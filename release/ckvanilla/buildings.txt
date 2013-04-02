@@ -1,0 +1,2270 @@
+ # Castle
+castle = {
+  # Wall quality, gives fortlevel
+  ca_wall_q_1 = {
+    desc = ca_wall_q_1_desc
+    prerequisites = { ca_wall_1 }
+    build_cost = 50
+    build_time = 182
+    fort_level = 0.5
+    ai_creation_factor = 80
+  }
+  ca_wall_q_2 = {
+    desc = ca_wall_q_2_desc
+    upgrades_from = ca_wall_q_1
+    prerequisites = { ca_wall_2 }
+    build_cost = 50
+    build_time = 182
+    fort_level = 0.5
+    ai_creation_factor = 79
+  }
+  ca_wall_q_3 = {
+    desc = ca_wall_q_3_desc
+    trigger = { TECH_FORTIFICATIONS_CONSTRUCTION = 1 }
+    upgrades_from = ca_wall_q_2
+    build_cost = 50
+    build_time = 182
+    fort_level = 0.5
+    ai_creation_factor = 78
+  }
+  ca_wall_q_4 = {
+    desc = ca_wall_q_4_desc
+    trigger = { TECH_FORTIFICATIONS_CONSTRUCTION = 3 }
+    upgrades_from = ca_wall_q_3
+    build_cost = 100
+    build_time = 365
+    fort_level = 1.0
+    ai_creation_factor = 77
+  }
+  ca_wall_q_5 = {
+    desc = ca_wall_q_5_desc
+    trigger = { TECH_FORTIFICATIONS_CONSTRUCTION = 5 }
+    upgrades_from = ca_wall_q_4
+    build_cost = 100
+    build_time = 365
+    fort_level = 1.0
+    ai_creation_factor = 76
+  }
+  
+  #Walls, gives fortlevel, levysize and income
+  ca_wall_1 = {
+    desc = ca_wall_1_desc
+    build_cost = 50
+    build_time = 365
+    fort_level = 0.5
+    levy_size = 0.025
+    tax_income = 0.2
+    ai_creation_factor = 90
+  }
+  ca_wall_2 = {
+    desc = ca_wall_2_desc
+    upgrades_from = ca_wall_1
+    build_cost = 50
+    build_time = 547 #1.5y
+    fort_level = 0.5
+    levy_size = 0.025
+    tax_income = 0.2
+    ai_creation_factor = 89
+  }
+  ca_wall_3 = {
+    desc = ca_wall_3_desc
+    upgrades_from = ca_wall_2
+    build_cost = 100
+    build_time = 730 #2y
+    fort_level = 1.0
+    levy_size = 0.05
+    tax_income = 0.2
+    ai_creation_factor = 88
+  }
+  ca_wall_4 = {
+    desc = ca_wall_4_desc
+    trigger = { TECH_FORTIFICATIONS_CONSTRUCTION = 2 }
+    upgrades_from = ca_wall_3
+    build_cost = 150
+    build_time = 1095 #3y
+    fort_level = 1.0
+    levy_size = 0.05
+    tax_income = 0.2
+    ai_creation_factor = 87
+  }
+  ca_wall_5 = {
+    desc = ca_wall_5_desc
+    trigger = { TECH_FORTIFICATIONS_CONSTRUCTION = 4 }
+    upgrades_from = ca_wall_4
+    build_cost = 150
+    build_time = 1460 #4y
+    fort_level = 1.5
+    levy_size = 0.1
+    tax_income = 0.5
+    ai_creation_factor = 86
+  }
+  ca_con_wall_6 = { # Theodosian Walls
+    desc = ca_con_wall_6_desc
+    upgrades_from = ca_wall_5
+    build_cost = 150
+    build_time = 1460 #4y
+    fort_level = 4.0
+    ai_creation_factor = 86
+  }
+
+  #Keeps, gives levy and garrison size
+  ca_keep_1 = {
+    desc = ca_keep_1_desc
+    build_cost = 150
+    build_time = 547 #1.5y
+    levy_size = 0.05
+    garrison_size = 0.05
+    ai_creation_factor = 102
+  }
+  ca_keep_2 = {
+    desc = ca_keep_1_desc
+    prerequisites = { ca_wall_1 }
+    upgrades_from = ca_keep_1
+    build_cost = 200
+    build_time = 730 #2y
+    levy_size = 0.1
+    garrison_size = 0.1
+    ai_creation_factor = 101
+  }
+  ca_keep_3 = {
+    desc = ca_keep_1_desc
+    prerequisites = { ca_wall_2 }
+    upgrades_from = ca_keep_2
+    build_cost = 300
+    build_time = 1095 #3y
+    levy_size = 0.15
+    garrison_size = 0.15
+    ai_creation_factor = 100
+  }
+  ca_keep_4 = {  
+    desc = ca_keep_1_desc
+    trigger = { TECH_FORTIFICATIONS_CONSTRUCTION = 1 }
+    upgrades_from = ca_keep_3
+    build_cost = 400
+    build_time = 1460 #4y
+    levy_size = 0.2
+    garrison_size = 0.2
+    ai_creation_factor = 99
+  }
+  ca_keep_5 = {
+    desc = ca_keep_1_desc
+    trigger = { TECH_FORTIFICATIONS_CONSTRUCTION = 3 }
+    upgrades_from = ca_keep_4
+    build_cost = 500
+    build_time = 2190 #6y
+    levy_size = 0.25
+    garrison_size = 0.2
+    ai_creation_factor = 98
+  }
+  ca_keep_6 = {
+    desc = ca_keep_1_desc
+    trigger = { TECH_FORTIFICATIONS_CONSTRUCTION = 5 }
+    upgrades_from = ca_keep_5
+    build_cost = 500
+    build_time = 2190 #6y
+    levy_size = 0.3
+    garrison_size = 0.2
+    ai_creation_factor = 97
+  }
+  
+  # Militia barracks, gives light infantry and archers.
+  ca_militia_barracks_1 = {
+    desc = ca_militia_barracks_1_desc
+    build_cost = 100
+    build_time = 365
+    light_infantry = 80
+    archers = 10
+    ai_creation_factor = 100
+  }
+  ca_militia_barracks_2 = {
+    desc = ca_militia_barracks_2_desc
+    prerequisites = { ca_wall_1 }
+    upgrades_from = ca_militia_barracks_1
+    build_cost = 120
+    build_time = 547
+    light_infantry = 20
+    archers = 90
+    ai_creation_factor = 99
+  }
+  ca_militia_barracks_3 = {
+    desc = ca_militia_barracks_3_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 1 }
+    upgrades_from = ca_militia_barracks_2
+    build_cost = 300
+    build_time = 1095
+    light_infantry = 30
+    archers = 120
+    ai_creation_factor = 98
+  }
+
+  #Training grounds, gives morale and reinforce rate
+  ca_training_grounds_1 = {
+    desc = ca_training_grounds_1_desc
+    prerequisites = { ca_wall_2 }
+    build_cost = 200
+    build_time = 730
+    land_morale = 0.1
+    levy_reinforce_rate = 0.1
+    ai_creation_factor = 89
+  }
+  ca_training_grounds_2 = {
+    desc = ca_training_grounds_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 2 }
+    upgrades_from = ca_training_grounds_1
+    build_cost = 300
+    build_time = 1095
+    land_morale = 0.2
+    levy_reinforce_rate = 0.2
+    ai_creation_factor = 88
+  }
+  
+  # Barracks, gives heavy infantry and pikemen
+  ca_barracks_1 = {
+    desc = ca_barracks_1_desc
+    build_cost = 100
+    build_time = 365
+    heavy_infantry = 30
+    pikemen = 15
+    ai_creation_factor = 105
+  }
+  ca_barracks_2 = {
+    desc = ca_barracks_1_desc
+    prerequisites = { ca_wall_1 }
+    upgrades_from = ca_barracks_1
+    build_cost = 120
+    build_time = 547
+    heavy_infantry = 40
+    pikemen = 15
+    ai_creation_factor = 104
+  }
+  ca_barracks_3 = {
+    desc = ca_barracks_1_desc
+    prerequisites = { ca_wall_2 }
+    upgrades_from = ca_barracks_2
+    build_cost = 200
+    build_time = 730
+    heavy_infantry = 45
+    pikemen = 20
+    ai_creation_factor = 103
+  }
+  ca_barracks_4 = {
+    desc = ca_barracks_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 1 }
+    upgrades_from = ca_barracks_3
+    build_cost = 300
+    build_time = 1095
+    heavy_infantry = 50
+    pikemen = 25
+    ai_creation_factor = 102
+  }
+  ca_barracks_5 = {
+    desc = ca_barracks_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 3 }
+    upgrades_from = ca_barracks_4
+    build_cost = 400
+    build_time = 2190
+    heavy_infantry = 60
+    pikemen = 25
+    ai_creation_factor = 101
+  }
+  ca_barracks_6 = {
+    desc = ca_barracks_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 5 }
+    upgrades_from = ca_barracks_5
+    build_cost = 500
+    build_time = 2190
+    heavy_infantry = 65
+    pikemen = 30
+    ai_creation_factor = 100
+  }
+  
+  #Stable, gives light cavalry and some heavy cavalry
+  ca_stable_1 = {
+    desc = ca_stable_1_desc
+    build_cost = 100
+    build_time = 365
+    light_cavalry = 45
+    ai_creation_factor = 89
+  }
+  ca_stable_2 = {
+    desc = ca_stable_1_desc
+    prerequisites = { ca_wall_1 }
+    upgrades_from = ca_stable_1
+    build_cost = 120
+    build_time = 547
+    light_cavalry = 55
+    ai_creation_factor = 88
+  }
+  ca_stable_3 = {
+    desc = ca_stable_1_desc
+    prerequisites = { ca_wall_2 }
+    upgrades_from = ca_stable_2
+    build_cost = 200
+    build_time = 730
+    light_cavalry = 55
+    knights = 5
+    ai_creation_factor = 87
+  }
+  ca_stable_4 = {
+    desc = ca_stable_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 2 }
+    upgrades_from = ca_stable_3
+    build_cost = 300
+    build_time = 1095
+    light_cavalry = 55
+    knights = 10
+    ai_creation_factor = 86
+  }
+  ca_stable_5 = {
+    desc = ca_stable_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 4 }
+    upgrades_from = ca_stable_4
+    build_cost = 400
+    build_time = 2190
+    light_cavalry = 55
+    knights = 20
+    ai_creation_factor = 85
+  }
+  
+  #Castle town, gives income
+  ca_town_1 = {
+    desc = ca_town_1_desc
+    build_cost = 100
+    build_time = 365
+    tax_income = 1.5
+    ai_creation_factor = 100
+  }
+  ca_town_2 = {
+    desc = ca_town_2_desc
+    prerequisites = { ca_wall_1 }
+    upgrades_from = ca_town_1
+    build_cost = 120
+    build_time = 547
+    tax_income = 2
+    ai_creation_factor = 99
+  }
+  ca_town_3 = {
+    desc = ca_town_3_desc
+    prerequisites = { ca_wall_2 }
+    upgrades_from = ca_town_2
+    build_cost = 200
+    build_time = 730
+    tax_income = 2.5
+    ai_creation_factor = 98
+  }
+  ca_town_4 = {
+    desc = ca_town_4_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 2 }
+    upgrades_from = ca_town_3
+    build_cost = 300
+    build_time = 1095
+    tax_income = 3
+    ai_creation_factor = 97
+  }
+  ca_town_5 = {
+    desc = ca_town_5_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 4 }
+    upgrades_from = ca_town_4
+    build_cost = 400
+    build_time = 2190
+    tax_income = 3.5
+    ai_creation_factor = 96
+  }
+  
+  #Warrior Cult, special pagan building that gives more infantry to pagans
+  ca_warrior_cult = {
+    desc = ca_warrior_cult_desc
+    auto_add_at_year = 10
+    build_cost = 10
+    build_time = 60
+    light_infantry = 140
+    heavy_infantry = 40
+    archers = 50
+    ai_creation_factor = 300 #AI should always build this if it can
+  }
+  
+  
+  # All cultural buildings follow the same pattern:
+  # tech required is 0, 1, 2, 4 for the levels of the buildings
+  # cost is 200 + 100 per level
+  # 60 maintenance of troops + 20 per level
+  # + 0.15 bonus in either offensive, defensive or morale sometimes split over different units or stats same on all levels
+  
+
+  #Welsh and English Longbow archery range
+  ca_culture_saxon_english_1 = {
+    desc = ca_culture_saxon_english_1_desc
+    prerequisites = { ca_wall_2 }
+    build_cost = 200
+    build_time = 730
+    archers_offensive = 0.15
+    archers = 60
+    ai_creation_factor = 101
+  }
+  ca_culture_saxon_english_2 = {
+    desc = ca_culture_saxon_english_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 1 }
+    upgrades_from = ca_culture_saxon_english_1
+    build_cost = 300
+    build_time = 1095
+    archers_offensive = 0.15
+    archers = 80
+    ai_creation_factor = 100
+  }
+  ca_culture_saxon_english_3 = {
+    desc = ca_culture_saxon_english_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 2 }
+    upgrades_from = ca_culture_saxon_english_2
+    build_cost = 400
+    build_time = 2190
+    archers_offensive = 0.15
+    archers = 100
+    ai_creation_factor = 99
+  }
+  ca_culture_saxon_english_4 = {
+    desc = ca_culture_saxon_english_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 4 }
+    upgrades_from = ca_culture_saxon_english_3
+    build_cost = 500
+    build_time = 2190
+    archers_offensive = 0.15
+    archers = 120
+    ai_creation_factor = 98
+  }
+
+  #Scottish Schiltron
+  ca_culture_scottish_1 = {
+    desc = ca_culture_scottish_1_desc
+    prerequisites = { ca_wall_2 }
+    build_cost = 200
+    build_time = 730
+    pikemen = 30
+    pikemen_defensive = 0.15
+    ai_creation_factor = 101
+  }
+  ca_culture_scottish_2 = {
+    desc = ca_culture_scottish_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 1 }
+    upgrades_from = ca_culture_scottish_1
+    build_cost = 300
+    build_time = 1095
+    pikemen = 40
+    pikemen_defensive = 0.15
+    ai_creation_factor = 100
+  }
+  ca_culture_scottish_3 = {
+    desc = ca_culture_scottish_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 2 }
+    upgrades_from = ca_culture_scottish_2
+    build_cost = 400
+    build_time = 2190
+    pikemen = 60
+    pikemen_defensive = 0.15
+    ai_creation_factor = 99
+      }
+  ca_culture_scottish_4 = {
+    desc = ca_culture_scottish_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 4 }
+    upgrades_from = ca_culture_scottish_3
+    build_cost = 500
+    build_time = 2190
+    pikemen = 80
+    pikemen_defensive = 0.15
+    ai_creation_factor = 98
+  }  
+  
+  #Baltic tribes Heavy Infantry camps
+  ca_culture_group_baltic_1 = {
+    desc = ca_culture_group_baltic_1_desc
+    prerequisites = { ca_wall_2 }
+    build_cost = 200
+    build_time = 730
+    heavy_infantry = 30
+    heavy_infantry_defensive = 0.15
+    ai_creation_factor = 101
+  }
+  ca_culture_group_baltic_2 = {
+    desc = ca_culture_group_baltic_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 1 }
+    upgrades_from = ca_culture_group_baltic_1
+    build_cost = 300
+    build_time = 1095
+    heavy_infantry = 40
+    heavy_infantry_defensive = 0.15
+    ai_creation_factor = 100
+  }
+  ca_culture_group_baltic_3 = {
+    desc = ca_culture_group_baltic_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 2 }
+    upgrades_from = ca_culture_group_baltic_2
+    build_cost = 400
+    build_time = 2190
+    heavy_infantry = 50
+    heavy_infantry_defensive = 0.15
+    ai_creation_factor = 99
+      }
+  ca_culture_group_baltic_4 = {
+    desc = ca_culture_group_baltic_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 4 }
+    upgrades_from = ca_culture_group_baltic_3
+    build_cost = 500
+    build_time = 2190
+    heavy_infantry = 60
+    heavy_infantry_defensive = 0.15
+    ai_creation_factor = 98
+  }
+  
+  #Altaic horse breeders (and Persian)
+  ca_culture_group_altaic_1 = {
+    desc = ca_culture_group_altaic_1_desc
+    prerequisites = { ca_wall_2 }
+    build_cost = 200
+    build_time = 730
+    light_cavalry = 10
+    knights = 5
+    horse_archers = 10
+    horse_archers_offensive = 0.1
+    horse_archers_morale = 0.05
+    ai_creation_factor = 101
+      }
+  ca_culture_group_altaic_2 = {
+    desc = ca_culture_group_altaic_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 1 }
+    upgrades_from = ca_culture_group_altaic_1
+    build_cost = 300
+    build_time = 1095
+    light_cavalry = 15
+    knights = 5
+    horse_archers = 15
+    horse_archers_offensive = 0.1
+    horse_archers_morale = 0.05
+    ai_creation_factor = 100
+  }
+  ca_culture_group_altaic_3 = {
+    desc = ca_culture_group_altaic_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 2 }
+    upgrades_from = ca_culture_group_altaic_2
+    build_cost = 400
+    build_time = 2190
+    light_cavalry = 15
+    knights = 10
+    horse_archers = 15
+    horse_archers_offensive = 0.1
+    horse_archers_morale = 0.05
+    ai_creation_factor = 99
+      }
+  ca_culture_group_altaic_4 = {
+    desc = ca_culture_group_altaic_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 4 }
+    upgrades_from = ca_culture_group_altaic_3
+    build_cost = 500
+    build_time = 2190
+    light_cavalry = 20
+    knights = 10
+    horse_archers = 20
+    horse_archers_offensive = 0.1
+    horse_archers_morale = 0.05
+    ai_creation_factor = 98
+  }
+  
+  #Frankish, Occitan, Norman and German Lists (and Breton)
+  ca_culture_frank_norman_german_1 = {
+    desc = ca_culture_frank_norman_german_1_desc
+    prerequisites = { ca_wall_2 }
+    build_cost = 200
+    build_time = 730
+    knights = 15
+    knights_offensive = 0.15
+    ai_creation_factor = 101
+      }
+  ca_culture_frank_norman_german_2 = {
+    desc = ca_culture_frank_norman_german_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 1 }
+    upgrades_from = ca_culture_frank_norman_german_1
+    build_cost = 300
+    build_time = 1095
+    knights = 20
+    knights_offensive = 0.15
+    ai_creation_factor = 100
+  }
+  ca_culture_frank_norman_german_3 = {
+    desc = ca_culture_frank_norman_german_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 2 }
+    upgrades_from = ca_culture_frank_norman_german_2
+    build_cost = 400
+    build_time = 2190
+    knights = 25
+    knights_offensive = 0.15
+    ai_creation_factor = 99
+      }
+  ca_culture_frank_norman_german_4 = {
+    desc = ca_culture_frank_norman_german_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 4 }
+    upgrades_from = ca_culture_frank_norman_german_3
+    build_cost = 500
+    build_time = 2190
+    knights = 30
+    knights_offensive = 0.15
+    ai_creation_factor = 98
+      }  
+  
+  #Iberian Fast horse breeders
+  ca_culture_group_iberian_1 = {
+    desc = ca_culture_group_iberian_1_desc
+    prerequisites = { ca_wall_2 }
+    build_cost = 200
+    build_time = 730
+    light_cavalry = 30
+    light_cavalry_offensive = 0.15
+    ai_creation_factor = 101
+      }
+  ca_culture_group_iberian_2 = {
+    desc = ca_culture_group_iberian_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 1 }
+    upgrades_from = ca_culture_group_iberian_1
+    build_cost = 300
+    build_time = 1095
+    light_cavalry = 40
+    light_cavalry_offensive = 0.15
+    ai_creation_factor = 100
+      }
+  ca_culture_group_iberian_3 = {
+    desc = ca_culture_group_iberian_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 2 }
+    upgrades_from = ca_culture_group_iberian_2
+    build_cost = 400
+    build_time = 2190
+    light_cavalry = 50
+    light_cavalry_offensive = 0.15
+    ai_creation_factor = 99
+      }
+  ca_culture_group_iberian_4 = {
+    desc = ca_culture_group_iberian_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 4 }
+    upgrades_from = ca_culture_group_iberian_3
+    build_cost = 500
+    build_time = 2190
+    light_cavalry = 60
+    light_cavalry_offensive = 0.15
+    ai_creation_factor = 98
+      }
+  
+  #Italian Pike formations
+  ca_culture_italian_1 = {
+    desc = ca_culture_italian_1_desc
+    prerequisites = { ca_wall_2 }
+    build_cost = 200
+    build_time = 730
+    pikemen = 30
+    pikemen_morale = 0.15
+    ai_creation_factor = 101
+      }
+  ca_culture_italian_2 = {
+    desc = ca_culture_italian_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 1 }
+    upgrades_from = ca_culture_italian_1
+    build_cost = 300
+    build_time = 1095
+    pikemen = 40
+    pikemen_morale = 0.15
+    ai_creation_factor = 100
+      }
+  ca_culture_italian_3 = {
+    desc = ca_culture_italian_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 2 }
+    upgrades_from = ca_culture_italian_2
+    build_cost = 400
+    build_time = 2190
+    pikemen = 50
+    pikemen_morale = 0.15
+    ai_creation_factor = 99
+      }
+  ca_culture_italian_4 = {
+    desc = ca_culture_italian_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 4 }
+    upgrades_from = ca_culture_italian_3
+    build_cost = 500
+    build_time = 2190
+    pikemen = 60
+    pikemen_morale = 0.15
+    ai_creation_factor = 98
+      }
+  
+  #Russian Armories
+  ca_culture_russian_1 = {
+    desc = ca_culture_russian_1_desc
+    prerequisites = { ca_wall_2 }
+    build_cost = 200
+    build_time = 730
+    heavy_infantry = 30
+    heavy_infantry_defensive = 0.15
+    ai_creation_factor = 101
+      }
+  ca_culture_russian_2 = {
+    desc = ca_culture_russian_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 1 }
+    upgrades_from = ca_culture_russian_1
+    build_cost = 300
+    build_time = 1095
+    heavy_infantry = 40
+    heavy_infantry_defensive = 0.15
+    ai_creation_factor = 100
+      }
+  ca_culture_russian_3 = {
+    desc = ca_culture_russian_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 2 }
+    upgrades_from = ca_culture_russian_2
+    build_cost = 400
+    build_time = 2190
+    heavy_infantry = 50
+    heavy_infantry_defensive = 0.15
+    ai_creation_factor = 99
+      }
+  ca_culture_russian_4 = {
+    desc = ca_culture_russian_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 4 }
+    upgrades_from = ca_culture_russian_3
+    build_cost = 500
+    build_time = 2190
+    heavy_infantry = 60
+    heavy_infantry_defensive = 0.15
+    ai_creation_factor = 98
+      }
+  
+  # Scandinavian Housecarls (and Saxon)
+  ca_culture_group_north_germanic_1 = {
+    desc = ca_culture_group_north_germanic_1_desc
+    prerequisites = { ca_wall_2 }
+    build_cost = 200
+    build_time = 730
+    heavy_infantry = 30
+    heavy_infantry_offensive = 0.15
+    ai_creation_factor = 101
+      }
+  ca_culture_group_north_germanic_2 = {
+    desc = ca_culture_group_north_germanic_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 1 }
+    upgrades_from = ca_culture_group_north_germanic_1
+    build_cost = 300
+    build_time = 1095
+    heavy_infantry = 40
+    heavy_infantry_offensive = 0.15
+    ai_creation_factor = 101
+      }
+  ca_culture_group_north_germanic_3 = {
+    desc = ca_culture_group_north_germanic_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 2 }
+    upgrades_from = ca_culture_group_north_germanic_2
+    build_cost = 400
+    build_time = 2190
+    heavy_infantry = 50
+    heavy_infantry_offensive = 0.15
+    ai_creation_factor = 101
+      }
+  ca_culture_group_north_germanic_4 = {
+    desc = ca_culture_group_north_germanic_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 4 }
+    upgrades_from = ca_culture_group_north_germanic_3
+    build_cost = 500
+    build_time = 2190
+    heavy_infantry = 60
+    heavy_infantry_offensive = 0.15
+    ai_creation_factor = 101
+      }
+  
+  # Hungarian Hussars (and West Slavic)
+  ca_culture_hungarian_1 = {
+    desc = ca_culture_hungarian_1_desc
+    prerequisites = { ca_wall_2 }
+    build_cost = 200
+    build_time = 730
+    light_cavalry = 30
+    light_cavalry_defensive = 0.15
+    ai_creation_factor = 101
+      }
+  ca_culture_hungarian_2 = {
+    desc = ca_culture_hungarian_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 1 }
+    upgrades_from = ca_culture_hungarian_1
+    build_cost = 300
+    build_time = 1095
+    light_cavalry = 40
+    light_cavalry_defensive = 0.15
+    ai_creation_factor = 101
+      }
+  ca_culture_hungarian_3 = {
+    desc = ca_culture_hungarian_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 2 }
+    upgrades_from = ca_culture_hungarian_2
+    build_cost = 400
+    build_time = 2190
+    light_cavalry = 50
+    light_cavalry_defensive = 0.15
+    ai_creation_factor = 101
+      }
+  ca_culture_hungarian_4 = {
+    desc = ca_culture_hungarian_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 4 }
+    upgrades_from = ca_culture_hungarian_3
+    build_cost = 500
+    build_time = 2190
+    light_cavalry = 60
+    light_cavalry_defensive = 0.15
+    ai_creation_factor = 101
+      }
+  
+  # Arabian Camel Cavalry
+  ca_culture_group_arabic_1 = {
+    desc = ca_culture_group_arabic_1_desc
+    prerequisites = { ca_wall_2 }
+    build_cost = 200
+    build_time = 730
+    light_cavalry = 30
+    light_cavalry_defensive = 0.15
+    ai_creation_factor = 101
+      }
+  ca_culture_group_arabic_2 = {
+    desc = ca_culture_group_arabic_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 1 }
+    upgrades_from = ca_culture_group_arabic_1
+    build_cost = 300
+    build_time = 1095
+    light_cavalry = 40
+    light_cavalry_defensive = 0.15
+    ai_creation_factor = 101
+      }
+  ca_culture_group_arabic_3 = {
+    desc = ca_culture_group_arabic_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 2 }
+    upgrades_from = ca_culture_group_arabic_2
+    build_cost = 400
+    build_time = 2190
+    light_cavalry = 50
+    light_cavalry_defensive = 0.15
+    ai_creation_factor = 101
+      }
+  ca_culture_group_arabic_4 = {
+    desc = ca_culture_group_arabic_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 4 }
+    upgrades_from = ca_culture_group_arabic_3
+    build_cost = 500
+    build_time = 2190
+    light_cavalry = 60
+    light_cavalry_defensive = 0.15
+    ai_creation_factor = 101
+      }
+  
+  # Byzantine Cataphracts
+  ca_culture_group_byzantine_1 = {
+    desc = ca_culture_group_byzantine_1_desc
+    prerequisites = { ca_wall_2 }
+    build_cost = 200
+    build_time = 730
+    knights = 10
+    horse_archers = 10
+    knights_offensive = 0.075
+    horse_archers_offensive = 0.075
+    ai_creation_factor = 101
+      }
+  ca_culture_group_byzantine_2 = {
+    desc = ca_culture_group_byzantine_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 1 }
+    upgrades_from = ca_culture_group_byzantine_1
+    build_cost = 300
+    build_time = 1095
+    knights = 15
+    horse_archers = 10
+    knights_offensive = 0.075
+    horse_archers_offensive = 0.075
+    ai_creation_factor = 101
+      }
+  ca_culture_group_byzantine_3 = {
+    desc = ca_culture_group_byzantine_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 2 }
+    upgrades_from = ca_culture_group_byzantine_2
+    build_cost = 400
+    build_time = 2190
+    knights = 15
+    horse_archers = 20
+    knights_offensive = 0.075
+    horse_archers_offensive = 0.075
+    ai_creation_factor = 101
+      }
+  ca_culture_group_byzantine_4 = {
+    desc = ca_culture_group_byzantine_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 4 }
+    upgrades_from = ca_culture_group_byzantine_3
+    build_cost = 500
+    build_time = 2190
+    knights = 20
+    horse_archers = 20
+    knights_offensive = 0.075
+    horse_archers_offensive = 0.075
+    ai_creation_factor = 101
+      }
+  
+  # Irish Gallowglass
+  ca_culture_irish_1 = {
+    desc = ca_culture_irish_1_desc
+    prerequisites = { ca_wall_2 }
+    build_cost = 200
+    build_time = 730
+    heavy_infantry = 30
+    heavy_infantry_defensive = 0.15
+    ai_creation_factor = 101
+      }
+  ca_culture_irish_2 = {
+    desc = ca_culture_irish_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 1 }
+    upgrades_from = ca_culture_irish_1
+    build_cost = 300
+    build_time = 1095
+    heavy_infantry = 40
+    heavy_infantry_defensive = 0.15
+    ai_creation_factor = 101
+      }
+  ca_culture_irish_3 = {
+    desc = ca_culture_irish_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 2 }
+    upgrades_from = ca_culture_irish_2
+    build_cost = 400
+    build_time = 2190
+    heavy_infantry = 50
+    heavy_infantry_defensive = 0.15
+    ai_creation_factor = 101
+      }
+  ca_culture_irish_4 = {
+    desc = ca_culture_irish_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 4 }
+    upgrades_from = ca_culture_irish_3
+    build_cost = 500
+    build_time = 2190
+    heavy_infantry = 60
+    heavy_infantry_defensive = 0.15
+    ai_creation_factor = 101
+      }
+  
+  # Ethiopian Light Infantry Drilling Ground
+  ca_culture_ethiopian_1 = {
+    desc = ca_culture_ethiopian_1_desc
+    prerequisites = { ca_wall_2 }
+    build_cost = 200
+    build_time = 730
+    light_infantry = 60
+    light_infantry_offensive = 0.15
+    ai_creation_factor = 101
+      }
+  ca_culture_ethiopian_2 = {
+    desc = ca_culture_ethiopian_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 1 }
+    upgrades_from = ca_culture_ethiopian_1
+    build_cost = 300
+    build_time = 1095
+    light_infantry = 80
+    light_infantry_offensive = 0.15
+    ai_creation_factor = 101
+      }
+  ca_culture_ethiopian_3 = {
+    desc = ca_culture_ethiopian_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 2 }
+    upgrades_from = ca_culture_ethiopian_2
+    build_cost = 400
+    build_time = 2190
+    light_infantry = 100
+    light_infantry_offensive = 0.15
+    ai_creation_factor = 101
+      }
+  ca_culture_ethiopian_4 = {
+    desc = ca_culture_ethiopian_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 4 }
+    upgrades_from = ca_culture_ethiopian_3
+    build_cost = 500
+    build_time = 2190
+    light_infantry = 120
+    light_infantry_offensive = 0.15
+    ai_creation_factor = 101
+      }
+  
+  # West African Free Warrior Lodge
+  ca_culture_west_african_1 = {
+    desc = ca_culture_west_african_1_desc
+    prerequisites = { ca_wall_2 }
+    build_cost = 200
+    build_time = 730
+    light_infantry = 30
+    archers = 30
+    light_infantry_offensive = 0.15
+    ai_creation_factor = 101
+      }
+  ca_culture_west_african_2 = {
+    desc = ca_culture_west_african_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 1 }
+    upgrades_from = ca_culture_west_african_1
+    build_cost = 300
+    build_time = 1095
+    light_infantry = 40
+    archers = 40
+    light_infantry_offensive = 0.15
+    ai_creation_factor = 101
+      }
+  ca_culture_west_african_3 = {
+    desc = ca_culture_west_african_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 2 }
+    upgrades_from = ca_culture_west_african_2
+    build_cost = 400
+    build_time = 2190
+    light_infantry = 50
+    archers = 50
+    light_infantry_offensive = 0.15
+    ai_creation_factor = 101
+      }
+  ca_culture_west_african_4 = {
+    desc = ca_culture_west_african_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 4 }
+    upgrades_from = ca_culture_west_african_3
+    build_cost = 500
+    build_time = 2190
+    light_infantry = 60
+    archers = 60
+    light_infantry_offensive = 0.15
+    ai_creation_factor = 101
+      }
+  
+  # South Slavic Cavalry
+  ca_culture_group_south_slavic_1 = {
+    desc = ca_culture_group_south_slavic_1_desc
+    prerequisites = { ca_wall_2 }
+    build_cost = 200
+    build_time = 730
+    knights = 5
+    light_cavalry = 20
+    knights_defensive = 0.075
+    light_cavalry_defensive = 0.075
+    ai_creation_factor = 101
+      }
+  ca_culture_group_south_slavic_2 = {
+    desc = ca_culture_group_south_slavic_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 1 }
+    upgrades_from = ca_culture_group_south_slavic_1
+    build_cost = 300
+    build_time = 1095
+    knights = 10
+    light_cavalry = 20
+    knights_defensive = 0.075
+    light_cavalry_defensive = 0.075
+    ai_creation_factor = 101
+      }
+  ca_culture_group_south_slavic_3 = {
+    desc = ca_culture_group_south_slavic_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 2 }
+    upgrades_from = ca_culture_group_south_slavic_2
+    build_cost = 400
+    build_time = 2190
+    knights = 15
+    light_cavalry = 20
+    knights_defensive = 0.075
+    light_cavalry_defensive = 0.075
+    ai_creation_factor = 101
+      }
+  ca_culture_group_south_slavic_4 = {
+    desc = ca_culture_group_south_slavic_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 4 }
+    upgrades_from = ca_culture_group_south_slavic_3
+    build_cost = 500
+    build_time = 2190
+    knights = 15
+    light_cavalry = 30
+    knights_defensive = 0.075
+    light_cavalry_defensive = 0.075
+    ai_creation_factor = 101
+      }
+  
+  # Dutch Urban Militia
+  ca_culture_dutch_1 = {
+    desc = ca_culture_dutch_1_desc
+    prerequisites = { ca_wall_2 }
+    build_cost = 200
+    build_time = 730
+    pikemen = 15
+    light_infantry = 30
+    light_infantry_offensive = 0.075
+    pikemen_offensive = 0.075
+    ai_creation_factor = 101
+      }
+  ca_culture_dutch_2 = {
+    desc = ca_culture_dutch_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 1 }
+    upgrades_from = ca_culture_dutch_1
+    build_cost = 300
+    build_time = 1095
+    pikemen = 20
+    light_infantry = 40
+    light_infantry_offensive = 0.075
+    pikemen_offensive = 0.075
+    ai_creation_factor = 101
+      }
+  ca_culture_dutch_3 = {
+    desc = ca_culture_dutch_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 2 }
+    upgrades_from = ca_culture_dutch_2
+    build_cost = 400
+    build_time = 2190
+    pikemen = 25
+    light_infantry = 50
+    light_infantry_offensive = 0.075
+    pikemen_offensive = 0.075
+    ai_creation_factor = 101
+      }
+  ca_culture_dutch_4 = {
+    desc = ca_culture_dutch_1_desc
+    trigger = { TECH_CASTLE_CONSTRUCTION = 4 }
+    upgrades_from = ca_culture_dutch_3
+    build_cost = 500
+    build_time = 2190
+    pikemen = 30
+    light_infantry = 60
+    light_infantry_offensive = 0.075
+    pikemen_offensive = 0.075
+    ai_creation_factor = 101
+      }
+}
+
+
+# City
+city = {
+  ct_wall_q_1 = {
+    desc = ct_wall_q_1_desc
+    prerequisites = { ct_wall_1 }
+    build_cost = 50
+    build_time = 182
+    fort_level = 0.4
+    ai_creation_factor = 60
+      }
+  ct_wall_q_2 = {
+    desc = ct_wall_q_2_desc
+    prerequisites = { ct_wall_2 }
+    upgrades_from = ct_wall_q_1
+    build_cost = 50
+    build_time = 182
+    fort_level = 0.4
+    ai_creation_factor = 59
+  }  
+  ct_wall_q_3 = {
+    desc = ca_wall_q_3_desc
+    trigger = { TECH_FORTIFICATIONS_CONSTRUCTION = 1 }
+    upgrades_from = ct_wall_q_2
+    build_cost = 50
+    build_time = 182
+    fort_level = 0.5
+    ai_creation_factor = 58
+  }
+  ct_wall_q_4 = {
+    desc = ca_wall_q_4_desc
+    trigger = { TECH_FORTIFICATIONS_CONSTRUCTION = 3 }
+    upgrades_from = ct_wall_q_3
+    build_cost = 100
+    build_time = 365
+    fort_level = 1
+    ai_creation_factor = 57
+  }
+  ct_wall_q_5 = {
+    desc = ca_wall_q_5_desc
+    trigger = { TECH_FORTIFICATIONS_CONSTRUCTION = 5 }
+    upgrades_from = ct_wall_q_4
+    build_cost = 100
+    build_time = 365
+    fort_level = 1
+    ai_creation_factor = 56
+  }
+
+  ct_wall_1 = {
+    desc = ca_wall_1_desc
+    build_cost = 50
+    build_time = 365
+    fort_level = 0.4
+    levy_size = 0.025
+    tax_income = 0.2
+    ai_creation_factor = 99
+      }
+  ct_wall_2 = {
+    desc = ca_wall_2_desc
+    upgrades_from = ct_wall_1
+    build_cost = 50
+    build_time = 547
+    fort_level = 0.4
+    levy_size = 0.025
+    tax_income = 0.2
+    ai_creation_factor = 98
+  }
+  ct_wall_3 = {
+    desc = ct_wall_3_desc
+    upgrades_from = ct_wall_2
+    build_cost = 100
+    build_time = 730
+    fort_level = 0.4
+    levy_size = 0.05
+    tax_income = 0.2
+    ai_creation_factor = 97
+  }
+  ct_wall_4 = {
+    desc = ct_wall_4_desc
+    trigger = { TECH_FORTIFICATIONS_CONSTRUCTION = 2 }
+    upgrades_from = ct_wall_3
+    build_cost = 100
+    build_time = 1095
+    fort_level = 0.5
+    levy_size = 0.05
+    tax_income = 0.2
+    ai_creation_factor = 96
+  }
+  ct_wall_5 = {
+    desc = ct_wall_5_desc
+    trigger = { TECH_FORTIFICATIONS_CONSTRUCTION = 4 }
+    upgrades_from = ct_wall_4
+    build_cost = 150
+    build_time = 1460
+    fort_level = 1.0
+    levy_size = 0.075
+    tax_income = 0.5
+    ai_creation_factor = 95
+  }
+  
+  # Merchant Republic Arsenal
+  ct_rep_arsenal_1 = {
+    desc = ct_rep_arsenal_1_desc
+    build_cost = 200
+    build_time = 1460
+    fort_level = 1.0
+    garrison_size = 0.25
+    levy_size = 0.075
+    ai_creation_factor = 95
+  }
+  ct_rep_arsenal_2 = {
+    upgrades_from = ct_rep_arsenal_1
+    desc = ct_rep_arsenal_2_desc
+    build_cost = 400
+    build_time = 1460
+    fort_level = 1.5
+    garrison_size = 0.2
+    levy_size = 0.075
+    ai_creation_factor = 95
+  }
+  ct_rep_arsenal_3 = {
+    upgrades_from = ct_rep_arsenal_2
+    trigger = { TECH_CITY_CONSTRUCTION = 5 }
+    desc = ct_rep_arsenal_3_desc
+    build_cost = 600
+    build_time = 2190
+    fort_level = 2.0
+    garrison_size = 0.25
+    levy_size = 0.125
+    ai_creation_factor = 95
+  }
+  
+  ct_training_grounds_1 = {
+    desc = ct_training_grounds_1_desc
+    build_cost = 150
+    build_time = 547
+    levy_size = 0.05
+    garrison_size = 0.05
+    ai_creation_factor = 98
+  }
+  ct_training_grounds_2 = {
+    desc = ct_training_grounds_1_desc
+    prerequisites = { ct_wall_1 }
+    upgrades_from = ct_training_grounds_1
+    build_cost = 200
+    build_time = 730
+    levy_size = 0.075
+    garrison_size = 0.1
+    ai_creation_factor = 97
+  } 
+  ct_training_grounds_3 = {
+    desc = ct_training_grounds_1_desc
+    upgrades_from = ct_training_grounds_2
+    build_cost = 300
+    build_time = 1095
+    levy_size = 0.1
+    garrison_size = 0.15
+    ai_creation_factor = 96
+  } 
+  ct_training_grounds_4 = {
+    desc = ct_training_grounds_1_desc
+    trigger = { TECH_FORTIFICATIONS_CONSTRUCTION = 1 }
+    upgrades_from = ct_training_grounds_3
+    build_cost = 400
+    build_time = 1460
+    levy_size = 0.125
+    garrison_size = 0.2
+    ai_creation_factor = 95
+  } 
+  ct_training_grounds_5 = {
+    desc = ct_training_grounds_1_desc
+    trigger = { TECH_FORTIFICATIONS_CONSTRUCTION = 3 }
+    upgrades_from = ct_training_grounds_4
+    build_cost = 500
+    build_time = 2190
+    levy_size = 0.15
+    garrison_size = 0.25
+    ai_creation_factor = 94
+  }
+  ct_training_grounds_6 = {
+    desc = ct_training_grounds_1_desc
+    trigger = { TECH_FORTIFICATIONS_CONSTRUCTION = 5 }
+    upgrades_from = ct_training_grounds_5
+    build_cost = 500
+    build_time = 2190
+    levy_size = 0.15
+    garrison_size = 0.25
+    ai_creation_factor = 93
+  }
+  
+  ct_barracks_1 = {
+    desc = ct_barracks_1_desc
+    build_cost = 100
+    build_time = 365
+    light_infantry = 60
+    archers = 30
+    ai_creation_factor = 95
+      }
+  ct_barracks_2 = {
+    desc = ct_barracks_2_desc
+    prerequisites = { ct_wall_1 }
+    upgrades_from = ct_barracks_1
+    build_cost = 120
+    build_time = 547
+    light_infantry = 40
+    archers = 70
+    ai_creation_factor = 94
+  }
+  ct_barracks_3 = {
+    desc = ct_barracks_1_desc
+    prerequisites = { ct_wall_2 }
+    upgrades_from = ct_barracks_2
+    build_cost = 200
+    build_time = 730
+    light_infantry = 80
+    archers = 50
+    ai_creation_factor = 93
+  }
+  ct_barracks_4 = {
+    desc = ct_barracks_2_desc
+    trigger = { TECH_CITY_CONSTRUCTION = 1 }
+    upgrades_from = ct_barracks_3
+    build_cost = 300
+    build_time = 1095
+    light_infantry = 60
+    archers = 90
+    ai_creation_factor = 92
+  }
+  ct_barracks_5 = {
+    desc = ct_barracks_1_desc
+    trigger = { TECH_CITY_CONSTRUCTION = 3 }
+    upgrades_from = ct_barracks_4
+    build_cost = 400
+    build_time = 2190
+    light_infantry = 100
+    archers = 70
+    ai_creation_factor = 91
+  }
+  ct_barracks_6 = {
+    desc = ct_barracks_2_desc
+    trigger = { TECH_CITY_CONSTRUCTION = 5 }
+    upgrades_from = ct_barracks_5
+    build_cost = 500
+    build_time = 2190
+    light_infantry = 80
+    archers = 110
+    ai_creation_factor = 90
+  }
+  
+  ct_guard_1 = {
+    desc = ct_guard_1_desc
+    build_cost = 100
+    build_time = 365
+    pikemen = 45
+    ai_creation_factor = 96
+      }
+  ct_guard_2 = {
+    desc = ct_guard_1_desc
+    prerequisites = { ct_wall_1 }
+    upgrades_from = ct_guard_1
+    build_cost = 120
+    build_time = 547
+    pikemen = 55
+    ai_creation_factor = 95
+  }
+  ct_guard_3 = {
+    desc = ct_guard_1_desc
+    prerequisites = { ct_wall_2 }
+    upgrades_from = ct_guard_2
+    build_cost = 200
+    build_time = 730
+    pikemen = 65
+    ai_creation_factor = 94
+      }
+  ct_guard_4 = {
+    desc = ct_guard_1_desc
+    trigger = { TECH_CITY_CONSTRUCTION = 2 }
+    upgrades_from = ct_guard_3
+    build_cost = 300
+    build_time = 1095
+    pikemen = 75
+    ai_creation_factor = 93
+      }
+  ct_guard_5 = {
+    desc = ct_guard_1_desc
+    trigger = { TECH_CITY_CONSTRUCTION = 4 }
+    upgrades_from = ct_guard_4
+    build_cost = 400
+    build_time = 2190
+    pikemen = 85
+    ai_creation_factor = 92
+  }
+  
+  ct_marketplace_1 = {
+    desc = ct_marketplace_1_desc
+    build_cost = 100
+    build_time = 365
+    tax_income = 2.5
+    ai_creation_factor = 110
+      }
+  ct_marketplace_2 = {
+    desc = ct_marketplace_2_desc
+    prerequisites = { ct_wall_1 }
+    upgrades_from = ct_marketplace_1
+    build_cost = 120
+    build_time = 547
+    tax_income = 3
+    ai_creation_factor = 109
+  }
+  ct_marketplace_3 = {
+    desc = ct_marketplace_3_desc
+    prerequisites = { ct_wall_2 }
+    upgrades_from = ct_marketplace_2
+    build_cost = 200
+    build_time = 730
+    tax_income = 3.5
+    ai_creation_factor = 108
+  }
+  ct_marketplace_4 = {
+    desc = ct_marketplace_4_desc
+    trigger = { TECH_CITY_CONSTRUCTION = 1 }
+    upgrades_from = ct_marketplace_3
+    build_cost = 300
+    build_time = 1095
+    tax_income = 4
+    ai_creation_factor = 107
+  }
+  ct_marketplace_5 = {
+    desc = ct_marketplace_5_desc
+    trigger = { TECH_CITY_CONSTRUCTION = 3 }
+    upgrades_from = ct_marketplace_4
+    build_cost = 400
+    build_time = 2190
+    tax_income = 4.5
+    ai_creation_factor = 106
+  }
+  ct_marketplace_6 = {
+    desc = ct_marketplace_6_desc
+    trigger = { TECH_CITY_CONSTRUCTION = 5 }
+    upgrades_from = ct_marketplace_5
+    build_cost = 500
+    build_time = 2190
+    tax_income = 5
+    ai_creation_factor = 105
+  }
+  
+  ct_port_1 = {
+    desc = ct_port_1_desc
+    build_cost = 100
+    build_time = 365
+    tax_income = 2.5
+    galleys = 2
+    ai_creation_factor = 110
+      }
+  ct_port_2 = {
+    desc = ct_port_1_desc
+    prerequisites = { ct_wall_1 }
+    upgrades_from = ct_port_1
+    build_cost = 120
+    build_time = 547
+    tax_income = 3
+    galleys = 2
+    ai_creation_factor = 109
+  }
+  ct_port_3 = {
+    desc = ct_port_1_desc
+    prerequisites = { ct_wall_2 }
+    upgrades_from = ct_port_2
+    build_cost = 200
+    build_time = 730
+    tax_income = 3.5
+    galleys = 2
+    ai_creation_factor = 108
+  }
+  ct_port_4 = {
+    desc = ct_port_1_desc
+    trigger = { TECH_CITY_CONSTRUCTION = 2 }
+    upgrades_from = ct_port_3
+    build_cost = 300
+    build_time = 1095
+    tax_income = 4
+    galleys = 3
+    ai_creation_factor = 107
+  }
+  ct_port_5 = {
+    desc = ct_port_1_desc
+    trigger = { TECH_CITY_CONSTRUCTION = 4 }
+    upgrades_from = ct_port_4
+    build_cost = 400
+    build_time = 2190
+    tax_income = 4.5
+    galleys = 3
+    ai_creation_factor = 106
+  }
+
+  ct_university_1 = {
+    desc = ct_university_1_desc
+    trigger = { TECH_CITY_CONSTRUCTION = 1 }
+    build_cost = 600
+    build_time = 1095
+    tech_growth_modifier = 0.2
+    ai_creation_factor = 107
+  }
+  ct_university_2 = {
+    desc = ct_university_1_desc
+    trigger = { TECH_CITY_CONSTRUCTION = 3 }
+    upgrades_from = ct_university_1
+    build_cost = 800
+    build_time = 2190
+    tech_growth_modifier = 0.3
+    ai_creation_factor = 106
+  }
+  ct_university_3 = {
+    desc = ct_university_1_desc
+    trigger = { TECH_CITY_CONSTRUCTION = 4 }
+    upgrades_from = ct_university_2
+    build_cost = 800
+    build_time = 2190
+    tech_growth_modifier = 0.3
+    ai_creation_factor = 105
+  }
+}
+
+
+# Temple
+temple = {
+  tp_wall_q_1 = {  
+    desc = tp_wall_q_1_desc
+    prerequisites = { tp_wall_1 }
+    build_cost = 50
+    build_time = 182
+    fort_level = 0.5
+    ai_creation_factor = 82
+      }
+  tp_wall_q_2 = {
+    desc = tp_wall_q_2_desc
+    prerequisites = { tp_wall_2 }
+    upgrades_from = tp_wall_q_1
+    build_cost = 50
+    build_time = 182
+    fort_level = 0.5
+    ai_creation_factor = 81
+  }  
+  tp_wall_q_3 = {
+    desc = ca_wall_q_3_desc
+    trigger = { TECH_FORTIFICATIONS_CONSTRUCTION = 1 }
+    upgrades_from = tp_wall_q_2
+    build_cost = 50
+    build_time = 182
+    fort_level = 0.5
+    ai_creation_factor = 80
+  }
+  tp_wall_q_4 = {
+    desc = ca_wall_q_4_desc
+    trigger = { TECH_FORTIFICATIONS_CONSTRUCTION = 3 }
+    upgrades_from = tp_wall_q_3
+    build_cost = 100
+    build_time = 365
+    fort_level = 1
+    ai_creation_factor = 79
+  }
+  tp_wall_q_5 = {
+    desc = ca_wall_q_5_desc
+    trigger = { TECH_FORTIFICATIONS_CONSTRUCTION = 5 }
+    upgrades_from = tp_wall_q_4
+    build_cost = 100
+    build_time = 365
+    fort_level = 1
+    ai_creation_factor = 78
+  }
+
+  tp_wall_1 = {
+    desc = ca_wall_1_desc
+    build_cost = 50
+    build_time = 365
+    fort_level = 0.5
+    levy_size = 0.025
+    tax_income = 0.2
+    ai_creation_factor = 97
+  }
+  tp_wall_2 = {
+    desc = ca_wall_2_desc
+    upgrades_from = tp_wall_1
+    build_cost = 50
+    build_time = 547
+    fort_level = 0.5
+    levy_size = 0.025
+    tax_income = 0.2
+    ai_creation_factor = 96
+  }
+  tp_wall_3 = {
+    desc = tp_wall_3_desc
+    upgrades_from = tp_wall_2
+    build_cost = 100
+    build_time = 730
+    fort_level = 1.0
+    levy_size = 0.05
+    tax_income = 0.2
+    ai_creation_factor = 95
+  }
+  tp_wall_4 = {
+    desc = tp_wall_4_desc
+    trigger = { TECH_FORTIFICATIONS_CONSTRUCTION = 2 }
+    upgrades_from = tp_wall_3
+    build_cost = 100
+    build_time = 1095
+    fort_level = 1.0
+    levy_size = 0.05
+    tax_income = 0.2
+    ai_creation_factor = 94
+  }
+  tp_wall_5 = {
+    desc = tp_wall_5_desc
+    trigger = { TECH_FORTIFICATIONS_CONSTRUCTION = 4 }
+    upgrades_from = tp_wall_4
+    build_cost = 150
+    build_time = 1460
+    fort_level = 1.5
+    levy_size = 0.075
+    tax_income = 0.5
+    ai_creation_factor = 93
+  }
+
+  tp_monastery_1 = {
+    desc = tp_monastery_1_desc
+    build_cost = 150
+    build_time = 547
+    levy_size = 0.05
+    garrison_size = 0.05
+    ai_creation_factor = 96
+  }
+  tp_monastery_2 = {
+    desc = tp_monastery_1_desc
+    prerequisites = { tp_wall_1 }
+    upgrades_from = tp_monastery_1
+    build_cost = 200
+    build_time = 730
+    levy_size = 0.075
+    garrison_size = 0.1
+    ai_creation_factor = 95
+  } 
+  tp_monastery_3 = {
+    desc = tp_monastery_1_desc
+    upgrades_from = tp_monastery_2
+    build_cost = 300
+    build_time = 1095
+    levy_size = 0.1
+    garrison_size = 0.15
+    ai_creation_factor = 94
+  } 
+  tp_monastery_4 = {
+    desc = tp_monastery_2_desc
+    trigger = { TECH_FORTIFICATIONS_CONSTRUCTION = 1 }
+    upgrades_from = tp_monastery_3
+    build_cost = 400
+    build_time = 1460
+    levy_size = 0.125
+    garrison_size = 0.2
+    ai_creation_factor = 93
+  } 
+  tp_monastery_5 = {
+    desc = tp_monastery_2_desc
+    trigger = { TECH_FORTIFICATIONS_CONSTRUCTION = 3 }
+    upgrades_from = tp_monastery_4
+    build_cost = 500
+    build_time = 2190
+    levy_size = 0.15
+    garrison_size = 0.25
+    ai_creation_factor = 92
+  }
+  tp_monastery_6 = {
+    desc = tp_monastery_2_desc
+    trigger = { TECH_FORTIFICATIONS_CONSTRUCTION = 5 }
+    upgrades_from = tp_monastery_5
+    build_cost = 500
+    build_time = 2190
+    levy_size = 0.15
+    garrison_size = 0.25
+    ai_creation_factor = 91
+  }
+  
+  tp_barracks_1 = {
+    desc = tp_barracks_1_desc
+    build_cost = 100
+    build_time = 365
+    light_infantry = 60
+    archers = 30
+    ai_creation_factor = 94
+  }
+  tp_barracks_2 = {
+    desc = tp_barracks_1_desc
+    prerequisites = { tp_wall_1 }
+    upgrades_from = tp_barracks_1
+    build_cost = 120
+    build_time = 547
+    light_infantry = 65
+    archers = 45
+    ai_creation_factor = 93
+  }
+  tp_barracks_3 = {
+    desc = tp_barracks_1_desc
+    prerequisites = { tp_wall_2 }
+    upgrades_from = tp_barracks_2
+    build_cost = 200
+    build_time = 730
+    light_infantry = 70
+    archers = 60
+    ai_creation_factor = 92
+  }
+  tp_barracks_4 = {
+    desc = tp_barracks_1_desc
+    trigger = { TECH_TEMPLE_CONSTRUCTION = 1 }
+    upgrades_from = tp_barracks_3
+    build_cost = 300
+    build_time = 1095
+    light_infantry = 75
+    archers = 75
+    ai_creation_factor = 91
+  }
+  tp_barracks_5 = {
+    desc = tp_barracks_1_desc
+    trigger = { TECH_TEMPLE_CONSTRUCTION = 3 }
+    upgrades_from = tp_barracks_4
+    build_cost = 400
+    build_time = 2190
+    light_infantry = 85
+    archers = 85
+    ai_creation_factor = 90
+  }
+  tp_barracks_6 = {
+    desc = tp_barracks_1_desc
+    trigger = { TECH_TEMPLE_CONSTRUCTION = 5 }
+    upgrades_from = tp_barracks_5
+    build_cost = 500
+    build_time = 2190
+    light_infantry = 95
+    archers = 95
+    ai_creation_factor = 89
+  }
+  
+  tp_elite_barracks_1 = {
+    desc = tp_elite_barracks_1_desc
+    build_cost = 100
+    build_time = 365
+    heavy_infantry = 45
+    ai_creation_factor = 95
+  }
+  tp_elite_barracks_2 = {
+    desc = tp_elite_barracks_1_desc
+    prerequisites = { tp_wall_1 }
+    upgrades_from = tp_elite_barracks_1
+    build_cost = 120
+    build_time = 730
+    heavy_infantry = 55
+    ai_creation_factor = 94
+  }
+  tp_elite_barracks_3 = {
+    desc = tp_elite_barracks_1_desc
+    prerequisites = { tp_wall_2 }
+    upgrades_from = tp_elite_barracks_2
+    build_cost = 200
+    build_time = 730
+    heavy_infantry = 65
+    ai_creation_factor = 93
+  }
+  tp_elite_barracks_4 = {
+    desc = tp_elite_barracks_1_desc
+    trigger = { TECH_TEMPLE_CONSTRUCTION = 1 }
+    upgrades_from = tp_elite_barracks_3
+    build_cost = 300
+    build_time = 1095
+    heavy_infantry = 75
+    ai_creation_factor = 92
+  }
+  tp_elite_barracks_5 = {
+    desc = tp_elite_barracks_1_desc
+    trigger = { TECH_TEMPLE_CONSTRUCTION = 3 }
+    upgrades_from = tp_elite_barracks_4
+    build_cost = 400
+    build_time = 2190
+    heavy_infantry = 85
+    ai_creation_factor = 91
+  }
+  tp_elite_barracks_6 = {
+    desc = tp_elite_barracks_1_desc
+    trigger = { TECH_TEMPLE_CONSTRUCTION = 5 }
+    upgrades_from = tp_elite_barracks_5
+    build_cost = 500
+    build_time = 2190
+    heavy_infantry = 95
+    ai_creation_factor = 90
+  }
+  
+  tp_town_1 = {
+    desc = tp_town_1_desc
+    build_cost = 100
+    build_time = 365
+    tax_income = 1.5
+    ai_creation_factor = 95
+  }
+  tp_town_2 = {
+    desc = tp_town_2_desc
+    prerequisites = { tp_wall_1 }
+    upgrades_from = tp_town_1
+    build_cost = 120
+    build_time = 547
+    tax_income = 2
+    ai_creation_factor = 94
+  }
+  tp_town_3 = {
+    desc = tp_town_3_desc
+    prerequisites = { tp_wall_2 }
+    upgrades_from = tp_town_2
+    build_cost = 200
+    build_time = 730
+    tax_income = 2.5
+    ai_creation_factor = 93
+  }
+  tp_town_4 = {
+    desc = tp_town_4_desc
+    trigger = { TECH_TEMPLE_CONSTRUCTION = 2 }
+    upgrades_from = tp_town_3
+    build_cost = 300
+    build_time = 1095
+    tax_income = 3
+    ai_creation_factor = 92
+  }
+  tp_town_5 = {
+    desc = tp_town_5_desc
+    trigger = { TECH_TEMPLE_CONSTRUCTION = 4 }
+    upgrades_from = tp_town_4
+    build_cost = 400
+    build_time = 2190
+    tax_income = 3.5
+    ai_creation_factor = 91
+  }
+
+  tp_school_1 = {
+    desc = tp_school_1_desc
+    prerequisites = { tp_wall_1 }
+    build_cost = 120
+    build_time = 547
+    tech_growth_modifier = 0.1
+    ai_creation_factor = 93
+  }
+  tp_school_2 = {
+    desc = tp_school_1_desc
+    prerequisites = { tp_wall_2 }
+    upgrades_from = tp_school_1
+    build_cost = 120
+    build_time = 547
+    tech_growth_modifier = 0.2
+    ai_creation_factor = 92
+  }
+}
+
+family_palace = {
+
+  # Mansion
+  fp_mansion_1 = {
+    desc = fp_mansion_1_desc
+    build_cost = 200
+    build_time = 1095
+    ai_creation_factor = 110
+    
+    levy_size = 0.1
+    tax_income = 2
+      }
+  
+  # Great Mansion
+  fp_mansion_2 = {
+    desc = fp_mansion_2_desc
+    upgrades_from = fp_mansion_1
+    build_cost = 300
+    build_time = 1460
+    ai_creation_factor = 109
+    
+    levy_size = 0.2
+    tax_income = 6
+      }
+  
+  # Palace
+  fp_mansion_3 = {
+    desc = fp_mansion_3_desc
+    upgrades_from = fp_mansion_2
+    build_cost = 400
+    build_time = 2190
+    ai_creation_factor = 108
+    
+    levy_size = 0.3
+    tax_income = 8
+      }
+  
+  # Grand Palace
+  fp_mansion_4 = {
+    desc = fp_mansion_4_desc
+    upgrades_from = fp_mansion_3
+    build_cost = 500
+    build_time = 2190
+    ai_creation_factor = 107
+    
+    levy_size = 0.4
+    tax_income = 10
+      }
+  
+  # Guard Barracks
+  fp_barracks_1 = {
+    desc = fp_barracks_1_desc
+    build_cost = 150
+    build_time = 730
+    ai_creation_factor = 105
+    
+    heavy_infantry = 70
+    pikemen = 50
+      }
+  
+  # Swordsmith
+  fp_barracks_2 = {
+    desc = fp_barracks_2_desc
+    upgrades_from = fp_barracks_1
+    prerequisites = { fp_mansion_2 }
+    build_cost = 250
+    build_time = 1095
+    ai_creation_factor = 104
+    
+    heavy_infantry = 85
+    pikemen = 65
+      }
+  
+  # Armory
+  fp_barracks_3 = {
+    desc = fp_barracks_3_desc
+    upgrades_from = fp_barracks_2
+    prerequisites = { fp_mansion_3 }
+    build_cost = 350
+    build_time = 1460
+    ai_creation_factor = 103
+    
+    heavy_infantry = 100
+    pikemen = 80
+      }
+  
+  # Small Stable
+  fp_stable_1 = {
+    desc = fp_stable_1_desc
+    build_cost = 150
+    build_time = 730
+    ai_creation_factor = 105
+    
+    light_cavalry = 75
+      }
+  
+  # Riding Grounds
+  fp_stable_2 = {
+    desc = fp_stable_2_desc
+    build_cost = 250
+    build_time = 1095
+    upgrades_from = fp_stable_1
+    prerequisites = { fp_mansion_2 }
+    ai_creation_factor = 104
+    
+    light_cavalry = 90
+      }
+  
+  # Horse Breeder
+  fp_stable_3 = {
+    desc = fp_stable_3_desc
+    build_cost = 350
+    build_time = 1460
+    upgrades_from = fp_stable_2
+    prerequisites = { fp_mansion_3 }
+    ai_creation_factor = 103
+    
+    light_cavalry = 105
+    knights = 45
+      }
+  
+  # Bowyer
+  fp_bowyer_1 = {
+    desc = fp_bowyer_1_desc
+    build_cost = 150
+    build_time = 730
+    ai_creation_factor = 105
+    
+    light_infantry = 95
+    archers = 95
+  }
+  
+  # Target Range
+  fp_bowyer_2 = {
+    desc = fp_bowyer_2_desc
+    build_cost = 250
+    build_time = 1095
+    upgrades_from = fp_bowyer_1
+    prerequisites = { fp_mansion_2 }
+    ai_creation_factor = 104
+    
+    light_infantry = 110
+    archers = 110
+      }
+  
+  # Crossbow Workshop
+  fp_bowyer_3 = {
+    desc = fp_bowyer_3_desc
+    build_cost = 350
+    build_time = 1460
+    upgrades_from = fp_bowyer_2
+    prerequisites = { fp_mansion_3 }
+    ai_creation_factor = 103
+    
+    light_infantry = 120
+    archers = 120
+      }
+  
+  # Map Room
+  fp_shipyard_1 = {
+    desc = fp_shipyard_1_desc
+    build_cost = 150
+    build_time = 730
+    ai_creation_factor = 105
+    
+    galleys = 12
+      }
+  
+  #  Private Shipyard
+  fp_shipyard_2 = {
+    desc = fp_shipyard_2_desc
+    build_cost = 250
+    build_time = 1095
+    upgrades_from = fp_shipyard_1
+    prerequisites = { fp_mansion_2 }
+    ai_creation_factor = 104
+    
+    galleys = 18
+      }
+  
+  # Naval Arsenal
+  fp_shipyard_3 = {
+    desc = fp_shipyard_3_desc
+    build_cost = 350
+    build_time = 1460
+    upgrades_from = fp_shipyard_2
+    prerequisites = { fp_mansion_3 }
+    ai_creation_factor = 103
+    
+    galleys = 24
+      }
+  
+  # Military Warehouse
+  fp_warehouse_1 = {
+    desc = fp_warehouse_1_desc
+    build_cost = 150
+    build_time = 730
+    ai_creation_factor = 105
+    
+    land_morale = 0.1
+    levy_reinforce_rate = 0.1
+    retinuesize = 1000
+      }
+  
+  # Palace Archive
+  fp_warehouse_2 = {
+    desc = fp_warehouse_2_desc
+    build_cost = 250
+    build_time = 1095
+    upgrades_from = fp_warehouse_1
+    prerequisites = { fp_mansion_2 }
+    ai_creation_factor = 104
+    
+    stewardship = 1
+    land_morale = 0.2
+    levy_reinforce_rate = 0.2
+    retinuesize = 2000
+      }
+  
+  # Administrative Office
+  fp_warehouse_3 = {
+    desc = fp_warehouse_3_desc
+    build_cost = 350
+    build_time = 1460
+    upgrades_from = fp_warehouse_2
+    prerequisites = { fp_mansion_3 }
+    ai_creation_factor = 103
+    
+    stewardship = 1
+    land_morale = 0.3
+    levy_reinforce_rate = 0.3
+    retinuesize = 3000
+      }
+  
+  # Palace Garden
+  fp_garden_1 = {
+    desc = fp_garden_1_desc
+    build_cost = 150
+    build_time = 730
+    ai_creation_factor = 105
+    
+    monthly_character_prestige = 0.20
+      }
+  
+  # Scenic Pond
+  fp_garden_2 = {
+    desc = fp_garden_2_desc
+    build_cost = 250
+    build_time = 1095
+    ai_creation_factor = 104
+
+    upgrades_from = fp_garden_1
+    prerequisites = { fp_mansion_2 }
+
+    diplomacy = 1
+    monthly_character_prestige = 0.30
+      }
+  
+  # Hedge Maze
+  fp_garden_3 = {
+    desc = fp_garden_3_desc
+    build_cost = 350
+    build_time = 1460
+    ai_creation_factor = 103
+
+    upgrades_from = fp_garden_2
+    prerequisites = { fp_mansion_3 }
+
+    diplomacy = 1
+    monthly_character_prestige = 0.50
+      }
+  
+  # Wine Cellar
+  fp_cellar_1 = {
+    desc = fp_cellar_1_desc
+    build_cost = 150
+    build_time = 730
+    ai_creation_factor = 105
+    
+    fertility = 0.1
+      }
+  
+  # Catacombs
+  fp_cellar_2 = {
+    desc = fp_cellar_2_desc
+    build_cost = 250
+    build_time = 1095
+    ai_creation_factor = 104
+
+    upgrades_from = fp_cellar_1
+    prerequisites = { fp_mansion_2 }
+    
+    martial = 1
+    monthly_character_piety = 0.25
+      }
+  
+  # Dungeon Complex
+  fp_cellar_3 = {
+    desc = fp_cellar_3_desc
+    build_cost = 350
+    build_time = 1460
+    ai_creation_factor = 103
+    
+    upgrades_from = fp_cellar_2
+    prerequisites = { fp_mansion_3 }
+    
+    martial = 1
+    monthly_character_prestige = 0.25
+      }
+  
+  # Secluded Shrine
+  fp_shrine_1 = {
+    desc = fp_shrine_1_desc
+    build_cost = 150
+    build_time = 730
+    ai_creation_factor = 105
+    
+    church_opinion = 10
+    monthly_character_piety = 0.10
+      }
+  
+  # Private Art Collection
+  fp_shrine_2 = {
+    desc = fp_shrine_2_desc
+    build_cost = 250
+    build_time = 1095
+    upgrades_from = fp_shrine_1
+    prerequisites = { fp_mansion_2 }
+    ai_creation_factor = 104
+    
+    learning = 1
+    monthly_character_piety = 0.25
+      }
+  
+  # Grand Library
+  fp_shrine_3 = {
+    desc = fp_shrine_3_desc
+    build_cost = 350
+    build_time = 1460
+    upgrades_from = fp_shrine_2
+    prerequisites = { fp_mansion_3 }
+    ai_creation_factor = 103
+    
+    learning = 1
+    monthly_character_piety = 0.50
+      }
+  
+  # Fortified Vault
+  fp_vault_1 = {
+    desc = fp_vault_1_desc
+    build_cost = 150
+    build_time = 730
+    ai_creation_factor = 105
+    
+    tax_income = 4
+      }
+  
+  # Secret Passages
+  fp_vault_2 = {
+    desc = fp_vault_2_desc
+    build_cost = 250
+    build_time = 1095
+    upgrades_from = fp_vault_1
+    prerequisites = { fp_mansion_2 }
+    ai_creation_factor = 104
+    
+    tax_income = 5
+    intrigue = 1
+      }
+  
+  # Hidden Chamber
+  fp_vault_3 = {
+    desc = fp_vault_3_desc
+    build_cost = 350
+    build_time = 1460
+    upgrades_from = fp_vault_2
+    prerequisites = { fp_mansion_3 }
+    ai_creation_factor = 103
+    
+    tax_income = 6
+    intrigue = 1
+  }
+}

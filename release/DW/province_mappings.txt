@@ -1,0 +1,1881 @@
+# link = { ck2 = 909 eux = 1795 eux = 1794 }	# Sahara Desert ->  East Sahara, Central Sahara
+seas = {
+link = { ck2 = 350 ck2 = 349 eux = 119 }	# Ancona, Spoleto -> Ancona
+link = { ck2 = 335 ck2 = 929 eux = 120 }	# Benevento, Aprutium -> Abruzzi
+link = { ck2 = 930 eux = 1311 eux = 1307 }	# Golfo di Taranto -> Gulf of Taranto, Straits of Messina
+link = { ck2 = 1008 ck2 = 943 eux = 1253 }	# Gulf of Bothnia, Näsijärvi -> Ålands Hav
+link = { ck2 = 925 eux = 1121 eux = 1124 }	# Mali -> Bure, Wasuju
+link = { ck2 = 926 eux = 1120 }	# Bambuk -> Bambuk
+# link = { ck2 = 924 ck2 = 923 eux = 1793 }	# Western Sahara, Adrar Plateau -> El Djouf
+link = { ck2 = 915 eux = 1134 }	# Djenné -> Jenne
+link = { ck2 = 919 eux = 1132 }	# Oualata -> Timbuktu
+link = { ck2 = 914 ck2 = 922 eux = 1142 }	# Gao, Tadmekka -> Dendi
+link = { ck2 = 911 eux = 1133 }	# Timbuktu -> Gao
+link = { ck2 = 927 eux = 1143 }	# Zarma -> Borgu
+link = { ck2 = 928 eux = 1136 }	# Gurma -> Gurma
+link = { ck2 = 913 eux = 1135 }	# Ghana -> Yatenga
+link = { ck2 = 912 eux = 1131 }	# Aoudaghost -> Massina
+link = { ck2 = 918 eux = 1127 }	# Sijilmasa -> Tuat
+link = { ck2 = 916 eux = 1128 }	# Taghaza -> Taodeni
+link = { ck2 = 917 eux = 1130 }	# Araouane -> Tadimekket
+link = { ck2 = 920 ck2 = 921 eux = 1129 }	# Ouadane, Idjil -> Azawadd
+link = { ck2 = 1011 ck2 = 1020 eux = 1294 }	# Mauretanian Coast, Western Mediterranean -> Gulf of Almeria
+link = { ck2 = 1021 eux = 1295 eux = 1299 }	# Golfo de Valencia -> Gulf of Valencia, Gulf of Mallorca
+link = { ck2 = 1022 eux = 1301 }	# Islas Baleares -> Barbary Coast
+link = { ck2 = 1025 eux = 1296 }	# Golfe du Lion -> Gulf of Lion
+link = { ck2 = 1024 eux = 1300 }	# Mediterranean Sea -> Western Mediterranean
+link = { ck2 = 1027 eux = 1297 }	# Côte d'Azur -> Cote D'Azur
+link = { ck2 = 1028 eux = 1298 }	# Ligurian Sea -> Ligurian Sea
+link = { ck2 = 1023 eux = 1302 }	# Ponant -> Cape Bon
+link = { ck2 = 1030 ck2 = 1029 eux = 1303 }	# Coast of Sardegna, Tyrrhenian Sea -> Tyrrenean Sea
+link = { ck2 = 1033 eux = 1305 }	# Golfe de Hammamet -> Gulf of Gabes
+link = { ck2 = 1034 eux = 1306 }	# Malta Channel -> Malta Channel
+link = { ck2 = 1031 ck2 = 1032 eux = 1304 }	# Golfo di Napoli, Strait di Messina -> Bay of Napoli
+link = { ck2 = 1035 eux = 1313 }	# Gulf of Sidra -> Gulf of Sirte
+link = { ck2 = 936 ck2 = 1017 eux = 1318 }	# Cyclades, Western Cyclades -> Sea of Crete
+link = { ck2 = 942 ck2 = 935 eux = 1319 }	# Western Aegean Sea, Aegean Sea -> Aegean Sea
+link = { ck2 = 1019 eux = 1284 }	# Irish Sea -> Irish Sea
+}
+# Iceland
+link = { ck2 = 1 eux = 370 }	# Vestisland -> Reykjavik
+link = { ck2 = 2 eux = 371 }	# Austisland -> Akureyri
+# England, Ireland, Scotland, and Wales
+link = { ck2 = 5 ck2 = 4 ck2 = 3 eux = 372 }	# Ulster, Tyrone, Tyrconnell -> Ulster
+link = { ck2 = 9 eux = 376 }	# Connacht -> Connaught
+link = { ck2 = 11 ck2 = 8 ck2 = 7 eux = 373 }	# Dublin, Breifne, Oriel -> Meath
+link = { ck2 = 15 ck2 = 16 ck2 = 12 ck2 = 10 eux = 374 }	# Ormond, Leinster, Ossory, Kildare -> Leinster
+link = { ck2 = 14 ck2 = 13 eux = 375 }	# Desmond, Thomond -> Munster
+link = { ck2 = 36 ck2 = 34 eux = 369 }	# Orkney, Shetland -> Orkney
+link = { ck2 = 37 ck2 = 39 ck2 = 40 ck2 = 45 eux = 252 }	# Caithness, Ross, Moray, Argyll -> Highlands
+link = { ck2 = 35 ck2 = 33 eux = 253 }	# Innse Gall, Faereyar -> Western Isles
+link = { ck2 = 41 eux = 251 }	# Buchan -> Aberdeen
+link = { ck2 = 44 ck2 = 42 ck2 = 43 ck2 = 46 eux = 250 }	# Atholl, Strathearn, Gowrie, Fife -> Fife
+link = { ck2 = 47 ck2 = 49 ck2 = 50 ck2 = 38 eux = 249 }	# Clydesdale, Carrick, Galloway, Teviotdale -> Ayrshire
+link = { ck2 = 48 ck2 = 51 eux = 248 }	# Lothian, Dunbar -> Lothian
+link = { ck2 = 52 ck2 = 56 eux = 246 }	# Northumberland, Durham -> Northumberland
+link = { ck2 = 53 ck2 = 55 ck2 = 54 eux = 247 }	# Cumberland, Westmorland, Isle of Man -> Cumbria
+link = { ck2 = 57 eux = 245 }	# York -> Yorkshire
+link = { ck2 = 61 eux = 243 }	# Lincoln -> Lincoln
+link = { ck2 = 58 ck2 = 59 eux = 244 }	# Lancaster, Chester -> Lancashire
+link = { ck2 = 60 ck2 = 64 ck2 = 65 eux = 242 }	# Perfeddwlad, Gwynedd, Powys -> Gwynedd
+link = { ck2 = 18 ck2 = 19 ck2 = 20 eux = 241 }	# Dyfed, Glamorgan, Gwent -> Glamorgan
+link = { ck2 = 66 ck2 = 30 ck2 = 67 ck2 = 17 eux = 240 }	# Shrewsbury, Worcester, Warwick, Hereford -> Marches
+link = { ck2 = 31 ck2 = 29 ck2 = 28 ck2 = 27 ck2 = 21 ck2 = 23 eux = 233 }	# Cornwall, Devon, Somerset, Dorset, Gloucester, Wiltshire -> Cornwall
+link = { ck2 = 26 eux = 234 }	# Winchester -> Wessex
+link = { ck2 = 73 ck2 = 25 ck2 = 24 eux = 235 }	# Kent, Sussex, Surrey -> Kent
+link = { ck2 = 71 ck2 = 70 eux = 1860 }	# Suffolk, Norfolk -> Norfolk
+link = { ck2 = 63 ck2 = 62 eux = 1861 }	# Derby, Leicester -> Derby
+link = { ck2 = 68 ck2 = 69 eux = 237 }	# Northampton, Bedford -> Oxfordshire
+link = { ck2 = 22 eux = 239 }	# Oxford -> Gloucestershire
+link = { ck2 = 72 eux = 238 }	# Essex -> Essex
+link = { ck2 = 32 eux = 236 }	# Middlesex -> London
+# Africa
+link = { ck2 = 871 eux = 1208 }	# Busaso -> Haud
+link = { ck2 = 872 eux = 1209 }	# Berbera -> Berbera
+link = { ck2 = 873 eux = 1211 eux = 1212 }	# Harer -> Harer, Zeila
+link = { ck2 = 882 eux = 1210 eux = 1213 }	# Ankober -> Ifat, Shoa
+link = { ck2 = 884 eux = 1214 }	# Antalo -> Awsa
+link = { ck2 = 881 eux = 1218 }	# Asosa -> Kefa
+link = { ck2 = 880  eux = 1225 }	# Sennar -> Butana
+link = { ck2 = 879 eux = 1229 }	# Atbara -> Berber
+link = { ck2 = 792 ck2 = 878 eux = 1232 }	# Nubia, Hayya -> Suakin
+link = { ck2 = 877 eux = 1226 }	# Kassala -> Taka
+link = { ck2 = 876 eux = 1230 }	# Akordat -> Massawa
+link = { ck2 = 875 eux = 1227 }	# Aksum -> Tigre
+link = { ck2 = 874 eux = 1215 }	# Tadjoura -> Tajura
+link = { ck2 = 883 eux = 1224 }	# Gondar -> Gonder
+link = { ck2 = 885 eux = 1223 }	# Matamma -> Gojjam
+link = { ck2 = 793 eux = 1228 eux = 1231 eux = 1234 }	# Makuria -> Dongola, Ibrim, Nubia
+link = { ck2 = 791 ck2 = 794 ck2 = 795 eux = 360 }	# Quena, Aswan, Asyut -> Nile
+link = { ck2 = 800 eux = 1233 }	# Gizeh -> Kargah
+link = { ck2 = 785 eux = 365 }	# Sinai -> Sinai
+link = { ck2 = 790 eux = 361 }	# Sarqihya -> Cairo
+link = { ck2 = 797 ck2 = 796 eux = 359 }	# Manupura, Cairo -> Asyut
+link = { ck2 = 789 eux = 363 }	# Pelusia -> Diamientia
+link = { ck2 = 798 eux = 362 }	# Damietta -> Delta
+link = { ck2 = 799 ck2 = 802 ck2 = 801 eux = 358 }	# Gabiyaha, Alexandria, Buhairya -> Alexandria
+link = { ck2 = 804 ck2 = 803 eux = 357 }	# Al Alamayn, Quattara -> Libya
+link = { ck2 = 806 ck2 = 808 ck2 = 807 ck2 = 805 eux = 356 }	# Cyrenaica, Benghazi, Senoussi, Tobruk -> Cyrenaica
+link = { ck2 = 809 ck2 = 810 eux = 355 }	# Syrte, Leptis Magna -> Sirt
+link = { ck2 = 811 eux = 354 }	# Tripolitana -> Tripolitania
+link = { ck2 = 816 ck2 = 814 ck2 = 813 eux = 353 }	# Mahdia, Gabes, Djerba -> Gabes
+link = { ck2 = 815 eux = 352 }	# Kairwan -> Gafsa
+link = { ck2 = 819 ck2 = 818 ck2 = 817 eux = 341 }	# Bizerte, Medjerda, Tunis -> Tunis
+link = { ck2 = 820 eux = 340 eux = 1882 }	# Annaba -> Constantine, Bône
+link = { ck2 = 822 eux = 339 }	# Bejaija -> Kabylia
+link = { ck2 = 825 ck2 = 831 ck2 = 824 eux = 338 }	# Beni Yanni, Al Djazair, Tell Atlas -> Al-Djazair
+link = { ck2 = 821 eux = 351 }	# Constantine -> Biskra
+link = { ck2 = 823 ck2 = 828 eux = 350 }	# Biskra, Ouled Nail -> Aures
+link = { ck2 = 832 eux = 337 }	# Orania -> Oran
+link = { ck2 = 830 ck2 = 834 eux = 336 }	# Lemdiyya, Tlemcen -> Tlemcen
+link = { ck2 = 829 ck2 = 833 ck2 = 835 eux = 349 }	# Mzab, Atlas Mnt, Hanyan -> Atlas
+link = { ck2 = 836 eux = 335 }	# Snassen -> Melilla
+link = { ck2 = 838 ck2 = 840 eux = 343 }	# El Rif, Fes -> Fez
+link = { ck2 = 837 eux = 346 }	# Figuig -> Figuig
+link = { ck2 = 839 eux = 1751 }	# Cebta -> Ceuta
+link = { ck2 = 842 ck2 = 844 eux = 342 }	# Infa, Massat -> Toubkhal
+link = { ck2 = 841 eux = 334 }	# Tangier -> Tangiers
+link = { ck2 = 845 ck2 = 846 eux = 345 }	# Anti-Atlas, Taroudant -> Safi
+link = { ck2 = 847 eux = 347 eux = 348 }	# Tharassat -> Ifni, Sus
+link = { ck2 = 849 eux = 366 }	# Canarias -> The Canarias
+link = { ck2 = 843 eux = 344 }	# Marrakech -> Marrakech
+# link = { ck2 = 909 eux = 1795 eux = 1794 eux = 1793 }	# Sahara Desert -> East Sahara, Central Sahara, El Djouf
+# # Arabian Peninsula, Middle East and Eastern Boundary Provinces
+link = { ck2 = 788 ck2 = 787 eux = 364 }	# Farama, El-Arish -> Gaza
+link = { ck2 = 786 ck2 = 782 ck2 = 779 eux = 1854 }	# Eilat, Negev, Beersheb -> Negev
+link = { ck2 = 784 ck2 = 720 eux = 383 }	# Al 'Aqabah, Hijaz -> Tabouk
+link = { ck2 = 718 eux = 384 }	# Medina -> Medina
+link = { ck2 = 719 eux = 385 }	# Mecca -> Mecca
+link = { ck2 = 861 eux = 386 }	# Asir -> Asir
+link = { ck2 = 860 ck2 = 859 eux = 387 }	# Sanaa, Taizz -> Mocha
+link = { ck2 = 858 ck2 = 857 eux = 388 }	# Aden, Bayda -> Aden
+link = { ck2 = 856 ck2 = 855 eux = 389 }	# Kathiri, Mahra -> Hadramut
+link = { ck2 = 866 eux = 402 eux = 1099 }	# Dhofar -> Mahra, Socotra
+link = { ck2 = 867 eux = 401 }	# Duqm -> Dhofar
+link = { ck2 = 868 eux = 400 }	# Muscat -> Muscat
+link = { ck2 = 869 eux = 399 }	# Hajar -> Suhar
+link = { ck2 = 870 eux = 398 eux = 404 eux = 397 }	# Dhu Zabi -> Qawasim, Liwa, Beni Yas
+link = { ck2 = 652 eux = 395 }	# Al Hasa -> Qatar
+link = { ck2 = 653 eux = 396 }	# Bahrein -> Bahrain
+#link = { ck2 = 908 eux = 403 eux = 1779 eux = 391 eux = 390 }	# Sharawrah -> Nizwa, Rub' al Khali, Najran, Sana'a
+link = { ck2 = 862 ck2 = 863 eux = 392 }	# Halaban, Hajr -> Najd
+link = { ck2 = 651 ck2 = 650 ck2 = 654 eux = 394 }	# Damman, Kuwait, Rummah -> Al Hasa
+link = { ck2 = 865 ck2 = 864 ck2 = 716 eux = 393 }	# Rafha, Hail, Ar'ar -> Jabal Shammar
+link = { ck2 = 649 eux = 408 }	# Basra -> Basra
+link = { ck2 = 647 ck2 = 648 ck2 = 645 eux = 412 }	# Ahvaz, Khozistan, Hendjan -> Khuzestan
+link = { ck2 = 643 ck2 = 644 eux = 429 }	# Fars, Shiraz -> Fars
+link = { ck2 = 642 ck2 = 640 eux = 430 }	# Ladistan, Zermanya -> Laristan
+link = { ck2 = 641 ck2 = 854 eux = 431 }	# Hormuz, Jask -> Hormuz
+link = { ck2 = 899 eux = 434 }	# Tis -> Makran
+link = { ck2 = 721 ck2 = 717 ck2 = 783 eux = 405 }	# Tabuk, Al Jawf, Maan -> Al Jawf
+link = { ck2 = 722 ck2 = 778 eux = 380 }	# Petra, Monreal -> Al Karak
+link = { ck2 = 781 ck2 = 780 ck2 = 776 ck2 = 774 ck2 = 775 ck2 = 773 eux = 379 }	# Darum, Ascalon, Hebron, Jerusalem, Jaffa, Tiberias -> Judea
+link = { ck2 = 777 ck2 = 723 eux = 381 }	# Kerak, Madaba -> Hawran
+link = { ck2 = 772 ck2 = 771 eux = 1855 }	# Acre, Tyrus -> Sidon
+link = { ck2 = 770 ck2 = 767 eux = 378 }	# Beirut, Tripoli -> Beirut
+link = { ck2 = 894 eux = 435 }	# Baluchistan -> Sistan
+link = { ck2 = 299 eux = 446 }	# Farrah -> Herat
+link = { ck2 = 907 eux = 445 }	# Sabzevar -> Marv
+link = { ck2 = 904 eux = 444 eux = 442 }	# Balkh -> Charjo, Bukhara
+link = { ck2 = 626 ck2 = 902 ck2 = 901 eux = 440 }	# Maverannahr, Dashhowuz, Khiva -> Khawarzam
+link = { ck2 = 622 ck2 = 900 eux = 471 }	# Aral, Kyzylorda -> Alimuly
+link = { ck2 = 897 ck2 = 898 eux = 472 }	# Ryn Desert, Omsk -> Zheteru
+link = { ck2 = 893 eux = 1075 eux = 1076 }	# Surgut -> Tyumen, Kurgan
+link = { ck2 = 887 eux = 1074 }	# Yamalia -> Tobolsk
+#link = { ck2 = 910 eux = 1780 eux = 1080 eux = 1073 eux = 1072 eux = 1069 }	# Siberia -> Komi, Idnakar, Berezov, Obdorsk, Surgut
+link = { ck2 = 766 ck2 = 764 ck2 = 763 ck2 = 765 eux = 377 }	# Tortosa, Antiocheia, Alexandretta, Archa -> Aleppo
+link = { ck2 = 735 ck2 = 707 ck2 = 734 ck2 = 699 ck2 = 702 ck2 = 701 eux = 332 }	# Teluch, Melitene, Aintab, Edessa, Khliat, Taron -> Mus
+link = { ck2 = 752 ck2 = 737 ck2 = 706 eux = 329 }	# Galatia, Kaisereia, Koloneia -> Sivas
+link = { ck2 = 704 ck2 = 678 eux = 330 }	# Theodosiopolis, Trapezous -> Trebizon
+link = { ck2 = 738 ck2 = 705 eux = 328 }	# Amisos, Chaldea -> Sinope
+link = { ck2 = 680 ck2 = 679 eux = 422 }	# Tao, Kartli -> Imereti
+link = { ck2 = 703 ck2 = 681 eux = 331 }	# Karin, Ani -> Erserum
+link = { ck2 = 733 ck2 = 732 eux = 1849 }	# Aleppo, Hama -> Hammah
+link = { ck2 = 725 ck2 = 769 ck2 = 768 ck2 = 731 ck2 = 730 ck2 = 728 eux = 382 }	# Irbid, Safed, Baalbek, Homs, Palmyra, Damascus -> Damascus
+link = { ck2 = 691 ck2 = 655 ck2 = 690 eux = 409 }	# Al Nasiryah, Kufa, Al Amarah -> Karbala
+link = { ck2 = 693 ck2 = 695 ck2 = 712 ck2 = 727 ck2 = 726 ck2 = 713 ck2 = 714 ck2 = 724 ck2 = 715 ck2 = 694 ck2 = 692 eux = 406 }	# Baghdad, Deir, Suwaida, Bostra, Al Mafraq, Druz, Az Zarqa, Amman, Al Habbariyah, Karbala, Al Nadjaf -> Badiyat Ash Sham
+link = { ck2 = 708 ck2 = 709 ck2 = 710 ck2 = 729 ck2 = 698 ck2 = 700 ck2 = 711 eux = 407 }	# Tell Bashir, Asas, Al Bichri, Al-Sukhnah, Al Jazira, Bira, Sinjar -> Dayr Az Zor
+link = { ck2 = 672 eux = 423 }	# Dwin -> Kartli
+link = { ck2 = 675 ck2 = 674 eux = 425 }	# Semender, Derbent -> Dagestan
+link = { ck2 = 669 ck2 = 673 eux = 424 }	# Shemakha, Albania -> Shirvan
+link = { ck2 = 668 eux = 421 }	# Shirvan -> Murgan
+link = { ck2 = 666 eux = 417 }	# Gilan -> Gilan
+link = { ck2 = 662 ck2 = 661 eux = 426 }	# Mazandaran, Tabaristan -> Mazandaran
+link = { ck2 = 633 eux = 427 }	# Gurgan -> Gurgan
+link = { ck2 = 624 ck2 = 623 eux = 443 }	# Mangyshlak, Khwarizm -> Ust Yurt
+link = { ck2 = 625 eux = 439 }	# Usturt -> Mangyshlak
+link = { ck2 = 627 ck2 = 629 ck2 = 628 eux = 438 }	# Kara-Kum, Turkmen, Bukhara -> Kara Kum
+link = { ck2 = 903 eux = 441 }	# Samarkand -> Khiva
+link = { ck2 = 631 ck2 = 630 ck2 = 905 eux = 437 }	# Dihistan, Merv, Herat -> Atak
+link = { ck2 = 906 ck2 = 632 ck2 = 635 ck2 = 637 eux = 436 }	# Birjand, Tus, Qohistan, Sistan -> Khurasan
+link = { ck2 = 852 ck2 = 639 ck2 = 853 eux = 432 }	# Zahedan, Kerman, Bam -> Kerman
+link = { ck2 = 634 ck2 = 636 ck2 = 638 ck2 = 646 ck2 = 660 eux = 433 }	# Nishapur, Lut, Yazd, Esfahan, Qwivir -> Dash-i-Lut
+link = { ck2 = 663 ck2 = 658 ck2 = 659 eux = 428 }	# Rayy, Hamadan, Qom -> Ajam
+link = { ck2 = 656 ck2 = 689 ck2 = 688 eux = 410 }	# Tigris, Ilam, Kermanshah -> Iraq-i-Arab
+link = { ck2 = 657 eux = 413 }	# Luristan -> Luristan
+link = { ck2 = 664 eux = 414 }	# Qazwin -> Hamadan
+link = { ck2 = 697 ck2 = 696 eux = 411 }	# Mosul, Samarra -> Mosul
+link = { ck2 = 687 ck2 = 686 ck2 = 685 eux = 415 }	# Kirkuk, Oromieh, Kurdistan -> Sharizhor
+link = { ck2 = 665 ck2 = 667 eux = 416 }	# Dailam, Tabriz -> Azerbaijan
+link = { ck2 = 671 ck2 = 670 eux = 420 }	# Suenik, Azerbaijan -> Qarabagh
+link = { ck2 = 683 ck2 = 684 eux = 418 }	# Amida, Nisibin -> Van
+link = { ck2 = 682 eux = 419 }	# Vaspurakan -> Armenia
+# Spain
+link = { ck2 = 156 eux = 206 }	# Coruña -> Galicia
+link = { ck2 = 157 eux = 231 }	# Santiago -> Porto
+link = { ck2 = 158 ck2 = 159 eux = 1851 }	# Porto, Coimbra -> Ribatejo
+link = { ck2 = 160 eux = 227 }	# Lisboa -> Lisboa
+link = { ck2 = 161 eux = 229 }	# Alcácer do Sal -> Alentejo
+link = { ck2 = 162 eux = 230 }	# Silves -> Algarve
+link = { ck2 = 163 ck2 = 164 eux = 224 }	# Faro, Niebla -> Andalucía
+link = { ck2 = 165 eux = 1749 }	# Cadiz -> Cadiz
+link = { ck2 = 166 eux = 226 }	# Algeciras -> Gibraltar
+link = { ck2 = 167 ck2 = 180 eux = 223 }	# Malaga, Granada -> Granada
+link = { ck2 = 168 eux = 222 }	# Almeria -> Almería
+link = { ck2 = 169 eux = 221 }	# Murcia -> Murcia
+link = { ck2 = 170 eux = 1750 }	# Denia -> Alicante
+link = { ck2 = 172 ck2 = 171 eux = 220 }	# Castellon, Valencia -> València
+link = { ck2 = 173 ck2 = 204 ck2 = 203 eux = 213 }	# Tarragona, Barcelona, Lleida -> Barcelona
+link = { ck2 = 205 ck2 = 206 eux = 212 }	# Empuries, Urgell -> Girona
+link = { ck2 = 207 eux = 211 }	# Alto Aragón -> Pirineo
+link = { ck2 = 152 eux = 210 }	# Navarra -> Navarra
+link = { ck2 = 153 eux = 209 }	# Viscaya -> Vizcaya
+link = { ck2 = 154 eux = 1745 }	# Asturias de Santillana -> Cantabria
+link = { ck2 = 155 eux = 207 }	# Asturias de Oviedo -> Asturias
+link = { ck2 = 202 ck2 = 175 ck2 = 174 eux = 214 }	# Zaragoza, Calatayud, Albarracin -> Aragón
+link = { ck2 = 201 ck2 = 199 eux = 1746 }	# Nájera, Burgos -> Burgos
+link = { ck2 = 190 ck2 = 189 eux = 208 }	# León, Astorga -> León
+link = { ck2 = 183 ck2 = 182 ck2 = 181 eux = 225 }	# Aracena, Seville, Cordoba -> Córdoba
+link = { ck2 = 185 ck2 = 184 eux = 218 }	# Mértola, Badajoz -> Badajoz
+link = { ck2 = 179 ck2 = 196 ck2 = 178 eux = 1748 }	# Almansa, Calatrava, La Mancha -> La Mancha
+link = { ck2 = 197 eux = 219 }	# Toledo -> Toledo
+link = { ck2 = 188 eux = 232 }	# Bragança -> Bragança
+link = { ck2 = 187 ck2 = 186 eux = 228 }	# Castelo Branco, Évora -> Beira
+link = { ck2 = 191 ck2 = 192 eux = 216 }	# Zamora, Salamanca -> Salamanca
+link = { ck2 = 198 ck2 = 200 ck2 = 176 eux = 215 }	# Valladolid, Soria, Molina -> Castilla La Vieja
+link = { ck2 = 177 eux = 217 }	# Cuenca -> Madrid
+link = { ck2 = 193 ck2 = 195 ck2 = 194 eux = 1747 }	# Alcantara, Caceres, Plasencia -> Caceres
+# Mediteranian Islands
+link = { ck2 = 826 ck2 = 827 eux = 333 }	# Menorca, Mallorca -> The Baleares
+link = { ck2 = 325 ck2 = 326 eux = 127 }	# Arborea, Cagliari -> Sardinia
+link = { ck2 = 324 eux = 1247 }	# Corsica -> Corsica
+link = { ck2 = 812 eux = 126 }	# Malta -> Malta
+link = { ck2 = 479 ck2 = 480 eux = 163 }	# Kaneia, Chandax -> Crete
+link = { ck2 = 483 eux = 320 }	# Rhodos -> Rhodes
+link = { ck2 = 757 ck2 = 756 eux = 321 }	# Famagusta, Limisol -> Cyprus
+link = { ck2 = 484 eux = 164 }	# Naxos -> Naxos
+# Italy
+link = { ck2 = 340 ck2 = 342 ck2 = 341 eux = 125 }	# Palermo, Girgenti, Trapani -> Palermo
+link = { ck2 = 343 ck2 = 339 eux = 124 }	# Siracusa, Messina -> Messina
+link = { ck2 = 344 ck2 = 337 ck2 = 338 eux = 123 }	# Taranto, Catanzaro, Reggio -> Calabria
+link = { ck2 = 348 ck2 = 347 ck2 = 346 ck2 = 345 eux = 122 }	# Foggia, Apulia, Bari, Lecce -> Apulia
+link = { ck2 = 356 eux = 112 }	# Venezia -> Venezia
+link = { ck2 = 333 ck2 = 243 eux = 118 }	# Rome, Orvieto -> Roma
+link = { ck2 = 350 eux = 119 }	# Ancona -> Ancona
+link = { ck2 = 349 ck2 = 335 eux = 120 }	# Spoleto, Benevento -> Abruzzi
+link = { ck2 = 851 ck2 = 334 ck2 = 336 eux = 121 }	# Capua, Napoli, Salerno -> Napoli
+link = { ck2 = 353 ck2 = 355 eux = 113 }	# Ferrara, Padua -> Ferrara
+link = { ck2 = 322 ck2 = 323 eux = 106 }	# Modena, Lucca -> Modena
+link = { ck2 = 327 eux = 115 }	# Pisa -> Pisa
+link = { ck2 = 331 ck2 = 330 ck2 = 332 eux = 117 }	# Piombino, Siena, Orbetello -> Siena
+link = { ck2 = 328 eux = 116 }	# Firenze -> Firenze
+link = { ck2 = 352 ck2 = 351 ck2 = 329 eux = 114 }	# Bologna, Ravenna, Urbino -> Romagna
+link = { ck2 = 354 eux = 109 }	# Mantua -> Mantua
+link = { ck2 = 320 eux = 1862 }	# Cremona -> Cremona
+link = { ck2 = 319 eux = 108 }	# Verona -> Verona
+link = { ck2 = 357 eux = 1774 }	# Treviso -> Treviso
+link = { ck2 = 321 eux = 105 }	# Parma -> Parma
+link = { ck2 = 233 eux = 101 }	# Genoa -> Liguria
+link = { ck2 = 230 eux = 102 }	# Nice -> Nice
+link = { ck2 = 231 eux = 1875 }	# Saluzzo -> Cuneo
+link = { ck2 = 318 eux = 107 }	# Brescia -> Brescia
+link = { ck2 = 317 eux = 110 }	# Trent -> Trent
+link = { ck2 = 235 ck2 = 234 eux = 104 }	# Lombardy, Pavia -> Lombardia
+link = { ck2 = 232 ck2 = 236 eux = 103 }	# Monferrato, Piemonte -> Piedmont
+link = { ck2 = 358 eux = 1769 eux = 111 }	# Aquileia -> Görz, Friuli
+# Nordic Countries
+link = { ck2 = 263 eux = 1775 }	# Holstein -> Holstein
+link = { ck2 = 264 eux = 13 }	# Slesvig -> Slesvig
+link = { ck2 = 267 eux = 15 }	# Jylland -> Jylland
+link = { ck2 = 265 eux = 14 }	# Fyn -> Fyn
+link = { ck2 = 266 eux = 12 }	# Sjælland -> Sjælland
+link = { ck2 = 303 ck2 = 6 ck2 = 305 eux = 6 }	# Skåne, Blekinge, Bornholm -> Skåne
+link = { ck2 = 298 ck2 = 300 eux = 3 }	# Småland, Öland -> Småland
+link = { ck2 = 301 eux = 25 }	# Gotland -> Gotland
+link = { ck2 = 376 eux = 35 }	# Saaremaa -> Ösel
+link = { ck2 = 302 eux = 26 }	# Halland -> Halland
+link = { ck2 = 297 eux = 7 }	# Västergötland -> Västergötland
+link = { ck2 = 296 eux = 16 }	# Viken -> Bohuslän
+link = { ck2 = 295 ck2 = 288 ck2 = 294 eux = 5 }	# Dal, Värmland, Närke -> Värmland
+link = { ck2 = 293 eux = 2 }	# Östergötland -> Östergötland
+link = { ck2 = 289 eux = 4 }	# Västmanland -> Bergslagen
+link = { ck2 = 292 ck2 = 290 eux = 1 }	# Södermanland, Uppland -> Stockholm
+link = { ck2 = 271 ck2 = 272 eux = 17 }	# Vestfold, Akershus -> Akershus
+link = { ck2 = 268 ck2 = 270 eux = 24 }	# Agder, Telemark -> Agder
+link = { ck2 = 274 ck2 = 269 ck2 = 275 eux = 23 }	# Bergenshus, Rogaland, Trøndelag -> Bergenshus
+link = { ck2 = 387 eux = 1777 }	# Kola -> Kola
+link = { ck2 = 389 eux = 315 }	# Finnmark -> Finnmark
+link = { ck2 = 279 eux = 18 }	# Lappland -> Lappland
+link = { ck2 = 280 eux = 11 }	# Västerbotten -> Västerbotten
+link = { ck2 = 281 ck2 = 283 ck2 = 285 ck2 = 286 eux = 9 }	# Ångermanland, Medelpad, Hälsingland, Gästrikland -> Hälsingland
+link = { ck2 = 282 eux = 10 }	# Jämtland -> Jämtland
+link = { ck2 = 284 ck2 = 287 eux = 8 }	# Herjedalen, Järnbäraland -> Dalaskogen
+link = { ck2 = 273 ck2 = 276 eux = 22 }	# Oppland, Hedmark -> Eidsiva
+link = { ck2 = 277 eux = 20 }	# Naumadal -> Trøndelag
+link = { ck2 = 278 ck2 = 391 eux = 21 }	# Hålogaland, Nordland -> Hålogaland
+link = { ck2 = 385 ck2 = 386 eux = 19 }	# Pohjanmaa, Kemi -> Österbotten
+link = { ck2 = 291 ck2 = 382 ck2 = 384 eux = 27 }	# Åland, Suomi, Satakunta -> Finland
+link = { ck2 = 383 eux = 29 }	# Häme -> Tavastland
+link = { ck2 = 381 eux = 28 }	# Uusimaa -> Nyland
+link = { ck2 = 392 eux = 30 eux = 32 }	# Käkisalmi -> Viborg, Kexholm
+link = { ck2 = 390 eux = 31 }	# Savo -> Savolax
+link = { ck2 = 850 ck2 = 388 eux = 1776 }	# Kantalahti, Karjala -> Karelia
+# France
+link = { ck2 = 104 ck2 = 103 eux = 170 }	# Cornouaille, Léon -> Finistère
+link = { ck2 = 102 ck2 = 101 eux = 169 }	# Penthievre, Rennes -> Armor
+link = { ck2 = 105 ck2 = 106 eux = 171 }	# Vannes, Nantes -> Morbihan
+link = { ck2 = 100 ck2 = 99 eux = 168 }	# Mortain, Évreux -> Normandie
+link = { ck2 = 142 eux = 172 }	# Thouars -> Vendée
+link = { ck2 = 143 ck2 = 148 ck2 = 144 ck2 = 141 eux = 180 }	# Saintonge, Angoulême, Lusignan, Poitiers -> Poitou
+link = { ck2 = 149 eux = 174 }	# Bordeaux -> Gascogne
+link = { ck2 = 150 ck2 = 151 eux = 173 }	# Marsan, Dax -> Labourd
+link = { ck2 = 97 eux = 167 }	# Rouen -> Caux
+link = { ck2 = 96 eux = 89 }	# Eu -> Picardie
+link = { ck2 = 75 eux = 87 }	# Boulogne -> Calais
+link = { ck2 = 74 ck2 = 76 eux = 90 }	# Guines, Yperen -> Vlaanderen
+link = { ck2 = 79 ck2 = 93 eux = 96 }	# Zeeland, Gent -> Zeeland
+link = { ck2 = 78 eux = 1744 }	# Brugge -> Antwerpen
+link = { ck2 = 80 ck2 = 81 eux = 97 }	# Holland, Westfriesland -> Holland
+link = { ck2 = 208 ck2 = 209 ck2 = 210 eux = 176 }	# Béarn, Armagnac, Foix -> Béarn
+link = { ck2 = 211 eux = 197 }	# Rosello -> Roussillon
+link = { ck2 = 212 ck2 = 220 ck2 = 219 eux = 200 }	# Narbonne, Melgueil, Gévaudan -> Languedoc
+link = { ck2 = 213 ck2 = 214 eux = 196 }	# Carcassonne, Toulouse -> Toulouse
+link = { ck2 = 221 eux = 201 }	# Provence -> Provence
+link = { ck2 = 215 eux = 194 eux = 175 }	# Agen -> Périgord, Armagnac
+link = { ck2 = 218 eux = 198 }	# Rouergue -> Rouergue
+link = { ck2 = 222 eux = 202 }	# Venaissin -> Avignon
+link = { ck2 = 108 eux = 177 eux = 1879 }	# Maine -> Maine, Alencon
+link = { ck2 = 107 eux = 178 }	# Anjou -> Anjou
+link = { ck2 = 77 eux = 88 }	# Artois -> Artois
+link = { ck2 = 229 ck2 = 223 ck2 = 228 eux = 204 }	# Forcalquier, Vivarais, Vienne -> Dauphiné
+link = { ck2 = 237 eux = 205 }	# Savoy -> Savoie
+link = { ck2 = 216 ck2 = 147 ck2 = 145 eux = 195 }	# Périgord, Limousin, La Marche -> Limousin
+link = { ck2 = 217 ck2 = 224 eux = 199 }	# Auvergne, Forez -> Auvergne
+link = { ck2 = 227 eux = 203 }	# Lyon -> Lyonnais
+link = { ck2 = 135 eux = 192 eux = 1877 eux = 193 }	# Bourgogne -> Bourgogne, Charolais, Franche-Comté
+link = { ck2 = 127 eux = 189 }	# Lorraine -> Lothringen
+link = { ck2 = 128 eux = 188 }	# Metz -> Metz
+link = { ck2 = 129 ck2 = 133 eux = 187 }	# Verdun, Saintois -> Barrois
+link = { ck2 = 115 eux = 94 }	# Luxembourg -> Luxemburg
+link = { ck2 = 116 eux = 93 }	# Liege -> Liège
+link = { ck2 = 117 eux = 92 }	# Brabant -> Brabant
+link = { ck2 = 94 eux = 1865 eux = 91 eux = 1866 }	# Hainaut -> Ghent, Hainaut, Namur
+link = { ck2 = 113 eux = 181 }	# Vermandois -> Valenciennes
+link = { ck2 = 95 eux = 1743 }	# Amiens -> Cambray
+link = { ck2 = 114 eux = 182 }	# Reims -> Vermandois
+link = { ck2 = 130 eux = 186 }	# Troyes -> Champagne
+link = { ck2 = 98 ck2 = 112 ck2 = 111 eux = 183 }	# Vexin, Paris, Chartres -> Île-de-France
+link = { ck2 = 109 ck2 = 140 ck2 = 110 ck2 = 138 eux = 184 }	# Vendôme, Tours, Blois, Orléans -> Orleanais
+link = { ck2 = 139 eux = 179 }	# Bourges -> Berry
+link = { ck2 = 131 eux = 185 }	# Sens -> Nemours
+link = { ck2 = 132 ck2 = 136 ck2 = 137 eux = 191 }	# Auxerre, Dijon, Nevers -> Nevers
+link = { ck2 = 146 ck2 = 226 ck2 = 225 ck2 = 240 eux = 190 }	# Bourbon, Charolais, Mâcon, Chalons -> Bourbon
+# Central Europe
+link = { ck2 = 82 eux = 98 }	# Sticht -> Utrecht
+link = { ck2 = 259 eux = 44 }	# Celle -> Hamburg
+link = { ck2 = 430 eux = 1763 }	# Lubusz -> Niederlausitz
+link = { ck2 = 83 eux = 99 }	# Gelre -> Gelre
+link = { ck2 = 84 eux = 100 }	# Friesland -> Friesland
+link = { ck2 = 85 eux = 55 }	# Ostfriesland -> Oldenburg
+link = { ck2 = 86 eux = 1874 }	# Oldenburg -> Bremen
+link = { ck2 = 848 eux = 54 }	# Bremen -> Stade
+link = { ck2 = 262 eux = 45 }	# Lübeck -> Lübeck
+link = { ck2 = 260 eux = 46 }	# Mecklenburg -> Mecklenburg
+link = { ck2 = 304 ck2 = 306 ck2 = 307 eux = 47 }	# Rügen, Rostock, Werle -> Vorpommern
+link = { ck2 = 365 ck2 = 308 eux = 50 }	# Brandenburg, Wolgast -> Brandenburg
+link = { ck2 = 364 eux = 60 }	# Lausitz -> Oberlausitz
+link = { ck2 = 366 eux = 1858 eux = 49 }	# Stettin -> Stettin, Neumark
+link = { ck2 = 437 ck2 = 436 eux = 265 }	# Praha, Boleslav -> Moravia
+link = { ck2 = 363 eux = 266 }	# Litomerice -> Bohemia
+link = { ck2 = 361 eux = 64 }	# Niederbayern -> Niederbayern
+link = { ck2 = 439 ck2 = 362 eux = 267 }	# Plzen, Domazlice -> Sudety
+link = { ck2 = 252 eux = 1872 }	# Ulm -> Ulm
+link = { ck2 = 448 eux = 76 }	# Salzburg -> Salzburg
+link = { ck2 = 316 eux = 73 }	# Tirol -> Tirol
+link = { ck2 = 359 eux = 1768 }	# Innsbruck -> Lienz
+link = { ck2 = 121 eux = 83 eux = 78 eux = 1876 }	# Nassau -> Nassau, Mainz, Frankfurt
+link = { ck2 = 87 eux = 56 }	# Osnabrück -> Osnabrück
+link = { ck2 = 88 eux = 86 }	# Münster -> Münster
+link = { ck2 = 89 ck2 = 90 eux = 1742 }	# Kleve, Jülich -> Limburg
+link = { ck2 = 91 ck2 = 92 eux = 95 }	# Loon, Breda -> Breda
+link = { ck2 = 119 eux = 84 eux = 85 }	# Köln -> Berg, Köln
+link = { ck2 = 257 eux = 57 eux = 1758 }	# Braunschweig -> Brunswick, Hannover
+link = { ck2 = 258 eux = 53 }	# Lüneburg -> Lüneburg
+link = { ck2 = 261 eux = 1857 }	# Hamburg -> Lauenburg
+link = { ck2 = 309 eux = 52 eux = 51 }	# Altmark -> Altmark, Ruppin
+link = { ck2 = 255 eux = 63 }	# Thüringen -> Thüringen
+link = { ck2 = 254 eux = 79 }	# Würzburg -> Würzburg
+link = { ck2 = 120 eux = 1762 eux = 81 eux = 82 }	# Göttingen -> Kassel, Hessen, Westfalen
+link = { ck2 = 310 eux = 1759 eux = 59 }	# Anhalt -> Potsdam, Meissen
+link = { ck2 = 256 eux = 58 }	# Weimar -> Anhalt
+link = { ck2 = 311 eux = 62 }	# Plauen -> Leipzig
+link = { ck2 = 312 eux = 61 eux = 1771 }	# Meissen -> Dresden, Erz
+link = { ck2 = 238 eux = 1871 }	# Valais -> Wallis
+link = { ck2 = 239 ck2 = 241 eux = 1867 }	# Genève, Neuchatel -> Freiburg
+link = { ck2 = 244 ck2 = 242 eux = 165 }	# Bern, Aargau -> Bern
+link = { ck2 = 134 eux = 1880 }	# Sundgau -> Sundgau
+link = { ck2 = 247 eux = 1873 }	# Chur -> Chur
+link = { ck2 = 246 eux = 166 }	# Grisons -> Schwyz
+link = { ck2 = 248 ck2 = 245 eux = 1870 }	# St. Gallen, Schwyz -> St Gallen
+link = { ck2 = 250 eux = 1869 }	# Breisgau -> Zürich
+link = { ck2 = 249 ck2 = 251 eux = 69 }	# Schwaben, Fürstenberg -> Konstanz
+link = { ck2 = 253 eux = 71 eux = 70 }	# Württemberg -> Ansbach, Württemberg
+link = { ck2 = 360 eux = 1868 eux = 65 }	# Oberbayern -> Augsburg, München
+link = { ck2 = 315 eux = 68 }	# Kempten -> Schwaben
+link = { ck2 = 314 eux = 1757 eux = 67 }	# Nürnberg -> Oberpfalz, Franken
+link = { ck2 = 313 eux = 66 }	# Bamberg -> Bamberg
+link = { ck2 = 125 eux = 72 eux = 74 }	# Baden -> Breisgau, Baden
+link = { ck2 = 126 eux = 75 }	# Nordgau -> Elsass
+link = { ck2 = 122 eux = 77 }	# Leiningen -> Pfalz
+link = { ck2 = 123 eux = 1760 }	# Mainz -> Koblenz
+link = { ck2 = 124 eux = 1761 eux = 80 }	# Pfalz -> Worms, Trier
+link = { ck2 = 118 eux = 1878 }	# Trier -> Aachen
+# Eastern Europe
+link = { ck2 = 458 eux = 131 eux = 130 }	# Istria -> Croatia, Istria
+link = { ck2 = 459 ck2 = 464 ck2 = 465 eux = 136 }	# Veglia, Senj, Zadar -> Dalmatia
+link = { ck2 = 509 ck2 = 510 eux = 159 }	# Karvuna, Constantia -> Silistria
+link = { ck2 = 511 eux = 1756 }	# Galaz -> Budjak
+link = { ck2 = 512 ck2 = 542 eux = 282 }	# Belgorod, Olvia -> Cherson
+link = { ck2 = 543 eux = 283 }	# Oleshye -> Zaporozhia
+link = { ck2 = 558 ck2 = 559 eux = 284 }	# Lower Dniepr, Crimea -> Crimea
+link = { ck2 = 560 ck2 = 561 ck2 = 562 eux = 285 }	# Cherson, Theodosia, Korchev -> Kaffa
+link = { ck2 = 557 ck2 = 563 ck2 = 596 eux = 286 }	# Lukomorie, Lower Don, Tana -> Azow
+link = { ck2 = 597 eux = 287 }	# Azov -> Kouban
+link = { ck2 = 598 ck2 = 600 eux = 1856 }	# Tmutarakan, Abkhazia -> Abkhazia
+link = { ck2 = 601 ck2 = 677 eux = 462 }	# Imeretia, Guria -> Georgia
+link = { ck2 = 620 ck2 = 604 eux = 464 }	# Itil, Kuma -> Astrakhan
+link = { ck2 = 618 eux = 465 }	# Guryev -> Bersh
+link = { ck2 = 621 eux = 470 }	# Emba -> Baybaktu
+link = { ck2 = 397 ck2 = 396 ck2 = 395 eux = 313 }	# Samoyedia, Bjarmia, Dvina -> Archangelsk
+link = { ck2 = 394 ck2 = 393 ck2 = 404 ck2 = 403 eux = 309 }	# Onega, Ääninen, Zaozerye, Romny -> Olonets
+link = { ck2 = 411 eux = 33 eux = 34 }	# Vodi -> Neva, Ingermanland
+link = { ck2 = 377 ck2 = 378 ck2 = 380 eux = 36 }	# Liivimaa, Kalevan, Narva -> Estland
+link = { ck2 = 375 ck2 = 379 eux = 37 }	# Latgale, Tartu -> Livland
+link = { ck2 = 374 eux = 38 eux = 271 }	# Zemgale -> Riga, Samogitia
+link = { ck2 = 373 eux = 39 eux = 40 }	# Kurzeme -> Kurland, Memel
+link = { ck2 = 421 ck2 = 372 ck2 = 371 ck2 = 422 ck2 = 426 eux = 41 }	# Zhmud, Memel, Sambia, Scalovia, Yatvyagi -> Ostpreussen
+link = { ck2 = 370 ck2 = 369 ck2 = 427 eux = 42 }	# Marienburg, Chelmno, Galindia -> Warmia
+link = { ck2 = 368 eux = 43 eux = 1859 }	# Danzig -> Danzig, Torun
+link = { ck2 = 367 eux = 48 }	# Slupsk -> Hinterpommern
+link = { ck2 = 431 ck2 = 429 eux = 254 }	# Poznan, Gniezno -> Poznan
+link = { ck2 = 432 eux = 255 eux = 258 }	# Kalisz -> Kalisz, Sieradz
+link = { ck2 = 529 eux = 256 }	# Plock -> Plock
+link = { ck2 = 527 eux = 262 eux = 259 }	# Krakow -> Krakow, Sandomierz
+link = { ck2 = 435 ck2 = 434 eux = 264 }	# Upper Silesia, Lower Silesia -> Breslau
+link = { ck2 = 433 ck2 = 526 ck2 = 440 eux = 263 }	# Opole, Cieszyn, Olomouc -> Ratibor
+link = { ck2 = 505 ck2 = 503 eux = 141 }	# Belgrade, Hum -> Serbia
+link = { ck2 = 466 eux = 139 }	# Zachlumia -> Hum
+link = { ck2 = 463 ck2 = 504 eux = 140 }	# Usora, Rama -> Bosnia
+link = { ck2 = 452 ck2 = 521 ck2 = 522 eux = 153 }	# Pecs, Csanad, Pest -> Pecs
+link = { ck2 = 462 eux = 1767 eux = 1864 }	# Krizevci -> Osijek, Somogy
+link = { ck2 = 457 ck2 = 456 eux = 129 }	# Krain, Kärnten -> Krain
+link = { ck2 = 461 eux = 152 }	# Zagreb -> Slavonia
+link = { ck2 = 450 ck2 = 454 ck2 = 453 eux = 135 }	# Sopron, Vas, Szekesfehervar -> Sopron
+link = { ck2 = 460 eux = 1863 }	# Varazdin -> Graz
+link = { ck2 = 455 eux = 128 }	# Steiermark -> Kärnten
+link = { ck2 = 449 eux = 132 }	# Österreich -> Steiermark
+link = { ck2 = 447 eux = 133 }	# Passau -> Linz
+link = { ck2 = 441 ck2 = 438 eux = 1770 }	# Brno, Hradec -> Ostmarch
+link = { ck2 = 446 ck2 = 445 eux = 134 }	# Znojmo, Pressburg -> Wien
+link = { ck2 = 502 ck2 = 501 eux = 1766 }	# Rashka, Naissus -> Kosovo
+link = { ck2 = 500 ck2 = 499 eux = 1765 }	# Serdica, Tyrnovo -> Nis
+link = { ck2 = 508 ck2 = 507 eux = 150 }	# Dorostotum, Nikopolis -> Bulgaria
+link = { ck2 = 451 ck2 = 444 ck2 = 443 eux = 1772 }	# Fejer, Esztergom, Nitra -> Pressburg
+link = { ck2 = 603 ck2 = 676 eux = 463 }	# Alania, Kakheti -> Alania
+link = { ck2 = 607 ck2 = 599 ck2 = 602 ck2 = 606 ck2 = 605 eux = 468 }	# Sarpa, Kuban, Kasogs, Yegorlyk, Manych -> Kalmykia
+link = { ck2 = 619 eux = 466 }	# Saray -> Sarai
+link = { ck2 = 398 ck2 = 399 ck2 = 405 ck2 = 402 ck2 = 400 eux = 1755 }	# Ugra, Syrj, Chud, Veliky Ustug, Zyriane -> Ustyug
+link = { ck2 = 892 eux = 1078 }	# Mansia -> North Ufa
+link = { ck2 = 406 eux = 314 }	# Vologda -> Vologda
+link = { ck2 = 407 eux = 1753 }	# Kostroma -> Kostroma
+link = { ck2 = 583 ck2 = 584 ck2 = 591 eux = 306 }	# Suzdal, Nizhny Novgorod, Cheremisa -> Nizhny Novgorod
+link = { ck2 = 582 eux = 307 }	# Vladimir -> Vladimir
+link = { ck2 = 575 ck2 = 573 eux = 295 }	# Moskva, Pereyaslavl Zalessky -> Moskva
+link = { ck2 = 570 eux = 294 }	# Tver -> Tver
+link = { ck2 = 569 eux = 296 }	# Vyazma -> Vyazma
+link = { ck2 = 568 eux = 293 }	# Smolensk -> Smolensk
+link = { ck2 = 576 eux = 297 }	# Bryansk -> Bryansk
+link = { ck2 = 554 eux = 289 }	# Chernigov -> Chernigov
+link = { ck2 = 555 ck2 = 556 eux = 290 }	# Pereyaslavl, Chortitza -> Poltava
+link = { ck2 = 586 ck2 = 585 eux = 1083 }	# Galich Mersky, Gorodez -> Vetluga
+link = { ck2 = 889 ck2 = 890 ck2 = 888 eux = 1077 }	# Chelyabi, Khantia, Komi -> Solikamsk
+link = { ck2 = 886 ck2 = 612 ck2 = 589 ck2 = 588 ck2 = 401 eux = 1079 }	# Perm, Votyaki, Kerzhenets, Merya, Hlynov -> Viatka
+link = { ck2 = 615 ck2 = 891 ck2 = 613 ck2 = 611 eux = 305 }	# Bashkirs, Tyumen, Bilyar, Kama -> Perm
+link = { ck2 = 895 ck2 = 896 eux = 475 }	# Oral, Aqtobe -> Ufa
+link = { ck2 = 616 eux = 469 eux = 474 }	# Yaik -> Mordvar, Uralsk
+link = { ck2 = 610 ck2 = 590 eux = 1082 }	# Bulgar, Chuvash -> Kazan
+link = { ck2 = 614 eux = 473 }	# Southern Ural -> Samara
+link = { ck2 = 609 eux = 1081 eux = 303 }	# Syrt -> Bolgar, Saratow
+link = { ck2 = 608 ck2 = 617 eux = 467 }	# Lower Volga, Uzens -> Bogutjar
+link = { ck2 = 595 ck2 = 594 eux = 288 }	# Don portage, Sarkel -> Cherkassk
+link = { ck2 = 564 ck2 = 565 eux = 291 }	# Desht-i-Kipchak, Sharukan -> Kharkov
+link = { ck2 = 567 eux = 298 }	# Novgorod Seversky -> Kursk
+link = { ck2 = 593 ck2 = 566 ck2 = 577 eux = 299 }	# Khopyor, Sugrov, Pronsk -> Voronezh
+link = { ck2 = 587 ck2 = 578 eux = 300 }	# Mozhaysk, Kolomna -> Tula
+link = { ck2 = 580 eux = 301 }	# Ryazan -> Ryazan
+link = { ck2 = 581 eux = 1754 }	# Murom -> Murom
+link = { ck2 = 579 eux = 1778 }	# Mordva -> Kasimov
+link = { ck2 = 592 eux = 304 eux = 302 }	# Burtasy -> Pensa, Tambow
+link = { ck2 = 574 ck2 = 571 ck2 = 572 eux = 308 }	# Rostov, Uglich, Yaroslavl -> Yaroslavl
+link = { ck2 = 408 eux = 312 }	# Beloozero -> Beloozero
+link = { ck2 = 412 eux = 1752 }	# Torzhok -> Rzhev
+link = { ck2 = 409 ck2 = 414 eux = 310 }	# Bezhetsky Verh, Novgorod -> Novgorod
+link = { ck2 = 413 eux = 274 }	# Pskov -> Pskov
+link = { ck2 = 415 eux = 311 }	# Velikiye Luki -> Kholm
+link = { ck2 = 410 ck2 = 417 eux = 275 }	# Toropets, Vitebsk -> Polotsk
+link = { ck2 = 416 eux = 273 }	# Daugava -> Wenden
+link = { ck2 = 550 ck2 = 418 eux = 276 }	# Minsk, Orsha -> Minsk
+link = { ck2 = 419 ck2 = 420 eux = 272 }	# Polotsk, Vilnius -> Vilna
+link = { ck2 = 423 eux = 270 }	# Trakai -> Trakai
+link = { ck2 = 428 ck2 = 528 eux = 257 }	# Kujawy, Sieradzko-Leczyckie -> Mazovia
+link = { ck2 = 425 ck2 = 424 eux = 269 }	# Podlasie, Grodno -> Podlasie
+link = { ck2 = 551 ck2 = 553 eux = 292 }	# Mstislavl, Lyubech -> Mogilyov
+link = { ck2 = 547 eux = 280 }	# Kiev -> Kiev
+link = { ck2 = 552 ck2 = 548 ck2 = 549 eux = 278 }	# Turov, Pinsk, Beresty -> Polesia
+link = { ck2 = 530 ck2 = 531 eux = 277 }	# Czersk, Sandomierz -> Grodno
+link = { ck2 = 544 eux = 281 }	# Korsun -> Podolia
+link = { ck2 = 442 ck2 = 525 ck2 = 524 eux = 154 }	# Trencín, Orava, Gemer -> Ersekujvar
+link = { ck2 = 532 eux = 260 }	# Sacz -> Lublin
+link = { ck2 = 541 eux = 268 }	# Peresechen -> Bessarabia
+link = { ck2 = 514 eux = 161 }	# Turnu -> Wallachia
+link = { ck2 = 515 ck2 = 516 ck2 = 506 eux = 160 }	# Tirgoviste, Severin, Vidin -> Oltenia
+link = { ck2 = 518 ck2 = 517 eux = 156 }	# Bacs, Temes -> Banat
+link = { ck2 = 520 eux = 155 }	# Bihar -> Szolnok
+link = { ck2 = 519 ck2 = 540 ck2 = 513 eux = 158 }	# Feher, Szekelyföld, Birlad -> Transylvania
+link = { ck2 = 523 ck2 = 538 eux = 157 }	# Heves, Abauj -> Partium
+link = { ck2 = 533 ck2 = 537 ck2 = 539 ck2 = 545 eux = 162 }	# Saris, Bereg, Marmaros, Torki -> Carpathia
+link = { ck2 = 534 eux = 261 }	# Peremyshl -> Ruthenia
+link = { ck2 = 535 ck2 = 536 ck2 = 546 eux = 279 }	# Vladimir Volynsky, Galich, Terebovl -> Volhynia
+# Greece and Aegean
+link = { ck2 = 478 eux = 145 }	# Monemvasia -> Morea
+link = { ck2 = 476 ck2 = 477 ck2 = 481 eux = 1773 }	# Achaia, Methone, Korinthos -> Achaea
+link = { ck2 = 485 ck2 = 482 eux = 146 }	# Euboia, Atheniai -> Athens
+link = { ck2 = 474 eux = 142 }	# Cephalonia -> Corfu
+link = { ck2 = 475 ck2 = 473 ck2 = 472 eux = 144 }	# Hellas, Árta, Épieros -> Janina
+link = { ck2 = 488 eux = 147 }	# Demetrias -> Larissa
+link = { ck2 = 489 eux = 1853 }	# Thessalia -> Kozani
+link = { ck2 = 490 ck2 = 491 ck2 = 492 eux = 148 }	# Thessalonike, Chalkidike, Strymon -> Macedonia
+link = { ck2 = 470 ck2 = 469 ck2 = 471 eux = 143 }	# Dyrrachion, Zeta, Ochrid -> Albania
+link = { ck2 = 493 ck2 = 494 ck2 = 495 ck2 = 487 eux = 149 }	# Philippopolis, Adrianopolis, Kaliopolis, Lesbos -> Edirne
+link = { ck2 = 468 eux = 138 }	# Ragusa -> Zeta
+link = { ck2 = 467 eux = 137 }	# Split -> Ragusa
+link = { ck2 = 496 eux = 151 }	# Constantinople -> Thrace
+link = { ck2 = 497 ck2 = 498 eux = 1764 }	# Thrake, Mesembria -> Burgas
+# Rest of Turkey
+link = { ck2 = 739 ck2 = 751 ck2 = 740 ck2 = 750 eux = 325 }	# Sinope, Paphlagonia, Herakleia, Nikaea -> Kastamon
+link = { ck2 = 741 ck2 = 742 eux = 316 }	# Nikomedeia, Prusa -> Bithynia
+link = { ck2 = 744 ck2 = 743 ck2 = 745 eux = 317 }	# Abydos, Kyzikos, Smyrna -> Bursa
+link = { ck2 = 746 ck2 = 748 ck2 = 486 eux = 318 }	# Ephesos, Laodikeia, Chios -> Smyrna
+link = { ck2 = 747 eux = 319 }	# Lykia -> Antalya
+link = { ck2 = 755 ck2 = 758 eux = 324 }	# Attaleia, Seleukeia -> Karaman
+link = { ck2 = 736 ck2 = 762 ck2 = 761 eux = 327 }	# Lykandos, Adana, Tarsos -> Adana
+link = { ck2 = 760 eux = 326 }	# Tyana -> Angora
+link = { ck2 = 753 eux = 1846 }	# Ancyra -> Yazgod
+link = { ck2 = 759 eux = 323 }	# Ikonion -> Konya
+link = { ck2 = 749 eux = 322 }	# Dorylaion -> Anatolia
+link = { ck2 = 754 eux = 1848 }	# Sozopolis -> Hamid
+# ### Water Provinces ####
+link = { ck2 = 958 eux = 1261 }	# Ladoga Lake -> Ladoga
+link = { ck2 = 944 eux = 1327 }	# Aral Sea -> Aral Sea
+link = { ck2 = 952 ck2 = 972 eux = 1326 }	# Caspian Sea, Kara-Bogaz Gol -> Caspian Sea
+link = { ck2 = 969 eux = 1323 }	# Sea of Azov -> Sea of Azov
+link = { ck2 = 949 ck2 = 1013 eux = 1322 }	# Coast of Taurida, Lake Yalpug -> Gulf of Odessa
+link = { ck2 = 951 eux = 1324 }	# Coast of Kolkhida -> Eastern Black Sea
+link = { ck2 = 950 ck2 = 948 eux = 1321 }	# Black Sea, Gulf of Varna -> Gulf of Varna
+link = { ck2 = 947 eux = 1320 }	# Sea of Marmara -> Sea of Marmara
+link = { ck2 = 946 eux = 1317 }	# Cilician Sea -> Gulf of Cyprus
+link = { ck2 = 945 ck2 = 940 ck2 = 983 ck2 = 979 eux = 1316 }	# Levantine Sea, Sea of Palestine, Dead Sea, Tiveriade Lake -> Palestinian Coast
+link = { ck2 = 939 ck2 = 941 eux = 1315 }	# Nile Delta, Eastern Mediterranean -> Bay of Alexandria
+link = { ck2 = 938 ck2 = 937 eux = 1314 }	# Coast of Egypt, Sea of Crete -> Gulf of Tobruk
+link = { ck2 = 911 ck2 = 936 eux = 1318 }	# Western Cyclades, Cyclades -> Sea of Crete
+link = { ck2 = 942 ck2 = 935 eux = 1319 }	# Western Aegean Sea, Aegean Sea -> Aegean Sea
+link = { ck2 = 934 eux = 1308 }	# Gulf of Venice -> Gulf of Venice
+link = { ck2 = 933 eux = 1309 }	# Adriatic Sea -> Adriatic Sea
+link = { ck2 = 932 eux = 1310 }	# Strait of Otranto -> Straits of Otranto
+link = { ck2 = 930 eux = 1311 }	# Golfo di Taranto -> Gulf of Taranto
+link = { ck2 = 931 eux = 1312 }	# Ionian Sea -> Ionian Sea
+link = { ck2 = 929 eux = 1313 }	# Gulf of Sidra -> Gulf of Sirte
+link = { ck2 = 926 eux = 1307 }	# Strait di Messina -> Straits of Messina
+link = { ck2 = 928 eux = 1306 }	# Malta Channel -> Malta Channel
+link = { ck2 = 927 eux = 1305 }	# Golfe de Hammamet -> Gulf of Gabes
+link = { ck2 = 925 eux = 1304 }	# Golfo di Napoli -> Bay of Napoli
+link = { ck2 = 922 eux = 1298 }	# Ligurian Sea -> Ligurian Sea
+link = { ck2 = 917 eux = 1302 }	# Ponant -> Cape Bon
+link = { ck2 = 918 eux = 1300 }	# Mediterranean Sea -> Western Mediterranean
+link = { ck2 = 921 eux = 1297 }	# Côte d'Azur -> Cote D'Azur
+link = { ck2 = 919 eux = 1296 }	# Golfe du Lion -> Gulf of Lion
+link = { ck2 = 916 eux = 1301 eux = 1299 }	# Islas Baleares -> Barbary Coast, Gulf of Mallorca
+link = { ck2 = 915 eux = 1295 }	# Golfo de Valencia -> Gulf of Valencia
+link = { ck2 = 1011 ck2 = 914 eux = 1294 }	# Mauretanian Coast, Western Mediterranean -> Gulf of Almeria
+link = { ck2 = 954 eux = 1293 }	# Strait of Gibraltar -> Straits of Gibraltar
+link = { ck2 = 953 eux = 1472 }	# Coast of Morocco -> Coast of Morocco
+link = { ck2 = 976 eux = 1471 }	# Sea of Canarias -> Canarian Sea
+link = { ck2 = 978 eux = 1470 }	# Atlantic -> Mauretanian Coast
+link = { ck2 = 981 eux = 1292 }	# Golfo de Cadiz -> Gulf of Cadiz
+link = { ck2 = 980 eux = 1291 }	# Portugal Coast -> Lusitanian Sea
+link = { ck2 = 970 eux = 1290 }	# Cabo de Finisterre -> Finisterre Bay
+link = { ck2 = 1014 eux = 1278 }	# Coast of Asturias -> Cantabrian Sea
+link = { ck2 = 974 eux = 1276 }	# Bay of Biscay -> Cote D'Argent
+link = { ck2 = 1015 eux = 1275 eux = 1277 }	# Northern Bay of Biscay -> Quiberon Bay, Bay of Biscay
+link = { ck2 = 977 eux = 1274 }	# Bretagne Coast -> Coast of Brittany
+link = { ck2 = 1010 ck2 = 967 eux = 1273 }	# Îles de la Manche, Land's End -> Land's End
+link = { ck2 = 1009 ck2 = 966 eux = 1272 }	# Baie de la Seine, The Solent -> The Channel
+link = { ck2 = 965 eux = 1271 }	# Strait of Dover -> Straits of Dover
+link = { ck2 = 996 eux = 1270 }	# The Wash -> Dogger Bank
+link = { ck2 = 995 eux = 1279 }	# Dogger bank -> Tyne
+link = { ck2 = 994 eux = 1280 }	# Firth of Forth -> Firth of Forth
+link = { ck2 = 993 eux = 1282 }	# Moray Firth -> Moray Firth
+link = { ck2 = 992 eux = 1283 }	# The Minch -> North Channel
+link = { ck2 = 913 eux = 1284 }	# Irish Sea -> Irish Sea
+link = { ck2 = 968 eux = 1285 }	# St. George's Channel -> St. George's Channel
+link = { ck2 = 991 eux = 1288 }	# Bantry Bay -> Celtic Sea
+link = { ck2 = 975 eux = 1287 eux = 1286 }	# Donegal Bay -> Dingle Bay, Donegal Bay
+link = { ck2 = 1016 eux = 1289 }	# Celtic Sea -> Western Approaches
+link = { ck2 = 982 eux = 1477 }	# Coast of Iceland -> Coast of Iceland
+link = { ck2 = 960 ck2 = 990 eux = 1476 }	# Faroya, Sea of Shetland -> Shetland Straits
+link = { ck2 = 1012 eux = 1260 }	# Lake Peipus -> Peipsi Järv
+link = { ck2 = 997 eux = 1262 }	# Onega -> Onega
+link = { ck2 = 964 ck2 = 955 eux = 1652 }	# White Sea, Saimaa -> White Sea
+link = { ck2 = 985 eux = 1263 }	# North Atlantic -> Barents Sea
+link = { ck2 = 987 eux = 1264 }	# North Sea -> Lofoten Sea
+link = { ck2 = 986 eux = 1265 eux = 1266 }	# North Sea -> Northern Norwegian Sea, Southern Norwegian Sea
+link = { ck2 = 1000 eux = 1267 eux = 1268 }	# Gulf of Heligoland -> Skagerrack, Helgoland Bight
+link = { ck2 = 1001 eux = 1259 }	# Kattegat -> Kattegat
+link = { ck2 = 999 eux = 1258 }	# The Sound -> Öresund
+link = { ck2 = 1002 ck2 = 1003 eux = 1257 }	# Gulf of Danzig, Bight of Hanö -> Southern Baltic Sea
+link = { ck2 = 1005 ck2 = 961 ck2 = 959 eux = 1255 }	# Sea of Åland, Hjälmaren, Mälaren -> Western Baltic Sea
+link = { ck2 = 1004 eux = 1256 }	# Baltic Sea -> Gulf of Riga
+link = { ck2 = 1006 eux = 1254 }	# Gulf of Finland -> Gulf of Finland
+link = { ck2 = 1007 ck2 = 957 ck2 = 956 eux = 1252 }	# Gulf of Bothnia, Oulujärvi, Kallavesi -> Gulf of Bothnia
+link = { ck2 = 963 eux = 1250 }	# Vänern -> Vänern
+link = { ck2 = 962 eux = 1251 }	# Vättern -> Vättern
+link = { ck2 = 973 eux = 1269 }	# Waddenzee -> Coast of Holland
+link = { ck2 = 988 eux = 1281 }	# North Sea -> The North Sea
+link = { ck2 = 989 eux = 1473 }	# North Sea -> Jan Mayen Sea
+link = { ck2 = 998 eux = 1474 }	# North Sea -> Spitzberg Sea
+link = { ck2 = 984 eux = 1475 }	# North Atlantic -> Icelandic Sea
+# ## ROTW ####
+# ROTW - North America
+link = { eux = 1810 }	# NOTHING -> Alaska
+link = { eux = 979 }	# NOTHING -> Aleut
+link = { eux = 978 }	# NOTHING -> Kenai
+link = { eux = 977 }	# NOTHING -> Yakutat
+link = { eux = 976 }	# NOTHING -> Tlingit
+link = { eux = 975 }	# NOTHING -> Tsimshian
+link = { eux = 974 }	# NOTHING -> Kwakiutl
+link = { eux = 972 }	# NOTHING -> Nootka
+link = { eux = 973 }	# NOTHING -> Squamish
+link = { eux = 874 }	# NOTHING -> Salish
+link = { eux = 873 }	# NOTHING -> Chinook
+link = { eux = 872 }	# NOTHING -> Kalapuya
+link = { eux = 871 }	# NOTHING -> Pomo
+link = { eux = 869 }	# NOTHING -> Salinan
+link = { eux = 870 }	# NOTHING -> Yorkuts
+link = { eux = 868 }	# NOTHING -> Chumash
+link = { eux = 867 }	# NOTHING -> Mojave
+link = { eux = 865 }	# NOTHING -> Cochimi
+link = { eux = 866 }	# NOTHING -> Guaycura
+link = { eux = 876 }	# NOTHING -> Yavapai
+link = { eux = 862 }	# NOTHING -> Yaqui
+link = { eux = 859 }	# NOTHING -> Sinaloa
+link = { eux = 855 }	# NOTHING -> Huichol
+link = { eux = 854 }	# NOTHING -> Sayultecas
+link = { eux = 851 }	# NOTHING -> Tarasco
+link = { eux = 849 }	# NOTHING -> Tlapanec
+link = { eux = 847 }	# NOTHING -> Mixtec
+link = { eux = 844 }	# NOTHING -> Zapotec
+link = { eux = 841 }	# NOTHING -> Guatemala
+link = { eux = 839 }	# NOTHING -> Pipil
+link = { eux = 837 }	# NOTHING -> Nicaragua
+link = { eux = 836 }	# NOTHING -> Chorotega
+link = { eux = 835 }	# NOTHING -> Panama
+link = { eux = 838 }	# NOTHING -> Mosquito
+link = { eux = 840 }	# NOTHING -> Honduras
+link = { eux = 843 }	# NOTHING -> Belize
+link = { eux = 842 }	# NOTHING -> Petén
+link = { eux = 846 }	# NOTHING -> Yucatan
+link = { eux = 845 }	# NOTHING -> Campeche
+link = { eux = 848 }	# NOTHING -> Tohancapan
+link = { eux = 858 }	# NOTHING -> Tamaulipas
+link = { eux = 884 }	# NOTHING -> Karankawa
+link = { eux = 888 }	# NOTHING -> Atakapa
+link = { eux = 893 }	# NOTHING -> Chitimacha
+link = { eux = 921 }	# NOTHING -> Bayougoula
+link = { eux = 922 }	# NOTHING -> Mobile
+link = { eux = 923 }	# NOTHING -> Pensacola
+link = { eux = 928 }	# NOTHING -> Apalachee
+link = { eux = 926 }	# NOTHING -> Seminole
+link = { eux = 927 }	# NOTHING -> Timucua
+link = { eux = 929 }	# NOTHING -> Muskogee
+link = { eux = 932 }	# NOTHING -> Santee
+link = { eux = 938 }	# NOTHING -> Pamlico
+link = { eux = 950 }	# NOTHING -> Powhatan
+link = { eux = 953 }	# NOTHING -> Conoy
+link = { eux = 957 }	# NOTHING -> Delaware
+link = { eux = 956 }	# NOTHING -> Lenape
+link = { eux = 962 }	# NOTHING -> Unami
+link = { eux = 963 }	# NOTHING -> Mahican
+link = { eux = 965 }	# NOTHING -> Manhattan
+link = { eux = 966 }	# NOTHING -> Connecticut
+link = { eux = 967 }	# NOTHING -> Narraganset
+link = { eux = 968 }	# NOTHING -> Massachusetts
+link = { eux = 970 }	# NOTHING -> Pennacook
+link = { eux = 985 }	# NOTHING -> Micmac
+link = { eux = 971 }	# NOTHING -> Abnaki
+link = { eux = 984 }	# NOTHING -> Acadia
+link = { eux = 983 }	# NOTHING -> Epekwitk
+link = { eux = 982 }	# NOTHING -> Unamakik
+link = { eux = 981 }	# NOTHING -> Taqamkuk
+link = { eux = 980 }	# NOTHING -> Beothuk
+link = { eux = 996 }	# NOTHING -> Innu
+link = { eux = 986 }	# NOTHING -> Kespek
+link = { eux = 990 }	# NOTHING -> Kwedech
+link = { eux = 994 }	# NOTHING -> Stadacona
+link = { eux = 995 }	# NOTHING -> Atikamekw
+link = { eux = 997 }	# NOTHING -> Labrador
+link = { eux = 998 }	# NOTHING -> Ungava
+link = { eux = 999 }	# NOTHING -> Nunavik
+link = { eux = 1000 }	# NOTHING -> Cree
+link = { eux = 1003 }	# NOTHING -> Moose Cree
+link = { eux = 1004 }	# NOTHING -> Attawapiskat
+link = { eux = 1005 }	# NOTHING -> Swampy Cree
+link = { eux = 1006 }	# NOTHING -> Chipewyan
+link = { eux = 1811 }	# NOTHING -> Nunavut
+link = { eux = 1807 }	# NOTHING -> Baffin
+link = { eux = 1804 }	# NOTHING -> Greenland
+link = { eux = 1105 }	# NOTHING -> Vestbygden
+link = { eux = 1104 }	# NOTHING -> Eiriksfjord
+link = { eux = 1812 }	# NOTHING -> Northwest Territories
+link = { eux = 1814 }	# NOTHING -> Columbia
+link = { eux = 1813 }	# NOTHING -> Saskatchewan
+link = { eux = 1809 }	# NOTHING -> Great Plains
+link = { eux = 1808 }	# NOTHING -> Great Basin
+link = { eux = 875 }	# NOTHING -> Canyon
+link = { eux = 878 }	# NOTHING -> Navajo
+link = { eux = 880 }	# NOTHING -> Pueblo
+link = { eux = 889 }	# NOTHING -> Arapaho
+link = { eux = 890 }	# NOTHING -> Kiowa
+link = { eux = 898 }	# NOTHING -> Kansas
+link = { eux = 901 }	# NOTHING -> Pawnee
+link = { eux = 903 }	# NOTHING -> Omaha
+link = { eux = 907 }	# NOTHING -> Dakota
+link = { eux = 906 }	# NOTHING -> Lakota
+link = { eux = 909 }	# NOTHING -> Mandan
+link = { eux = 1010 }	# NOTHING -> Manitoba
+link = { eux = 1011 }	# NOTHING -> Woods Cree
+link = { eux = 1009 }	# NOTHING -> Atikaki
+link = { eux = 1806 }	# NOTHING -> Weagamow
+link = { eux = 1008 }	# NOTHING -> Winnipeg
+link = { eux = 1007 }	# NOTHING -> Ojibwa
+link = { eux = 1001 }	# NOTHING -> Sault
+link = { eux = 1002 }	# NOTHING -> Abitbi
+link = { eux = 1805 }	# NOTHING -> Québec
+link = { eux = 992 }	# NOTHING -> Algonquin
+link = { eux = 993 }	# NOTHING -> Hochelega
+link = { eux = 969 }	# NOTHING -> Pocumtuk
+link = { eux = 964 }	# NOTHING -> Mohawk
+link = { eux = 989 }	# NOTHING -> Ontario
+link = { eux = 991 }	# NOTHING -> Ottawa
+link = { eux = 988 }	# NOTHING -> Huron
+link = { eux = 911 }	# NOTHING -> Menominee
+link = { eux = 912 }	# NOTHING -> Sauk
+link = { eux = 910 }	# NOTHING -> Chippewa
+link = { eux = 908 }	# NOTHING -> Minnesota
+link = { eux = 913 }	# NOTHING -> Fox
+link = { eux = 914 }	# NOTHING -> Winnebago
+link = { eux = 945 }	# NOTHING -> Michigan
+link = { eux = 944 }	# NOTHING -> Potawatomi
+link = { eux = 987 }	# NOTHING -> Niagara
+link = { eux = 958 }	# NOTHING -> Seneca
+link = { eux = 959 }	# NOTHING -> Cayuga
+link = { eux = 960 }	# NOTHING -> Onondaga
+link = { eux = 961 }	# NOTHING -> Oneida
+link = { eux = 955 }	# NOTHING -> Susquehanna
+link = { eux = 954 }	# NOTHING -> Allegheny
+link = { eux = 947 }	# NOTHING -> Erie
+link = { eux = 946 }	# NOTHING -> Wyandot
+link = { eux = 943 }	# NOTHING -> Miami
+link = { eux = 916 }	# NOTHING -> Kaskaskia
+link = { eux = 915 }	# NOTHING -> Illinois
+link = { eux = 905 }	# NOTHING -> Iowa
+link = { eux = 904 }	# NOTHING -> Nakota
+link = { eux = 902 }	# NOTHING -> Missouri
+link = { eux = 899 }	# NOTHING -> Osage
+link = { eux = 900 }	# NOTHING -> Tamaroa
+link = { eux = 917 }	# NOTHING -> Cahokia
+link = { eux = 942 }	# NOTHING -> Wea
+link = { eux = 940 }	# NOTHING -> Kentucky
+link = { eux = 948 }	# NOTHING -> Ohio
+link = { eux = 951 }	# NOTHING -> Kanawha
+link = { eux = 952 }	# NOTHING -> Manahoac
+link = { eux = 937 }	# NOTHING -> Tuscarora
+link = { eux = 949 }	# NOTHING -> Monacan
+link = { eux = 941 }	# NOTHING -> Cumberland
+link = { eux = 939 }	# NOTHING -> Pennyrile
+link = { eux = 934 }	# NOTHING -> Shawnee
+link = { eux = 935 }	# NOTHING -> Cherokee
+link = { eux = 936 }	# NOTHING -> Cheraw
+link = { eux = 933 }	# NOTHING -> Catawba
+link = { eux = 931 }	# NOTHING -> Chiaha
+link = { eux = 930 }	# NOTHING -> Yamasee
+link = { eux = 924 }	# NOTHING -> Alabama
+link = { eux = 925 }	# NOTHING -> Tuskegee
+link = { eux = 920 }	# NOTHING -> Choctaw
+link = { eux = 919 }	# NOTHING -> Chickasaw
+link = { eux = 918 }	# NOTHING -> Tennessee
+link = { eux = 894 }	# NOTHING -> Caddo
+link = { eux = 895 }	# NOTHING -> Arkansas
+link = { eux = 897 }	# NOTHING -> Quapaw
+link = { eux = 892 }	# NOTHING -> Wichita
+link = { eux = 896 }	# NOTHING -> Ozark
+link = { eux = 891 }	# NOTHING -> Jicarilla
+link = { eux = 885 }	# NOTHING -> Comanche
+link = { eux = 881 }	# NOTHING -> Piro
+link = { eux = 879 }	# NOTHING -> Apache
+link = { eux = 877 }	# NOTHING -> Pima
+link = { eux = 863 }	# NOTHING -> Suma
+link = { eux = 864 }	# NOTHING -> Concho
+link = { eux = 882 }	# NOTHING -> Mescalero
+link = { eux = 861 }	# NOTHING -> Coahuila
+link = { eux = 886 }	# NOTHING -> Waco
+link = { eux = 883 }	# NOTHING -> Lipan
+link = { eux = 887 }	# NOTHING -> Tonkawa
+link = { eux = 860 }	# NOTHING -> Tepehuan
+link = { eux = 856 }	# NOTHING -> Zacatecas
+link = { eux = 857 }	# NOTHING -> Guachichil
+link = { eux = 853 }	# NOTHING -> Huastec
+link = { eux = 852 }	# NOTHING -> Mexico
+link = { eux = 850 }	# NOTHING -> Tlaxcala
+link = { eux = 482 }	# NOTHING -> Bahamas
+link = { eux = 484 }	# NOTHING -> Havana
+link = { eux = 485 }	# NOTHING -> Moron
+link = { eux = 486 }	# NOTHING -> Guantanamo
+link = { eux = 487 }	# NOTHING -> Jamaica
+link = { eux = 483 }	# NOTHING -> Turks Islands
+link = { eux = 489 }	# NOTHING -> Tortuga
+link = { eux = 488 }	# NOTHING -> Les Cayes
+link = { eux = 490 }	# NOTHING -> Barahonas
+link = { eux = 492 }	# NOTHING -> Puerto Rico
+link = { eux = 1881 }	# NOTHING -> St. Barthélemy
+link = { eux = 493 }	# NOTHING -> St. Thomas
+link = { eux = 494 }	# NOTHING -> St. Martin
+link = { eux = 495 }	# NOTHING -> St. Kitts
+link = { eux = 496 }	# NOTHING -> Antigua
+link = { eux = 497 }	# NOTHING -> Guadeloupe
+link = { eux = 498 }	# NOTHING -> Dominica
+link = { eux = 499 }	# NOTHING -> Martinique
+link = { eux = 501 }	# NOTHING -> Barbados
+link = { eux = 500 }	# NOTHING -> St. Lucia
+link = { eux = 502 }	# NOTHING -> Trinidad
+link = { eux = 481 }	# NOTHING -> Bermuda
+link = { eux = 367 }	# NOTHING -> The Azores
+# #ROTW South America
+link = { eux = 826 }	# NOTHING -> Choco
+link = { eux = 823 }	# NOTHING -> Cauca
+link = { eux = 820 }	# NOTHING -> Quito
+link = { eux = 819 }	# NOTHING -> Guayaquil
+link = { eux = 816 }	# NOTHING -> Tumbes
+link = { eux = 812 }	# NOTHING -> Chanchan
+link = { eux = 809 }	# NOTHING -> Lima
+link = { eux = 806 }	# NOTHING -> Nazca
+link = { eux = 805 }	# NOTHING -> Arequipa
+link = { eux = 796 }	# NOTHING -> Arica
+link = { eux = 793 }	# NOTHING -> Atacama
+link = { eux = 792 }	# NOTHING -> Copiapo
+link = { eux = 787 }	# NOTHING -> Picunmapu
+link = { eux = 784 }	# NOTHING -> Huillimapu
+link = { eux = 783 }	# NOTHING -> Patagonia Occidental
+link = { eux = 782 }	# NOTHING -> Tierra del Fuego
+link = { eux = 1095 }	# NOTHING -> Falklands
+link = { eux = 781 }	# NOTHING -> Patagonia Oriental
+link = { eux = 780 }	# NOTHING -> Tehuelmapu
+link = { eux = 779 }	# NOTHING -> Serranos
+link = { eux = 778 }	# NOTHING -> Rio de la Plata
+link = { eux = 773 }	# NOTHING -> Banda Oriental
+link = { eux = 771 }	# NOTHING -> Patos
+link = { eux = 769 }	# NOTHING -> Santana
+link = { eux = 766 }	# NOTHING -> Sao Vicente
+link = { eux = 764 }	# NOTHING -> Santo Amaro
+link = { eux = 763 }	# NOTHING -> Rio de Janeiro
+link = { eux = 762 }	# NOTHING -> Sao Tome
+link = { eux = 761 }	# NOTHING -> Espirito Santo
+link = { eux = 760 }	# NOTHING -> Porto Seguro
+link = { eux = 757 }	# NOTHING -> Ilheus
+link = { eux = 756 }	# NOTHING -> Bahia
+link = { eux = 755 }	# NOTHING -> Pernambuco
+link = { eux = 754 }	# NOTHING -> Itamaraca
+link = { eux = 753 }	# NOTHING -> Rio Grande
+link = { eux = 751 }	# NOTHING -> Ceara
+link = { eux = 749 }	# NOTHING -> Maranhao
+link = { eux = 748 }	# NOTHING -> Grao Para
+link = { eux = 747 }	# NOTHING -> Tucujulandia
+link = { eux = 746 }	# NOTHING -> Cayenne
+link = { eux = 745 }	# NOTHING -> Suriname
+link = { eux = 744 }	# NOTHING -> Demerara
+link = { eux = 743 }	# NOTHING -> Essequibo
+link = { eux = 741 }	# NOTHING -> Cumana
+link = { eux = 831 }	# NOTHING -> Caracas
+link = { eux = 491 }	# NOTHING -> Curacao
+link = { eux = 830 }	# NOTHING -> Maracaibo
+link = { eux = 829 }	# NOTHING -> Magdalena
+link = { eux = 828 }	# NOTHING -> Cartagena
+link = { eux = 827 }	# NOTHING -> Antioquía
+link = { eux = 832 }	# NOTHING -> Chiancon
+link = { eux = 833 }	# NOTHING -> Tunja
+link = { eux = 834 }	# NOTHING -> Barinas
+link = { eux = 742 }	# NOTHING -> Guayana
+link = { eux = 825 }	# NOTHING -> Bogota
+link = { eux = 824 }	# NOTHING -> Mariquita
+link = { eux = 822 }	# NOTHING -> Caqueta
+link = { eux = 821 }	# NOTHING -> Quijos
+link = { eux = 818 }	# NOTHING -> Canelos
+link = { eux = 817 }	# NOTHING -> Cuenca
+link = { eux = 813 }	# NOTHING -> Cajamarca
+link = { eux = 815 }	# NOTHING -> Maynas
+link = { eux = 814 }	# NOTHING -> Huanuco
+link = { eux = 811 }	# NOTHING -> Tarma
+link = { eux = 810 }	# NOTHING -> Huancavelica
+link = { eux = 807 }	# NOTHING -> Huamanga
+link = { eux = 808 }	# NOTHING -> Cuzco
+link = { eux = 804 }	# NOTHING -> Puno
+link = { eux = 802 }	# NOTHING -> Chuquiabo
+link = { eux = 803 }	# NOTHING -> Moxos
+link = { eux = 801 }	# NOTHING -> Caranga
+link = { eux = 800 }	# NOTHING -> Chiquitos
+link = { eux = 798 }	# NOTHING -> Charcas
+link = { eux = 797 }	# NOTHING -> Caracara
+link = { eux = 795 }	# NOTHING -> Chichas
+link = { eux = 794 }	# NOTHING -> Jujuy
+link = { eux = 791 }	# NOTHING -> Catamarca
+link = { eux = 788 }	# NOTHING -> Cuyo
+link = { eux = 785 }	# NOTHING -> Pehuenmapu
+link = { eux = 786 }	# NOTHING -> Salinas Grande
+link = { eux = 789 }	# NOTHING -> Pampas
+link = { eux = 790 }	# NOTHING -> Chaco Austral
+link = { eux = 777 }	# NOTHING -> Parana
+link = { eux = 772 }	# NOTHING -> Uruguay
+link = { eux = 770 }	# NOTHING -> Tape
+link = { eux = 776 }	# NOTHING -> Itenines
+link = { eux = 799 }	# NOTHING -> Chaco Boreal
+link = { eux = 775 }	# NOTHING -> Xeres
+link = { eux = 774 }	# NOTHING -> Mbaracayu
+link = { eux = 768 }	# NOTHING -> Guayra
+link = { eux = 765 }	# NOTHING -> Minas Gerais
+link = { eux = 767 }	# NOTHING -> Mato Grosso
+link = { eux = 1803 }	# NOTHING -> Southern Amazonas
+link = { eux = 1802 }	# NOTHING -> Northern Amazonas
+link = { eux = 750 }	# NOTHING -> Alpercatas
+link = { eux = 752 }	# NOTHING -> Oeiras
+link = { eux = 759 }	# NOTHING -> Diamentina
+link = { eux = 758 }	# NOTHING -> Goias
+# Oceania
+link = { eux = 1790 }	# NOTHING -> Western Australia
+link = { eux = 1084 }	# NOTHING -> Wadjuk
+link = { eux = 1791 }	# NOTHING -> Central Australia
+link = { eux = 1086 }	# NOTHING -> Kaurna
+link = { eux = 1088 }	# NOTHING -> Wergaia
+link = { eux = 1089 }	# NOTHING -> Wiradjuri
+link = { eux = 1091 }	# NOTHING -> Kamilaroi
+link = { eux = 1093 }	# NOTHING -> Barunggam
+link = { eux = 1094 }	# NOTHING -> Gubbi Gubbi
+link = { eux = 1092 }	# NOTHING -> Bundjalung
+link = { eux = 1090 }	# NOTHING -> Eora
+link = { eux = 1087 }	# NOTHING -> Woiworung
+link = { eux = 1085 }	# NOTHING -> Paredarerme
+link = { eux = 1246 }	# NOTHING -> Aorangi
+link = { eux = 1109 }	# NOTHING -> Timaru
+link = { eux = 1107 }	# NOTHING -> Taranaki
+link = { eux = 1106 }	# NOTHING -> Whangarei
+link = { eux = 1108 }	# NOTHING -> Wairoa
+link = { eux = 1239 }	# NOTHING -> Vanuatu
+link = { eux = 1238 }	# NOTHING -> Solomon Islands
+link = { eux = 1237 }	# NOTHING -> Papua
+link = { eux = 1789 }	# NOTHING -> Maoke
+link = { eux = 1236 }	# NOTHING -> Rabaul
+link = { eux = 1245 }	# NOTHING -> Irian
+link = { eux = 646 }	# NOTHING -> Ambom
+link = { eux = 647 }	# NOTHING -> Ceram
+link = { eux = 648 }	# NOTHING -> Halmahera
+link = { eux = 644 }	# NOTHING -> Menade
+link = { eux = 643 }	# NOTHING -> Pose
+link = { eux = 641 }	# NOTHING -> Makassar
+link = { eux = 642 }	# NOTHING -> Bone
+link = { eux = 635 }	# NOTHING -> Timor
+link = { eux = 633 }	# NOTHING -> Flores
+link = { eux = 634 }	# NOTHING -> Sumba
+link = { eux = 632 }	# NOTHING -> Sumbawa
+link = { eux = 631 }	# NOTHING -> Bali-Lombok
+link = { eux = 627 }	# NOTHING -> Blambangan
+link = { eux = 628 }	# NOTHING -> Surabaya
+link = { eux = 626 }	# NOTHING -> Mataram
+link = { eux = 625 }	# NOTHING -> Priangan
+link = { eux = 629 }	# NOTHING -> Demak
+link = { eux = 630 }	# NOTHING -> Sunda
+link = { eux = 624 }	# NOTHING -> Banten
+link = { eux = 623 }	# NOTHING -> Lampung
+link = { eux = 621 }	# NOTHING -> Benkulen
+link = { eux = 622 }	# NOTHING -> Palembang
+link = { eux = 619 }	# NOTHING -> Minangkabau
+link = { eux = 620 }	# NOTHING -> Siak
+link = { eux = 618 }	# NOTHING -> Aru
+link = { eux = 617 }	# NOTHING -> Aceh
+link = { eux = 639 }	# NOTHING -> Banjarmasin
+link = { eux = 640 }	# NOTHING -> Sukadane
+link = { eux = 636 }	# NOTHING -> Brunei
+link = { eux = 638 }	# NOTHING -> Kutei
+link = { eux = 637 }	# NOTHING -> Sabah
+link = { eux = 655 }	# NOTHING -> Palawan
+link = { eux = 652 }	# NOTHING -> Maguindanao
+link = { eux = 653 }	# NOTHING -> Tagoloan
+link = { eux = 654 }	# NOTHING -> Visayas
+link = { eux = 656 }	# NOTHING -> Manila
+link = { eux = 658 }	# NOTHING -> Cagayan
+link = { eux = 657 }	# NOTHING -> Samtoy
+link = { eux = 1235 }	# NOTHING -> Guam
+link = { eux = 645 }	# NOTHING -> Buru
+link = { eux = 649 }	# NOTHING -> Ternate
+link = { eux = 1242 }	# NOTHING -> Fiji
+link = { eux = 1243 }	# NOTHING -> Samoa
+link = { eux = 1244 }	# NOTHING -> Tahiti
+link = { eux = 1241 }	# NOTHING -> Kiribati
+link = { eux = 1240 }	# NOTHING -> Hawaii
+# # ROTW Africa
+link = { eux = 1110 }	# NOTHING -> Rio de Oro
+link = { eux = 1111 }	# NOTHING -> Arguin
+link = { eux = 368 }	# NOTHING -> Madeira
+link = { eux = 1096 }	# NOTHING -> Cape Verde
+link = { eux = 1127 }	# NOTHING -> Tuat
+link = { eux = 1128 }	# NOTHING -> Taodeni
+link = { eux = 1325 }	# NOTHING -> Lake Balaton
+link = { eux = 1220 }	# NOTHING -> Dar Ja'al
+link = { eux = 1221 }	# NOTHING -> Taqali
+link = { eux = 1219 }	# NOTHING -> Kordofan
+link = { eux = 1158 }	# NOTHING -> Kanem
+link = { eux = 1157 }	# NOTHING -> Borno
+link = { eux = 1156 }	# NOTHING -> Damagaram
+link = { eux = 1148 }	# NOTHING -> Gobir
+link = { eux = 1130 }	# NOTHING -> Tadimekket
+link = { eux = 1129 }	# NOTHING -> Azawadd
+link = { eux = 1132 }	# NOTHING -> Timbuktu
+link = { eux = 1133 }	# NOTHING -> Gao
+link = { eux = 1112 }	# NOTHING -> Trarza
+link = { eux = 1113 }	# NOTHING -> Cayor
+link = { eux = 1114 }	# NOTHING -> Gabu
+link = { eux = 1116 }	# NOTHING -> Wolof
+link = { eux = 1115 }	# NOTHING -> Brakna
+link = { eux = 1123 }	# NOTHING -> Segu
+link = { eux = 1131 }	# NOTHING -> Massina
+link = { eux = 1135 }	# NOTHING -> Yatenga
+link = { eux = 1134 }	# NOTHING -> Jenne
+link = { eux = 1124 }	# NOTHING -> Wasuju
+link = { eux = 1121 }	# NOTHING -> Bure
+link = { eux = 1120 }	# NOTHING -> Bambuk
+link = { eux = 1117 }	# NOTHING -> Futa Jallon
+link = { eux = 1118 }	# NOTHING -> Sierra Leone
+link = { eux = 1122 }	# NOTHING -> Konian
+link = { eux = 1125 }	# NOTHING -> Worodugu
+link = { eux = 1119 }	# NOTHING -> Grain Coast
+link = { eux = 1126 }	# NOTHING -> Ivory Coast
+link = { eux = 1139 }	# NOTHING -> Gold Coast
+link = { eux = 1138 }	# NOTHING -> Kumasi
+link = { eux = 1137 }	# NOTHING -> Wagadugi
+link = { eux = 1136 }	# NOTHING -> Gurma
+link = { eux = 1142 }	# NOTHING -> Dendi
+link = { eux = 1143 }	# NOTHING -> Borgu
+link = { eux = 1140 }	# NOTHING -> Abomey
+link = { eux = 1141 }	# NOTHING -> Whydah
+link = { eux = 1144 }	# NOTHING -> Oyo
+link = { eux = 1147 }	# NOTHING -> Benin
+link = { eux = 1151 }	# NOTHING -> Bonny
+link = { eux = 1146 }	# NOTHING -> Ife
+link = { eux = 1145 }	# NOTHING -> Nupe
+link = { eux = 1150 }	# NOTHING -> Zamfara
+link = { eux = 1149 }	# NOTHING -> Katsina
+link = { eux = 1155 }	# NOTHING -> Kano
+link = { eux = 1154 }	# NOTHING -> Zazzau
+link = { eux = 1153 }	# NOTHING -> Pindinga
+link = { eux = 1152 }	# NOTHING -> Idah
+link = { eux = 1163 }	# NOTHING -> Calabar
+link = { eux = 1097 }	# NOTHING -> Fernando Po
+link = { eux = 1165 }	# NOTHING -> Gabon
+link = { eux = 1098 }	# NOTHING -> St. Helena
+link = { eux = 1161 }	# NOTHING -> Bauchi
+link = { eux = 1249 }	# NOTHING -> Yola
+link = { eux = 1160 }	# NOTHING -> Mandara
+link = { eux = 1159 }	# NOTHING -> Bagirmi
+link = { eux = 1796 }	# NOTHING -> Central Africa
+link = { eux = 1216 }	# NOTHING -> Dar Nuba
+link = { eux = 1217 }	# NOTHING -> Fazughli
+link = { eux = 1798 }	# NOTHING -> Uganda
+link = { eux = 1207 }	# NOTHING -> Ogaden
+link = { eux = 1208 }	# NOTHING -> Haud
+link = { eux = 1218 }	# NOTHING -> Kefa
+link = { eux = 1222 }	# NOTHING -> Gezira
+link = { eux = 1205 }	# NOTHING -> Mogadishu
+link = { eux = 1204 }	# NOTHING -> Lamu
+link = { eux = 1203 }	# NOTHING -> Malindi
+link = { eux = 1202 }	# NOTHING -> Mombasa
+link = { eux = 1200 }	# NOTHING -> Tanga
+link = { eux = 1199 }	# NOTHING -> Bagamoyo
+link = { eux = 1198 }	# NOTHING -> Tabora
+link = { eux = 1197 }	# NOTHING -> Ujiji
+link = { eux = 1797 }	# NOTHING -> Inner Kongo
+link = { eux = 1164 }	# NOTHING -> Cameroon
+link = { eux = 1169 }	# NOTHING -> Mayombe
+link = { eux = 1162 }	# NOTHING -> Wukari
+link = { eux = 1166 }	# NOTHING -> Loango
+link = { eux = 1170 }	# NOTHING -> Kongo
+link = { eux = 1167 }	# NOTHING -> Luanda
+link = { eux = 1171 }	# NOTHING -> Ndongo
+link = { eux = 1800 }	# NOTHING -> Zambia
+link = { eux = 1799 }	# NOTHING -> Malawi
+link = { eux = 1196 }	# NOTHING -> Kilwa
+link = { eux = 1201 }	# NOTHING -> Zanzibar
+link = { eux = 1194 }	# NOTHING -> Boina
+link = { eux = 1792 }	# NOTHING -> Antananarivo
+link = { eux = 1193 }	# NOTHING -> Menabe
+link = { eux = 1195 }	# NOTHING -> Mozambique
+link = { eux = 1192 }	# NOTHING -> Quelimane
+link = { eux = 1186 }	# NOTHING -> Sofala
+link = { eux = 1183 }	# NOTHING -> Inhambane
+link = { eux = 1182 }	# NOTHING -> Delagoa Bay
+link = { eux = 1181 }	# NOTHING -> Natal
+link = { eux = 1180 }	# NOTHING -> Transkei
+link = { eux = 1179 }	# NOTHING -> Little Karoo
+link = { eux = 1177 }	# NOTHING -> Cape
+link = { eux = 1175 }	# NOTHING -> Lesser Namaqualand
+link = { eux = 1174 }	# NOTHING -> Greater Namaqualand
+link = { eux = 1173 }	# NOTHING -> Damaraland
+link = { eux = 1172 }	# NOTHING -> Benguela
+link = { eux = 1168 }	# NOTHING -> Kisarna
+link = { eux = 1187 }	# NOTHING -> Urungwe
+link = { eux = 1184 }	# NOTHING -> Zimbabwe
+link = { eux = 1801 }	# NOTHING -> Kalahari
+link = { eux = 1185 }	# NOTHING -> Uteve
+link = { eux = 1189 }	# NOTHING -> Barwe
+link = { eux = 1188 }	# NOTHING -> Masapa
+link = { eux = 1190 }	# NOTHING -> Zumbo
+link = { eux = 1191 }	# NOTHING -> Sena
+link = { eux = 1178 }	# NOTHING -> Great Karoo
+link = { eux = 1176 }	# NOTHING -> Roggeveld
+# ROTW Far East
+link = { eux = 1015 }	# NOTHING -> Okinawa
+link = { eux = 1815 }	# NOTHING -> Hyuga
+link = { eux = 1012 }	# NOTHING -> Satsuma
+link = { eux = 1817 }	# NOTHING -> Higo
+link = { eux = 1013 }	# NOTHING -> Hizen
+link = { eux = 1818 }	# NOTHING -> Chikuzen
+link = { eux = 1017 }	# NOTHING -> Nagato
+link = { eux = 1014 }	# NOTHING -> Bungo
+link = { eux = 1016 }	# NOTHING -> Shikoku
+link = { eux = 1819 }	# NOTHING -> Tosa
+link = { eux = 1820 }	# NOTHING -> Awa
+link = { eux = 1825 }	# NOTHING -> Aki
+link = { eux = 1823 }	# NOTHING -> Iwami
+link = { eux = 1018 }	# NOTHING -> Izumo
+link = { eux = 1828 }	# NOTHING -> Bingo
+link = { eux = 1827 }	# NOTHING -> Bitchu
+link = { eux = 1826 }	# NOTHING -> Hoki
+link = { eux = 1830 }	# NOTHING -> Tajima
+link = { eux = 1019 }	# NOTHING -> Harima
+link = { eux = 1831 }	# NOTHING -> Tanba
+link = { eux = 1021 }	# NOTHING -> Settsu
+link = { eux = 1832 }	# NOTHING -> Yamato
+link = { eux = 1022 }	# NOTHING -> Kii
+link = { eux = 1030 }	# NOTHING -> Owari
+link = { eux = 1020 }	# NOTHING -> Kyoto
+link = { eux = 1834 }	# NOTHING -> Omi
+link = { eux = 1023 }	# NOTHING -> Echizen
+link = { eux = 1835 }	# NOTHING -> Mino
+link = { eux = 1839 }	# NOTHING -> Totomi
+link = { eux = 1029 }	# NOTHING -> Shinano
+link = { eux = 1837 }	# NOTHING -> Etchu
+link = { eux = 1024 }	# NOTHING -> Echigo
+link = { eux = 1841 }	# NOTHING -> Izu
+link = { eux = 1843 }	# NOTHING -> Kozuke
+link = { eux = 1028 }	# NOTHING -> Musashi
+link = { eux = 1842 }	# NOTHING -> Kazusa
+link = { eux = 1027 }	# NOTHING -> Hitachi
+link = { eux = 1026 }	# NOTHING -> Mutsu
+link = { eux = 1025 }	# NOTHING -> Dewa
+link = { eux = 1847 }	# NOTHING -> Shiribeshi
+link = { eux = 1031 }	# NOTHING -> Kamikawa
+link = { eux = 1852 }	# NOTHING -> Tokachi
+link = { eux = 1032 }	# NOTHING -> The Kurils
+link = { eux = 1033 }	# NOTHING -> Sakhalin
+link = { eux = 1034 }	# NOTHING -> Kamchatka
+link = { eux = 1035 }	# NOTHING -> Penchisky
+link = { eux = 1038 }	# NOTHING -> Anadyrsk
+link = { eux = 1037 }	# NOTHING -> Nizhe-Kolymsk
+link = { eux = 1036 }	# NOTHING -> Podzhiversk
+link = { eux = 1783 }	# NOTHING -> Eastern Siberia
+link = { eux = 1782 }	# NOTHING -> Central Siberia
+link = { eux = 1039 }	# NOTHING -> Verkhoyansk
+link = { eux = 1040 }	# NOTHING -> Suntar Khayat
+link = { eux = 1041 }	# NOTHING -> Gizhiga
+link = { eux = 1044 }	# NOTHING -> Tauisk
+link = { eux = 1043 }	# NOTHING -> Okhotsk
+link = { eux = 1042 }	# NOTHING -> Kamnuskoye
+link = { eux = 1045 }	# NOTHING -> Yakutsk
+link = { eux = 1046 }	# NOTHING -> Butalsk
+link = { eux = 1047 }	# NOTHING -> Jugjur
+link = { eux = 1052 }	# NOTHING -> Verkohzehkoye
+link = { eux = 1048 }	# NOTHING -> Udskoye
+link = { eux = 1050 }	# NOTHING -> Deren
+link = { eux = 1049 }	# NOTHING -> Saghalian Oula
+link = { eux = 1053 }	# NOTHING -> Albazinsky
+link = { eux = 729 }	# NOTHING -> Wusuli
+link = { eux = 728 }	# NOTHING -> Sanxing
+link = { eux = 727 }	# NOTHING -> Heilongjiang
+link = { eux = 724 }	# NOTHING -> Yakesa
+link = { eux = 731 }	# NOTHING -> Ninguta
+link = { eux = 1850 }	# NOTHING -> Mudanjiang
+link = { eux = 732 }	# NOTHING -> Hamgyeong
+link = { eux = 730 }	# NOTHING -> Haixi
+link = { eux = 725 }	# NOTHING -> Hinggan
+link = { eux = 723 }	# NOTHING -> Xilin Gol
+link = { eux = 704 }	# NOTHING -> Liaoxi
+link = { eux = 726 }	# NOTHING -> Liaodong
+link = { eux = 1845 }	# NOTHING -> Uiji
+link = { eux = 733 }	# NOTHING -> Pyeongan
+link = { eux = 734 }	# NOTHING -> Gangwon
+link = { eux = 735 }	# NOTHING -> Chungcheong
+link = { eux = 736 }	# NOTHING -> Gyeongsang
+link = { eux = 737 }	# NOTHING -> Jeolla
+link = { eux = 738 }	# NOTHING -> Taiwan
+link = { eux = 597 }	# NOTHING -> Johor
+link = { eux = 659 }	# NOTHING -> Riau
+link = { eux = 596 }	# NOTHING -> Malacca
+link = { eux = 598 }	# NOTHING -> Pahang
+link = { eux = 595 }	# NOTHING -> Perak
+link = { eux = 599 }	# NOTHING -> Kelantan
+link = { eux = 594 }	# NOTHING -> Pattani
+link = { eux = 593 }	# NOTHING -> Ligore
+link = { eux = 592 }	# NOTHING -> Ratchaburi
+link = { eux = 591 }	# NOTHING -> Tenasserim
+link = { eux = 603 }	# NOTHING -> Rayong
+link = { eux = 604 }	# NOTHING -> Udong
+link = { eux = 605 }	# NOTHING -> Prey Nokor
+link = { eux = 606 }	# NOTHING -> Panduranga
+link = { eux = 609 }	# NOTHING -> Siem Reap
+link = { eux = 608 }	# NOTHING -> Champassak
+link = { eux = 607 }	# NOTHING -> Vijaya
+link = { eux = 610 }	# NOTHING -> Binh Tri Thien
+link = { eux = 611 }	# NOTHING -> Thakhek
+link = { eux = 612 }	# NOTHING -> Khorat
+link = { eux = 600 }	# NOTHING -> Ayutthaya
+link = { eux = 590 }	# NOTHING -> Moulmein
+link = { eux = 586 }	# NOTHING -> Pegu
+link = { eux = 579 }	# NOTHING -> Arakan
+link = { eux = 585 }	# NOTHING -> Toungoo
+link = { eux = 589 }	# NOTHING -> Chiang Mai
+link = { eux = 601 }	# NOTHING -> Sukthothai
+link = { eux = 614 }	# NOTHING -> Vientiane
+link = { eux = 602 }	# NOTHING -> Chiang Rai
+link = { eux = 1844 }	# NOTHING -> Xiankhouang
+link = { eux = 615 }	# NOTHING -> Luang Prabang
+link = { eux = 613 }	# NOTHING -> Thang Long
+link = { eux = 666 }	# NOTHING -> Hainan
+link = { eux = 665 }	# NOTHING -> Jiangmen
+link = { eux = 668 }	# NOTHING -> Macau
+link = { eux = 667 }	# NOTHING -> Guangzhou
+link = { eux = 1829 }	# NOTHING -> Xiamen
+link = { eux = 669 }	# NOTHING -> Fuzhou
+link = { eux = 1824 }	# NOTHING -> Wenzhou
+link = { eux = 684 }	# NOTHING -> Hangzhou
+link = { eux = 1822 }	# NOTHING -> Shangai
+link = { eux = 1821 }	# NOTHING -> Nanjing
+link = { eux = 685 }	# NOTHING -> Huai'an
+link = { eux = 690 }	# NOTHING -> Shandong Bandao
+link = { eux = 691 }	# NOTHING -> Jinan
+link = { eux = 695 }	# NOTHING -> Hejian
+link = { eux = 1816 }	# NOTHING -> Beijing
+link = { eux = 568 }	# NOTHING -> Chittagong
+link = { eux = 564 }	# NOTHING -> Vanga
+link = { eux = 561 }	# NOTHING -> Bangala
+link = { eux = 553 }	# NOTHING -> Cuttack
+link = { eux = 549 }	# NOTHING -> Parlakimidi
+link = { eux = 542 }	# NOTHING -> Telingana
+link = { eux = 574 }	# NOTHING -> The Andamans
+link = { eux = 541 }	# NOTHING -> Kondavidu
+link = { eux = 539 }	# NOTHING -> Madras
+link = { eux = 573 }	# NOTHING -> Korales
+link = { eux = 572 }	# NOTHING -> Jaffna
+link = { eux = 537 }	# NOTHING -> Tiruchchirapalli
+link = { eux = 536 }	# NOTHING -> Madurai
+link = { eux = 535 }	# NOTHING -> Malabar
+link = { eux = 538 }	# NOTHING -> Kongu
+link = { eux = 533 }	# NOTHING -> Mysore
+link = { eux = 534 }	# NOTHING -> Calicut
+link = { eux = 532 }	# NOTHING -> Raichur Doab
+link = { eux = 531 }	# NOTHING -> Goa
+link = { eux = 530 }	# NOTHING -> Konkan
+link = { eux = 529 }	# NOTHING -> Dadra
+link = { eux = 528 }	# NOTHING -> Surat
+link = { eux = 515 }	# NOTHING -> Kathiawar
+link = { eux = 516 }	# NOTHING -> Ahmadabad
+link = { eux = 503 }	# NOTHING -> Kutch
+link = { eux = 504 }	# NOTHING -> Sind
+link = { eux = 576 }	# NOTHING -> Indus
+link = { eux = 575 }	# NOTHING -> Baluchistan
+link = { eux = 447 }	# NOTHING -> Kandahar
+link = { eux = 449 }	# NOTHING -> Gharchistan
+link = { eux = 450 }	# NOTHING -> Balkh
+link = { eux = 453 }	# NOTHING -> Karshi
+link = { eux = 454 }	# NOTHING -> Samarkand
+link = { eux = 455 }	# NOTHING -> Kyzyl Kum
+link = { eux = 456 }	# NOTHING -> Turkestan
+link = { eux = 476 }	# NOTHING -> Kypshak
+link = { eux = 479 }	# NOTHING -> Kerey
+link = { eux = 1071 }	# NOTHING -> Tara
+link = { eux = 1070 }	# NOTHING -> Koda
+link = { eux = 1781 }	# NOTHING -> Western Siberia
+link = { eux = 1067 }	# NOTHING -> Narym
+link = { eux = 1068 }	# NOTHING -> Pegaya Orda
+link = { eux = 1061 }	# NOTHING -> Yeniseysk
+link = { eux = 1064 }	# NOTHING -> Tomsk
+link = { eux = 480 }	# NOTHING -> Kulunda
+link = { eux = 477 }	# NOTHING -> Nadym
+link = { eux = 478 }	# NOTHING -> Argyn
+link = { eux = 457 }	# NOTHING -> Tashkent
+link = { eux = 459 }	# NOTHING -> Chuy
+link = { eux = 461 }	# NOTHING -> Moghulistan
+link = { eux = 458 }	# NOTHING -> Ferghana
+link = { eux = 452 }	# NOTHING -> Badakhshan
+link = { eux = 460 }	# NOTHING -> Tian Shan
+link = { eux = 1785 }	# NOTHING -> Karakoram
+link = { eux = 509 }	# NOTHING -> Kashmir
+link = { eux = 508 }	# NOTHING -> Jammu
+link = { eux = 578 }	# NOTHING -> Kohistan
+link = { eux = 451 }	# NOTHING -> Kabulistan
+link = { eux = 448 }	# NOTHING -> Gazni
+link = { eux = 577 }	# NOTHING -> Quetta
+link = { eux = 507 }	# NOTHING -> Lahore
+link = { eux = 506 }	# NOTHING -> Multan
+link = { eux = 511 }	# NOTHING -> Sutlej
+link = { eux = 510 }	# NOTHING -> Chandigarh
+link = { eux = 740 }	# NOTHING -> Ladakh
+link = { eux = 739 }	# NOTHING -> Altishar
+link = { eux = 1786 }	# NOTHING -> Takla Makan
+link = { eux = 712 }	# NOTHING -> Uighuristan
+link = { eux = 1784 }	# NOTHING -> Tiam Shan
+link = { eux = 714 }	# NOTHING -> Dzungaria
+link = { eux = 1066 }	# NOTHING -> Altai
+link = { eux = 1065 }	# NOTHING -> Kuznetsk
+link = { eux = 1062 }	# NOTHING -> Kachinsk
+link = { eux = 1063 }	# NOTHING -> Sayan
+link = { eux = 716 }	# NOTHING -> Tannu Tuva
+link = { eux = 717 }	# NOTHING -> Hovd
+link = { eux = 715 }	# NOTHING -> Urumqi
+link = { eux = 713 }	# NOTHING -> Kuruk Tag
+link = { eux = 711 }	# NOTHING -> Qarqan
+link = { eux = 710 }	# NOTHING -> Hotan
+link = { eux = 555 }	# NOTHING -> Oudh
+link = { eux = 1055 }	# NOTHING -> Verkne-Angarsky
+link = { eux = 1059 }	# NOTHING -> Bratsk
+link = { eux = 1054 }	# NOTHING -> Ilimsk
+link = { eux = 1051 }	# NOTHING -> Uchurskoye
+link = { eux = 1060 }	# NOTHING -> Irkutsk
+link = { eux = 1056 }	# NOTHING -> Barguzinsky
+link = { eux = 1058 }	# NOTHING -> Nerchinsky
+link = { eux = 1057 }	# NOTHING -> Udinsky
+link = { eux = 718 }	# NOTHING -> Jasagdu
+link = { eux = 719 }	# NOTHING -> Sayin Noyan
+link = { eux = 720 }	# NOTHING -> Tshiyet Noyan
+link = { eux = 721 }	# NOTHING -> Dornod
+link = { eux = 722 }	# NOTHING -> Chahar
+link = { eux = 703 }	# NOTHING -> Chengde
+link = { eux = 696 }	# NOTHING -> Xuan Fu
+link = { eux = 702 }	# NOTHING -> Ulaanchab
+link = { eux = 701 }	# NOTHING -> Ordos
+link = { eux = 693 }	# NOTHING -> Sanguan
+link = { eux = 697 }	# NOTHING -> Datong
+link = { eux = 692 }	# NOTHING -> Handan
+link = { eux = 694 }	# NOTHING -> Changzhi
+link = { eux = 1838 }	# NOTHING -> Hefei
+link = { eux = 688 }	# NOTHING -> Kaifeng
+link = { eux = 686 }	# NOTHING -> Anqing
+link = { eux = 683 }	# NOTHING -> Nanchang
+link = { eux = 670 }	# NOTHING -> Ganzhou
+link = { eux = 671 }	# NOTHING -> Changsha
+link = { eux = 682 }	# NOTHING -> Hanyang
+link = { eux = 687 }	# NOTHING -> Running
+link = { eux = 1836 }	# NOTHING -> Nanyang
+link = { eux = 681 }	# NOTHING -> Yichuan
+link = { eux = 672 }	# NOTHING -> Chenzhou
+link = { eux = 1840 }	# NOTHING -> Guilin
+link = { eux = 664 }	# NOTHING -> Guangxi
+link = { eux = 663 }	# NOTHING -> Wenshan
+link = { eux = 616 }	# NOTHING -> Viet Bac
+link = { eux = 660 }	# NOTHING -> Xishuan Banna
+link = { eux = 587 }	# NOTHING -> Keng Tung
+link = { eux = 588 }	# NOTHING -> Mongnai
+link = { eux = 580 }	# NOTHING -> Chin
+link = { eux = 584 }	# NOTHING -> Kyaukse
+link = { eux = 569 }	# NOTHING -> Manipur
+link = { eux = 567 }	# NOTHING -> Silhet
+link = { eux = 563 }	# NOTHING -> Pandua
+link = { eux = 560 }	# NOTHING -> Jharkhand
+link = { eux = 552 }	# NOTHING -> Orissa
+link = { eux = 548 }	# NOTHING -> Indravati
+link = { eux = 543 }	# NOTHING -> Golconda
+link = { eux = 540 }	# NOTHING -> Bangalore
+link = { eux = 544 }	# NOTHING -> Ahmadnagar
+link = { eux = 545 }	# NOTHING -> Maharastra
+link = { eux = 527 }	# NOTHING -> Khandesh
+link = { eux = 517 }	# NOTHING -> Baroda
+link = { eux = 514 }	# NOTHING -> Jodphur
+link = { eux = 513 }	# NOTHING -> Jaisalmer
+link = { eux = 505 }	# NOTHING -> Bakkar
+link = { eux = 520 }	# NOTHING -> Bikaner
+link = { eux = 512 }	# NOTHING -> Thar
+link = { eux = 521 }	# NOTHING -> Panipat
+link = { eux = 522 }	# NOTHING -> Delhi
+link = { eux = 1787 }	# NOTHING -> Himalaya
+link = { eux = 705 }	# NOTHING -> Dangla
+link = { eux = 706 }	# NOTHING -> Amdo
+link = { eux = 707 }	# NOTHING -> Yumen
+link = { eux = 709 }	# NOTHING -> Ningxia
+link = { eux = 708 }	# NOTHING -> Gansu
+link = { eux = 699 }	# NOTHING -> Lanzhou
+link = { eux = 700 }	# NOTHING -> Shaanxi
+link = { eux = 689 }	# NOTHING -> Fengyuan
+link = { eux = 680 }	# NOTHING -> Shenquing
+link = { eux = 673 }	# NOTHING -> Bozhou
+link = { eux = 674 }	# NOTHING -> Guiyang
+link = { eux = 675 }	# NOTHING -> Liangshan
+link = { eux = 662 }	# NOTHING -> Yunnan
+link = { eux = 661 }	# NOTHING -> Dali
+link = { eux = 583 }	# NOTHING -> Hsenwi
+link = { eux = 581 }	# NOTHING -> Sagaing
+link = { eux = 570 }	# NOTHING -> Naga
+link = { eux = 566 }	# NOTHING -> Assam
+link = { eux = 562 }	# NOTHING -> Koch
+link = { eux = 558 }	# NOTHING -> Maithil
+link = { eux = 559 }	# NOTHING -> Bihar
+link = { eux = 551 }	# NOTHING -> Gondwana
+link = { eux = 547 }	# NOTHING -> Bastar
+link = { eux = 546 }	# NOTHING -> Nagpur
+link = { eux = 550 }	# NOTHING -> Mandla
+link = { eux = 526 }	# NOTHING -> Malwa
+link = { eux = 518 }	# NOTHING -> Udaipur
+link = { eux = 519 }	# NOTHING -> Jaipur
+link = { eux = 523 }	# NOTHING -> Lucknow
+link = { eux = 524 }	# NOTHING -> Agra
+link = { eux = 525 }	# NOTHING -> Ajmer
+link = { eux = 556 }	# NOTHING -> Allahabad
+link = { eux = 554 }	# NOTHING -> Gorka
+link = { eux = 557 }	# NOTHING -> Katmandu
+link = { eux = 676 }	# NOTHING -> U-Tsang
+link = { eux = 565 }	# NOTHING -> Bhutan
+link = { eux = 1788 }	# NOTHING -> Arunachal
+link = { eux = 571 }	# NOTHING -> Brahmaputra
+link = { eux = 677 }	# NOTHING -> Qamdo
+link = { eux = 678 }	# NOTHING -> Kham
+link = { eux = 679 }	# NOTHING -> Sichuan Pendi
+link = { eux = 582 }	# NOTHING -> Kachin
+link = { eux = 1833 }	# NOTHING -> Ji'an
+link = { eux = 1248 }	# NOTHING -> Maldives
+link = { eux = 1100 }	# NOTHING -> Mahe
+link = { eux = 1101 }	# NOTHING -> Diego Garcia
+link = { eux = 1103 }	# NOTHING -> Bourbon
+link = { eux = 1102 }	# NOTHING -> Mauritius
+link = { eux = 698 }	# NOTHING -> Guyuan
+link = { eux = 650 }	# NOTHING -> Tidore
+link = { eux = 651 }	# NOTHING -> Sulu
+# ROTW Water
+link = { eux = 1329 }	# NOTHING -> Red Sea
+link = { eux = 1328 }	# NOTHING -> Gulf of Suez
+link = { eux = 1588 }	# NOTHING -> New Georgia Islands
+link = { eux = 1535 }	# NOTHING -> Baia Parangua
+link = { eux = 1589 }	# NOTHING -> Brazil-Malvinas Confluence Zone
+link = { eux = 1590 }	# NOTHING -> South Brazil Current
+link = { eux = 1536 }	# NOTHING -> Rio De La Plata
+link = { eux = 1534 }	# NOTHING -> Rio De Janeiro
+link = { eux = 1533 }	# NOTHING -> Todos Santos Bay
+link = { eux = 1532 }	# NOTHING -> Coast of Pernambuc
+link = { eux = 1531 }	# NOTHING -> Coast of Recife
+link = { eux = 1530 }	# NOTHING -> Coast of Brazil
+link = { eux = 1594 }	# NOTHING -> South Sandwich Islands
+link = { eux = 1529 }	# NOTHING -> Amazonas Gulf
+link = { eux = 1528 }	# NOTHING -> Bay of Belem
+link = { eux = 1527 }	# NOTHING -> Guyana Coast
+link = { eux = 1595 }	# NOTHING -> East of Magellans
+link = { eux = 1657 }	# NOTHING -> Lake Nicaragua
+link = { eux = 1515 }	# NOTHING -> Gulf of Darien
+link = { eux = 1514 }	# NOTHING -> Moscitos Coast
+link = { eux = 1587 }	# NOTHING -> Coast of Falklands
+link = { eux = 1519 }	# NOTHING -> Venezuelan Gulf
+link = { eux = 1517 }	# NOTHING -> Central Caribbean
+link = { eux = 1516 }	# NOTHING -> Jamaica Channel
+link = { eux = 1520 }	# NOTHING -> Venezuelan Sea
+link = { eux = 1522 }	# NOTHING -> Windward Islands
+link = { eux = 1521 }	# NOTHING -> Eastern Caribbean
+link = { eux = 1524 }	# NOTHING -> Turks & Caicos Sea
+link = { eux = 1523 }	# NOTHING -> Lesser Antilles
+link = { eux = 1526 }	# NOTHING -> Coast of Hispaniola
+link = { eux = 1575 }	# NOTHING -> Northern Guiana Basin
+link = { eux = 1576 }	# NOTHING -> Guiana Basin
+link = { eux = 1577 }	# NOTHING -> Southern Guiana Basin
+link = { eux = 1581 }	# NOTHING -> North Equatorial Current
+link = { eux = 1537 }	# NOTHING -> Bahia Blanca
+link = { eux = 1498 }	# NOTHING -> Northern Atlantic
+link = { eux = 1563 }	# NOTHING -> Hatton Bank
+link = { eux = 1479 }	# NOTHING -> Rockall
+link = { eux = 1478 }	# NOTHING -> Northeastern Atlantic
+link = { eux = 1538 }	# NOTHING -> Coast of Patagonia
+link = { eux = 1578 }	# NOTHING -> Canary Approach
+link = { eux = 1566 }	# NOTHING -> Iberian Shelf
+link = { eux = 1567 }	# NOTHING -> Sea of Azores
+link = { eux = 1580 }	# NOTHING -> Central North Atlantic
+link = { eux = 1568 }	# NOTHING -> Corner Seamounts
+link = { eux = 1582 }	# NOTHING -> West Sargasso Sea
+link = { eux = 1583 }	# NOTHING -> Sargasso Sea
+link = { eux = 1574 }	# NOTHING -> Antilles Current
+link = { eux = 1572 }	# NOTHING -> West Bermuda Sea
+link = { eux = 1573 }	# NOTHING -> East Bermuda Sea
+link = { eux = 1505 }	# NOTHING -> Florida Straits
+link = { eux = 1518 }	# NOTHING -> Northwestern Caribbean
+link = { eux = 1513 }	# NOTHING -> Belize Bay
+link = { eux = 1510 }	# NOTHING -> Yucatan Sea
+link = { eux = 1509 }	# NOTHING -> Tampico Bay
+link = { eux = 1507 }	# NOTHING -> Mobile Bay
+link = { eux = 1508 }	# NOTHING -> Galveston Bay
+link = { eux = 1511 }	# NOTHING -> Gulf of Mexico
+link = { eux = 1512 }	# NOTHING -> Yucatan Channel
+link = { eux = 1506 }	# NOTHING -> Apalachee Bay
+link = { eux = 1525 }	# NOTHING -> Coast of Cuba
+link = { eux = 1503 }	# NOTHING -> Coast of Florida
+link = { eux = 1504 }	# NOTHING -> Sea of Sargassos
+link = { eux = 1571 }	# NOTHING -> Blake Plateau
+link = { eux = 1502 }	# NOTHING -> Coast of Carolina
+link = { eux = 1501 }	# NOTHING -> Cape Hatteras
+link = { eux = 1570 }	# NOTHING -> New England Seamounts
+link = { eux = 1500 }	# NOTHING -> Chesapeake Bay
+link = { eux = 1539 }	# NOTHING -> Magellan Strait
+link = { eux = 1660 }	# NOTHING -> Lake Erie
+link = { eux = 1659 }	# NOTHING -> Lake Ontario
+link = { eux = 1661 }	# NOTHING -> Lake Huron
+link = { eux = 1662 }	# NOTHING -> Lake Michigan
+link = { eux = 1706 }	# NOTHING -> Pacific Ocean
+link = { eux = 1564 }	# NOTHING -> Eastern Gibbs Fracture
+link = { eux = 1565 }	# NOTHING -> Western Gibbs Fracture
+link = { eux = 1569 }	# NOTHING -> Sable Island Bank
+link = { eux = 1499 }	# NOTHING -> Massachusetts Bay
+link = { eux = 1492 }	# NOTHING -> Bay of Fundy
+link = { eux = 1491 }	# NOTHING -> Cabot Strait
+link = { eux = 1494 }	# NOTHING -> Fortune Bay
+link = { eux = 1495 }	# NOTHING -> Notre Dame Bay
+link = { eux = 1493 }	# NOTHING -> Strait of Belle Isle
+link = { eux = 1497 }	# NOTHING -> Greenland Sea
+link = { eux = 1496 }	# NOTHING -> Labrador Sea
+link = { eux = 1490 }	# NOTHING -> Gulf of St. Lawrence
+link = { eux = 1664 }	# NOTHING -> Lake Nipigon
+link = { eux = 1663 }	# NOTHING -> Lake Superior
+link = { eux = 1665 }	# NOTHING -> Lake Winnipeg
+link = { eux = 1540 }	# NOTHING -> South Chilean Coast
+link = { eux = 1486 }	# NOTHING -> James Bay
+link = { eux = 1487 }	# NOTHING -> Western Hudson Bay
+link = { eux = 1489 }	# NOTHING -> Foxe Basin
+link = { eux = 1488 }	# NOTHING -> Eastern Hudson Bay
+link = { eux = 1541 }	# NOTHING -> Coast of Chile
+link = { eux = 1483 }	# NOTHING -> Labrador Strait
+link = { eux = 1485 }	# NOTHING -> Hudson Straits
+link = { eux = 1484 }	# NOTHING -> Baffin Bay
+link = { eux = 1482 }	# NOTHING -> Western Coast of Greenland
+link = { eux = 1481 }	# NOTHING -> Eastern Coast of Greenland
+link = { eux = 1480 }	# NOTHING -> Denmark Strait
+link = { eux = 1542 }	# NOTHING -> Atacama Coast
+link = { eux = 1593 }	# NOTHING -> Eastern South Atlantic Current
+link = { eux = 1606 }	# NOTHING -> Tristan da Cunha Islands
+link = { eux = 1607 }	# NOTHING -> South Atlantic Raging Fifties
+link = { eux = 1608 }	# NOTHING -> South Atlantic
+link = { eux = 1605 }	# NOTHING -> South Atlantic Current
+link = { eux = 1592 }	# NOTHING -> Western South Atlantic Current
+link = { eux = 1718 }	# NOTHING -> Mornington Abyssal Plain
+link = { eux = 1591 }	# NOTHING -> Brazil Current
+link = { eux = 1599 }	# NOTHING -> Trindade Island
+link = { eux = 1598 }	# NOTHING -> Central South Atlantic
+link = { eux = 1596 }	# NOTHING -> North Brazil Current
+link = { eux = 1584 }	# NOTHING -> Romanche Gap
+link = { eux = 1579 }	# NOTHING -> Cap Verde Approach
+link = { eux = 1469 }	# NOTHING -> Coast of Guinea
+link = { eux = 1468 }	# NOTHING -> Coast of Gambia
+link = { eux = 1597 }	# NOTHING -> South Equatorial Current
+link = { eux = 1648 }	# NOTHING -> Lake Tchad
+link = { eux = 1705 }	# NOTHING -> Juan Fernandez Islands
+link = { eux = 1467 }	# NOTHING -> Gold Coast
+link = { eux = 1466 }	# NOTHING -> Ivory Coast
+link = { eux = 1465 }	# NOTHING -> Gulf of Nigeria
+link = { eux = 1464 }	# NOTHING -> Coast of Cameroon
+link = { eux = 1586 }	# NOTHING -> West Guinea Basin
+link = { eux = 1585 }	# NOTHING -> East Guinea Basin
+link = { eux = 1463 }	# NOTHING -> Gulf of Kongo
+link = { eux = 1717 }	# NOTHING -> Southern Humboldt Current
+link = { eux = 1462 }	# NOTHING -> Coast of Angola
+link = { eux = 1601 }	# NOTHING -> North Benguela Current
+link = { eux = 1600 }	# NOTHING -> South St Helena
+link = { eux = 1604 }	# NOTHING -> Eastern South Atlantic Current
+link = { eux = 1609 }	# NOTHING -> South Atlantic Roaring Forties
+link = { eux = 1602 }	# NOTHING -> South Benguela Current
+link = { eux = 1461 }	# NOTHING -> Coast of Namibia
+link = { eux = 1603 }	# NOTHING -> Bouvet Island
+link = { eux = 1704 }	# NOTHING -> San Felix Island
+link = { eux = 1460 }	# NOTHING -> Cape of Good Hope
+link = { eux = 1610 }	# NOTHING -> Cape of Storms
+link = { eux = 1459 }	# NOTHING -> Coast of Ciskei
+link = { eux = 1457 }	# NOTHING -> Coast of Natal
+link = { eux = 1458 }	# NOTHING -> Coast of Transkei
+link = { eux = 1626 }	# NOTHING -> Natal Basin
+link = { eux = 1625 }	# NOTHING -> Marion Island
+link = { eux = 1628 }	# NOTHING -> Crozet Islands
+link = { eux = 1700 }	# NOTHING -> Cocos Ridge
+link = { eux = 1656 }	# NOTHING -> Lake Titicaca
+link = { eux = 1436 }	# NOTHING -> Philippine Sea
+link = { eux = 1672 }	# NOTHING -> Western Pacific
+link = { eux = 1673 }	# NOTHING -> Micronesia Sea
+link = { eux = 1438 }	# NOTHING -> Tinian Sea
+link = { eux = 1444 }	# NOTHING -> Bay of Anadyr
+link = { eux = 1443 }	# NOTHING -> Bay of Oljut
+link = { eux = 1445 }	# NOTHING -> Bering Sea
+link = { eux = 1666 }	# NOTHING -> Kamtchatka Basin
+link = { eux = 1668 }	# NOTHING -> Attu and Kiska Islands
+link = { eux = 1667 }	# NOTHING -> Komandorskie Islands
+link = { eux = 1442 }	# NOTHING -> Bay of Uka
+link = { eux = 1382 }	# NOTHING -> Bay of Komenskoie
+link = { eux = 1383 }	# NOTHING -> Coast of Kamchatka
+link = { eux = 1384 }	# NOTHING -> Okhotsk Sea
+link = { eux = 1381 }	# NOTHING -> Bay of Ayan
+link = { eux = 1380 }	# NOTHING -> Amur Estuary
+link = { eux = 1379 }	# NOTHING -> Tatar Straits
+link = { eux = 1385 }	# NOTHING -> Coast of Sakhalin
+link = { eux = 1386 }	# NOTHING -> Soya Strait
+link = { eux = 1441 }	# NOTHING -> Kuril Islands
+link = { eux = 1670 }	# NOTHING -> Maug Island
+link = { eux = 1669 }	# NOTHING -> Kamtchatka Current
+link = { eux = 1387 }	# NOTHING -> Tsugaru Strait
+link = { eux = 1378 }	# NOTHING -> Coast of Olga
+link = { eux = 1388 }	# NOTHING -> Sea of Japan
+link = { eux = 1377 }	# NOTHING -> North Korean Sea
+link = { eux = 1376 }	# NOTHING -> South Korean Sea
+link = { eux = 1375 }	# NOTHING -> Korea Bay
+link = { eux = 1374 }	# NOTHING -> Yellow Sea
+link = { eux = 1373 }	# NOTHING -> Yang Tse Delta
+link = { eux = 1389 }	# NOTHING -> Amakusa Sea
+link = { eux = 1390 }	# NOTHING -> Seto Inland Sea
+link = { eux = 1391 }	# NOTHING -> Tokai Sea
+link = { eux = 1440 }	# NOTHING -> Taihei Ocean
+link = { eux = 1439 }	# NOTHING -> Iwo Jima Sea
+link = { eux = 1671 }	# NOTHING -> Japan Current
+link = { eux = 1653 }	# NOTHING -> Lake Balchasj
+link = { eux = 1435 }	# NOTHING -> Yap Islands
+link = { eux = 1675 }	# NOTHING -> Bikini Island
+link = { eux = 1674 }	# NOTHING -> Carolinas Islands
+link = { eux = 1396 }	# NOTHING -> Coast of Luzon
+link = { eux = 1402 }	# NOTHING -> Maguindanao Coast
+link = { eux = 1398 }	# NOTHING -> Sulu Sea
+link = { eux = 1359 }	# NOTHING -> Straits of Makassar
+link = { eux = 1368 }	# NOTHING -> Coast of Brunei
+link = { eux = 1366 }	# NOTHING -> Cam Ranh Bay
+link = { eux = 1367 }	# NOTHING -> South China Sea
+link = { eux = 1365 }	# NOTHING -> Gulf of Siam
+link = { eux = 1364 }	# NOTHING -> Mekong Delta
+link = { eux = 1363 }	# NOTHING -> Coast of Sarawak
+link = { eux = 1361 }	# NOTHING -> Straits of Johor
+link = { eux = 1362 }	# NOTHING -> Malayan Sea
+link = { eux = 1360 }	# NOTHING -> Karimata Strait
+link = { eux = 1397 }	# NOTHING -> Gulf of Leyte
+link = { eux = 1676 }	# NOTHING -> Melanesian Basin
+link = { eux = 1434 }	# NOTHING -> Melanesia Sea
+link = { eux = 1405 }	# NOTHING -> Vilian Strait
+link = { eux = 1404 }	# NOTHING -> Biak Bay
+link = { eux = 1403 }	# NOTHING -> Palau Islands
+link = { eux = 1399 }	# NOTHING -> Sea of Celebes
+link = { eux = 1400 }	# NOTHING -> Sea of Ternete
+link = { eux = 1357 }	# NOTHING -> The Moluccas
+link = { eux = 1354 }	# NOTHING -> Coast of Surabaya
+link = { eux = 1358 }	# NOTHING -> Java Sea
+link = { eux = 1355 }	# NOTHING -> Straits of Lombok
+link = { eux = 1420 }	# NOTHING -> King Sound
+link = { eux = 1356 }	# NOTHING -> Timor Sea
+link = { eux = 1401 }	# NOTHING -> Sea of Banda
+link = { eux = 1408 }	# NOTHING -> Arafuam Sea
+link = { eux = 1409 }	# NOTHING -> Kolepom Bay
+link = { eux = 1410 }	# NOTHING -> Gulf of Carpentaria
+link = { eux = 1407 }	# NOTHING -> Torres Strait
+link = { eux = 1406 }	# NOTHING -> Trobrian Islands
+link = { eux = 1433 }	# NOTHING -> Nauru Island
+link = { eux = 1432 }	# NOTHING -> Solomon Sea
+link = { eux = 1430 }	# NOTHING -> Coral Sea
+link = { eux = 1411 }	# NOTHING -> Great Barrier Reef
+link = { eux = 1431 }	# NOTHING -> Western Fidji Basin
+link = { eux = 1429 }	# NOTHING -> New Caledonian Sea
+link = { eux = 1412 }	# NOTHING -> Capricorn Bay
+link = { eux = 1425 }	# NOTHING -> Three Kings Islands
+link = { eux = 1426 }	# NOTHING -> Coast of New Zealand
+link = { eux = 1413 }	# NOTHING -> Cape Howe
+link = { eux = 1424 }	# NOTHING -> Northern Tasman Sea
+link = { eux = 1423 }	# NOTHING -> Cook Strait
+link = { eux = 1428 }	# NOTHING -> Sea of Antarctica
+link = { eux = 1427 }	# NOTHING -> Canterbury Bight
+link = { eux = 1421 }	# NOTHING -> Tasman Sea
+link = { eux = 1414 }	# NOTHING -> Bass Strait
+link = { eux = 1422 }	# NOTHING -> Southern Tasman Sea
+link = { eux = 1415 }	# NOTHING -> Kangaroo Island
+link = { eux = 1416 }	# NOTHING -> Great Australian Bight
+link = { eux = 1635 }	# NOTHING -> South Australian Basin
+link = { eux = 1417 }	# NOTHING -> Cape Leuwiin
+link = { eux = 1418 }	# NOTHING -> Shark Bay
+link = { eux = 1654 }	# NOTHING -> Lake Bajkal
+link = { eux = 1655 }	# NOTHING -> Poyang Lake
+link = { eux = 1370 }	# NOTHING -> Gulf of Tonkin
+link = { eux = 1437 }	# NOTHING -> Northern Philippine Sea
+link = { eux = 1392 }	# NOTHING -> Ryukyu Islands
+link = { eux = 1372 }	# NOTHING -> Taiwan Strait
+link = { eux = 1371 }	# NOTHING -> Guangzhou Bay
+link = { eux = 1393 }	# NOTHING -> Luzon Strait
+link = { eux = 1395 }	# NOTHING -> Manila Bay
+link = { eux = 1369 }	# NOTHING -> Coast of Annam
+link = { eux = 1419 }	# NOTHING -> Northwest Cape
+link = { eux = 1643 }	# NOTHING -> Northern West Australian Current
+link = { eux = 1641 }	# NOTHING -> East Indian Ocean
+link = { eux = 1353 }	# NOTHING -> Coast of Java
+link = { eux = 1352 }	# NOTHING -> Christmas Island
+link = { eux = 1642 }	# NOTHING -> Wallaby Plateau
+link = { eux = 1644 }	# NOTHING -> West Australian Basin
+link = { eux = 1645 }	# NOTHING -> Eastern Indian Ocean South Equatorial Current
+link = { eux = 1640 }	# NOTHING -> West Australian Current
+link = { eux = 1639 }	# NOTHING -> Southern West Australian Current
+link = { eux = 1634 }	# NOTHING -> Indian Ocean Raging Fifties
+link = { eux = 1633 }	# NOTHING -> South Indian Ocean
+link = { eux = 1638 }	# NOTHING -> Southeastern Indian Ridge
+link = { eux = 1646 }	# NOTHING -> Indian Ocean South Equatorial Current
+link = { eux = 1637 }	# NOTHING -> St Paul and Amsterdam Islands
+link = { eux = 1632 }	# NOTHING -> Heard and McDonald Islands
+link = { eux = 1631 }	# NOTHING -> Kerguelen Islands
+link = { eux = 1636 }	# NOTHING -> Southwestern Indian Ridge
+link = { eux = 1647 }	# NOTHING -> Western Indian Ocean South Equatorial Current
+link = { eux = 1348 }	# NOTHING -> Straits of Malacca
+link = { eux = 1350 }	# NOTHING -> Coast of Aceh
+link = { eux = 1349 }	# NOTHING -> Nicobar Isles
+link = { eux = 1351 }	# NOTHING -> Coast of Sumatra
+link = { eux = 1624 }	# NOTHING -> Cocos Islands
+link = { eux = 1623 }	# NOTHING -> Ninetyeast Ridge
+link = { eux = 1621 }	# NOTHING -> Chagos Archipelago
+link = { eux = 1620 }	# NOTHING -> Central Indian Ocean
+link = { eux = 1394 }	# NOTHING -> Paracel Islands
+link = { eux = 1618 }	# NOTHING -> Western Equatorial Counter Current
+link = { eux = 1619 }	# NOTHING -> Equatorial Counter Current
+link = { eux = 1622 }	# NOTHING -> Eastern Equatorial Counter Current
+link = { eux = 1613 }	# NOTHING -> Southern Bay of Bengal
+link = { eux = 1347 }	# NOTHING -> Mergui Archipelago
+link = { eux = 1345 }	# NOTHING -> Irrawady Delta
+link = { eux = 1346 }	# NOTHING -> Andaman Sea
+link = { eux = 1612 }	# NOTHING -> Northern Bay of Bengal
+link = { eux = 1611 }	# NOTHING -> Gulf of Bengal
+link = { eux = 1344 }	# NOTHING -> Akyab Bay
+link = { eux = 1614 }	# NOTHING -> Ceylon Sea
+link = { eux = 1341 }	# NOTHING -> Coast of Coromandel
+link = { eux = 1342 }	# NOTHING -> Coast of Orissa
+link = { eux = 1343 }	# NOTHING -> Ganges Delta
+link = { eux = 1719 }	# NOTHING -> South Pacific Raging Fifties
+link = { eux = 1720 }	# NOTHING -> South Pacific
+link = { eux = 1721 }	# NOTHING -> South Pacific Roaring Forties
+link = { eux = 1722 }	# NOTHING -> Chatham island
+link = { eux = 1723 }	# NOTHING -> Bounty Island
+link = { eux = 1709 }	# NOTHING -> Peru Current
+link = { eux = 1730 }	# NOTHING -> East Pacific Ridge
+link = { eux = 1713 }	# NOTHING -> Eastern Island
+link = { eux = 1712 }	# NOTHING -> South Equatorial Pacific Current
+link = { eux = 1741 }	# NOTHING -> Tiki Basin
+link = { eux = 1731 }	# NOTHING -> Pitcairn Island
+link = { eux = 1739 }	# NOTHING -> Tuamotu Islands
+link = { eux = 1729 }	# NOTHING -> Tubuai Islands
+link = { eux = 1728 }	# NOTHING -> Society Islands
+link = { eux = 1727 }	# NOTHING -> Tonga Islands
+link = { eux = 1724 }	# NOTHING -> Fiji Basin
+link = { eux = 1725 }	# NOTHING -> East of New Hebrides
+link = { eux = 1738 }	# NOTHING -> Carolina and Flint islands
+link = { eux = 1726 }	# NOTHING -> Samoa Islands
+link = { eux = 1737 }	# NOTHING -> Kirimati Island
+link = { eux = 1733 }	# NOTHING -> Phoenix Islands
+link = { eux = 1732 }	# NOTHING -> Kiribati Islands
+link = { eux = 1708 }	# NOTHING -> Eastern Equatorial Pacific Counter Current
+link = { eux = 1711 }	# NOTHING -> Equatorial Pacific Counter Current
+link = { eux = 1740 }	# NOTHING -> Marquises Islands
+link = { eux = 1736 }	# NOTHING -> Western Equatorial Pacific Counter Current
+link = { eux = 1735 }	# NOTHING -> Palmyra Island
+link = { eux = 1734 }	# NOTHING -> Gilbert Islands
+link = { eux = 1707 }	# NOTHING -> Clipperton Island
+link = { eux = 1716 }	# NOTHING -> Clipperton Fracture Zone
+link = { eux = 1696 }	# NOTHING -> Clarion Fracture Zone
+link = { eux = 1715 }	# NOTHING -> Eastern Equatorial Pacific Current
+link = { eux = 1714 }	# NOTHING -> North Equatorial Pacific Current
+link = { eux = 1697 }	# NOTHING -> Coast of Hawaii
+link = { eux = 1699 }	# NOTHING -> Central Pacific Basin
+link = { eux = 1698 }	# NOTHING -> Marshall Islands
+link = { eux = 1691 }	# NOTHING -> Wake Island
+link = { eux = 1692 }	# NOTHING -> Midway Island
+link = { eux = 1693 }	# NOTHING -> Molokai Fracture Zone
+link = { eux = 1688 }	# NOTHING -> Murray Fracture Zone
+link = { eux = 1689 }	# NOTHING -> North Pacific Drift
+link = { eux = 1690 }	# NOTHING -> Western North Pacific Drift
+link = { eux = 1683 }	# NOTHING -> Andreanov Islands
+link = { eux = 1678 }	# NOTHING -> Tchouktchs Sea
+link = { eux = 1562 }	# NOTHING -> Kuskowim Bay
+link = { eux = 1677 }	# NOTHING -> Pribilov Island
+link = { eux = 1679 }	# NOTHING -> Bowers Ridge
+link = { eux = 1685 }	# NOTHING -> Umnak Island
+link = { eux = 1680 }	# NOTHING -> Aleuts Basin
+link = { eux = 1686 }	# NOTHING -> Eastern North Pacific Drift
+link = { eux = 1681 }	# NOTHING -> Unalaska Islands
+link = { eux = 1561 }	# NOTHING -> Coast of Alaska
+link = { eux = 1560 }	# NOTHING -> Kodiak Island
+link = { eux = 1682 }	# NOTHING -> Gulf of Alaska
+link = { eux = 1559 }	# NOTHING -> Hecate Strait
+link = { eux = 1558 }	# NOTHING -> Coast of Columbia
+link = { eux = 1684 }	# NOTHING -> Northern California Current
+link = { eux = 1557 }	# NOTHING -> Coast of Oregon
+link = { eux = 1556 }	# NOTHING -> Santa Catalina Islands
+link = { eux = 1687 }	# NOTHING -> California Current
+link = { eux = 1555 }	# NOTHING -> Coast of California
+link = { eux = 1694 }	# NOTHING -> Southern California Current
+link = { eux = 1554 }	# NOTHING -> Coast of Baja
+link = { eux = 1553 }	# NOTHING -> Gulf of California
+link = { eux = 1695 }	# NOTHING -> Revilla Gigedo Islands
+link = { eux = 1552 }	# NOTHING -> Mazatlan Bay
+link = { eux = 1701 }	# NOTHING -> Guatemala Basin
+link = { eux = 1551 }	# NOTHING -> Manzazilla Bay
+link = { eux = 1550 }	# NOTHING -> Acapulco Bay
+link = { eux = 1549 }	# NOTHING -> Bay of Costa Rica
+link = { eux = 1548 }	# NOTHING -> Gulf of Panama
+link = { eux = 1547 }	# NOTHING -> Coast of Ecuador
+link = { eux = 1702 }	# NOTHING -> Galapagos Islands
+link = { eux = 1545 }	# NOTHING -> Coast of Peru
+link = { eux = 1703 }	# NOTHING -> Nazca Ridge
+link = { eux = 1546 }	# NOTHING -> Guayaguil Bay
+link = { eux = 1544 }	# NOTHING -> Arequipa Bay
+link = { eux = 1543 }	# NOTHING -> Arica Gulf
+link = { eux = 1710 }	# NOTHING -> Humboldt Current
+link = { eux = 1629 }	# NOTHING -> Crozet Basin
+link = { eux = 1627 }	# NOTHING -> Taolagnaro Bay
+link = { eux = 1617 }	# NOTHING -> Mascarene Plateau
+link = { eux = 1455 }	# NOTHING -> The Mascareignes
+link = { eux = 1630 }	# NOTHING -> Madagascar Basin
+link = { eux = 1454 }	# NOTHING -> Coast of Tamatave
+link = { eux = 1456 }	# NOTHING -> Gulf of Zambeze
+link = { eux = 1651 }	# NOTHING -> Lake Malawi
+link = { eux = 1650 }	# NOTHING -> Lake Tangayika
+link = { eux = 1649 }	# NOTHING -> Lake Victoria
+link = { eux = 1449 }	# NOTHING -> Mozambique Channel
+link = { eux = 1450 }	# NOTHING -> Diego Suarez Bay
+link = { eux = 1448 }	# NOTHING -> Zanzibar Strait
+link = { eux = 1447 }	# NOTHING -> Coast of Pepper
+link = { eux = 1446 }	# NOTHING -> Horn of Africa
+link = { eux = 1453 }	# NOTHING -> The Seychelles
+link = { eux = 1616 }	# NOTHING -> North Indian Ocean
+link = { eux = 1615 }	# NOTHING -> Coast of Maldives
+link = { eux = 1340 }	# NOTHING -> Comorin Cape
+link = { eux = 1339 }	# NOTHING -> Coast of Malabar
+link = { eux = 1451 }	# NOTHING -> Western Arabian Sea
+link = { eux = 1338 }	# NOTHING -> Laquedive Islands
+link = { eux = 1452 }	# NOTHING -> Eastern Arabian Sea
+link = { eux = 1337 }	# NOTHING -> Gulf of Gujarat
+link = { eux = 1336 }	# NOTHING -> Gulf of Indus
+link = { eux = 1333 }	# NOTHING -> Mascate Coast
+link = { eux = 1334 }	# NOTHING -> Straits of Hormuz
+link = { eux = 1335 }	# NOTHING -> Persian Gulf
+link = { eux = 1332 }	# NOTHING -> Sea of Oman
+link = { eux = 1331 }	# NOTHING -> Gulf of Aden
+link = { eux = 1330 }	# NOTHING -> Bab el Mandeb
+

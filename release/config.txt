@@ -1,0 +1,84 @@
+debug = {
+  generic  = no  
+  30 = no # Leaders
+  31 = no # Provinces
+  32 = no # Ministers
+  33 = no # Tech teams 
+  34 = no # Resources 
+  35 = no # Techs 
+  36 = no # Buildings 
+  37 = no # Units 
+  38 = no # Stockpiles 
+  39 = no # Sliders 
+  40 = no # Ideas 
+  41 = no # Revolters 
+  42 = no # Cores 
+  43 = no # Countries 
+  44 = yes # Base tax
+  all = no 
+}
+eu3dir = .\DW\ 
+ck2dir = .\ckvanilla\
+eu4dir = .\Vanilla\ 
+
+skip = {
+  d_bulgarian_company = yes
+  d_pecheneg_company = yes
+  d_victual_brothers = yes
+  d_breton_company = yes
+  d_rose_company = yes
+  d_little_hat_company = yes
+  d_star_company = yes
+  d_company_of_st_george = yes
+  d_great_company = yes
+  d_shiite_cuman_company = yes
+  d_shiite_turkic_company = yes
+  d_sunni_berber_company = yes
+  d_sunni_cuman_company = yes
+  d_sunni_turkic_company = yes
+  d_rus_company = yes
+  d_ghilman = yes
+  d_abyssinian_band = yes
+  d_shiite_berber_company = yes
+  d_lithuanian_band = yes
+  d_catalan_band = yes
+  d_navarrese_company = yes
+  d_miaphysite = yes
+  d_shiite_bedouin_company = yes
+  d_irish_band = yes
+  d_sunni_bedouin_company = yes
+  d_saxon_band = yes
+  d_swiss_company = yes
+  d_cuman_company = yes
+  d_swiss_band = yes
+  d_mamluks = yes
+  d_turkic_band = yes
+  d_catalan_company = yes
+  d_nubian_band = yes
+  d_hashshashin = yes
+  d_white_company = yes
+  d_monothelite = yes
+  d_nes= yes
+  d_monophysite = yes
+  d_maghreb_corsairs = yes
+  d_frisian_navy = yes
+  d_hanseatic_navy = yes
+  d_genoese_navy = yes
+  d_venetian_navy = yes
+  d_bulgarian_band = yes
+  d_pecheneg_band = yes
+  d_alan_band = yes
+  d_scottish_band = yes
+  d_lappish_band = yes
+  d_finnish_band = yes
+  d_rus_band = yes
+  d_cuman_band = yes
+  d_bre= yes
+  d_lombard_band = yes
+  d_turkic_company = yes
+  d_breton_band = yes
+
+
+
+
+}

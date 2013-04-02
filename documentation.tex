@@ -1,0 +1,59 @@
+\documentclass[12pt,ebook,oneside]{book}
+
+\usepackage{graphicx} 
+\usepackage{layouts} 
+\usepackage{hyperref} 
+\textheight=1.2\textheight
+
+\begin{document}
+\chapter{Provinces}
+The converter sets:
+\begin{itemize}
+\item Province ownership
+\item Province control
+\item Province manpower (not implemented)
+\item Province basetax 
+\end{itemize}
+
+\section{Province ownership}
+
+Ownership is decided by holding the County title. In the case
+of several CK provinces mapping to one EU province, the decision
+is by plurality of the CK titles, with tiebreaking effectively
+random.
+
+\section{Control}
+
+Control is based on occupation of the baronies, including the
+county seat. Unoccupied baronies count as held by the province 
+owner. 
+
+\section{Base tax}
+
+Redistributed from the EU3 base tax, with weight equal to
+the tax income of all holdings in each CK province corresponding
+to the EU3 province. In cases where a CK province maps to more
+than one EU3 province, the weight is divided equally between the
+EU3 ones. Note that the tax income is not adjusted for technology. 
+
+\chapter{States}
+
+The following state-level variables are handled:
+\begin{itemize}
+\item Vassals.
+\item Government types. 
+\end{itemize}
+
+\section{Vassalisation}
+
+The CK vassal structure is followed. If a CK primary title converts,
+and it has a liege which also converts to a different tag, then the first EU nation
+becomes the vassal of the second. 
+
+\section{Government type}
+
+Depends on the succession law. CK titles with law
+\verb|patrician_elective| become merchant republics; all others
+become feudal monarchies. 
+
+\end{document}
