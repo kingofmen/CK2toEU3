@@ -15,6 +15,7 @@ debug = {
   42 = no # Cores 
   43 = no # Countries 
   44 = yes # Base tax
+  45 = yes # Manpower 
   all = no 
 }
 eu3dir = .\DW\ 

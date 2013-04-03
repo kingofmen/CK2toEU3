@@ -11,8 +11,8 @@ The converter sets:
 \begin{itemize}
 \item Province ownership
 \item Province control
-\item Province manpower (not implemented)
-\item Province basetax 
+\item Province basetax
+\item Province manpower  
 \end{itemize}
 
 \section{Province ownership}
@@ -35,6 +35,13 @@ the tax income of all holdings in each CK province corresponding
 to the EU3 province. In cases where a CK province maps to more
 than one EU3 province, the weight is divided equally between the
 EU3 ones. Note that the tax income is not adjusted for technology. 
+
+\section{Manpower}
+
+Redistributed from EU3 manpower, with weight given by the levy
+size of the CK holdings in each province; otherwise the algorithm
+is the same as for base tax. Light infantry counts only
+one-half in the weighting. 
 
 \chapter{States}
 
