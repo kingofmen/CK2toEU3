@@ -22,6 +22,9 @@ eu3dir = .\DW\
 ck2dir = .\ckvanilla\
 eu4dir = .\Vanilla\ 
 
+minimumMaxPrestige = 20 
+minimumGold = 10 
+
 skip = {
   d_bulgarian_company = yes
   d_pecheneg_company = yes

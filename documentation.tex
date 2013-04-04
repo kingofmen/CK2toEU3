@@ -49,6 +49,7 @@ The following state-level variables are handled:
 \begin{itemize}
 \item Vassals.
 \item Government types. 
+\item Prestige and gold. 
 \end{itemize}
 
 \section{Vassalisation}
@@ -61,6 +62,19 @@ becomes the vassal of the second.
 
 Depends on the succession law. CK titles with law
 \verb|patrician_elective| become merchant republics; all others
-become feudal monarchies. 
+become feudal monarchies.
+
+\section{Prestige and gold}
+
+The EU3 gold is redistributed in simple proportion to
+how much CK gold the converted ruler has, except that 
+negative gold is counted as zero and the minimum amount
+of gold is \verb|minimumGold|, to avoid instant loans. 
+
+Prestige is converted in proportion to the sum of prestige and
+piety. The constant of proportionality is such that the greatest
+CK score (positive or negative) converts to the greatest EU prestige
+(positive or negative), or the value of \verb|minimumMaxPrestige| in
+the config file. 
 
 \end{document}
