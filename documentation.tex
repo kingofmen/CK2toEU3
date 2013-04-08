@@ -12,15 +12,16 @@ The converter sets:
 \item Province ownership
 \item Province control
 \item Province basetax
-\item Province manpower  
+\item Province manpower 
+\item Province religion and culture.  
 \end{itemize}
 
 \section{Province ownership}
 
 Ownership is decided by holding the County title. In the case
 of several CK provinces mapping to one EU province, the decision
-is by plurality of the CK titles, with tiebreaking effectively
-random.
+is by plurality of the CK titles weighted by base tax, with 
+tiebreaking effectively random.
 
 \section{Control}
 
@@ -42,6 +43,22 @@ Redistributed from EU3 manpower, with weight given by the levy
 size of the CK holdings in each province; otherwise the algorithm
 is the same as for base tax. Light infantry counts only
 one-half in the weighting. 
+
+\section{Religion and culture}
+
+Converted according to the mappings in \verb|religion_mappings.txt|
+and \verb|culture_mappings.txt| respectively. In the case of multiple
+CK provinces, weighted by base tax. In the case of culture, some large
+CK2 cultures are broken up by region, such that, for example, `german'
+converts differently depending on the de-jure duchy it is found in:
+\begin{verbatim}
+link = { ck2 = german eux = pommeranian de_jure = d_pommerania }
+link = { ck2 = german eux = pommeranian de_jure = d_pomeralia }
+link = { ck2 = german eux = pommeranian de_jure = d_mecklemburg }
+link = { ck2 = german eux = prussian de_jure = d_livonia }
+link = { ck2 = german eux = prussian de_jure = d_prussia }
+link = { ck2 = german eux = prussian de_jure = d_polotsk }
+\end{verbatim} 
 
 \chapter{States}
 
