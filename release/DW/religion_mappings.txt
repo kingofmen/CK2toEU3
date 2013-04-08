@@ -1,0 +1,29 @@
+
+link = { ck2 = catholic eux = catholic }
+link = { ck2 = cathar  eux = catholic }
+link = { ck2 = fraticelli  eux = catholic }
+link = { ck2 = waldensian  eux = catholic }
+link = { ck2 = lollard  eux = catholic }
+link = { ck2 = orthodox  eux = orthodox }
+link = { ck2 = miaphysite  eux = orthodox }
+link = { ck2 = monophysite  eux = orthodox }
+link = { ck2 = bogomilist  eux = orthodox }
+link = { ck2 = nestorian  eux = orthodox }
+link = { ck2 = monothelite eux = orthodox }
+link = { ck2 = iconoclast  eux = orthodox }
+link = { ck2 = sunni  eux = sunni }
+link = { ck2 = zikri  eux = sunni }
+link = { ck2 = yazidi  eux = sunni }
+link = { ck2 = ibadi  eux = sunni }
+link = { ck2 = shiite  eux = shiite  }
+link = { ck2 = bektashi  eux = shiite }
+link = { ck2 = druze  eux = shiite }
+link = { ck2 = hurufi  eux = shiite }
+link = { ck2 = pagan  eux = shamanism }
+link = { ck2 = norse_pagan eux = shamanism }
+link = { ck2 = tengri_pagan  eux = shamanism }
+link = { ck2 = baltic_pagan  eux = shamanism}
+link = { ck2 = finnish_pagan  eux = shamanism }
+link = { ck2 = aztec eux = animism }
+link = { ck2 = zoroastrian eux = shamanism }
+
