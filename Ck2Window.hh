@@ -106,7 +106,8 @@ private:
   void eu3Diplomacy ();
   void eu3Governments ();     
   void eu3Manpower ();
-  void eu3ProvinceCultures ();  
+  void eu3ProvinceCultures ();
+  void eu3ProvinceReligion ();    
   void eu3Provinces ();
   void eu3StateVariables(); 
   void eu3Taxes ();  

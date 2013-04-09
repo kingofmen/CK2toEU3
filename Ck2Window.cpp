@@ -938,6 +938,56 @@ void WorkerThread::eu3ProvinceCultures () {
   }
 }
 
+void WorkerThread::eu3ProvinceReligion () {
+  for (map<Object*, objvec>::iterator link = euProvToCkProvsMap.begin(); link != euProvToCkProvsMap.end(); ++link) {
+    Object* eup = (*link).first;
+    objvec ckps = (*link).second;
+    if (0 == ckps.size()) continue; // Already gave a warning about this.
+
+    map<string, double> weights; 
+    
+    for (objiter ckp = ckps.begin(); ckp != ckps.end(); ++ckp) {
+      string ckReligion = (*ckp)->safeGetString("religion");
+      if (religionMap.find(ckReligion) == religionMap.end()) {
+	Logger::logStream(Logger::Warning) << "Warning: Could not find EU3 conversion for religion "
+					   << ckReligion
+					   << " in province "
+					   << nameAndNumber(*ckp)
+					   << ", no weight assigned.\n";
+	continue; 
+      }
+
+      string euReligion = religionMap[ckReligion];      
+      weights[euReligion] += getCkWeight(*ckp, BaseTax); 
+    }
+
+    if (0 == weights.size()) {
+      Logger::logStream(Logger::Warning) << "Warning: Could not find any conversions for CK religions in EU province "
+					 << nameAndNumber(eup)
+					 << ", no change made.\n";
+      continue; 
+    }
+    
+    double best = 0;
+    string winner = eup->safeGetString("religion");
+    for (map<string, double>::iterator cand = weights.begin(); cand != weights.end(); ++cand) {
+      if ((*cand).second < best) continue;
+      winner = (*cand).first;
+      best = (*cand).second;
+    }
+    if (winner == eup->safeGetString("religion")) continue;
+
+    Logger::logStream(DebugReligion) << "Changing religion of "
+				    << nameAndNumber(eup)
+				    << " to "
+				    << winner
+				    << " from "
+				    << eup->safeGetString("religion") 
+				    << ".\n"; 
+    eup->resetLeaf("religion", winner); 
+  }
+}
+
 void WorkerThread::eu3Provinces () {
   for (map<Object*, objvec>::iterator link = euProvToCkProvsMap.begin(); link != euProvToCkProvsMap.end(); ++link) {
     Object* eup = (*link).first;
@@ -1221,7 +1271,8 @@ void WorkerThread::convertEU3 () {
   eu3Taxes();
   eu3Manpower(); 
   eu3StateVariables();
-  eu3ProvinceCultures(); 
+  eu3ProvinceCultures();
+  eu3ProvinceReligion();   
   
   Logger::logStream(Logger::Game) << "Done with conversion, writing to file.\n"; 
   ofstream writer;

@@ -23,7 +23,8 @@ enum Debugs {DebugLeaders = 30,
 	     DebugCountries,
 	     DebugBasetax,
 	     DebugManpower,
-	     DebugCulture, 
+	     DebugCulture,
+	     DebugReligion, 
 	     NumDebugs};
 
 class Logger : public QObject, public std::ostream {
