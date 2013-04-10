@@ -46,6 +46,8 @@ one-half in the weighting.
 
 \section{Religion and culture}
 
+\label{sec:provculture}
+
 Converted according to the mappings in \verb|religion_mappings.txt|
 and \verb|culture_mappings.txt| respectively. In the case of multiple
 CK provinces, weighted by base tax. In the case of culture, some large
@@ -67,6 +69,7 @@ The following state-level variables are handled:
 \item Vassals.
 \item Government types. 
 \item Prestige and gold. 
+\item Culture. 
 \end{itemize}
 
 \section{Vassalisation}
@@ -93,5 +96,35 @@ piety. The constant of proportionality is such that the greatest
 CK score (positive or negative) converts to the greatest EU prestige
 (positive or negative), or the value of \verb|minimumMaxPrestige| in
 the config file. 
+
+\section{Culture}
+
+State culture is determined by the CK culture of the ruler and all his
+vassals, as follows. Each ruler is given some weight for each title he
+has, depending on the tier:
+\begin{itemize}
+\item Empire, Kingdom - 1 point
+\item Duchy, Barony - 1.5 points
+\item County - 2 points
+\end{itemize}
+Note that counties are most highly weighted; this is to attempt to
+reflect the makeup of the nobility of the country at large. The
+emperor is a distant figure, as are Kings, while Barons are not very
+powerful; it is the local Count who
+determines whether the peasants are under a ``foreign yoke'' or not.
+
+Once the title weights have been summed, they are divided by distance
+from the sovereign ruler: Divide by 1 for the ruler himself, 2 for his
+direct vassals, 3 for their vassals, and so on. 
+
+Titles which have a ``special de-jure rule'' as described in section
+\ref{sec:provculture} give weight to their special culture instead of
+the most general one; the weight is the same. 
+
+The culture with the most weight becomes the primary culture. 
+Cultures with weight at least 20\% of the primary culture's weight
+become accepted. 
+
+
 
 \end{document}

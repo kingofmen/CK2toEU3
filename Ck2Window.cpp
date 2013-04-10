@@ -1102,6 +1102,58 @@ void WorkerThread::eu3StateVariables () {
   }  
 }
 
+void WorkerThread::eu3StateCultures () {
+  for (map<Object*, Object*>::iterator i = euCountryToCharacterMap.begin(); i != euCountryToCharacterMap.end(); ++i) {
+    Object* euCountry = (*i).first;
+    if ((euCountry->getKey() == "PIR") || (euCountry->getKey() == "REB")) continue; 
+    
+    Object* ckRuler   = (*i).second;
+    map<string, double> weights; 
+    
+    recursiveCollectCultures(ckRuler, weights, 1);
+
+    if (0 == weights.size()) {
+      Logger::logStream(Logger::Warning) << "Warning: Could not find any EU3 cultures for tag "
+					 << euCountry->getKey()
+					 << ", no change made.\n";
+      continue;
+    }
+    
+    map<string, double>::iterator best = weights.begin();
+    for (map<string, double>::iterator cand = weights.begin(); cand != weights.end(); ++cand) {
+      if ((*cand).second < (*best).second) continue;
+      best = cand;
+    }
+
+    Object* history = getHistory(euCountry); 
+    string oldCulture = euCountry->safeGetString("primary_culture");
+    if (oldCulture != (*best).first) {
+      Logger::logStream(DebugCulture) << "New primary culture for "
+				      << euCountry->getKey() << ": "
+				      << (*best).first << " (was " << oldCulture
+				      << ")\n";
+      euCountry->resetLeaf("primary_culture", (*best).first);
+      history->resetLeaf("primary_culture", (*best).first);
+      
+    }
+
+    euCountry->unsetValue("accepted_culture");
+    history->unsetValue("accepted_culture");
+    
+    for (map<string, double>::iterator cand = weights.begin(); cand != weights.end(); ++cand) {
+      if (best == cand) continue;
+      if ((*cand).second < 0.20*(*best).second) continue;
+      euCountry->setLeaf("accepted_culture", (*cand).first);
+      history->setLeaf("add_accepted_culture", (*cand).first);
+
+      Logger::logStream(DebugCulture) << "Adding " << (*cand).first
+				      << " as accepted culture of "
+				      << euCountry->getKey()
+				      << ".\n"; 
+    }
+  }
+}
+
 void WorkerThread::eu3Taxes () {
   double totalEuTax = 0;
   double totalCkWeight = 0; 
@@ -1212,6 +1264,15 @@ double WorkerThread::getCkWeight (Object* province, WeightType wtype) {
   return ret; 
 }
 
+Object* WorkerThread::getHistory (Object* euEntity) {
+  Object* ret = euEntity->safeGetObject("history");
+  if (!ret) {
+    ret = new Object("history");
+    euEntity->setValue(ret);
+  }
+  return ret; 
+}
+
 double WorkerThread::getManpower (Object* building) {
   double ret = 0;
   ret += 0.5 * building->safeGetFloat("light_infantry");
@@ -1222,6 +1283,66 @@ double WorkerThread::getManpower (Object* building) {
   ret += 1.0 * building->safeGetFloat("horse_archers");
   ret += 1.0 * building->safeGetFloat("pikemen");
   return ret; 
+}
+
+void WorkerThread::recursiveCollectCultures (Object* ckRuler, map<string, double>& weights, int iteration) {
+  string ckCulture = remQuotes(ckRuler->safeGetString("culture")); 
+  if (cultureMap.find(ckCulture) == cultureMap.end()) {
+    Logger::logStream(Logger::Warning) << "Warning: Could not convert culture "
+				       << ckCulture
+				       << " of character "
+				       << ckRuler->getKey()
+				       << ".\n"; 
+  }
+  else {
+    // Give some weight for each title, making sure to check whether it is a special area. 
+    for (objiter title = beginRel(ckRuler, Title); title != finalRel(ckRuler, Title); ++title) {
+      Object* ckTitle = (*title);
+      string euCulture = cultureMap[ckCulture];
+      double titleWeight = 0;
+      switch (titleTier(ckTitle)) {
+      case Empire:  
+      case Kingdom: titleWeight = 1.0; break;
+      case Duchy:   titleWeight = 1.5; break;
+      case County:  titleWeight = 2.0; break;
+      case Barony:  titleWeight = 1.5; break;
+      default:
+      case Other:
+	titleWeight = 0;
+	Logger::logStream(Logger::Warning) << "Warning: Do not recognise tier of title " << ckTitle->getKey() << ", no culture weight assigned.\n";
+	break;
+      }
+      
+      while (ckTitle) {
+	string dejure = remQuotes(ckTitle->safeGetString("de_jure_liege", "---"));
+	// If it is currently under its dejure liege, it's not listed, so check for actual liege as backup. 
+	if (dejure == "---") dejure = remQuotes(ckTitle->safeGetString("liege", "---"));
+	if (dejure == "---") break; 
+	if (specialCultureMap.find(dejure) != specialCultureMap.end()) {
+	  string candidate = specialCultureMap[dejure][ckCulture];
+	  if (candidate != "") {
+	    euCulture = candidate;
+	    Logger::logStream(DebugCulture) << "Special-converting culture "
+					    << ckCulture
+					    << " as "
+					    << candidate
+					    << " for title "
+					    << (*title)->getKey()
+					    << " due to de-jure liege "
+					    << dejure
+					    << ".\n";
+	  }
+	  break; 
+	}
+	ckTitle = titleMap[dejure];
+      }
+      weights[euCulture] += titleWeight / iteration; 
+    }
+  }
+  
+  for (objiter vassal = vassalMap[ckRuler].begin(); vassal != vassalMap[ckRuler].end(); ++vassal) {
+    recursiveCollectCultures(*vassal, weights, iteration+1); 
+  }
 }
 
 /******************************* End calculators ********************************/
@@ -1273,6 +1394,7 @@ void WorkerThread::convertEU3 () {
   eu3StateVariables();
   eu3ProvinceCultures();
   eu3ProvinceReligion();   
+  eu3StateCultures();
   
   Logger::logStream(Logger::Game) << "Done with conversion, writing to file.\n"; 
   ofstream writer;

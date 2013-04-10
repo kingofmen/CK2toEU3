@@ -14,8 +14,10 @@ debug = {
   41 = no # Revolters 
   42 = no # Cores 
   43 = no # Countries 
-  44 = yes # Base tax
-  45 = yes # Manpower 
+  44 = no # Base tax
+  45 = no # Manpower 
+  46 = yes # Culture
+  47 = no # Religion 
   all = no 
 }
 eu3dir = .\DW\ 

@@ -109,13 +109,16 @@ private:
   void eu3ProvinceCultures ();
   void eu3ProvinceReligion ();    
   void eu3Provinces ();
-  void eu3StateVariables(); 
+  void eu3StateVariables ();
+  void eu3StateCultures (); 
   void eu3Taxes ();  
 
   // Calculators, helper methods
   enum WeightType {BaseTax, ManPower, NumWeights}; 
   double getCkWeight (Object* ckprov, WeightType = BaseTax);
+  Object* getHistory (Object* euEntity); 
   double getManpower (Object* building);
+  void recursiveCollectCultures (Object* ckRuler, map<string, double>& weights, int iteration);
   
   enum TitleTier {Empire, Kingdom, Duchy, County, Barony, Other};
   enum IterType {Chars, Titles};
