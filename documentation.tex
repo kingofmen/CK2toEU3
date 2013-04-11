@@ -70,6 +70,7 @@ The following state-level variables are handled:
 \item Government types. 
 \item Prestige and gold. 
 \item Culture. 
+\item Religion. 
 \end{itemize}
 
 \section{Vassalisation}
@@ -112,6 +113,8 @@ reflect the makeup of the nobility of the country at large. The
 emperor is a distant figure, as are Kings, while Barons are not very
 powerful; it is the local Count who
 determines whether the peasants are under a ``foreign yoke'' or not.
+These weights can be set in \verb|config.txt|, where they are given 
+as \verb|e_weight|, \verb|k_weight|, and so on. 
 
 Once the title weights have been summed, they are divided by distance
 from the sovereign ruler: Divide by 1 for the ruler himself, 2 for his
@@ -124,6 +127,11 @@ the most general one; the weight is the same.
 The culture with the most weight becomes the primary culture. 
 Cultures with weight at least 20\% of the primary culture's weight
 become accepted. 
+
+\section{Religion}
+
+Converted in the same way as state culture, except that there is no
+special treatment of particular regions. 
 
 
 

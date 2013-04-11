@@ -109,8 +109,9 @@ private:
   void eu3ProvinceCultures ();
   void eu3ProvinceReligion ();    
   void eu3Provinces ();
+  void eu3StateCultures ();
+  void eu3StateReligion ();   
   void eu3StateVariables ();
-  void eu3StateCultures (); 
   void eu3Taxes ();  
 
   // Calculators, helper methods
@@ -119,6 +120,7 @@ private:
   Object* getHistory (Object* euEntity); 
   double getManpower (Object* building);
   void recursiveCollectCultures (Object* ckRuler, map<string, double>& weights, int iteration);
+  void recursiveCollectReligion (Object* ckRuler, map<string, double>& weights, int iteration);  
   
   enum TitleTier {Empire, Kingdom, Duchy, County, Barony, Other};
   enum IterType {Chars, Titles};

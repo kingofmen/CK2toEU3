@@ -16,8 +16,8 @@ debug = {
   43 = no # Countries 
   44 = no # Base tax
   45 = no # Manpower 
-  46 = yes # Culture
-  47 = no # Religion 
+  46 = no # Culture
+  47 = yes # Religion 
   all = no 
 }
 eu3dir = .\DW\ 
@@ -26,6 +26,12 @@ eu4dir = .\Vanilla\
 
 minimumMaxPrestige = 20 
 minimumGold = 10 
+
+e_weight = 1.0 
+k_weight = 1.0 
+d_weight = 1.5
+c_weight = 2.0
+b_weight = 1.5
 
 skip = {
   d_bulgarian_company = yes

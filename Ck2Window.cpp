@@ -14,6 +14,7 @@
 #include <algorithm>
 #include "StructUtils.hh" 
 #include "StringManips.hh"
+#include <direct.h>
 
 using namespace std; 
 
@@ -1067,41 +1068,6 @@ void WorkerThread::eu3Provinces () {
   }
 }
 
-void WorkerThread::eu3StateVariables () {
-  double maxEuPrestige = configObject->safeGetFloat("minimumMaxPrestige", 20);
-  double maxCkPrestige = 0; 
-  double totalEuGold   = 0;
-  double totalCkGold   = 0; 
-  
-  for (map<Object*, Object*>::iterator i = euCountryToCharacterMap.begin(); i != euCountryToCharacterMap.end(); ++i) {
-    Object* euCountry = (*i).first;
-    Object* ckRuler   = (*i).second;
-    
-    totalEuGold += euCountry->safeGetFloat("treasury");
-    totalCkGold += max(ckRuler->safeGetFloat("wealth"), 0.0); 
-    maxEuPrestige = max(maxEuPrestige, fabs(euCountry->safeGetFloat("precise_prestige")));
-    maxCkPrestige = max(maxCkPrestige, fabs(ckRuler->safeGetFloat("prestige") + ckRuler->safeGetFloat("piety"))); 
-  }
-
-  double minimumGold = configObject->safeGetFloat("minimumGold", 10); 
-  for (map<Object*, Object*>::iterator i = euCountryToCharacterMap.begin(); i != euCountryToCharacterMap.end(); ++i) {
-    Object* euCountry = (*i).first;
-    Object* ckRuler   = (*i).second;
-
-    double gold = max(ckRuler->safeGetFloat("wealth"), 0.0); 
-    double prestige = ckRuler->safeGetFloat("prestige") + ckRuler->safeGetFloat("piety");
-
-    gold /= totalCkGold;
-    gold *= totalEuGold;
-    gold = max(gold, minimumGold); 
-    euCountry->resetLeaf("treasury", gold);
-
-    prestige /= maxCkPrestige;
-    prestige *= maxEuPrestige;
-    euCountry->resetLeaf("precise_prestige", prestige); 
-  }  
-}
-
 void WorkerThread::eu3StateCultures () {
   for (map<Object*, Object*>::iterator i = euCountryToCharacterMap.begin(); i != euCountryToCharacterMap.end(); ++i) {
     Object* euCountry = (*i).first;
@@ -1153,6 +1119,80 @@ void WorkerThread::eu3StateCultures () {
     }
   }
 }
+
+void WorkerThread::eu3StateReligion () {
+  for (map<Object*, Object*>::iterator i = euCountryToCharacterMap.begin(); i != euCountryToCharacterMap.end(); ++i) {
+    Object* euCountry = (*i).first;
+    if ((euCountry->getKey() == "PIR") || (euCountry->getKey() == "REB")) continue; 
+    
+    Object* ckRuler   = (*i).second;
+    map<string, double> weights; 
+    
+    recursiveCollectReligion(ckRuler, weights, 1);
+
+    if (0 == weights.size()) {
+      Logger::logStream(Logger::Warning) << "Warning: Could not find any EU3 religion for tag "
+					 << euCountry->getKey()
+					 << ", no change made.\n";
+      continue;
+    }
+    
+    map<string, double>::iterator best = weights.begin();
+    for (map<string, double>::iterator cand = weights.begin(); cand != weights.end(); ++cand) {
+      if ((*cand).second < (*best).second) continue;
+      best = cand;
+    }
+
+    Object* history = getHistory(euCountry); 
+    string oldReligion = euCountry->safeGetString("religion");
+    if (oldReligion != (*best).first) {
+      Logger::logStream(DebugReligion) << "New state religion for "
+				      << euCountry->getKey() << ": "
+				      << (*best).first << " (was " << oldReligion
+				      << ")\n";
+      euCountry->resetLeaf("religion", (*best).first);
+      history->resetLeaf("religion", (*best).first);
+      
+    }
+  }
+}
+
+
+void WorkerThread::eu3StateVariables () {
+  double maxEuPrestige = configObject->safeGetFloat("minimumMaxPrestige", 20);
+  double maxCkPrestige = 0; 
+  double totalEuGold   = 0;
+  double totalCkGold   = 0; 
+  
+  for (map<Object*, Object*>::iterator i = euCountryToCharacterMap.begin(); i != euCountryToCharacterMap.end(); ++i) {
+    Object* euCountry = (*i).first;
+    Object* ckRuler   = (*i).second;
+    
+    totalEuGold += euCountry->safeGetFloat("treasury");
+    totalCkGold += max(ckRuler->safeGetFloat("wealth"), 0.0); 
+    maxEuPrestige = max(maxEuPrestige, fabs(euCountry->safeGetFloat("precise_prestige")));
+    maxCkPrestige = max(maxCkPrestige, fabs(ckRuler->safeGetFloat("prestige") + ckRuler->safeGetFloat("piety"))); 
+  }
+
+  double minimumGold = configObject->safeGetFloat("minimumGold", 10); 
+  for (map<Object*, Object*>::iterator i = euCountryToCharacterMap.begin(); i != euCountryToCharacterMap.end(); ++i) {
+    Object* euCountry = (*i).first;
+    Object* ckRuler   = (*i).second;
+
+    double gold = max(ckRuler->safeGetFloat("wealth"), 0.0); 
+    double prestige = ckRuler->safeGetFloat("prestige") + ckRuler->safeGetFloat("piety");
+
+    gold /= totalCkGold;
+    gold *= totalEuGold;
+    gold = max(gold, minimumGold); 
+    euCountry->resetLeaf("treasury", gold);
+
+    prestige /= maxCkPrestige;
+    prestige *= maxEuPrestige;
+    euCountry->resetLeaf("precise_prestige", prestige); 
+  }  
+}
+
 
 void WorkerThread::eu3Taxes () {
   double totalEuTax = 0;
@@ -1301,11 +1341,11 @@ void WorkerThread::recursiveCollectCultures (Object* ckRuler, map<string, double
       string euCulture = cultureMap[ckCulture];
       double titleWeight = 0;
       switch (titleTier(ckTitle)) {
-      case Empire:  
-      case Kingdom: titleWeight = 1.0; break;
-      case Duchy:   titleWeight = 1.5; break;
-      case County:  titleWeight = 2.0; break;
-      case Barony:  titleWeight = 1.5; break;
+      case Empire:  titleWeight = configObject->safeGetFloat("e_weight", 1.0); break;
+      case Kingdom: titleWeight = configObject->safeGetFloat("k_weight", 1.0); break;
+      case Duchy:   titleWeight = configObject->safeGetFloat("d_weight", 1.5); break;
+      case County:  titleWeight = configObject->safeGetFloat("c_weight", 2.0); break;
+      case Barony:  titleWeight = configObject->safeGetFloat("b_weight", 1.5); break;	
       default:
       case Other:
 	titleWeight = 0;
@@ -1344,6 +1384,44 @@ void WorkerThread::recursiveCollectCultures (Object* ckRuler, map<string, double
     recursiveCollectCultures(*vassal, weights, iteration+1); 
   }
 }
+
+void WorkerThread::recursiveCollectReligion (Object* ckRuler, map<string, double>& weights, int iteration) {
+  string ckReligion = remQuotes(ckRuler->safeGetString("religion")); 
+  if (religionMap.find(ckReligion) == religionMap.end()) {
+    Logger::logStream(Logger::Warning) << "Warning: Could not convert religion "
+				       << ckReligion
+				       << " of character "
+				       << ckRuler->getKey()
+				       << ".\n"; 
+  }
+  else {
+    // Give some weight for each title, making sure to check whether it is a special area. 
+    for (objiter title = beginRel(ckRuler, Title); title != finalRel(ckRuler, Title); ++title) {
+      Object* ckTitle = (*title);
+      string euReligion = religionMap[ckReligion];
+      double titleWeight = 0;
+      switch (titleTier(ckTitle)) {
+      case Empire:  titleWeight = configObject->safeGetFloat("e_weight", 1.0); break;
+      case Kingdom: titleWeight = configObject->safeGetFloat("k_weight", 1.0); break;
+      case Duchy:   titleWeight = configObject->safeGetFloat("d_weight", 1.5); break;
+      case County:  titleWeight = configObject->safeGetFloat("c_weight", 2.0); break;
+      case Barony:  titleWeight = configObject->safeGetFloat("b_weight", 1.5); break;		
+      default:
+      case Other:
+	titleWeight = 0;
+	Logger::logStream(Logger::Warning) << "Warning: Do not recognise tier of title " << ckTitle->getKey() << ", no religion weight assigned.\n";
+	break;
+      }
+      
+      weights[euReligion] += titleWeight / iteration; 
+    }
+  }
+  
+  for (objiter vassal = vassalMap[ckRuler].begin(); vassal != vassalMap[ckRuler].end(); ++vassal) {
+    recursiveCollectReligion(*vassal, weights, iteration+1); 
+  }
+}
+
 
 /******************************* End calculators ********************************/
 
@@ -1395,8 +1473,19 @@ void WorkerThread::convertEU3 () {
   eu3ProvinceCultures();
   eu3ProvinceReligion();   
   eu3StateCultures();
+  eu3StateReligion();   
   
-  Logger::logStream(Logger::Game) << "Done with conversion, writing to file.\n"; 
+  Logger::logStream(Logger::Game) << "Done with conversion, writing to file.\n";
+  DWORD attribs = GetFileAttributesA("Output");
+  if (attribs == INVALID_FILE_ATTRIBUTES) {
+    Logger::logStream(Logger::Warning) << "Warning, no Output directory, attempting to create one.\n";
+    int error = _mkdir("Output");
+    if (-1 == error) {
+      Logger::logStream(Logger::Error) << "Error: Could not create Output directory. Cannot write to file.\n";
+      return; 
+    }
+  }
+  
   ofstream writer;
   writer.open(".\\Output\\converted.eu3");
   Parser::topLevel = euxGame;
