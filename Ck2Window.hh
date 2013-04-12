@@ -103,6 +103,7 @@ private:
   void loadFiles (); 
 
   // Eu3 conversions
+  void eu3Characters ();
   void eu3Diplomacy ();
   void eu3Governments ();     
   void eu3Manpower ();
@@ -115,9 +116,9 @@ private:
   void eu3Taxes ();  
 
   // Calculators, helper methods
-  enum WeightType {BaseTax, ManPower, NumWeights}; 
+  enum WeightType {BaseTax, ManPower, NumWeights};
+  void calculateAttributes (Object* ckChar);  
   double getCkWeight (Object* ckprov, WeightType = BaseTax);
-  Object* getHistory (Object* euEntity); 
   double getManpower (Object* building);
   void recursiveCollectCultures (Object* ckRuler, map<string, double>& weights, int iteration);
   void recursiveCollectReligion (Object* ckRuler, map<string, double>& weights, int iteration);  
@@ -164,7 +165,8 @@ private:
   
   // String lookups
   map<string, Object*> titleMap;
-
+  vector<string> attribNames; 
+  
   // Countries
   objvec sovereigns;
   map<Object*, Object*> liegeMap;
@@ -179,7 +181,9 @@ private:
   Object* staticMods;
   map<string, string> religionMap;
   map<string, string> cultureMap;
-  map<string, map<string, string> > specialCultureMap; 
+  map<string, map<string, string> > specialCultureMap;
+  objvec traits;
+  map<string, Object*> dynasties; 
 }; 
 
 #endif

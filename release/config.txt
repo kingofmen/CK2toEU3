@@ -1,6 +1,6 @@
 debug = {
   generic  = no  
-  30 = no # Leaders
+  30 = yes # Leaders
   31 = no # Provinces
   32 = no # Ministers
   33 = no # Tech teams 
@@ -17,7 +17,8 @@ debug = {
   44 = no # Base tax
   45 = no # Manpower 
   46 = no # Culture
-  47 = yes # Religion 
+  47 = no # Religion 
+  48 = no # Governments 
   all = no 
 }
 eu3dir = .\DW\ 

@@ -492,12 +492,8 @@ void WorkerThread::createCountryMap () {
       country = new Object(existingCountry);
       country->setKey(eutag);
       euxGame->setValue(country, existingCountry);
-      Object* history = country->safeGetObject("history");
-      if (history) history->clear();
-      else {
-	history = new Object("history");
-	country->setValue(history);
-      }
+      Object* history = country->getNeededObject("history");
+      history->clear();
       country->unsetValue("army");
       country->unsetValue("navy");
       country->unsetValue("monarch");
@@ -768,12 +764,122 @@ void WorkerThread::loadFiles () {
 
   Logger::logStream(DebugCulture) << "Found " << cultureMap.size() << " regular and "
 				  << specialCultureMap.size() << " special culture conversions.\n";
+
+  Object* traitObj = loadTextFile(sourceVersion + "traits.txt");
+  traits = traitObj->getLeaves();
+  // CK uses Fortran indexing for the traits
+  traits.insert(traits.begin(), new Object("dummyTrait"));
+
+  Object* dynObj = loadTextFile(sourceVersion + "dynasties.txt");
+  objvec dyns = dynObj->getLeaves();
+  for (objiter dyn = dyns.begin(); dyn != dyns.end(); ++dyn) {
+    dynasties[(*dyn)->getKey()] = (*dyn);
+    Logger::logStream(DebugLeaders) << "Found dynasty " << (*dyn)->getKey() << ", " << (*dyn)->safeGetString("name") << ".\n"; 
+  }
+  dyns.clear(); 
+  dynObj = ck2Game->safeGetObject("dynasties");
+  if (dynObj) dyns = dynObj->getLeaves();
+  for (objiter dyn = dyns.begin(); dyn != dyns.end(); ++dyn) {
+    if (dynasties[(*dyn)->getKey()]) continue; 
+    dynasties[(*dyn)->getKey()] = (*dyn);
+    Logger::logStream(DebugLeaders) << "Found dynasty " << (*dyn)->getKey() << ", " << (*dyn)->safeGetString("name") << ".\n"; 
+  }
 }
 
 
 /******************************* End initialisers *******************************/ 
 
 /******************************* Begin EU3 conversions ********************************/
+
+void WorkerThread::eu3Characters () {
+  int monarchId = 1;
+  Object* dummyWorstChar = new Object("dummyWorst");
+  Object* dummyBestChar  = new Object("dummyBest"); 
+  Object* dummyTempChar  = new Object("dummyTemp"); 
+  
+  
+  for (map<Object*, Object*>::iterator i = euCountryToCharacterMap.begin(); i != euCountryToCharacterMap.end(); ++i) {
+    Object* euCountry = (*i).first;
+    if ((euCountry->getKey() == "PIR") || (euCountry->getKey() == "REB")) continue;
+    Object* ckRuler = (*i).second;
+    calculateAttributes(ckRuler);
+    for (unsigned int a = 0; a < attribNames.size(); ++a) {
+      if (ckRuler->safeGetInt(attribNames[a]) < dummyWorstChar->safeGetInt(attribNames[a]))
+	dummyWorstChar->resetLeaf(attribNames[a], ckRuler->safeGetInt(attribNames[a]));
+      else if (ckRuler->safeGetInt(attribNames[a]) > dummyBestChar->safeGetInt(attribNames[a]))
+	dummyBestChar->resetLeaf(attribNames[a], ckRuler->safeGetInt(attribNames[a]));
+    }
+  }
+  
+  for (unsigned int a = 0; a < attribNames.size(); ++a) {
+    dummyBestChar->resetLeaf(attribNames[a], dummyBestChar->safeGetInt(attribNames[a]) - dummyWorstChar->safeGetFloat(attribNames[a])); 
+  }
+    
+  // Convert monarchs and heirs.
+  for (map<Object*, Object*>::iterator i = euCountryToCharacterMap.begin(); i != euCountryToCharacterMap.end(); ++i) {
+    Object* euCountry = (*i).first;
+    if ((euCountry->getKey() == "PIR") || (euCountry->getKey() == "REB")) continue; 
+    
+    Object* ckRuler    = (*i).second;
+    Object* euHistory  = euCountry->getNeededObject("history"); 
+    Object* rulerEvent = new Object(remQuotes(ckRuler->safeGetString("birth_date", "1399.1.1")));
+    Object* euMonarch  = new Object("monarch");
+
+    rulerEvent->setValue(euMonarch);
+    euHistory->setValue(rulerEvent);
+    
+    euMonarch->resetLeaf("name", ckRuler->safeGetString("birth_name", "NEMO"));
+
+    for (unsigned int a = 0; a < attribNames.size(); ++a) {
+      double percentage = ckRuler->safeGetFloat(attribNames[a]) - dummyWorstChar->safeGetFloat(attribNames[a]);
+      percentage /= (0.0001 + dummyBestChar->safeGetFloat(attribNames[a]));
+      dummyTempChar->resetLeaf(attribNames[a], percentage);
+    }
+
+    
+    double adm = 4.5 * (dummyTempChar->safeGetFloat("stewardship") + dummyTempChar->safeGetFloat("learning"));
+    euMonarch->resetLeaf("ADM", (int) floor(adm + 0.5));
+    adm = 9 * dummyTempChar->safeGetFloat("martial");
+    euMonarch->resetLeaf("MIL", (int) floor(adm + 0.5));
+    adm = 4.5 * (dummyTempChar->safeGetFloat("diplomacy") + dummyTempChar->safeGetFloat("intrigue"));
+    euMonarch->resetLeaf("DIP", (int) floor(adm + 0.5));
+
+    Logger::logStream(DebugLeaders) << "Converted "
+				    << euMonarch->safeGetString("name")
+				    << " with ADM "
+				    << euMonarch->safeGetString("ADM") << "-"
+				    << euMonarch->safeGetString("DIP") << "-"
+				    << euMonarch->safeGetString("MIL") << " from CK stats";
+    for (unsigned int a = 0; a < attribNames.size(); ++a) 
+      Logger::logStream(DebugLeaders) << " " << ckRuler->safeGetString(attribNames[a]) << " ("
+				      << dummyTempChar->safeGetString(attribNames[a]) << ")";
+
+    Logger::logStream(DebugLeaders) << ".\n"; 
+
+    
+    Object* id = new Object("id");
+    id->resetLeaf("id", monarchId);
+    id->resetLeaf("type", "37");
+    euMonarch->setValue(id);
+
+    Object* dynasty = dynasties[ckRuler->safeGetString("dynasty")];
+    string dynastyName = "\"Unknown Dynasty\"";
+    if (dynasty) dynastyName = dynasty->safeGetString("name");
+    else Logger::logStream(DebugLeaders) << "Warning: Could not find dynasty "
+					 << ckRuler->safeGetString("dynasty")
+					 << " for monarch "
+					 << ckRuler->safeGetString("birth_name")
+					 << ".\n"; 
+    euMonarch->resetLeaf("dynasty", dynastyName); 
+
+    Object* nationPointer = euCountry->getNeededObject("monarch");
+    nationPointer->resetLeaf("id", monarchId);
+    nationPointer->resetLeaf("type", "37");
+    monarchId++; 
+  }
+
+  euxGame->resetLeaf("monarch", monarchId);
+}
 
 void WorkerThread::eu3Diplomacy () {
   Object* eu3Diplomacy = euxGame->safeGetObject("diplomacy");
@@ -806,16 +912,12 @@ void WorkerThread::eu3Governments () {
     if (succession == "patrician_elective") euCountry->resetLeaf("government", "merchant_republic");
     else euCountry->resetLeaf("government", "feudal_monarchy");
 
-    Logger::logStream(Logger::Game) << "Government of " << ckCountry->getKey()
-				    << " (" << euCountry->getKey() << ") is "
-				    << succession << " -> " << euCountry->safeGetString("government")
-				    << ".\n"; 
+    Logger::logStream(DebugGovernments) << "Government of " << ckCountry->getKey()
+					<< " (" << euCountry->getKey() << ") is "
+					<< succession << " -> " << euCountry->safeGetString("government")
+					<< ".\n"; 
     
-    Object* euHistory = euCountry->safeGetObject("history");
-    if (!euHistory) {
-      euHistory = new Object("history");
-      euCountry->setValue(euHistory); 
-    }
+    Object* euHistory = euCountry->getNeededObject("history");
     euHistory->resetLeaf("government", euCountry->safeGetString("government")); 
   }  
 }
@@ -857,8 +959,8 @@ void WorkerThread::eu3Manpower () {
     
     afterTotal += manpower; 
     eup->resetLeaf("manpower", manpower);
-    Object* history = eup->safeGetObject("history");
-    if (history) history->resetLeaf("manpower", manpower); 
+    Object* history = eup->getNeededObject("history");
+    history->resetLeaf("manpower", manpower); 
   }
 
   Logger::logStream(DebugManpower) << "After distribution: " << afterTotal << "\n"
@@ -1091,7 +1193,7 @@ void WorkerThread::eu3StateCultures () {
       best = cand;
     }
 
-    Object* history = getHistory(euCountry); 
+    Object* history = euCountry->getNeededObject("history");
     string oldCulture = euCountry->safeGetString("primary_culture");
     if (oldCulture != (*best).first) {
       Logger::logStream(DebugCulture) << "New primary culture for "
@@ -1143,7 +1245,7 @@ void WorkerThread::eu3StateReligion () {
       best = cand;
     }
 
-    Object* history = getHistory(euCountry); 
+    Object* history = euCountry->getNeededObject("history");
     string oldReligion = euCountry->safeGetString("religion");
     if (oldReligion != (*best).first) {
       Logger::logStream(DebugReligion) << "New state religion for "
@@ -1231,8 +1333,8 @@ void WorkerThread::eu3Taxes () {
     
     afterTotal += basetax; 
     eup->resetLeaf("base_tax", basetax);
-    Object* history = eup->safeGetObject("history");
-    if (history) history->resetLeaf("base_tax", basetax); 
+    Object* history = eup->getNeededObject("history");
+    history->resetLeaf("base_tax", basetax); 
   }
 
   Logger::logStream(DebugBasetax) << "After distribution: " << afterTotal << "\n"
@@ -1252,6 +1354,27 @@ void WorkerThread::eu3Taxes () {
 /******************************* End EU3 conversions ********************************/
 
 /*******************************  Begin calculators ********************************/
+
+void WorkerThread::calculateAttributes (Object* ckChar) {
+  if (!ckChar) return;
+  if (-999 != ckChar->safeGetInt("martial", -999)) return; 
+  
+  Object* attributes = ckChar->safeGetObject("attributes");
+  if (attributes) {
+    for (int i = 0; i < 5; ++i) ckChar->resetLeaf(attribNames[i], attributes->tokenAsInt(i));
+  }
+
+  Object* ckTraits = ckChar->safeGetObject("traits");
+  if (!ckTraits) return;
+  for (int t = 0; t < ckTraits->numTokens(); ++t) {
+    int traitNum = ckTraits->tokenAsInt(t);
+    if (traitNum < 0) continue;
+    if (traitNum >= (int) traits.size()) continue;
+    Object* trait = traits[traitNum];
+    if (!trait) continue; // This should be impossible.
+    for (int i = 0; i < 5; ++i) ckChar->resetLeaf(attribNames[i], ckChar->safeGetInt(attribNames[i]) + trait->safeGetInt(attribNames[i]));
+  }
+}
 
 double WorkerThread::getCkWeight (Object* province, WeightType wtype) {
   string cacheword = "totalTax";
@@ -1301,15 +1424,6 @@ double WorkerThread::getCkWeight (Object* province, WeightType wtype) {
 
   ret *= modifier; 
   province->resetLeaf(cacheword, ret);
-  return ret; 
-}
-
-Object* WorkerThread::getHistory (Object* euEntity) {
-  Object* ret = euEntity->safeGetObject("history");
-  if (!ret) {
-    ret = new Object("history");
-    euEntity->setValue(ret);
-  }
   return ret; 
 }
 
@@ -1457,6 +1571,11 @@ void WorkerThread::convertEU3 () {
 
   initialiseCharacters(); 
   initialiseRelationMaps();
+  attribNames.push_back("diplomacy");
+  attribNames.push_back("martial");  
+  attribNames.push_back("stewardship");
+  attribNames.push_back("intrigue");  
+  attribNames.push_back("learning"); 
   
   loadFiles();
   createProvinceMap(); 
@@ -1474,6 +1593,7 @@ void WorkerThread::convertEU3 () {
   eu3ProvinceReligion();   
   eu3StateCultures();
   eu3StateReligion();   
+  eu3Characters(); 
   
   Logger::logStream(Logger::Game) << "Done with conversion, writing to file.\n";
   DWORD attribs = GetFileAttributesA("Output");
