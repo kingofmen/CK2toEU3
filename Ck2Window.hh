@@ -121,7 +121,8 @@ private:
   double getCkWeight (Object* ckprov, WeightType = BaseTax);
   double getManpower (Object* building);
   void recursiveCollectCultures (Object* ckRuler, map<string, double>& weights, int iteration);
-  void recursiveCollectReligion (Object* ckRuler, map<string, double>& weights, int iteration);  
+  void recursiveCollectReligion (Object* ckRuler, map<string, double>& weights, int iteration);
+  void setCharacterAttributes (Object* euMonarch, Object* ckRuler, int monarchId, Object* dummyBestChar, Object* dummyWorstChar); 
   
   enum TitleTier {Empire, Kingdom, Duchy, County, Barony, Other};
   enum IterType {Chars, Titles};

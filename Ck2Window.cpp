@@ -795,8 +795,6 @@ void WorkerThread::eu3Characters () {
   int monarchId = 1;
   Object* dummyWorstChar = new Object("dummyWorst");
   Object* dummyBestChar  = new Object("dummyBest"); 
-  Object* dummyTempChar  = new Object("dummyTemp"); 
-  
   
   for (map<Object*, Object*>::iterator i = euCountryToCharacterMap.begin(); i != euCountryToCharacterMap.end(); ++i) {
     Object* euCountry = (*i).first;
@@ -827,55 +825,44 @@ void WorkerThread::eu3Characters () {
 
     rulerEvent->setValue(euMonarch);
     euHistory->setValue(rulerEvent);
+    setCharacterAttributes(euMonarch, ckRuler, monarchId, dummyBestChar, dummyWorstChar);
     
-    euMonarch->resetLeaf("name", ckRuler->safeGetString("birth_name", "NEMO"));
-
-    for (unsigned int a = 0; a < attribNames.size(); ++a) {
-      double percentage = ckRuler->safeGetFloat(attribNames[a]) - dummyWorstChar->safeGetFloat(attribNames[a]);
-      percentage /= (0.0001 + dummyBestChar->safeGetFloat(attribNames[a]));
-      dummyTempChar->resetLeaf(attribNames[a], percentage);
-    }
-
-    
-    double adm = 4.5 * (dummyTempChar->safeGetFloat("stewardship") + dummyTempChar->safeGetFloat("learning"));
-    euMonarch->resetLeaf("ADM", (int) floor(adm + 0.5));
-    adm = 9 * dummyTempChar->safeGetFloat("martial");
-    euMonarch->resetLeaf("MIL", (int) floor(adm + 0.5));
-    adm = 4.5 * (dummyTempChar->safeGetFloat("diplomacy") + dummyTempChar->safeGetFloat("intrigue"));
-    euMonarch->resetLeaf("DIP", (int) floor(adm + 0.5));
-
-    Logger::logStream(DebugLeaders) << "Converted "
-				    << euMonarch->safeGetString("name")
-				    << " with ADM "
-				    << euMonarch->safeGetString("ADM") << "-"
-				    << euMonarch->safeGetString("DIP") << "-"
-				    << euMonarch->safeGetString("MIL") << " from CK stats";
-    for (unsigned int a = 0; a < attribNames.size(); ++a) 
-      Logger::logStream(DebugLeaders) << " " << ckRuler->safeGetString(attribNames[a]) << " ("
-				      << dummyTempChar->safeGetString(attribNames[a]) << ")";
-
-    Logger::logStream(DebugLeaders) << ".\n"; 
-
-    
-    Object* id = new Object("id");
-    id->resetLeaf("id", monarchId);
-    id->resetLeaf("type", "37");
-    euMonarch->setValue(id);
-
-    Object* dynasty = dynasties[ckRuler->safeGetString("dynasty")];
-    string dynastyName = "\"Unknown Dynasty\"";
-    if (dynasty) dynastyName = dynasty->safeGetString("name");
-    else Logger::logStream(DebugLeaders) << "Warning: Could not find dynasty "
-					 << ckRuler->safeGetString("dynasty")
-					 << " for monarch "
-					 << ckRuler->safeGetString("birth_name")
-					 << ".\n"; 
-    euMonarch->resetLeaf("dynasty", dynastyName); 
-
     Object* nationPointer = euCountry->getNeededObject("monarch");
     nationPointer->resetLeaf("id", monarchId);
     nationPointer->resetLeaf("type", "37");
-    monarchId++; 
+    monarchId++;
+
+    Object* ckHeir = 0; 
+    for (objiter son = beginRel(ckRuler, Son); son != finalRel(ckRuler, Son); ++son) {
+      if ((*son)->safeGetString("death_date", "ILIVE") != "ILIVE") continue;
+      ckHeir = (*son);
+      break;
+    }
+
+    if (!ckHeir) {
+      for (objiter son = beginRel(ckRuler, Daughter); son != finalRel(ckRuler, Daughter); ++son) {
+	if ((*son)->safeGetString("death_date", "ILIVE") != "ILIVE") continue;
+	ckHeir = (*son);
+	break;
+      }
+    }
+      
+    if (!ckHeir) {
+      euCountry->unsetValue("heir");
+      continue;
+    }
+
+    Object* euHeir = new Object("heir");
+    rulerEvent = new Object(remQuotes(ckHeir->safeGetString("birth_date", "1399.1.1")));
+    rulerEvent->setValue(euHeir);
+    euHistory->setValue(rulerEvent);
+    setCharacterAttributes(euHeir, ckHeir, monarchId, dummyBestChar, dummyWorstChar);
+    euHeir->setLeaf("birth_date", ckHeir->safeGetString("birth_date", "1399.1.1")); 
+    
+    nationPointer = euCountry->getNeededObject("heir");
+    nationPointer->resetLeaf("id", monarchId);
+    nationPointer->resetLeaf("type", "37");
+    monarchId++;
   }
 
   euxGame->resetLeaf("monarch", monarchId);
@@ -1535,6 +1522,60 @@ void WorkerThread::recursiveCollectReligion (Object* ckRuler, map<string, double
     recursiveCollectReligion(*vassal, weights, iteration+1); 
   }
 }
+
+void WorkerThread::setCharacterAttributes (Object* euMonarch, Object* ckRuler, int monarchId, Object* dummyBestChar, Object* dummyWorstChar) {
+  static Object* dummyTempChar  = new Object("dummyTemp"); 
+  
+  euMonarch->resetLeaf("name", ckRuler->safeGetString("birth_name", "NEMO"));
+
+  for (unsigned int a = 0; a < attribNames.size(); ++a) {
+    double percentage = ckRuler->safeGetFloat(attribNames[a]) - dummyWorstChar->safeGetFloat(attribNames[a]);
+    percentage /= (0.0001 + dummyBestChar->safeGetFloat(attribNames[a]));
+    dummyTempChar->resetLeaf(attribNames[a], percentage);
+  }
+
+    
+  double adm = 4.5 * (dummyTempChar->safeGetFloat("stewardship") + dummyTempChar->safeGetFloat("learning"));
+  if (adm > 9) adm = 9;
+  if (adm < 0) adm = 0;  
+  euMonarch->resetLeaf("ADM", (int) floor(adm + 0.5));
+  adm = 9 * dummyTempChar->safeGetFloat("martial");
+  if (adm > 9) adm = 9;
+  if (adm < 0) adm = 0;        
+  euMonarch->resetLeaf("MIL", (int) floor(adm + 0.5));
+  adm = 4.5 * (dummyTempChar->safeGetFloat("diplomacy") + dummyTempChar->safeGetFloat("intrigue"));
+  if (adm > 9) adm = 9;
+  if (adm < 0) adm = 0;        
+  euMonarch->resetLeaf("DIP", (int) floor(adm + 0.5));
+
+  Logger::logStream(DebugLeaders) << "Converted "
+				  << euMonarch->safeGetString("name")
+				  << " with ADM "
+				  << euMonarch->safeGetString("ADM") << "-"
+				  << euMonarch->safeGetString("DIP") << "-"
+				  << euMonarch->safeGetString("MIL") << " from CK stats";
+  for (unsigned int a = 0; a < attribNames.size(); ++a) 
+    Logger::logStream(DebugLeaders) << " " << ckRuler->safeGetString(attribNames[a]) << " ("
+				    << dummyTempChar->safeGetString(attribNames[a]) << ")";
+
+  Logger::logStream(DebugLeaders) << ".\n"; 
+    
+  Object* id = new Object("id");
+  id->resetLeaf("id", monarchId);
+  id->resetLeaf("type", "37");
+  euMonarch->setValue(id);
+
+  Object* dynasty = dynasties[ckRuler->safeGetString("dynasty")];
+  string dynastyName = "\"Unknown Dynasty\"";
+  if (dynasty) dynastyName = dynasty->safeGetString("name");
+  else Logger::logStream(DebugLeaders) << "Warning: Could not find dynasty "
+				       << ckRuler->safeGetString("dynasty")
+				       << " for monarch "
+				       << ckRuler->safeGetString("birth_name")
+				       << ".\n"; 
+  euMonarch->resetLeaf("dynasty", dynastyName); 
+}
+
 
 
 /******************************* End calculators ********************************/
