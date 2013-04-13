@@ -791,6 +791,67 @@ void WorkerThread::loadFiles () {
 
 /******************************* Begin EU3 conversions ********************************/
 
+void WorkerThread::eu3Cores () {
+  for (map<Object*, objvec>::iterator link = euProvToCkProvsMap.begin(); link != euProvToCkProvsMap.end(); ++link) {
+    Object* eup = (*link).first;
+    objvec ckps = (*link).second;
+    if (0 == ckps.size()) continue; // Already gave a warning about this.
+
+    eup->unsetValue("core");
+    Object* history = eup->getNeededObject("history");
+    history->unsetValue("add_core");
+
+    // For each CK province, look up who owns it de-jure and give him (or them) a core on it.
+    set<Object*> dejures;    
+    for (objiter ckp = ckps.begin(); ckp != ckps.end(); ++ckp) {
+      string titleTag = remQuotes((*ckp)->safeGetString("title"));
+      Object* title = getTitle(titleTag);
+      while (title) {
+	dejures.insert(title);
+	titleTag = remQuotes(title->safeGetString("de_jure_liege"));
+	Object* liege = getTitle(titleTag);
+
+	if (!liege) { // Either independent, or currently vassal to the de-jure liege.
+	  titleTag = remQuotes(title->safeGetString("liege"));
+	  liege = getTitle(titleTag);
+	}
+	title = liege; 
+      }
+    }
+
+    map<Object*, int> gotCores; 
+    for (set<Object*>::iterator title = dejures.begin(); title != dejures.end(); ++title) {
+      Object* holder = titleToCharMap[*title];
+      if (!holder) continue;
+      Object* euNation = characterToEuCountryMap[holder];
+      if (!euNation) continue;
+      if (gotCores[euNation] > 0) continue; 
+      
+      // Check if this title is primary-level, ie empire for emperors, etc.
+      TitleTier level = titleTier(*title);
+      bool primary = true;      
+      for (objiter i = beginRel(holder, Title); i != finalRel(holder, Title); ++i) {
+	if (level >= titleTier(*i)) continue;
+	primary = false;
+	break;
+      }
+      if (!primary) continue;
+      
+      Logger::logStream(DebugCores) << "Giving core on "
+				    << nameAndNumber(eup)
+				    << " to tag " 
+				    << euNation->getKey()
+				    << " due to de-jure title "
+				    << (*title)->getKey()
+				    << ".\n";
+      eup->setLeaf("core", addQuotes(euNation->getKey()));
+      history->setLeaf("add_core", addQuotes(euNation->getKey()));
+      gotCores[euNation]++; 
+    }
+    
+  }
+}
+
 void WorkerThread::eu3Characters () {
   int monarchId = 1;
   Object* dummyWorstChar = new Object("dummyWorst");
@@ -1023,8 +1084,10 @@ void WorkerThread::eu3ProvinceCultures () {
 				    << winner
 				    << " from "
 				    << eup->safeGetString("culture") 
-				    << ".\n"; 
-    eup->resetLeaf("culture", winner); 
+				    << ".\n";
+    Object* history = eup->getNeededObject("history");    
+    eup->resetLeaf("culture", winner);
+    history->resetLeaf("culture", winner);
   }
 }
 
@@ -1073,8 +1136,10 @@ void WorkerThread::eu3ProvinceReligion () {
 				    << winner
 				    << " from "
 				    << eup->safeGetString("religion") 
-				    << ".\n"; 
-    eup->resetLeaf("religion", winner); 
+				    << ".\n";
+    Object* history = eup->getNeededObject("history");        
+    eup->resetLeaf("religion", winner);
+    history->resetLeaf("religion", winner);     
   }
 }
 
@@ -1152,8 +1217,12 @@ void WorkerThread::eu3Provinces () {
       best = (*curr).second;
 
     }
+
+    Object* history = eup->getNeededObject("history");    
     eup->resetLeaf("owner", addQuotes(winner->getKey()));
-    eup->resetLeaf("controller", conTag == "" ? addQuotes(winner->getKey()) : conTag); 
+    eup->resetLeaf("controller", conTag == "" ? addQuotes(winner->getKey()) : conTag);
+    history->resetLeaf("owner", addQuotes(winner->getKey()));
+    history->resetLeaf("controller", conTag == "" ? addQuotes(winner->getKey()) : conTag);
   }
 }
 
@@ -1635,6 +1704,7 @@ void WorkerThread::convertEU3 () {
   eu3StateCultures();
   eu3StateReligion();   
   eu3Characters(); 
+  eu3Cores(); 
   
   Logger::logStream(Logger::Game) << "Done with conversion, writing to file.\n";
   DWORD attribs = GetFileAttributesA("Output");

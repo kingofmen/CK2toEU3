@@ -104,6 +104,7 @@ private:
 
   // Eu3 conversions
   void eu3Characters ();
+  void eu3Cores (); 
   void eu3Diplomacy ();
   void eu3Governments ();     
   void eu3Manpower ();
@@ -124,7 +125,7 @@ private:
   void recursiveCollectReligion (Object* ckRuler, map<string, double>& weights, int iteration);
   void setCharacterAttributes (Object* euMonarch, Object* ckRuler, int monarchId, Object* dummyBestChar, Object* dummyWorstChar); 
   
-  enum TitleTier {Empire, Kingdom, Duchy, County, Barony, Other};
+  enum TitleTier {Barony, County, Duchy, Kingdom, Empire, Other};
   enum IterType {Chars, Titles};
   enum RelationType {Father, Mother, Son, Daughter, Child, Title};
   
