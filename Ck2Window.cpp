@@ -1775,17 +1775,17 @@ void WorkerThread::setCharacterAttributes (Object* euMonarch, Object* ckRuler, i
   }
 
     
-  double adm = 4.5 * (dummyTempChar->safeGetFloat("stewardship") + dummyTempChar->safeGetFloat("learning"));
+  double adm = 3 + 3 * (dummyTempChar->safeGetFloat("stewardship") + dummyTempChar->safeGetFloat("learning"));
   if (adm > 9) adm = 9;
-  if (adm < 0) adm = 0;  
+  if (adm < 3) adm = 3;  
   euMonarch->resetLeaf("ADM", (int) floor(adm + 0.5));
-  adm = 9 * dummyTempChar->safeGetFloat("martial");
+  adm = 3 + 6 * dummyTempChar->safeGetFloat("martial");
   if (adm > 9) adm = 9;
-  if (adm < 0) adm = 0;        
+  if (adm < 3) adm = 3;        
   euMonarch->resetLeaf("MIL", (int) floor(adm + 0.5));
-  adm = 4.5 * (dummyTempChar->safeGetFloat("diplomacy") + dummyTempChar->safeGetFloat("intrigue"));
+  adm = 3 + 3 * (dummyTempChar->safeGetFloat("diplomacy") + dummyTempChar->safeGetFloat("intrigue"));
   if (adm > 9) adm = 9;
-  if (adm < 0) adm = 0;        
+  if (adm < 3) adm = 3;        
   euMonarch->resetLeaf("DIP", (int) floor(adm + 0.5));
 
   Logger::logStream(DebugLeaders) << "Converted "
