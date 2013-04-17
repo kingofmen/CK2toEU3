@@ -12,18 +12,20 @@ debug = {
   39 = no # Sliders 
   40 = no # Ideas 
   41 = no # Revolters 
-  42 = yes # Cores 
+  42 = no # Cores 
   43 = no # Countries 
   44 = no # Base tax
   45 = no # Manpower 
   46 = no # Culture
   47 = no # Religion 
   48 = no # Governments 
-  all = no 
+  all = yes 
 }
 eu3dir = .\DW\ 
 ck2dir = .\ckvanilla\
 eu4dir = .\Vanilla\ 
+logfile = logfile.txt
+
 
 minimumMaxPrestige = 20 
 minimumGold = 10 
@@ -33,6 +35,208 @@ k_weight = 1.0
 d_weight = 1.5
 c_weight = 2.0
 b_weight = 1.5
+
+sliders = {
+  aristocracy_plutocracy = { -5 0 }
+  centralization_decentralization = { 2 5 }
+  innovative_narrowminded = { 0 5 }
+  mercantilism_freetrade = { -2 2 }
+  offensive_defensive = { 2 5 } 
+  land_naval = { -2 2 }
+  quality_quantity = { -2 2 }
+  serfdom_freesubjects = { -2 2 }
+}
+
+city = {
+  aristocracy_plutocracy = 1
+  centralization_decentralization = 1
+  innovative_narrowminded = -1 
+  land_naval = -1
+}
+castle = {
+  aristocracy_plutocracy = -1 
+  centralization_decentralization = 1
+  land_naval = -2
+}
+temple = {
+  centralization_decentralization = 1
+  innovative_narrowminded = 1
+  land_naval = -2
+}
+
+building_slider_effects = {
+  knights = {
+    offensive_defensive = -10
+    quality_quantity = -10
+  }
+  pikemen = {
+    offensive_defensive = 8
+  }
+  light_infantry = {
+    quality_quantity = 2
+  }
+  heavy_infantry = {
+    quality_quantity = -3
+  }
+  fort_level = {
+    offensive_defensive = 10
+  }
+  galleys = {
+    land_naval = 4
+  }
+}
+
+succ_patrician_elective = {
+  aristocracy_plutocracy = 10  
+}
+
+feudal_contract_0 = {
+  aristocracy_plutocracy = 0
+}
+feudal_contract_1 = {
+  aristocracy_plutocracy = -1
+}
+feudal_contract_2 = {
+  aristocracy_plutocracy = -2
+}
+feudal_contract_3 = {
+  aristocracy_plutocracy = -3
+}
+feudal_contract_4 = {
+  aristocracy_plutocracy = -5
+}
+feudal_tax_0 = {
+  aristocracy_plutocracy = -1
+}
+feudal_tax_1 = {
+  aristocracy_plutocracy = 0
+}
+feudal_tax_2 = {
+  aristocracy_plutocracy = 1
+}
+feudal_tax_3 = {
+  aristocracy_plutocracy = 2
+}
+feudal_tax_4 = {
+  aristocracy_plutocracy = 4
+}
+city_contract_0 = {
+  aristocracy_plutocracy = -1
+}
+city_contract_1 = {
+  aristocracy_plutocracy = 0
+}
+city_contract_2 = {
+  aristocracy_plutocracy = 2
+}
+city_contract_3 = {
+  aristocracy_plutocracy = 3
+}
+city_contract_4 = {
+  aristocracy_plutocracy = 5
+}
+city_tax_0 = {
+  aristocracy_plutocracy = 0
+}
+city_tax_1 = {
+  aristocracy_plutocracy = -1
+}
+city_tax_2 = {
+  aristocracy_plutocracy = -2
+}
+city_tax_3 = {
+  aristocracy_plutocracy = -3
+}
+city_tax_4 = {
+  aristocracy_plutocracy = -5
+}
+temple_contract_0 = {
+  aristocracy_plutocracy = 0
+}
+temple_contract_1 = {
+  aristocracy_plutocracy = 0
+}
+temple_contract_2 = {
+  aristocracy_plutocracy = 0
+}
+temple_contract_3 = {
+  aristocracy_plutocracy = 0
+}
+temple_contract_4 = {
+  aristocracy_plutocracy = 0
+}
+temple_tax_0 = {
+  aristocracy_plutocracy = 0
+}
+temple_tax_1 = {
+  aristocracy_plutocracy = 0
+}
+temple_tax_2 = {
+  aristocracy_plutocracy = 0
+}
+temple_tax_3 = {
+  aristocracy_plutocracy = 0
+}
+temple_tax_4 = {
+  aristocracy_plutocracy = 0
+}
+
+centralization_0 = {
+  centralization_decentralization = 3
+}
+centralization_1 = {
+  centralization_decentralization = 2
+}
+centralization_2 = {
+  centralization_decentralization = 1
+}
+centralization_3 = {
+  centralization_decentralization = 0
+}
+centralization_4 = {
+  centralization_decentralization = -1
+}
+
+investiture_law_0 = { # Papal investiture. 
+  innovative_narrowminded = 2
+}
+
+tech_slider_effects = {
+  5 = { # Siege Equipment 
+    offensive_defensive = -1 
+  }
+  6 = { # Military Organization
+    offensive_defensive = -1 
+  }
+  7 = { # Tactics
+    offensive_defensive = -1 
+  }
+  9 = { # Trade practices
+    mercantilism_freetrade = -1 
+  }
+  11 = { # Castle Infrastructure
+    offensive_defensive = 1 
+  }
+  12 = { # Town infrastructure
+    mercantilism_freetrade = -1 
+  }
+  14 = { # Improved Keeps
+    offensive_defensive = 1 
+  }
+  17 = { # Popular Customs
+    serfdom_freesubjects = 1
+  }
+  19 = { # Majesty
+    serfdom_freesubjects = -1
+  }
+  21 = { # Cultural Flexibility
+    serfdom_freesubjects = 1
+  }
+  23 = { # Legalism
+    mercantilism_freetrade = -1 
+    serfdom_freesubjects = -1 
+  }
+}
 
 skip = {
   d_bulgarian_company = yes

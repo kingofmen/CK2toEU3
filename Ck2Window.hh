@@ -21,9 +21,11 @@ public:
   
   QPlainTextEdit* textWindow; 
   WorkerThread* worker;
-  
+  void writeDebugLog (string fname); 
   void loadFile (string fname, int autoTask = -1);
-						      
+						 
+						 
+						 
 public slots:
 
   void loadFile (); 
@@ -111,6 +113,7 @@ private:
   void eu3ProvinceCultures ();
   void eu3ProvinceReligion ();    
   void eu3Provinces ();
+  void eu3Sliders (); 
   void eu3StateCultures ();
   void eu3StateReligion ();   
   void eu3StateVariables ();
@@ -159,11 +162,13 @@ private:
   map<Object*, objvec> sons;
 
   // Titles, land
-  map<Object*, objvec> charTitles; 
+  map<Object*, objvec>  charTitles; 
   map<Object*, Object*> titleToCharMap;
   map<Object*, Object*> euCountryToCharacterMap;
   map<Object*, Object*> euCountryToCkCountryMap; 
   map<Object*, Object*> characterToEuCountryMap; 
+  map<Object*, Object*> ckCountyToCkProvinceMap;
+  map<Object*, objvec>  euCountryToCkProvincesMap; 
   
   // String lookups
   map<string, Object*> titleMap;

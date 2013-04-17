@@ -80,6 +80,7 @@ The following state-level variables are handled:
 \item Culture. 
 \item Religion. 
 \item Monarchs. 
+\item Sliders.
 \end{itemize}
 
 \section{Vassalisation}
@@ -162,5 +163,48 @@ diplomacy and intrigue.
 Heirs are generated from the oldest living son of the CK monarch, or
 oldest living daughter if there are no sons; if there are no children,
 no EU heir is created. The conversion is otherwise the same. 
+
+\section{Sliders}
+
+All sliders are set to be between the limits in \verb|config.txt|, 
+eg \verb|pluto = { -5 0 }| indicates that converted aristocracy varies from -5
+(the EU minimum) to 0 (halfway to full plutocracy). All effect sizes
+are set in \verb|config.txt|; the below refers to the defaults. For
+each slider, each CK ruler counts up all his effects, then divides by
+the difference between highest and lowest, making a percentage. He
+then gets a slider number which is that percentage of the way from the
+lowest possible to the highest. For example, the median plutocrat 
+gets Plutocracy=-2.5, which is rounded up to -2. All effects that
+depend on titles (ie laws) are multiplied by the tier of the title,
+with Barony being one. 
+
+\begin{itemize}
+\item Plutocracy: Each city barony in held counties gives a point, each castle
+  subtracts one. High city levy laws add points, feudal levy laws subtract
+  points; high feudal taxation adds, high city taxation
+  subtracts. This is on the grounds that the people supplying armies are
+  powerful while the people paying taxes are downtrodden. Finally,
+  having the \verb|patrician_elective| succession law - indicating a
+  merchant republic - gives a boost to plutocracy. 
+\item Decentralisation: Each holding gives a point, meaning large
+  empires are less centralised; further, the Crown Power laws increase
+  centralisation. 
+\item Narrowminded: Increased by church holdings, decreased by city
+  holdings. Having Papal investiture also increases narrowmindedness. 
+\item Free trade: Affected only by techs. The reasoning is that
+  advanced technology allows governments to impose controls on trade,
+  so that ``free trade'' is not an ideological but a default position
+  taken by primitive countries. 
+\item Defensive: Again technology, but in this case also buildings. Castle Infrastructure and Improved
+  Keeps are defensive, while Tactics, Military Organisation and Siege
+  Equipment are offensive. Knights are offensive, pikemen and fort
+  levels are defensive. 
+\item Naval: Galleys give points for naval. All holdings give points
+  for land, cities less than the other two kinds. 
+\item Quantity: Based on buildings. Knights and heavy infantry give
+  points for quality, light infantry for quantity. 
+\item Free subjects: Technology. Majesty and Legalism give serfdom,
+  Popular Customs and Cultural Flexibility give freedom. 
+\end{itemize}
 
 \end{document}

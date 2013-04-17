@@ -18,45 +18,46 @@
 
 using namespace std; 
 
-char stringbuffer[10000]; 
+char stringbuffer[10000];
+CleanerWindow* parentWindow;
 
 int main (int argc, char** argv) {
   QApplication industryApp(argc, argv);
   QDesktopWidget* desk = QApplication::desktop();
   QRect scr = desk->availableGeometry();
-  CleanerWindow window;
-  window.show();
+  parentWindow = new CleanerWindow();
+  parentWindow->show();
   srand(42); 
   
-  window.resize(3*scr.width()/5, scr.height()/2);
-  window.move(scr.width()/5, scr.height()/4);
-  window.setWindowTitle(QApplication::translate("toplevel", "CK2 parser utility"));
+  parentWindow->resize(3*scr.width()/5, scr.height()/2);
+  parentWindow->move(scr.width()/5, scr.height()/4);
+  parentWindow->setWindowTitle(QApplication::translate("toplevel", "CK2 parser utility"));
  
-  QMenuBar* menuBar = window.menuBar();
+  QMenuBar* menuBar = parentWindow->menuBar();
   QMenu* fileMenu = menuBar->addMenu("File");
   QAction* newGame = fileMenu->addAction("Load file");
   QAction* quit    = fileMenu->addAction("Quit");
 
-  QObject::connect(quit, SIGNAL(triggered()), &window, SLOT(close())); 
-  QObject::connect(newGame, SIGNAL(triggered()), &window, SLOT(loadFile())); 
+  QObject::connect(quit, SIGNAL(triggered()), parentWindow, SLOT(close())); 
+  QObject::connect(newGame, SIGNAL(triggered()), parentWindow, SLOT(loadFile())); 
 
   QMenu* actionMenu = menuBar->addMenu("Actions");
   QAction* clean = actionMenu->addAction("Clean");
-  QObject::connect(clean, SIGNAL(triggered()), &window, SLOT(cleanFile())); 
+  QObject::connect(clean, SIGNAL(triggered()), parentWindow, SLOT(cleanFile())); 
   QAction* stats = actionMenu->addAction("Stats");
-  QObject::connect(stats, SIGNAL(triggered()), &window, SLOT(getStats()));
+  QObject::connect(stats, SIGNAL(triggered()), parentWindow, SLOT(getStats()));
   QAction* convert3 = actionMenu->addAction("Convert to EU3");
-  QObject::connect(convert3, SIGNAL(triggered()), &window, SLOT(convertEU3()));
+  QObject::connect(convert3, SIGNAL(triggered()), parentWindow, SLOT(convertEU3()));
   QAction* convert4 = actionMenu->addAction("Convert to EU4");
-  QObject::connect(convert4, SIGNAL(triggered()), &window, SLOT(convertEU4())); 
+  QObject::connect(convert4, SIGNAL(triggered()), parentWindow, SLOT(convertEU4())); 
   
   QAction* cmap = actionMenu->addAction("Colour map");
-  QObject::connect(cmap, SIGNAL(triggered()), &window, SLOT(colourMap()));
+  QObject::connect(cmap, SIGNAL(triggered()), parentWindow, SLOT(colourMap()));
   
-  window.textWindow = new QPlainTextEdit(&window);
-  window.textWindow->setFixedSize(3*scr.width()/5 - 10, scr.height()/2-40);
-  window.textWindow->move(5, 30);
-  window.textWindow->show(); 
+  parentWindow->textWindow = new QPlainTextEdit(parentWindow);
+  parentWindow->textWindow->setFixedSize(3*scr.width()/5 - 10, scr.height()/2-40);
+  parentWindow->textWindow->move(5, 30);
+  parentWindow->textWindow->show(); 
 
   Logger::createStream(Logger::Debug);
   Logger::createStream(Logger::Trace);
@@ -64,22 +65,22 @@ int main (int argc, char** argv) {
   Logger::createStream(Logger::Warning);
   Logger::createStream(Logger::Error);
 
-  QObject::connect(&(Logger::logStream(Logger::Debug)),   SIGNAL(message(QString)), &window, SLOT(message(QString)));
-  QObject::connect(&(Logger::logStream(Logger::Trace)),   SIGNAL(message(QString)), &window, SLOT(message(QString)));
-  QObject::connect(&(Logger::logStream(Logger::Game)),    SIGNAL(message(QString)), &window, SLOT(message(QString)));
-  QObject::connect(&(Logger::logStream(Logger::Warning)), SIGNAL(message(QString)), &window, SLOT(message(QString)));
-  QObject::connect(&(Logger::logStream(Logger::Error)),   SIGNAL(message(QString)), &window, SLOT(message(QString)));
+  QObject::connect(&(Logger::logStream(Logger::Debug)),   SIGNAL(message(QString)), parentWindow, SLOT(message(QString)));
+  QObject::connect(&(Logger::logStream(Logger::Trace)),   SIGNAL(message(QString)), parentWindow, SLOT(message(QString)));
+  QObject::connect(&(Logger::logStream(Logger::Game)),    SIGNAL(message(QString)), parentWindow, SLOT(message(QString)));
+  QObject::connect(&(Logger::logStream(Logger::Warning)), SIGNAL(message(QString)), parentWindow, SLOT(message(QString)));
+  QObject::connect(&(Logger::logStream(Logger::Error)),   SIGNAL(message(QString)), parentWindow, SLOT(message(QString)));
 
   setOutputStream(&(Logger::logStream(Logger::Game))); 
   
   for (int i = DebugLeaders; i < NumDebugs; ++i) {
     Logger::createStream(i);
-    QObject::connect(&(Logger::logStream(i)),   SIGNAL(message(QString)), &window, SLOT(message(QString)));
+    QObject::connect(&(Logger::logStream(i)),   SIGNAL(message(QString)), parentWindow, SLOT(message(QString)));
     Logger::logStream(i).setActive(false); 
   } 
-  
-  window.show();
-  if (argc > 1) window.loadFile(argv[1], argc > 2 ? atoi(argv[2]) : 1);  
+
+  parentWindow->show();
+  if (argc > 1) parentWindow->loadFile(argv[1], argc > 2 ? atoi(argv[2]) : 1);  
   return industryApp.exec();  
 }
 
@@ -139,6 +140,16 @@ void CleanerWindow::colourMap() {
   Logger::logStream(Logger::Game) << "Map colours.\n"; 
   worker->setTask(WorkerThread::ColourMap); 
   worker->start(); 
+}
+
+void CleanerWindow::writeDebugLog (string fname) {
+  if (fname == "") return; 
+  QFile outfile;
+  outfile.setFileName(QString(fname.c_str()));
+  outfile.open(QIODevice::Append | QIODevice::Text);
+  QTextStream out(&outfile);
+  out << textWindow->toPlainText() << endl;
+  outfile.close(); 
 }
 
 WorkerThread::WorkerThread (string fn, int atask)
@@ -638,7 +649,14 @@ void WorkerThread::createProvinceMap () {
 
       for (objiter ckp = currProvs.begin(); ckp != currProvs.end(); ++ckp) {
 	ckProvToEuProvsMap[*ckp].push_back(euprov);
-	euProvToCkProvsMap[euprov].push_back(*ckp); 
+	euProvToCkProvsMap[euprov].push_back(*ckp);
+
+	if (ckCountyToCkProvinceMap[*ckp]) continue;
+	string titletag = remQuotes((*ckp)->safeGetString("title"));
+	Object* title = getTitle(titletag);
+	if (!title) continue;
+	if (County != titleTier(title)) continue;
+	ckCountyToCkProvinceMap[title] = (*ckp); 
       }
     }
   }
@@ -1223,6 +1241,159 @@ void WorkerThread::eu3Provinces () {
     eup->resetLeaf("controller", conTag == "" ? addQuotes(winner->getKey()) : conTag);
     history->resetLeaf("owner", addQuotes(winner->getKey()));
     history->resetLeaf("controller", conTag == "" ? addQuotes(winner->getKey()) : conTag);
+
+    for (objiter ckp = ckps.begin(); ckp != ckps.end(); ++ckp) {
+      if (find(euCountryToCkProvincesMap[winner].begin(), euCountryToCkProvincesMap[winner].end(), (*ckp)) != euCountryToCkProvincesMap[winner].end()) continue; 
+      euCountryToCkProvincesMap[winner].push_back(*ckp);
+    }
+  }
+}
+
+struct SliderInfo {
+  double minimumCKvalue;
+  double maximumCKvalue;
+  int minimumEUvalue;
+  int maximumEUvalue; 
+}; 
+
+void WorkerThread::eu3Sliders () {
+  Object* sliders = configObject->safeGetObject("sliders");
+  if (!sliders) {
+    Logger::logStream(Logger::Warning) << "Could not find slider object in config.txt. No changes made to sliders.\n";
+    return;
+  }
+  Object* techs = configObject->safeGetObject("tech_slider_effects");
+  objvec techEffects = techs->getLeaves(); 
+
+  Object* builds = configObject->safeGetObject("building_slider_effects");
+  objvec buildEffects = builds->getLeaves(); 
+  
+  map<string, SliderInfo*> values;
+  objvec names = sliders->getLeaves();
+  for (objiter slider = names.begin(); slider != names.end(); ++slider) {
+    SliderInfo* curr = new SliderInfo();
+    string key = (*slider)->getKey();
+    curr->minimumEUvalue = (*slider)->tokenAsInt(0);
+    curr->maximumEUvalue = (*slider)->tokenAsInt(1);
+    curr->minimumCKvalue = 1e20;
+    curr->maximumCKvalue = -1e20; 
+    values[key] = curr; 
+  }
+  
+  for (map<Object*, Object*>::iterator i = euCountryToCharacterMap.begin(); i != euCountryToCharacterMap.end(); ++i) {
+    Object* euCountry = (*i).first;
+    if ((euCountry->getKey() == "PIR") || (euCountry->getKey() == "REB")) continue;
+    Object* ckRuler = (*i).second;
+
+    map<string, double> currentCKvals;     
+    for (objiter title = beginRel(ckRuler, Title); title != finalRel(ckRuler, Title); ++title) {
+      objvec laws = (*title)->getValue("law");
+      for (objiter law = laws.begin(); law != laws.end(); ++law) {
+	string key = remQuotes((*law)->getLeaf());
+	Object* effect = configObject->safeGetObject(key);
+	if (!effect) continue;
+	for (map<string, SliderInfo*>::iterator name = values.begin(); name != values.end(); ++name) {
+	  string key = (*name).first;
+	  currentCKvals[key] += effect->safeGetFloat(key) * (1 + titleTier(*title));
+	}
+      }
+    }
+
+    for (objiter ckp = euCountryToCkProvincesMap[euCountry].begin(); ckp != euCountryToCkProvincesMap[euCountry].end(); ++ckp) {
+      Object* province = (*ckp);
+      
+      objvec baronies = province->getLeaves();
+      for (objiter barony = baronies.begin(); barony != baronies.end(); ++barony) {
+      	string type = (*barony)->safeGetString("type", "BLAH");
+	if (type == "BLAH") continue;
+
+	Object* buildList = ckBuildings->safeGetObject(type);
+	if (buildList) { 
+	  objvec buildings = buildList->getLeaves();
+	  for (objiter building = buildings.begin(); building != buildings.end(); ++building) {
+	    if ((*barony)->safeGetString((*building)->getKey(), "no") != "yes") continue;
+	    
+	    for (objiter beff = buildEffects.begin(); beff != buildEffects.end(); ++beff) {
+	      double number = (*building)->safeGetFloat((*beff)->getKey()); 
+	      for (map<string, SliderInfo*>::iterator name = values.begin(); name != values.end(); ++name) {
+		string key = (*name).first;
+		currentCKvals[key] += (*beff)->safeGetFloat(key) * number; 
+	      }		      
+	    }
+	  }
+	}
+
+	
+	Object* effect = configObject->safeGetObject(type);
+	if (!effect) continue;
+	for (map<string, SliderInfo*>::iterator name = values.begin(); name != values.end(); ++name) {
+	  string key = (*name).first;
+	  currentCKvals[key] += effect->safeGetFloat(key); 
+	}	
+      }
+
+      Object* provTechs = province->safeGetObject("technology");
+      if (provTechs) provTechs = provTechs->safeGetObject("level");
+      if (!provTechs) continue;
+
+      for (objiter effect = techEffects.begin(); effect != techEffects.end(); ++effect) {
+	string techstring = (*effect)->getKey();
+	int techNumber = atoi(techstring.c_str());
+	for (map<string, SliderInfo*>::iterator name = values.begin(); name != values.end(); ++name) {
+	  string key = (*name).first;
+	  currentCKvals[key] += (*effect)->safeGetFloat(key) * provTechs->tokenAsInt(techNumber);
+	}	
+      }
+    }
+
+    for (map<string, SliderInfo*>::iterator name = values.begin(); name != values.end(); ++name) {
+      string key = (*name).first;
+      ckRuler->resetLeaf(key, currentCKvals[key]);
+      if ((*name).second->maximumCKvalue < currentCKvals[key]) (*name).second->maximumCKvalue = currentCKvals[key];
+      if ((*name).second->minimumCKvalue > currentCKvals[key]) (*name).second->minimumCKvalue = currentCKvals[key];
+    }	
+  }
+
+  for (map<string, SliderInfo*>::iterator name = values.begin(); name != values.end(); ++name) {
+    (*name).second->maximumEUvalue -= (*name).second->minimumEUvalue;
+    if (fabs((*name).second->maximumCKvalue - (*name).second->minimumCKvalue) < 0.001)
+      Logger::logStream(Logger::Warning) << "Warning: No apparent information on slider "
+					 << (*name).first
+					 << ", skipping without change for all nations.\n"; 
+  }
+  
+  for (map<Object*, Object*>::iterator i = euCountryToCharacterMap.begin(); i != euCountryToCharacterMap.end(); ++i) {
+    Object* euCountry = (*i).first;
+    if ((euCountry->getKey() == "PIR") || (euCountry->getKey() == "REB")) continue;
+    Object* ckRuler = (*i).second;
+
+    for (map<string, SliderInfo*>::iterator name = values.begin(); name != values.end(); ++name) {
+      string key = (*name).first;
+      double currValue = ckRuler->safeGetFloat(key);
+      double currEUmin = (*name).second->minimumEUvalue;
+      double currEUmax = (*name).second->maximumEUvalue;
+      double currCKmin = (*name).second->minimumCKvalue;
+      double currCKmax = (*name).second->maximumCKvalue;
+
+      if (fabs(currCKmax - currCKmin) < 0.001) continue; 
+
+      currCKmax -= currCKmin; // Maximums are actually differences
+      currValue -= currCKmin;
+      currValue /= currCKmax;
+      currValue *= currEUmax;
+      currValue += currEUmin;
+      int final = (int) floor(currValue + 0.5);
+
+      euCountry->resetLeaf(key, final);
+      Object* history = euCountry->getNeededObject("history");
+      history->resetLeaf(key, final);
+      
+      Logger::logStream(DebugSliders) << "Setting " << euCountry->getKey() << " " << key << " to " << final
+				      << " based on score " << ckRuler->safeGetString(key) << " of "
+				      << currEUmin << " " << currEUmax << " " << currCKmin << " " << currCKmax << " " << currValue 
+				      << ".\n"; 
+      
+    }
   }
 }
 
@@ -1705,6 +1876,7 @@ void WorkerThread::convertEU3 () {
   eu3StateReligion();   
   eu3Characters(); 
   eu3Cores(); 
+  eu3Sliders(); 
   
   Logger::logStream(Logger::Game) << "Done with conversion, writing to file.\n";
   DWORD attribs = GetFileAttributesA("Output");
@@ -1715,6 +1887,22 @@ void WorkerThread::convertEU3 () {
       Logger::logStream(Logger::Error) << "Error: Could not create Output directory. Cannot write to file.\n";
       return; 
     }
+  }
+
+  string debuglog = configObject->safeGetString("logfile");
+  if (debuglog != "") {
+    string outputdir = "Output\\";
+    debuglog = outputdir + debuglog;
+
+    attribs = GetFileAttributesA(debuglog.c_str());
+    if (attribs != INVALID_FILE_ATTRIBUTES) {
+      int error = remove(debuglog.c_str());
+      if (0 != error) Logger::logStream(Logger::Warning) << "Warning: Could not delete old log file. New one will be appended.\n";
+    }
+    
+
+    
+    parentWindow->writeDebugLog(debuglog);
   }
   
   ofstream writer;
