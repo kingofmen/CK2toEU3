@@ -6,6 +6,7 @@
 #include <QThread> 
 #include "Object.hh"
 #include <map>
+#include <fstream>
 
 using namespace std;
 
@@ -21,7 +22,8 @@ public:
   
   QPlainTextEdit* textWindow; 
   WorkerThread* worker;
-  void writeDebugLog (string fname); 
+  void writeDebugLog (string fname);
+  void closeDebugLog (); 
   void loadFile (string fname, int autoTask = -1);
 						 
 						 
@@ -37,7 +39,7 @@ public slots:
   void message (QString m); 
   
 private:
-
+  ofstream debuglog; 
 };
 
 struct ObjectSorter {
@@ -105,6 +107,7 @@ private:
   void loadFiles (); 
 
   // Eu3 conversions
+  void eu3Armies ();   
   void eu3Characters ();
   void eu3Cores (); 
   void eu3Diplomacy ();

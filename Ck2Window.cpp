@@ -7,7 +7,6 @@
 #include <QRect>
 #include <qpushbutton.h>
 #include <iostream> 
-#include <fstream> 
 #include <string>
 #include "Logger.hh" 
 #include <set>
@@ -81,7 +80,7 @@ int main (int argc, char** argv) {
 
   parentWindow->show();
   if (argc > 1) parentWindow->loadFile(argv[1], argc > 2 ? atoi(argv[2]) : 1);  
-  return industryApp.exec();  
+  return industryApp.exec();
 }
 
 
@@ -93,7 +92,8 @@ CleanerWindow::CleanerWindow (QWidget* parent)
 CleanerWindow::~CleanerWindow () {}
 
 void CleanerWindow::message (QString m) {
-  textWindow->appendPlainText(m); 
+  textWindow->appendPlainText(m);
+  if (debuglog.is_open()) debuglog << m.toAscii().data() << std::endl; 
 }
 
 void CleanerWindow::loadFile () {
@@ -142,14 +142,26 @@ void CleanerWindow::colourMap() {
   worker->start(); 
 }
 
+void CleanerWindow::closeDebugLog () {
+  if (debuglog.is_open()) debuglog.close();
+}
+
 void CleanerWindow::writeDebugLog (string fname) {
-  if (fname == "") return; 
+  if (fname == "") return;
+  if (debuglog.is_open()) debuglog.close();
+  debuglog.open(fname.c_str()); 
+  /*
   QFile outfile;
   outfile.setFileName(QString(fname.c_str()));
   outfile.open(QIODevice::Append | QIODevice::Text);
   QTextStream out(&outfile);
-  out << textWindow->toPlainText() << endl;
-  outfile.close(); 
+
+  QTextDocument* doc = textWindow->document();
+  for (QTextBlock b = doc->begin(); b != doc->end(); b = b.next()) {
+    out << b.text() << endl;
+  }
+  outfile.close();
+  */
 }
 
 WorkerThread::WorkerThread (string fn, int atask)
@@ -808,6 +820,195 @@ void WorkerThread::loadFiles () {
 /******************************* End initialisers *******************************/ 
 
 /******************************* Begin EU3 conversions ********************************/
+
+void WorkerThread::eu3Armies () {
+  int unitId = euxGame->safeGetInt("unit"); 
+  
+  int euShips = 1;
+  vector<string> harbours;
+  map<Object*, vector<string> > shipNames; 
+  Object* forbidShips = configObject->safeGetObject("forbidShips");
+  vector<string> inlands;
+  if (forbidShips) {
+    for (int i = 0; i < forbidShips->numTokens(); ++i) {
+      inlands.push_back(forbidShips->getToken(i)); 
+    }
+  }
+  
+  // Loop for armies
+  for (map<Object*, Object*>::iterator i = euCountryToCharacterMap.begin(); i != euCountryToCharacterMap.end(); ++i) {
+    Object* euNation = (*i).first;    
+    Object* ckRuler = (*i).second;
+
+    objvec navies = euNation->getValue("navy");
+    for (objiter navy = navies.begin(); navy != navies.end(); ++navy) {
+      objvec ships = (*navy)->getValue("ship");
+      euShips += ships.size();
+      string provTag = (*navy)->safeGetString("location");
+      if (find(inlands.begin(), inlands.end(), provTag) == inlands.end()) harbours.push_back(provTag);
+      for (objiter ship = ships.begin(); ship != ships.end(); ++ship) {
+	shipNames[euNation].push_back((*ship)->safeGetString("name"));
+      } 
+    }
+    
+    euNation->unsetValue("army");
+    Object* demesne = ckRuler->safeGetObject("demesne");
+    if (!demesne) continue;
+
+    int retinue = 0;
+    string euLocation = ""; 
+    objvec ckArmies = demesne->getValue("army"); 
+    for (objiter ckArmy = ckArmies.begin(); ckArmy != ckArmies.end(); ++ckArmy) {
+      objvec units = (*ckArmy)->getValue("sub_unit");
+      for (objiter unit = units.begin(); unit != units.end(); ++unit) {
+	if ((*unit)->safeGetString("retinue_type", "BLAH") == "BLAH") continue;
+	retinue++;
+      }
+      if (euLocation != "") continue; 
+      string ckTag = (*ckArmy)->safeGetString("location");
+      Object* ckProv = ck2Game->safeGetObject(ckTag);
+      if (!ckProv) continue;
+      objvec euProvs = ckProvToEuProvsMap[ckProv];
+      for (objiter cand = euProvs.begin(); cand != euProvs.end(); ++cand) {
+	if (euNation->getKey() != remQuotes((*cand)->safeGetString("owner"))) continue;
+	euLocation = (*cand)->getKey();
+	break; 
+      }
+    }
+
+    if (0 == retinue) continue; // Rhyming code!
+    if (euLocation == "") euLocation = euNation->safeGetString("capital"); 
+
+    Logger::logStream(DebugUnits) << "Creating " << retinue
+				  << " regiments for tag " << euNation->getKey()
+				  << ", to be placed in " << euLocation << ".\n"; 
+    
+    Object* euArmy = new Object("army");
+    euNation->setValue(euArmy); 
+    Object* id = euArmy->getNeededObject("id");
+    id->setLeaf("id", unitId++);
+    id->setLeaf("type", "43");
+
+    string armyname = "Retinue of ";
+    armyname += remQuotes(ckRuler->safeGetString("birth_name"));
+    euArmy->setLeaf("name", addQuotes(armyname));
+    euArmy->setLeaf("location", euLocation);
+    for (int reg = 0; reg < retinue; ++reg) {
+      Object* regiment = new Object("regiment");
+      euArmy->setValue(regiment);
+      id = regiment->getNeededObject("id");
+      id->setLeaf("id", unitId++);
+      id->setLeaf("type", "43");
+      sprintf(stringbuffer, "\"Retinue regiment %i\"", reg+1);
+      regiment->setLeaf("name", stringbuffer);
+      regiment->setLeaf("home", euLocation);
+      regiment->setLeaf("type", "\"western_medieval_infantry\"");
+      regiment->setLeaf("strength", "1.000"); 
+    }
+  }
+
+  // Loop for navies, which are handled differently.
+  int ckShips = 0;
+  for (map<Object*, Object*>::iterator i = euCountryToCharacterMap.begin(); i != euCountryToCharacterMap.end(); ++i) {
+    Object* euNation = (*i).first;    
+    Object* ckRuler = (*i).second;
+    string euLocation = "";   
+    
+    euNation->unsetValue("navy");
+    int currentShips = 0;
+    
+    for (objiter ckp = euCountryToCkProvincesMap[euNation].begin(); ckp != euCountryToCkProvincesMap[euNation].end(); ++ckp) {
+      Object* province = (*ckp);
+      
+      objvec baronies = province->getLeaves();
+      bool coastal = false; 
+      for (objiter barony = baronies.begin(); barony != baronies.end(); ++barony) {
+      	string type = (*barony)->safeGetString("type", "BLAH");
+	if (type == "BLAH") continue;
+
+	Object* buildList = ckBuildings->safeGetObject(type);
+	if (buildList) { 
+	  objvec buildings = buildList->getLeaves();
+	  for (objiter building = buildings.begin(); building != buildings.end(); ++building) {
+	    if ((*barony)->safeGetString((*building)->getKey(), "no") != "yes") continue;
+	    int galleys = (*building)->safeGetInt("galleys");
+	    if (0 == galleys) continue;
+	    currentShips += galleys;
+	    coastal = true; 
+	  }
+	}
+      }
+    
+      if (!coastal) continue;
+      shipNames[euNation].push_back(province->safeGetString("name")); 
+      if (euLocation != "") continue; 
+      objvec euProvs = ckProvToEuProvsMap[province];
+      for (objiter cand = euProvs.begin(); cand != euProvs.end(); ++cand) {
+	if (euNation->getKey() != remQuotes((*cand)->safeGetString("owner"))) continue;
+	if (find(inlands.begin(), inlands.end(), (*cand)->getKey()) != inlands.end()) continue; 
+	if ((euLocation == "") ||
+	    (((find(harbours.begin(), harbours.end(), euLocation) != harbours.end()) &&
+	      (find(harbours.begin(), harbours.end(), (*cand)->getKey()) != harbours.end()))))
+	  euLocation = (*cand)->getKey();
+	break; 
+      }
+    }
+  
+    if (euLocation == "") {
+      if (find(harbours.begin(), harbours.end(), euNation->safeGetString("capital")) != harbours.end()) euLocation = euNation->safeGetString("capital");
+      else if (0 < harbours.size()) euLocation = harbours[0];
+      else euLocation = "1"; 
+    }
+    ckRuler->resetLeaf("totalShips", currentShips);
+    ckRuler->resetLeaf("navyLocation", euLocation); 
+    ckShips += currentShips;
+    if (0 < currentShips) Logger::logStream(DebugUnits) << "Found " << currentShips << " CK galleys for tag " << euNation->getKey()
+							<< ", with navy location " << euLocation << ".\n"; 
+  }
+
+  for (map<Object*, Object*>::iterator i = euCountryToCharacterMap.begin(); i != euCountryToCharacterMap.end(); ++i) {
+    Object* euNation = (*i).first;    
+    Object* ckRuler = (*i).second;
+
+    double currentShips = ckRuler->safeGetFloat("totalShips");
+    currentShips /= ckShips;
+    currentShips *= euShips;
+    
+    int shipsToCreate = (int) floor(currentShips + 0.5);
+    if (0 == shipsToCreate) continue;
+    Logger::logStream(DebugUnits) << "Creating " << shipsToCreate << " EU ships for tag " << euNation->getKey() << "\n"; 
+    int namesUsed = 0; 
+
+    Object* euNavy = new Object("navy");
+    euNation->setValue(euNavy);
+    Object* id = euNavy->getNeededObject("id");
+    id->setLeaf("id", unitId++);
+    id->setLeaf("type", "43");
+    sprintf(stringbuffer, "\"%s's Navy\"", remQuotes(ckRuler->safeGetString("birth_name")).c_str());
+    euNavy->setLeaf("name", stringbuffer); 
+    euNavy->setLeaf("location", ckRuler->safeGetString("navyLocation"));
+    //euNavy->setLeaf("location", "1");
+    for (int s = 0; s < shipsToCreate; ++s) {
+      Object* ship = new Object("ship");
+      euNavy->setValue(ship);
+      id = ship->getNeededObject("id");
+      id->setLeaf("id", unitId++);
+      id->setLeaf("type", "43");
+      if (0 == shipNames[euNation].size()) ship->setLeaf("name", "\"Ship\"");
+      else {
+	ship->setLeaf("name", shipNames[euNation][namesUsed++]);
+	if (namesUsed >= (int) shipNames[euNation].size()) namesUsed = 0;
+      }
+      ship->setLeaf("home", ckRuler->safeGetString("navyLocation"));
+      //ship->setLeaf("home", "1"); 
+      ship->setLeaf("type", 0 == s%2 ? "\"carrack\"" : "\"cog\"");
+      ship->setLeaf("strength", "1.000"); 
+    }
+  }
+
+  
+  euxGame->resetLeaf("unit", unitId); 
+}
 
 void WorkerThread::eu3Cores () {
   for (map<Object*, objvec>::iterator link = euProvToCkProvsMap.begin(); link != euProvToCkProvsMap.end(); ++link) {
@@ -1846,6 +2047,20 @@ void WorkerThread::convertEU3 () {
     Logger::logStream(Logger::Game) << "No file loaded.\n";
     return; 
   }
+
+  string debuglog = configObject->safeGetString("logfile");
+  if (debuglog != "") {
+    string outputdir = "Output\\";
+    debuglog = outputdir + debuglog;
+
+    DWORD attribs = GetFileAttributesA(debuglog.c_str());
+    if (attribs != INVALID_FILE_ATTRIBUTES) {
+      int error = remove(debuglog.c_str());
+      if (0 != error) Logger::logStream(Logger::Warning) << "Warning: Could not delete old log file. New one will be appended.\n";
+    }
+    parentWindow->writeDebugLog(debuglog);
+  }
+
   
   Logger::logStream(Logger::Game) << "Loading EU3 source file.\n";
   euxGame = loadTextFile(targetVersion + "input.eu3");
@@ -1877,6 +2092,7 @@ void WorkerThread::convertEU3 () {
   eu3Characters(); 
   eu3Cores(); 
   eu3Sliders(); 
+  eu3Armies(); 
   
   Logger::logStream(Logger::Game) << "Done with conversion, writing to file.\n";
   DWORD attribs = GetFileAttributesA("Output");
@@ -1888,27 +2104,12 @@ void WorkerThread::convertEU3 () {
       return; 
     }
   }
-
-  string debuglog = configObject->safeGetString("logfile");
-  if (debuglog != "") {
-    string outputdir = "Output\\";
-    debuglog = outputdir + debuglog;
-
-    attribs = GetFileAttributesA(debuglog.c_str());
-    if (attribs != INVALID_FILE_ATTRIBUTES) {
-      int error = remove(debuglog.c_str());
-      if (0 != error) Logger::logStream(Logger::Warning) << "Warning: Could not delete old log file. New one will be appended.\n";
-    }
-    
-
-    
-    parentWindow->writeDebugLog(debuglog);
-  }
-  
+ 
   ofstream writer;
   writer.open(".\\Output\\converted.eu3");
   Parser::topLevel = euxGame;
   writer << (*euxGame);
   writer.close();
-  Logger::logStream(Logger::Game) << "Done writing.\n";  
+  Logger::logStream(Logger::Game) << "Done writing.\n";
+  parentWindow->closeDebugLog(); 
 }

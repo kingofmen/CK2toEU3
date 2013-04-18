@@ -81,6 +81,7 @@ The following state-level variables are handled:
 \item Religion. 
 \item Monarchs. 
 \item Sliders.
+\item Armies and navies. 
 \end{itemize}
 
 \section{Vassalisation}
@@ -206,5 +207,23 @@ with Barony being one.
 \item Free subjects: Technology. Majesty and Legalism give serfdom,
   Popular Customs and Cultural Flexibility give freedom. 
 \end{itemize}
+
+\section{Armies and navies}
+
+Armies are converted by giving one EU3 infantry regiment per retinue
+unit, placed in the capital. 
+
+Navies are created in proportion to the number of galleys supplied by
+the CK buildings in a nation. The total number of EU3 ships is equal
+to the number in the input save; they are evenly distributed
+between carracks and cogs. They are placed in EU3 provinces that:
+\begin{itemize}
+\item Convert from CK provinces supplying galleys
+\item Are owned by the EU3 nation in question
+\item Are not in the \verb|forbidShips| list - this allows for cases
+  where CK coastal provinces convert to EU3 inland ones.
+\end{itemize}
+Where possible, EU3 provinces that contain navies in vanilla are
+preferred. 
 
 \end{document}

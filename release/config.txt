@@ -26,6 +26,7 @@ ck2dir = .\ckvanilla\
 eu4dir = .\Vanilla\ 
 logfile = logfile.txt
 
+forbidShips = { 4 283 98 }
 
 minimumMaxPrestige = 20 
 minimumGold = 10 
