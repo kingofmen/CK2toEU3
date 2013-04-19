@@ -1274,6 +1274,7 @@ void WorkerThread::eu3Hre () {
 				<< ".\n";
     (*elector)->unsetValue("score"); 
     (*elector)->setLeaf("elector", "yes");
+    (*elector)->setLeaf("preferred_emperor", addQuotes((*elector)->getKey())); 
     history = (*elector)->getNeededObject("history");
     history->setLeaf("elector", "yes");
   }
