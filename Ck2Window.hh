@@ -111,7 +111,8 @@ private:
   void eu3Characters ();
   void eu3Cores (); 
   void eu3Diplomacy ();
-  void eu3Governments ();     
+  void eu3Governments ();
+  void eu3Hre (); 
   void eu3Manpower ();
   void eu3ProvinceCultures ();
   void eu3ProvinceReligion ();    
@@ -125,8 +126,10 @@ private:
   // Calculators, helper methods
   enum WeightType {BaseTax, ManPower, NumWeights};
   void calculateAttributes (Object* ckChar);  
-  double getCkWeight (Object* ckprov, WeightType = BaseTax);
+  double getCkWeight (Object* ckprov, WeightType w = BaseTax);
   double getManpower (Object* building);
+  double getTotalCkWeight(Object* euCountry, WeightType w = BaseTax);
+  void recursiveAddToHre (Object* ckRuler, Object* euCountry, objvec& electors, objvec& done); 
   void recursiveCollectCultures (Object* ckRuler, map<string, double>& weights, int iteration);
   void recursiveCollectReligion (Object* ckRuler, map<string, double>& weights, int iteration);
   void setCharacterAttributes (Object* euMonarch, Object* ckRuler, int monarchId, Object* dummyBestChar, Object* dummyWorstChar); 

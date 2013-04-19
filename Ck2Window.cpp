@@ -1189,6 +1189,97 @@ void WorkerThread::eu3Governments () {
   }  
 }
 
+struct EmperorCandidate {
+  Object* ckTitle;
+  Object* euCountry;
+  Object* ckRuler;
+  double score; 
+};
+
+void WorkerThread::eu3Hre () {
+  // States whose capital is in the HRE are members; some are additionally electors, which is a specific leaf.
+  // All provinces have already been removed from the HRE in eu3Provinces. Now remove elector states and check
+  // for eligibility.
+
+  
+  vector<EmperorCandidate*> candidates; 
+  for (map<Object*, Object*>::iterator i = euCountryToCkCountryMap.begin(); i != euCountryToCkCountryMap.end(); ++i) {
+    Object* euCountry = (*i).first;
+
+    Object* euHistory = euCountry->getNeededObject("history");
+    euHistory->unsetValue("elector");
+    euHistory->unsetValue("emperor");
+    euCountry->unsetValue("elector");
+    euCountry->unsetValue("preferred_emperor");
+
+    Object* ckRuler = euCountryToCharacterMap[euCountry];
+    if (!ckRuler) continue;
+
+    EmperorCandidate* curr = new EmperorCandidate();
+    curr->ckTitle = 0;
+    for (objiter title = beginRel(ckRuler, Title); title != finalRel(ckRuler, Title); ++title) {
+      if (Empire != titleTier(*title)) continue;
+      curr->ckTitle = (*title);
+      break;
+    }
+    if (!curr->ckTitle) continue;
+
+    Logger::logStream(DebugHre) << "Ruler " << ckRuler->safeGetString("birth_name")
+				<< " with EU tag " << euCountry->getKey()
+				<< " is candidate for HRE due to CK title "
+				<< curr->ckTitle->getKey()
+				<< ".\n";
+    curr->euCountry = euCountry;
+    curr->ckRuler = ckRuler;
+    candidates.push_back(curr); 
+  }
+
+  if (0 == candidates.size()) {
+    Logger::logStream(DebugHre) << "No candidates for HRE - dissolving it.\n";
+    euxGame->unsetValue("emperor");
+    euxGame->unsetValue("old_emperor");
+    return; 
+  }
+
+  EmperorCandidate* emperor = 0; 
+  for (vector<EmperorCandidate*>::iterator c = candidates.begin(); c != candidates.end(); ++c) {
+    (*c)->score = getTotalCkWeight((*c)->euCountry); 
+    if ((emperor) && (emperor->score > (*c)->score)) continue;
+    emperor = (*c); 
+  }
+
+  Logger::logStream(DebugHre) << "Candidate " << emperor->ckRuler->safeGetString("birth_name")
+			      << " of tag " << emperor->euCountry->getKey() 
+			      << " is made emperor with score of " << emperor->score << ".\n";
+  if (1 < candidates.size()) {
+    Logger::logStream(DebugHre) << "Also ran:\n";
+    for (vector<EmperorCandidate*>::iterator c = candidates.begin(); c != candidates.end(); ++c) {
+      if (emperor == (*c)) continue; 
+      Logger::logStream(DebugHre) << "  " << (*c)->ckRuler->safeGetString("birth_name") << " of "
+				  << (*c)->euCountry->getKey() << " with score "
+				  << (*c)->score << "\n"; 
+    }
+  }
+
+  objvec electors;
+  objvec done;
+  recursiveAddToHre(emperor->ckRuler, emperor->euCountry, electors, done);
+  Object* history = emperor->euCountry->getNeededObject("history");
+  history->resetLeaf("emperor", "yes"); 
+  euxGame->resetLeaf("emperor", addQuotes(emperor->euCountry->getKey()));
+  
+  for (objiter elector = electors.begin(); elector != electors.end(); ++elector) {
+    Logger::logStream(DebugHre) << "Making " << (*elector)->getKey() << " an elector due to score "
+				<< (*elector)->safeGetString("score")
+				<< ".\n";
+    (*elector)->unsetValue("score"); 
+    (*elector)->setLeaf("elector", "yes");
+    history = (*elector)->getNeededObject("history");
+    history->setLeaf("elector", "yes");
+  }
+  
+}
+
 void WorkerThread::eu3Manpower () {
   double totalEuMp = 0;
   double totalCkMp = 0; 
@@ -1365,6 +1456,8 @@ void WorkerThread::eu3ProvinceReligion () {
 void WorkerThread::eu3Provinces () {
   for (map<Object*, objvec>::iterator link = euProvToCkProvsMap.begin(); link != euProvToCkProvsMap.end(); ++link) {
     Object* eup = (*link).first;
+    eup->unsetValue("hre");
+    eup->getNeededObject("history")->resetLeaf("hre", "no"); 
     objvec ckps = (*link).second;
     if (0 == ckps.size()) {
       Logger::logStream(Logger::Warning) << "Warning: No CK provinces for "
@@ -1867,6 +1960,55 @@ double WorkerThread::getManpower (Object* building) {
   return ret; 
 }
 
+double WorkerThread::getTotalCkWeight (Object* euCountry, WeightType w) {
+  double ret = 0; 
+  for (objiter prov = euCountryToCkProvincesMap[euCountry].begin(); prov != euCountryToCkProvincesMap[euCountry].end(); ++prov) {
+    ret += getCkWeight(*prov); 
+  }
+  return ret; 
+}
+
+void WorkerThread::recursiveAddToHre (Object* ckRuler, Object* euCountry, objvec& electors, objvec& done) {
+  if (find(done.begin(), done.end(), euCountry) != done.end()) return; 
+  Logger::logStream(DebugHre) << "Adding " << euCountry->getKey() << " to HRE.\n"; 
+  done.push_back(euCountry); 
+  
+  double score = 0;  
+  for (objiter prov = euCountryToCkProvincesMap[euCountry].begin(); prov != euCountryToCkProvincesMap[euCountry].end(); ++prov) {
+    score += getCkWeight(*prov);
+    for (objiter euProv = ckProvToEuProvsMap[*prov].begin(); euProv != ckProvToEuProvsMap[*prov].end(); ++euProv) {
+      if (remQuotes((*euProv)->safeGetString("owner")) != euCountry->getKey()) continue;
+      Object* history = (*euProv)->getNeededObject("history");      
+      (*euProv)->resetLeaf("hre", "yes");
+      history->resetLeaf("hre", "yes");
+    }
+  }
+
+  euCountry->setLeaf("score", score); 
+  objiter canBeat = electors.end();
+  for (objiter c = electors.begin(); c != electors.end(); ++c) {
+    if (score < (*c)->safeGetFloat("score")) continue;
+    canBeat = c;
+    break;
+  }
+  electors.insert(canBeat, euCountry);
+  if (configObject->safeGetInt("numElectors") < (int) electors.size()) {
+    Object* worst = electors.back();
+    worst->unsetValue("score");
+    electors.pop_back(); 
+  }
+
+  for (objiter title = beginRel(ckRuler, Title); title != finalRel(ckRuler, Title); ++title) {
+    for (objiter vassal = vassalMap[*title].begin(); vassal != vassalMap[*title].end(); ++vassal) {
+      Object* vassalChar = titleToCharMap[*vassal];
+      if (!vassalChar) continue;
+      Object* vassalNation = characterToEuCountryMap[vassalChar];
+      if (!vassalNation) continue;
+      recursiveAddToHre(vassalChar, vassalNation, electors, done); 
+    }
+  }
+}
+
 void WorkerThread::recursiveCollectCultures (Object* ckRuler, map<string, double>& weights, int iteration) {
   string ckCulture = remQuotes(ckRuler->safeGetString("culture")); 
   if (cultureMap.find(ckCulture) == cultureMap.end()) {
@@ -2093,6 +2235,7 @@ void WorkerThread::convertEU3 () {
   eu3Cores(); 
   eu3Sliders(); 
   eu3Armies(); 
+  eu3Hre();
   
   Logger::logStream(Logger::Game) << "Done with conversion, writing to file.\n";
   DWORD attribs = GetFileAttributesA("Output");

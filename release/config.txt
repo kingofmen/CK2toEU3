@@ -19,12 +19,14 @@ debug = {
   46 = no # Culture
   47 = no # Religion 
   48 = no # Governments 
+  49 = no # HRE 
   all = yes 
 }
 eu3dir = .\DW\ 
 ck2dir = .\ckvanilla\
 eu4dir = .\Vanilla\ 
 logfile = logfile.txt
+numElectors = 7
 
 forbidShips = { 4 283 98 }
 
