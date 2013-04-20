@@ -77,8 +77,10 @@ link = { ck2 = 32 eux = 236 }	# Middlesex -> London
 #
 # Africa
 #
-link = { ck2 = 871 eux = 1208 }	# Busaso -> Haud
-link = { ck2 = 872 eux = 1209 }	# Berbera -> Berbera
+#link = { ck2 = 871 eux = 1208 }	# Busaso -> Haud
+link = { ck2 = 871 eux = 1206 eux = 1099 }	# Busaso -> Majerteen, Socotra #D
+#link = { ck2 = 872 eux = 1209 }	# Berbera -> Berbera
+link = { ck2 = 872 eux = 1208 eux = 1209 }	# Berbera -> Haud, Berbera #D
 link = { ck2 = 873 eux = 1211 eux = 1212 }	# Harer -> Harer, Zeila
 link = { ck2 = 882 eux = 1210 eux = 1213 }	# Ankober -> Ifat, Shoa
 link = { ck2 = 884 eux = 1214 }	# Antalo -> Awsa
@@ -150,7 +152,8 @@ link = { ck2 = 653 eux = 396 }	# Bahrein -> Bahrain
 link = { ck2 = 862 ck2 = 863 eux = 392 }	# Halaban, Hajr -> Najd
 link = { ck2 = 651 ck2 = 650 ck2 = 654 eux = 394 }	# Damman, Kuwait, Rummah -> Al Hasa
 link = { ck2 = 865 ck2 = 864 ck2 = 716 eux = 393 }	# Rafha, Hail, Ar'ar -> Jabal Shammar
-link = { ck2 = 649 eux = 408 }	# Basra -> Basra
+#link = { ck2 = 649 eux = 408 }	# Basra -> Basra
+link = { ck2 = 649 ck2 = 655 eux = 408 }	# Basra, Kufa -> Basra #D
 link = { ck2 = 647 ck2 = 648 ck2 = 645 eux = 412 }	# Ahvaz, Khozistan, Hendjan -> Khuzestan
 link = { ck2 = 643 ck2 = 644 eux = 429 }	# Fars, Shiraz -> Fars
 link = { ck2 = 642 ck2 = 640 eux = 430 }	# Ladistan, Zermanya -> Laristan
@@ -181,7 +184,8 @@ link = { ck2 = 680 ck2 = 679 eux = 422 }	# Tao, Kartli -> Imereti
 link = { ck2 = 703 ck2 = 681 eux = 331 }	# Karin, Ani -> Erserum
 link = { ck2 = 733 ck2 = 732 eux = 1849 }	# Aleppo, Hama -> Hammah
 link = { ck2 = 725 ck2 = 769 ck2 = 768 ck2 = 731 ck2 = 730 ck2 = 728 eux = 382 }	# Irbid, Safed, Baalbek, Homs, Palmyra, Damascus -> Damascus
-link = { ck2 = 691 ck2 = 655 ck2 = 690 eux = 409 }	# Al Nasiryah, Kufa, Al Amarah -> Karbala
+#link = { ck2 = 691 ck2 = 655 ck2 = 690 eux = 409 }	# Al Nasiryah, Kufa, Al Amarah -> Karbala
+link = { ck2 = 691 ck2 = 690 eux = 409 }	# Al Nasiryah, Al Amarah -> Karbala #D
 link = { ck2 = 693 ck2 = 695 ck2 = 712 ck2 = 727 ck2 = 726 ck2 = 713 ck2 = 714 ck2 = 724 ck2 = 715 ck2 = 694 ck2 = 692 eux = 406 }	# Baghdad, Deir, Suwaida, Bostra, Al Mafraq, Druz, Az Zarqa, Amman, Al Habbariyah, Karbala, Al Nadjaf -> Badiyat Ash Sham
 link = { ck2 = 708 ck2 = 709 ck2 = 710 ck2 = 729 ck2 = 698 ck2 = 700 ck2 = 711 eux = 407 }	# Tell Bashir, Asas, Al Bichri, Al-Sukhnah, Al Jazira, Bira, Sinjar -> Dayr Az Zor
 link = { ck2 = 672 eux = 423 }	# Dwin -> Kartli
