@@ -1,4 +1,5 @@
 # link = { ck2 = 909 eux = 1795 eux = 1794 }	# Sahara Desert ->  East Sahara, Central Sahara
+#
 seas = {
 link = { ck2 = 350 ck2 = 349 eux = 119 }	# Ancona, Spoleto -> Ancona
 link = { ck2 = 335 ck2 = 929 eux = 120 }	# Benevento, Aprutium -> Abruzzi
@@ -36,10 +37,14 @@ link = { ck2 = 936 ck2 = 1017 eux = 1318 }	# Cyclades, Western Cyclades -> Sea o
 link = { ck2 = 942 ck2 = 935 eux = 1319 }	# Western Aegean Sea, Aegean Sea -> Aegean Sea
 link = { ck2 = 1019 eux = 1284 }	# Irish Sea -> Irish Sea
 }
+#
 # Iceland
+#
 link = { ck2 = 1 eux = 370 }	# Vestisland -> Reykjavik
 link = { ck2 = 2 eux = 371 }	# Austisland -> Akureyri
+#
 # England, Ireland, Scotland, and Wales
+#
 link = { ck2 = 5 ck2 = 4 ck2 = 3 eux = 372 }	# Ulster, Tyrone, Tyrconnell -> Ulster
 link = { ck2 = 9 eux = 376 }	# Connacht -> Connaught
 link = { ck2 = 11 ck2 = 8 ck2 = 7 eux = 373 }	# Dublin, Breifne, Oriel -> Meath
@@ -69,7 +74,9 @@ link = { ck2 = 68 ck2 = 69 eux = 237 }	# Northampton, Bedford -> Oxfordshire
 link = { ck2 = 22 eux = 239 }	# Oxford -> Gloucestershire
 link = { ck2 = 72 eux = 238 }	# Essex -> Essex
 link = { ck2 = 32 eux = 236 }	# Middlesex -> London
+#
 # Africa
+#
 link = { ck2 = 871 eux = 1208 }	# Busaso -> Haud
 link = { ck2 = 872 eux = 1209 }	# Berbera -> Berbera
 link = { ck2 = 873 eux = 1211 eux = 1212 }	# Harer -> Harer, Zeila
@@ -120,7 +127,9 @@ link = { ck2 = 847 eux = 347 eux = 348 }	# Tharassat -> Ifni, Sus
 link = { ck2 = 849 eux = 366 }	# Canarias -> The Canarias
 link = { ck2 = 843 eux = 344 }	# Marrakech -> Marrakech
 # link = { ck2 = 909 eux = 1795 eux = 1794 eux = 1793 }	# Sahara Desert -> East Sahara, Central Sahara, El Djouf
+#
 # # Arabian Peninsula, Middle East and Eastern Boundary Provinces
+#
 link = { ck2 = 788 ck2 = 787 eux = 364 }	# Farama, El-Arish -> Gaza
 link = { ck2 = 786 ck2 = 782 ck2 = 779 eux = 1854 }	# Eilat, Negev, Beersheb -> Negev
 link = { ck2 = 784 ck2 = 720 eux = 383 }	# Al 'Aqabah, Hijaz -> Tabouk
@@ -200,7 +209,9 @@ link = { ck2 = 665 ck2 = 667 eux = 416 }	# Dailam, Tabriz -> Azerbaijan
 link = { ck2 = 671 ck2 = 670 eux = 420 }	# Suenik, Azerbaijan -> Qarabagh
 link = { ck2 = 683 ck2 = 684 eux = 418 }	# Amida, Nisibin -> Van
 link = { ck2 = 682 eux = 419 }	# Vaspurakan -> Armenia
+#
 # Spain
+#
 link = { ck2 = 156 eux = 206 }	# Coruña -> Galicia
 link = { ck2 = 157 eux = 231 }	# Santiago -> Porto
 link = { ck2 = 158 ck2 = 159 eux = 1851 }	# Porto, Coimbra -> Ribatejo
@@ -235,7 +246,9 @@ link = { ck2 = 191 ck2 = 192 eux = 216 }	# Zamora, Salamanca -> Salamanca
 link = { ck2 = 198 ck2 = 200 ck2 = 176 eux = 215 }	# Valladolid, Soria, Molina -> Castilla La Vieja
 link = { ck2 = 177 eux = 217 }	# Cuenca -> Madrid
 link = { ck2 = 193 ck2 = 195 ck2 = 194 eux = 1747 }	# Alcantara, Caceres, Plasencia -> Caceres
+#
 # Mediteranian Islands
+#
 link = { ck2 = 826 ck2 = 827 eux = 333 }	# Menorca, Mallorca -> The Baleares
 link = { ck2 = 325 ck2 = 326 eux = 127 }	# Arborea, Cagliari -> Sardinia
 link = { ck2 = 324 eux = 1247 }	# Corsica -> Corsica
@@ -244,7 +257,9 @@ link = { ck2 = 479 ck2 = 480 eux = 163 }	# Kaneia, Chandax -> Crete
 link = { ck2 = 483 eux = 320 }	# Rhodos -> Rhodes
 link = { ck2 = 757 ck2 = 756 eux = 321 }	# Famagusta, Limisol -> Cyprus
 link = { ck2 = 484 eux = 164 }	# Naxos -> Naxos
+#
 # Italy
+#
 link = { ck2 = 340 ck2 = 342 ck2 = 341 eux = 125 }	# Palermo, Girgenti, Trapani -> Palermo
 link = { ck2 = 343 ck2 = 339 eux = 124 }	# Siracusa, Messina -> Messina
 link = { ck2 = 344 ck2 = 337 ck2 = 338 eux = 123 }	# Taranto, Catanzaro, Reggio -> Calabria
@@ -273,7 +288,9 @@ link = { ck2 = 317 eux = 110 }	# Trent -> Trent
 link = { ck2 = 235 ck2 = 234 eux = 104 }	# Lombardy, Pavia -> Lombardia
 link = { ck2 = 232 ck2 = 236 eux = 103 }	# Monferrato, Piemonte -> Piedmont
 link = { ck2 = 358 eux = 1769 eux = 111 }	# Aquileia -> Görz, Friuli
+#
 # Nordic Countries
+#
 link = { ck2 = 263 eux = 1775 }	# Holstein -> Holstein
 link = { ck2 = 264 eux = 13 }	# Slesvig -> Slesvig
 link = { ck2 = 267 eux = 15 }	# Jylland -> Jylland
@@ -310,7 +327,9 @@ link = { ck2 = 381 eux = 28 }	# Uusimaa -> Nyland
 link = { ck2 = 392 eux = 30 eux = 32 }	# Käkisalmi -> Viborg, Kexholm
 link = { ck2 = 390 eux = 31 }	# Savo -> Savolax
 link = { ck2 = 850 ck2 = 388 eux = 1776 }	# Kantalahti, Karjala -> Karelia
+#
 # France
+#
 link = { ck2 = 104 ck2 = 103 eux = 170 }	# Cornouaille, Léon -> Finistère
 link = { ck2 = 102 ck2 = 101 eux = 169 }	# Penthievre, Rennes -> Armor
 link = { ck2 = 105 ck2 = 106 eux = 171 }	# Vannes, Nantes -> Morbihan
@@ -360,7 +379,9 @@ link = { ck2 = 139 eux = 179 }	# Bourges -> Berry
 link = { ck2 = 131 eux = 185 }	# Sens -> Nemours
 link = { ck2 = 132 ck2 = 136 ck2 = 137 eux = 191 }	# Auxerre, Dijon, Nevers -> Nevers
 link = { ck2 = 146 ck2 = 226 ck2 = 225 ck2 = 240 eux = 190 }	# Bourbon, Charolais, Mâcon, Chalons -> Bourbon
+#
 # Central Europe
+#
 link = { ck2 = 82 eux = 98 }	# Sticht -> Utrecht
 link = { ck2 = 259 eux = 44 }	# Celle -> Hamburg
 link = { ck2 = 430 eux = 1763 }	# Lubusz -> Niederlausitz
@@ -420,7 +441,9 @@ link = { ck2 = 122 eux = 77 }	# Leiningen -> Pfalz
 link = { ck2 = 123 eux = 1760 }	# Mainz -> Koblenz
 link = { ck2 = 124 eux = 1761 eux = 80 }	# Pfalz -> Worms, Trier
 link = { ck2 = 118 eux = 1878 }	# Trier -> Aachen
+#
 # Eastern Europe
+#
 link = { ck2 = 458 eux = 131 eux = 130 }	# Istria -> Croatia, Istria
 link = { ck2 = 459 ck2 = 464 ck2 = 465 eux = 136 }	# Veglia, Senj, Zadar -> Dalmatia
 link = { ck2 = 509 ck2 = 510 eux = 159 }	# Karvuna, Constantia -> Silistria
@@ -536,7 +559,9 @@ link = { ck2 = 523 ck2 = 538 eux = 157 }	# Heves, Abauj -> Partium
 link = { ck2 = 533 ck2 = 537 ck2 = 539 ck2 = 545 eux = 162 }	# Saris, Bereg, Marmaros, Torki -> Carpathia
 link = { ck2 = 534 eux = 261 }	# Peremyshl -> Ruthenia
 link = { ck2 = 535 ck2 = 536 ck2 = 546 eux = 279 }	# Vladimir Volynsky, Galich, Terebovl -> Volhynia
+#
 # Greece and Aegean
+#
 link = { ck2 = 478 eux = 145 }	# Monemvasia -> Morea
 link = { ck2 = 476 ck2 = 477 ck2 = 481 eux = 1773 }	# Achaia, Methone, Korinthos -> Achaea
 link = { ck2 = 485 ck2 = 482 eux = 146 }	# Euboia, Atheniai -> Athens
@@ -551,7 +576,9 @@ link = { ck2 = 468 eux = 138 }	# Ragusa -> Zeta
 link = { ck2 = 467 eux = 137 }	# Split -> Ragusa
 link = { ck2 = 496 eux = 151 }	# Constantinople -> Thrace
 link = { ck2 = 497 ck2 = 498 eux = 1764 }	# Thrake, Mesembria -> Burgas
+#
 # Rest of Turkey
+#
 link = { ck2 = 739 ck2 = 751 ck2 = 740 ck2 = 750 eux = 325 }	# Sinope, Paphlagonia, Herakleia, Nikaea -> Kastamon
 link = { ck2 = 741 ck2 = 742 eux = 316 }	# Nikomedeia, Prusa -> Bithynia
 link = { ck2 = 744 ck2 = 743 ck2 = 745 eux = 317 }	# Abydos, Kyzikos, Smyrna -> Bursa
@@ -564,7 +591,9 @@ link = { ck2 = 753 eux = 1846 }	# Ancyra -> Yazgod
 link = { ck2 = 759 eux = 323 }	# Ikonion -> Konya
 link = { ck2 = 749 eux = 322 }	# Dorylaion -> Anatolia
 link = { ck2 = 754 eux = 1848 }	# Sozopolis -> Hamid
+#
 # ### Water Provinces ####
+#
 link = { ck2 = 958 eux = 1261 }	# Ladoga Lake -> Ladoga
 link = { ck2 = 944 eux = 1327 }	# Aral Sea -> Aral Sea
 link = { ck2 = 952 ck2 = 972 eux = 1326 }	# Caspian Sea, Kara-Bogaz Gol -> Caspian Sea
@@ -644,8 +673,10 @@ link = { ck2 = 988 eux = 1281 }	# North Sea -> The North Sea
 link = { ck2 = 989 eux = 1473 }	# North Sea -> Jan Mayen Sea
 link = { ck2 = 998 eux = 1474 }	# North Sea -> Spitzberg Sea
 link = { ck2 = 984 eux = 1475 }	# North Atlantic -> Icelandic Sea
+#
 # ## ROTW ####
 # ROTW - North America
+#
 link = { eux = 1810 }	# NOTHING -> Alaska
 link = { eux = 979 }	# NOTHING -> Aleut
 link = { eux = 978 }	# NOTHING -> Kenai
@@ -859,7 +890,9 @@ link = { eux = 500 }	# NOTHING -> St. Lucia
 link = { eux = 502 }	# NOTHING -> Trinidad
 link = { eux = 481 }	# NOTHING -> Bermuda
 link = { eux = 367 }	# NOTHING -> The Azores
+#
 # #ROTW South America
+#
 link = { eux = 826 }	# NOTHING -> Choco
 link = { eux = 823 }	# NOTHING -> Cauca
 link = { eux = 820 }	# NOTHING -> Quito
@@ -958,7 +991,9 @@ link = { eux = 750 }	# NOTHING -> Alpercatas
 link = { eux = 752 }	# NOTHING -> Oeiras
 link = { eux = 759 }	# NOTHING -> Diamentina
 link = { eux = 758 }	# NOTHING -> Goias
+#
 # Oceania
+#
 link = { eux = 1790 }	# NOTHING -> Western Australia
 link = { eux = 1084 }	# NOTHING -> Wadjuk
 link = { eux = 1791 }	# NOTHING -> Central Australia
@@ -1029,7 +1064,9 @@ link = { eux = 1243 }	# NOTHING -> Samoa
 link = { eux = 1244 }	# NOTHING -> Tahiti
 link = { eux = 1241 }	# NOTHING -> Kiribati
 link = { eux = 1240 }	# NOTHING -> Hawaii
+#
 # # ROTW Africa
+#
 link = { eux = 1110 }	# NOTHING -> Rio de Oro
 link = { eux = 1111 }	# NOTHING -> Arguin
 link = { eux = 368 }	# NOTHING -> Madeira
@@ -1148,7 +1185,9 @@ link = { eux = 1190 }	# NOTHING -> Zumbo
 link = { eux = 1191 }	# NOTHING -> Sena
 link = { eux = 1178 }	# NOTHING -> Great Karoo
 link = { eux = 1176 }	# NOTHING -> Roggeveld
+#
 # ROTW Far East
+#
 link = { eux = 1015 }	# NOTHING -> Okinawa
 link = { eux = 1815 }	# NOTHING -> Hyuga
 link = { eux = 1012 }	# NOTHING -> Satsuma
@@ -1473,7 +1512,9 @@ link = { eux = 1102 }	# NOTHING -> Mauritius
 link = { eux = 698 }	# NOTHING -> Guyuan
 link = { eux = 650 }	# NOTHING -> Tidore
 link = { eux = 651 }	# NOTHING -> Sulu
+#
 # ROTW Water
+#
 link = { eux = 1329 }	# NOTHING -> Red Sea
 link = { eux = 1328 }	# NOTHING -> Gulf of Suez
 link = { eux = 1588 }	# NOTHING -> New Georgia Islands
