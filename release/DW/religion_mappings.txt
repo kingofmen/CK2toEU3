@@ -12,7 +12,7 @@ link = { ck2 = nestorian  eux = orthodox }
 link = { ck2 = monothelite eux = orthodox }
 link = { ck2 = iconoclast  eux = orthodox }
 link = { ck2 = sunni  eux = sunni }
-link = { ck2 = zikri  eux = sunni }
+link = { ck2 = zikri  eux = shiite }
 link = { ck2 = yazidi  eux = sunni }
 link = { ck2 = ibadi  eux = sunni }
 link = { ck2 = shiite  eux = shiite  }
