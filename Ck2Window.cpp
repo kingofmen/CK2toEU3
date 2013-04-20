@@ -229,12 +229,308 @@ string convertMonth (int month) {
   else return "january"; 
 }
 
+class ScatterPlot {
+public:
+  ScatterPlot (const char* xaxis, const char* yaxis);
+  void addFlag (QPixmap* flag, double xc, double yc); 
+  void paint (const char* filename);
+private:
+  QPainter* painter;
+  QImage* image;
+  vector<pair<double, double> > positions;
+  vector<QPixmap*> flags;
+  pair<double, double> norm; 
+};
+
+ScatterPlot::ScatterPlot (const char* xaxis, const char* yaxis) {
+  image = new QImage(500, 500, QImage::Format_RGB32);
+  painter = new QPainter(image);
+  QPen pen(Qt::white);
+  QBrush brush;
+  brush.setStyle(Qt::SolidPattern);
+  brush.setColor(Qt::white); 
+  painter->setPen(pen);
+  painter->setBrush(brush); 
+  painter->drawRect(0, 0, 500, 500);
+
+  pen.setColor(Qt::black);
+  painter->setPen(pen);
+  painter->drawLine(20, 0, 20,  500);
+  painter->drawLine(0, 480, 500, 480);
+
+  painter->drawText(235, 491, xaxis);
+  painter->rotate(-90);
+  painter->drawText(-200, 8, yaxis); 
+  painter->rotate(90);   
+}
+
+void ScatterPlot::paint (const char* filename) {
+  for (unsigned int i = 0; i < flags.size(); ++i) {
+    int xpos = (int) floor(20 + 470*positions[i].first/norm.first + 0.5);
+    int ypos = (int) floor(480 - 470*positions[i].second/norm.second + 0.5);
+    painter->drawPixmap(QRect(xpos - 10, ypos - 10, 20, 20), *(flags[i]), QRect(0, 0, 128, 128));
+  }
+  painter->drawText(1, 491, "  0");
+  painter->drawText(1, 235, " 50");
+  painter->drawText(1, 20,  "100");
+  sprintf(stringbuffer, "%i", (int) floor(norm.first + 0.5));
+  painter->drawText(470, 490, stringbuffer);
+  image->save(filename); 
+}
+
+void ScatterPlot::addFlag (QPixmap* flag, double xc, double yc) {
+  positions.push_back(pair<double, double>(xc, yc));
+  flags.push_back(flag);
+  norm.first = max(norm.first, xc);
+  norm.second = max(norm.second, yc); 
+}
+
+class TriangleImage {
+public:
+  TriangleImage (const char* dl, const char* dr, const char* up); 
+  void addFlag (QPixmap* flag, double dl, double dr, double up);
+  void paint (const char* filename);
+  void reconcile (); 
+private:
+  QPainter* painter;
+  QImage* image;
+  vector<pair<double, double> > originalPositions;
+  vector<pair<double, double> > finalPositions;
+  vector<QPixmap*> flags;
+
+  void push ();
+  double smallestDistance ();  
+};
+
+void TriangleImage::addFlag (QPixmap* flag, double dl, double dr, double up) {
+  double xpos = 250;
+  double ypos = 315;
+  double scale = 1.0 / (dl + dr + up);
+  xpos -= floor(scale * dl * 240 + 0.5);
+  xpos += floor(scale * dr * 240 + 0.5);
+  ypos -= floor(scale * up * 277 + 0.5);
+  ypos += floor(scale * dl * 138 + 0.5); 
+  ypos += floor(scale * dr * 138 + 0.5);
+
+  originalPositions.push_back(pair<double, double>(xpos, ypos));
+  finalPositions.push_back(pair<double, double>(xpos, ypos));
+  flags.push_back(flag); 
+}
+
+double TriangleImage::smallestDistance () {
+  double smallest = 1e20; 
+  for (vector<pair<double, double> >::iterator i = finalPositions.begin(); i != finalPositions.end(); ++i) {
+    for (vector<pair<double, double> >::iterator j = finalPositions.begin(); j != finalPositions.end(); ++j) {
+      if (i == j) continue;
+      double dist = pow((*i).first - (*j).first, 2);
+      dist       += pow((*i).second - (*j).second, 2);
+      dist        = sqrt(dist);
+      if (dist < smallest) smallest = dist;
+    }
+  }
+  return smallest; 
+}
+
+void TriangleImage::push () {
+  for (unsigned int i = 0; i < finalPositions.size(); ++i) {
+    for (unsigned int j = 0; j < finalPositions.size(); ++j) {    
+      if (i == j) {
+	double xdist = finalPositions[i].first - originalPositions[j].first;
+	double ydist = finalPositions[i].second - originalPositions[j].second;
+	finalPositions[i].first  -= xdist * 0.01;
+	finalPositions[i].second -= ydist * 0.01;	
+      }
+      else {
+	double xdist = finalPositions[i].first - finalPositions[j].first;
+	double ydist = finalPositions[i].second - finalPositions[j].second;
+	double dist  = pow(xdist, 2);
+	dist        += pow(ydist, 2);
+	dist         = 0.00001 + sqrt(dist);
+	if (dist > 35) continue; 
+	finalPositions[i].first  += xdist * (1 / dist); 
+	finalPositions[i].second += ydist * (1 / dist);
+	finalPositions[j].first  -= xdist * (1 / dist); 
+	finalPositions[j].second -= ydist * (1 / dist); 	
+      }
+    }
+  }  
+}
+
+void TriangleImage::reconcile () {
+  for (int i = 0; i < 50000; ++i) {
+    double curr = smallestDistance();
+    if (curr > 23) break;
+    push();
+    if (0 == i % 1000) Logger::logStream(Logger::Game) << "Reconcile " << i << " " << curr << ".\n";
+  }
+}
+
+void TriangleImage::paint (const char* filename) {
+  for (unsigned int i = 0; i < flags.size(); ++i) {
+    int xpos = (int) floor(finalPositions[i].first + 0.5);
+    int ypos = (int) floor(finalPositions[i].second + 0.5);
+    painter->drawLine(xpos, ypos, originalPositions[i].first, originalPositions[i].second);     
+    painter->drawPixmap(QRect(xpos - 10, ypos - 10, 20, 20), *(flags[i]), QRect(0, 0, 128, 128));
+  }
+  for (unsigned int i = 0; i < flags.size(); ++i) {
+    int xpos = (int) floor(originalPositions[i].first + 0.5);
+    int ypos = (int) floor(originalPositions[i].second + 0.5);
+    painter->drawEllipse(xpos, ypos, 4, 4); 
+  }  
+  image->save(filename); 
+}
+
+TriangleImage::TriangleImage (const char* dl, const char* dr, const char* up) {
+  image = new QImage(500, 500, QImage::Format_RGB32);
+  painter = new QPainter(image);
+  QPen pen(Qt::white);
+  QBrush brush;
+  brush.setStyle(Qt::SolidPattern);
+  brush.setColor(Qt::white); 
+  painter->setPen(pen);
+  painter->setBrush(brush); 
+  QPolygon triangle(3); 
+  triangle.putPoints(0, 3, 10, 454, 490, 454, 250, 46);
+  painter->drawPolygon(triangle);
+  painter->drawText(5, 484, dl);
+  painter->drawText(470, 484, dr);
+  painter->drawText(235, 16, up);
+  pen.setColor(Qt::black);
+  painter->setPen(pen);
+  painter->drawLine(250, 315, 250,  46);
+  painter->drawLine(250, 315,  10, 454);
+  painter->drawLine(250, 315, 490, 454);
+}
+
+int calcLevel (Object* btype, Object* buildings) {
+  int level = btype->safeGetInt("level", -1);
+  if (-1 != level) return level; 
+
+  level = 0; 
+  Object* upgraded = buildings->safeGetObject(btype->safeGetString("upgrades_from", "BLAH"));
+  if (upgraded) level += 1 + calcLevel(upgraded, buildings);
+  
+  Object* prereqs = btype->safeGetObject("prerequisites");
+  if (prereqs) {
+    for (int token = 0; token < prereqs->numTokens(); ++token) {
+      upgraded = buildings->safeGetObject(prereqs->getToken(token));
+      if (!upgraded) continue;
+      level += 1 + calcLevel(upgraded, buildings);
+    }
+  }
+  
+  btype->resetLeaf("level", level);
+  return level; 
+}
+
 void WorkerThread::getStatistics () {
   if (!ck2Game) {
     Logger::logStream(Logger::Game) << "No file loaded.\n";
     return; 
   }
 
+  initialiseCharacters(); 
+  initialiseRelationMaps();
+  loadFiles();
+  createVassalsMap(); 
+
+  objvec players;
+  for (objiter c = begin(Chars); c != final(Chars); ++c) {
+    if ((*c)->safeGetString("player", "no") != "yes") continue;
+    players.push_back(*c); 
+  }
+
+  objvec leaves = ck2Game->getLeaves();
+  for (objiter prov = leaves.begin(); prov != leaves.end(); ++prov) {
+    int maxSettlements = (*prov)->safeGetInt("max_settlements", -1); 
+    if (-1 == maxSettlements) continue;
+
+    Object* title = getTitle(remQuotes((*prov)->safeGetString("title")));
+    Object* player = 0;
+    while (title) {
+      Object* holder = getChar(title->safeGetString("holder"));
+      if (find(players.begin(), players.end(), holder) != players.end()) {
+	player = holder;
+	break;
+      }
+      title = liegeMap[title]; 
+    }
+
+    if (!player) continue; 
+    player->resetLeaf("provinces", 1 + player->safeGetInt("provinces"));
+    player->resetLeaf("max_holdings", maxSettlements + player->safeGetInt("max_holdings")); 
+    
+    objvec holdings = (*prov)->getLeaves(); 
+    for (objiter holding = holdings.begin(); holding != holdings.end(); ++holding) {
+      string htype = (*holding)->safeGetString("type");
+      if (htype == "castle") player->resetLeaf("castle", 1 + player->safeGetInt("castle"));
+      else if (htype == "city") player->resetLeaf("city", 1 + player->safeGetInt("city"));
+      else if (htype == "temple") player->resetLeaf("temple", 1 + player->safeGetInt("temple"));
+      else continue;
+
+      Object* buildings = ckBuildings->safeGetObject(htype);
+      if (!buildings) continue;
+      objvec btypes = buildings->getLeaves();
+      for (objiter btype = btypes.begin(); btype != btypes.end(); ++btype) {
+	if ((*holding)->safeGetString((*btype)->getKey(), "no") != "yes") continue;
+	player->resetLeaf("totalBuildings", 1 + player->safeGetInt("totalBuildings"));
+	int level = calcLevel(*btype, buildings);
+	player->resetLeaf("totalLevels", level + player->safeGetInt("totalLevels"));
+      }
+    }
+  }
+
+  for (objiter player = players.begin(); player != players.end(); ++player) {
+    TitleTier highest = Barony;
+    Object* title = 0;
+    for (objiter t = beginRel((*player), Title); t != finalRel((*player), Title); ++t) {
+      if ((!title) || (titleTier(*t) > highest)) {
+	highest = titleTier(*t);
+	title = (*t); 
+      }
+    }
+
+    (*player)->resetLeaf("title", title->getKey()); 
+  }
+
+  
+  TriangleImage holdings("Castle", "City", "Temple");
+  ScatterPlot settled("Total baronies", "Settled percentage");
+  ScatterPlot techlevel("Total buildings", "Average level"); 
+  for (objiter player = players.begin(); player != players.end(); ++player) {
+    Logger::logStream(Logger::Game) << "Flagging " << (*player)->safeGetString("title") << "\n";
+    string flagname(".\\flags\\");
+    flagname += (*player)->safeGetString("title");
+    flagname += ".bmp";
+    DWORD attribs = GetFileAttributesA(flagname.c_str());
+    if (attribs == INVALID_FILE_ATTRIBUTES) flagname = "./flags/k_norway.bmp";
+    QPixmap* currflag = new QPixmap(flagname.c_str()); 
+    
+    double cities = (*player)->safeGetFloat("city");
+    double castle = (*player)->safeGetFloat("castle");
+    double temple = (*player)->safeGetFloat("temple");
+    double barony = (*player)->safeGetFloat("max_holdings");
+    double levels = (*player)->safeGetFloat("totalLevels");
+    double builds = (*player)->safeGetFloat("totalBuildings");
+    double provinces = (*player)->safeGetFloat("provinces");
+
+    settled.addFlag(currflag, barony, (cities + castle + temple)/barony); 
+    techlevel.addFlag(currflag, builds, levels / builds); 
+    
+    castle -= provinces;
+    cities /= (castle + cities + temple);
+    castle /= (castle + cities + temple);
+    temple /= (castle + cities + temple);
+
+    holdings.addFlag(currflag, castle, cities, temple);
+  }
+
+  holdings.reconcile();
+  holdings.paint("holdings.png");
+  
+  settled.paint("development.png");
+  techlevel.paint("buildings.png"); 
+  
   Logger::logStream(Logger::Game) << "Done with statistics.\n";
 }
 
