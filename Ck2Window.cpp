@@ -288,7 +288,7 @@ void ScatterPlot::addFlag (QPixmap* flag, double xc, double yc) {
 class TriangleImage {
 public:
   TriangleImage (const char* dl, const char* dr, const char* up); 
-  void addFlag (QPixmap* flag, double dl, double dr, double up);
+  void addFlag (QPixmap* flag, double dl, double dr, double up, string name);
   void paint (const char* filename);
   void reconcile (); 
 private:
@@ -297,12 +297,16 @@ private:
   vector<pair<double, double> > originalPositions;
   vector<pair<double, double> > finalPositions;
   vector<QPixmap*> flags;
-
+  vector<string> names; 
+  vector<double> downlefts;
+  vector<double> downright;
+  vector<double> upamounts; 
+  
   void push ();
   double smallestDistance ();  
 };
 
-void TriangleImage::addFlag (QPixmap* flag, double dl, double dr, double up) {
+void TriangleImage::addFlag (QPixmap* flag, double dl, double dr, double up, string name) {
   double xpos = 250;
   double ypos = 315;
   double scale = 1.0 / (dl + dr + up);
@@ -314,7 +318,11 @@ void TriangleImage::addFlag (QPixmap* flag, double dl, double dr, double up) {
 
   originalPositions.push_back(pair<double, double>(xpos, ypos));
   finalPositions.push_back(pair<double, double>(xpos, ypos));
-  flags.push_back(flag); 
+  flags.push_back(flag);
+  names.push_back(name);
+  downlefts.push_back(dl);
+  downright.push_back(dr);
+  upamounts.push_back(up); 
 }
 
 double TriangleImage::smallestDistance () {
@@ -366,12 +374,23 @@ void TriangleImage::reconcile () {
 }
 
 void TriangleImage::paint (const char* filename) {
+  QPen wpen(Qt::white);
+  QPen bpen(Qt::black);  
+
   for (unsigned int i = 0; i < flags.size(); ++i) {
     int xpos = (int) floor(finalPositions[i].first + 0.5);
     int ypos = (int) floor(finalPositions[i].second + 0.5);
+    painter->setPen(bpen);        
     painter->drawLine(xpos, ypos, originalPositions[i].first, originalPositions[i].second);     
     painter->drawPixmap(QRect(xpos - 10, ypos - 10, 20, 20), *(flags[i]), QRect(0, 0, 128, 128));
+
+    painter->drawPixmap(QRect(5 + ((i%2)*295), 5+22*(i/2), 20, 20), *(flags[i]), QRect(0, 0, 128, 128));
+    painter->setPen(wpen);      
+    sprintf(stringbuffer, "%s (%.1f, %.1f, %.1f)", names[i].c_str(), downlefts[i], downright[i], upamounts[i]);
+    painter->drawText(28 + ((i%2)*295), 16+22*(i/2), stringbuffer);      
   }
+
+  painter->setPen(bpen);    
   for (unsigned int i = 0; i < flags.size(); ++i) {
     int xpos = (int) floor(originalPositions[i].first + 0.5);
     int ypos = (int) floor(originalPositions[i].second + 0.5);
@@ -512,17 +531,11 @@ void WorkerThread::getStatistics () {
     double barony = (*player)->safeGetFloat("max_holdings");
     double levels = (*player)->safeGetFloat("totalLevels");
     double builds = (*player)->safeGetFloat("totalBuildings");
-    double provinces = (*player)->safeGetFloat("provinces");
+    //double provinces = (*player)->safeGetFloat("provinces");
 
     settled.addFlag(currflag, barony, (cities + castle + temple)/barony); 
     techlevel.addFlag(currflag, builds, levels / builds); 
-    
-    castle -= provinces;
-    cities /= (castle + cities + temple);
-    castle /= (castle + cities + temple);
-    temple /= (castle + cities + temple);
-
-    holdings.addFlag(currflag, castle, cities, temple);
+    holdings.addFlag(currflag, castle, cities, temple, (*player)->safeGetString("title"));
   }
 
   holdings.reconcile();
