@@ -1161,7 +1161,7 @@ void WorkerThread::loadFiles () {
 void WorkerThread::eu3Armies () {
   int unitId = euxGame->safeGetInt("unit"); 
   
-  int euShips = 1;
+  int euShips = 0;
   vector<string> harbours;
   map<Object*, vector<string> > shipNames; 
   Object* forbidShips = configObject->safeGetObject("forbidShips");
@@ -1245,7 +1245,7 @@ void WorkerThread::eu3Armies () {
   }
 
   // Loop for navies, which are handled differently.
-  int ckShips = 0;
+  int ckShips = 1;
   for (map<Object*, Object*>::iterator i = euCountryToCharacterMap.begin(); i != euCountryToCharacterMap.end(); ++i) {
     Object* euNation = (*i).first;    
     Object* ckRuler = (*i).second;
@@ -1303,6 +1303,8 @@ void WorkerThread::eu3Armies () {
 							<< ", with navy location " << euLocation << ".\n"; 
   }
 
+  Logger::logStream(DebugUnits) << "Found " << ckShips << " CK ships and " << euShips << " EU ships.\n"; 
+  
   for (map<Object*, Object*>::iterator i = euCountryToCharacterMap.begin(); i != euCountryToCharacterMap.end(); ++i) {
     Object* euNation = (*i).first;    
     Object* ckRuler = (*i).second;
@@ -1313,7 +1315,9 @@ void WorkerThread::eu3Armies () {
     
     int shipsToCreate = (int) floor(currentShips + 0.5);
     if (0 == shipsToCreate) continue;
-    Logger::logStream(DebugUnits) << "Creating " << shipsToCreate << " EU ships for tag " << euNation->getKey() << "\n"; 
+    Logger::logStream(DebugUnits) << "Creating " << shipsToCreate
+				  << " EU ships for tag "
+				  << euNation->getKey() << "\n"; 
     int namesUsed = 0; 
 
     Object* euNavy = new Object("navy");
