@@ -175,6 +175,7 @@ private:
   map<Object*, Object*> characterToEuCountryMap; 
   map<Object*, Object*> ckCountyToCkProvinceMap;
   map<Object*, objvec>  euCountryToCkProvincesMap; 
+  map<Object*, Object*> titleToCkProvinceMap; 
   
   // String lookups
   map<string, Object*> titleMap;

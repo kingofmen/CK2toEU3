@@ -76,12 +76,12 @@ The following state-level variables are handled:
 \begin{itemize}
 \item Vassals.
 \item Government types. 
-\item Prestige and gold. 
 \item Culture. 
 \item Religion. 
 \item Monarchs. 
 \item Sliders.
 \item Armies and navies. 
+\item Miscellaneous minor variables. 
 \end{itemize}
 
 \section{Vassalisation}
@@ -95,19 +95,6 @@ becomes the vassal of the second.
 Depends on the succession law. CK titles with law
 \verb|patrician_elective| become merchant republics; all others
 become feudal monarchies.
-
-\section{Prestige and gold}
-
-The EU3 gold is redistributed in simple proportion to
-how much CK gold the converted ruler has, except that 
-negative gold is counted as zero and the minimum amount
-of gold is \verb|minimumGold|, to avoid instant loans. 
-
-Prestige is converted in proportion to the sum of prestige and
-piety. The constant of proportionality is such that the greatest
-CK score (positive or negative) converts to the greatest EU prestige
-(positive or negative), or the value of \verb|minimumMaxPrestige| in
-the config file. 
 
 \section{Culture}
 
@@ -225,6 +212,26 @@ between carracks and cogs. They are placed in EU3 provinces that:
 \end{itemize}
 Where possible, EU3 provinces that contain navies in vanilla are
 preferred. 
+
+\section{Minor variables}
+
+The EU3 gold is redistributed in simple proportion to
+how much CK gold the converted ruler has, except that 
+negative gold is counted as zero and the minimum amount
+of gold is \verb|minimumGold|, to avoid instant loans. 
+
+Prestige is converted in proportion to the sum of prestige and
+piety. The constant of proportionality is such that the greatest
+CK score (positive or negative) converts to the greatest EU prestige
+(positive or negative), or the value of \verb|minimumMaxPrestige| in
+the config file. 
+
+Capitals are set, where possible, to match the CK capital. If that
+can't be done, the counties and baronies of the ruler are searched,
+and the first one corresponding to an EU3 province owned by the nation
+in question is used as a capital. If that doesn't work, all EU3
+provinces are searched, the first one owned by the nation being used. 
+
 
 \chapter{Miscellany}
 

@@ -806,7 +806,12 @@ void WorkerThread::createCountryMap () {
 
     Object* holder = titleToCharMap[title];
     if (!holder) continue; // This is normal, indicates eg uncreated empire. 
-
+    Object* demesne = holder->safeGetObject("demesne");
+    if (demesne) {
+      string primary = remQuotes(demesne->safeGetString("primary", "BAH"));
+      if ((primary != "BAH") && (primary != cktag)) continue;
+    } 
+    
     string eutag = (*link)->safeGetString("EUX");
     Object* country = euxGame->safeGetObject(eutag);
     if (!country) {
@@ -981,6 +986,30 @@ void WorkerThread::createProvinceMap () {
       }
     }
   }
+
+  for (objiter ckp = ck2provs.begin(); ckp != ck2provs.end(); ++ckp) {
+    objvec baronies = (*ckp)->getLeaves();
+    for (objiter b = baronies.begin(); b != baronies.end(); ++b) {
+      string htype = (*b)->safeGetString("type");
+      if (!ckBuildings->safeGetObject(htype)) continue;
+      Object* btitle = getTitle((*b)->getKey());
+      if (!btitle) {
+	Logger::logStream(Logger::Warning) << "Warning: " << (*b)->getKey()
+					   << " should be a title, but isn't.\n"; 
+	continue;
+      }
+      titleToCkProvinceMap[btitle] = (*ckp); 
+    }
+
+    string tag = remQuotes((*ckp)->safeGetString("title"));
+    Object* ctitle = getTitle(tag);
+    if (!ctitle) {
+	Logger::logStream(Logger::Warning) << "Warning: " << tag
+					   << " should be a title, but isn't.\n"; 
+	continue;
+    }
+    titleToCkProvinceMap[ctitle] = (*ckp); 
+  }
 }
 
 void WorkerThread::createVassalsMap () {
@@ -1066,7 +1095,6 @@ void WorkerThread::initialiseRelationMaps () {
     string holderId = (*title)->safeGetString("holder");
     Object* holder = getChar(holderId);
     if (!holder) {
-      //Logger::logStream(Logger::Warning) << "Warning: Title " << (*title)->getKey() << " not held by anyone.\n";
       continue; 
     }
     charTitles[holder].push_back(*title);
@@ -2115,6 +2143,10 @@ void WorkerThread::eu3StateVariables () {
     double gold = max(ckRuler->safeGetFloat("wealth"), 0.0); 
     double prestige = ckRuler->safeGetFloat("prestige") + ckRuler->safeGetFloat("piety");
 
+    Logger::logStream(DebugGovernments) << "Prestige for " << euCountry->getKey() << ": "
+					<< prestige << " of " << maxCkPrestige << " and " << maxEuPrestige
+					<< " gives " << (prestige * maxEuPrestige / maxCkPrestige) << ".\n"; 
+    
     gold /= totalCkGold;
     gold *= totalEuGold;
     gold = max(gold, minimumGold); 
@@ -2122,7 +2154,67 @@ void WorkerThread::eu3StateVariables () {
 
     prestige /= maxCkPrestige;
     prestige *= maxEuPrestige;
-    euCountry->resetLeaf("precise_prestige", prestige); 
+    euCountry->resetLeaf("precise_prestige", prestige);
+
+    Object* history = euCountry->getNeededObject("history");
+    Object* demesne = ckRuler->safeGetObject("demesne");
+    if (!demesne) continue;
+    string capTag = remQuotes(demesne->safeGetString("capital", "BLAH"));
+    Object* capTitle = getTitle(capTag);
+    if (!capTitle) {
+      Logger::logStream(Logger::Warning) << "Warning: Unable to find CK capital " << capTag
+					 << " for tag " << euCountry->getKey() << "; not resetting capital.\n";
+      continue; 
+    }
+
+    Object* capProv = titleToCkProvinceMap[capTitle];
+    if (!capProv) {
+      Logger::logStream(Logger::Warning) << "Warning: Unable to find CK province for capital title " << capTitle->getKey()
+					 << " for tag " << euCountry->getKey() << "; not resetting capital.\n";
+      continue; 
+    }
+
+    Object* newCapital = 0;
+    for (objiter cand = ckProvToEuProvsMap[capProv].begin(); cand != ckProvToEuProvsMap[capProv].end(); ++cand) {
+      string ownerTag = remQuotes((*cand)->safeGetString("owner"));
+      if (ownerTag != euCountry->getKey()) continue;
+      newCapital = (*cand);
+      break; 
+    }
+
+    if (!newCapital) {
+      for (objiter t = beginRel(ckRuler, Title); t != finalRel(ckRuler, Title); ++t) {
+	Object* ckProv = titleToCkProvinceMap[*t];
+	if (!ckProv) continue;
+	for (objiter cand = ckProvToEuProvsMap[ckProv].begin(); cand != ckProvToEuProvsMap[ckProv].end(); ++cand) {
+	  string ownerTag = remQuotes((*cand)->safeGetString("owner"));
+	  if (ownerTag != euCountry->getKey()) continue;
+	  newCapital = (*cand);
+	  break; 
+	}
+	if (newCapital) break; 
+      }
+    }
+
+    if (!newCapital) {
+      // Bah. Search every EU3 province until we find one!
+      for (map<Object*, objvec>::iterator i = euProvToCkProvsMap.begin(); i != euProvToCkProvsMap.end(); ++i) {
+	Object* euProv = (*i).first;
+	if (remQuotes(euProv->safeGetString("owner")) != euCountry->getKey()) continue;
+	newCapital = euProv;
+	break; 
+      }
+    }
+    
+    if (!newCapital) {
+      Logger::logStream(Logger::Warning) << "Could not find capital province for tag " << euCountry->getKey()
+					 << ", no reassignment made.\n";
+      continue; 
+    }
+
+    Logger::logStream(DebugGovernments) << "Moving " << euCountry->getKey() << " capital to " << newCapital->getKey() << ".\n"; 
+    euCountry->resetLeaf("capital", newCapital->getKey());
+    history->resetLeaf("capital", newCapital->getKey());
   }  
 }
 
