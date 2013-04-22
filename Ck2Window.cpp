@@ -2132,7 +2132,70 @@ void WorkerThread::eu3StateVariables () {
     totalEuGold += euCountry->safeGetFloat("treasury");
     totalCkGold += max(ckRuler->safeGetFloat("wealth"), 0.0); 
     maxEuPrestige = max(maxEuPrestige, fabs(euCountry->safeGetFloat("precise_prestige")));
-    maxCkPrestige = max(maxCkPrestige, fabs(ckRuler->safeGetFloat("prestige") + ckRuler->safeGetFloat("piety"))); 
+    maxCkPrestige = max(maxCkPrestige, fabs(ckRuler->safeGetFloat("prestige") + ckRuler->safeGetFloat("piety")));
+
+    euCountry->resetLeaf("stability", "0.000");
+    euCountry->resetLeaf("stability_investment", "0.000");
+    euCountry->resetLeaf("badboy", "0.000"); 
+    euCountry->resetLeaf("infantry", "\"western_medieval_infantry\"");
+    euCountry->resetLeaf("cavalry", "\"western_medieval_knights\"");
+    euCountry->resetLeaf("manpower", "1.000");
+    euCountry->resetLeaf("big_ship", "\"carrack\"");
+    euCountry->resetLeaf("galley", "\"galley\"");
+    euCountry->resetLeaf("transport", "\"cog\"");
+    euCountry->resetLeaf("colonists", "0");
+    euCountry->resetLeaf("missionaries", "0");
+    euCountry->resetLeaf("merchants", "0");
+    euCountry->resetLeaf("spies", "0");
+    euCountry->resetLeaf("diplomats", "0");
+    euCountry->resetLeaf("officials", "0");
+    euCountry->resetLeaf("army_tradition", "0");    
+    euCountry->resetLeaf("cultural_tradition", "0");
+    euCountry->resetLeaf("navy_tradition", "0");
+    euCountry->unsetValue("press_gangs");
+    euCountry->unsetValue("grand_navy");
+    euCountry->unsetValue("sea_hawks");
+    euCountry->unsetValue("superior_seamanship");
+    euCountry->unsetValue("naval_glory");
+    euCountry->unsetValue("excellent_shipwrights");
+    euCountry->unsetValue("naval_fighting_instruction");
+    euCountry->unsetValue("naval_provisioning");
+    euCountry->unsetValue("grand_army");
+    euCountry->unsetValue("military_drill");
+    euCountry->unsetValue("engineer_corps");
+    euCountry->unsetValue("battlefield_commisions");
+    euCountry->unsetValue("glorious_arms");
+    euCountry->unsetValue("national_conscripts");
+    euCountry->unsetValue("regimental_system");
+    euCountry->unsetValue("napoleonic_warfare");
+    euCountry->unsetValue("land_of_opportunity");
+    euCountry->unsetValue("merchant_adventures");
+    euCountry->unsetValue("colonial_ventures");
+    euCountry->unsetValue("shrewd_commerce_practise");
+    euCountry->unsetValue("vice_roys");
+    euCountry->unsetValue("quest_for_the_new_world");
+    euCountry->unsetValue("scientific_revolution");
+    euCountry->unsetValue("improved_foraging");
+    euCountry->unsetValue("vetting");
+    euCountry->unsetValue("bureaucracy");
+    euCountry->unsetValue("national_bank");
+    euCountry->unsetValue("national_trade_policy");
+    euCountry->unsetValue("espionage");
+    euCountry->unsetValue("bill_of_rights");
+    euCountry->unsetValue("smithian_economics");
+    euCountry->unsetValue("liberty_egalite_fraternity");
+    euCountry->unsetValue("ecumenism");
+    euCountry->unsetValue("church_attendance_duty");
+    euCountry->unsetValue("divine_supremacy");
+    euCountry->unsetValue("patron_of_art");
+    euCountry->unsetValue("deus_vult");
+    euCountry->unsetValue("humanist_tolerance");
+    euCountry->unsetValue("cabinet");
+    euCountry->unsetValue("revolution_and_counter");
+
+
+
+    
   }
 
   double minimumGold = configObject->safeGetFloat("minimumGold", 10); 
