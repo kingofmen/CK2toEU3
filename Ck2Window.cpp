@@ -1412,6 +1412,74 @@ void WorkerThread::eu3Cores () {
   }
 }
 
+void WorkerThread::eu3Cots () {
+  Object* trade = euxGame->getNeededObject("trade");
+  trade->clear();
+  for (map<Object*, Object*>::iterator i = euCountryToCkCountryMap.begin(); i != euCountryToCkCountryMap.end(); ++i) {
+    Object* euCountry = (*i).first;
+
+    if (euCountry->safeGetString("government") != "merchant_republic") continue;
+    string location = euCountry->safeGetString("capital");
+    Object* euProv = euxGame->safeGetObject(location);
+    if (!euProv) {
+      Logger::logStream(Logger::Warning) << "Warning: Could not find province " << location
+					 << ", alleged capital of " << euCountry->getKey()
+					 << "; no COT placed.\n";
+      continue;
+    }
+    if (remQuotes(euProv->safeGetString("owner")) != euCountry->getKey()) {
+      Logger::logStream(Logger::Warning) << "Warning: Province " << location
+					 << ", alleged capital of " << euCountry->getKey()
+					 << ", is owned by " << euProv->safeGetString("owner")
+					 << ". No COT placed.\n";
+      continue;
+    }
+
+    Object* cot = new Object("cot");
+    trade->setValue(cot);
+    cot->setLeaf("location", location);
+    Object* owner = new Object(euCountry->getKey());
+    cot->setValue(owner);
+    owner->setLeaf("level", "5");
+
+    Logger::logStream(DebugCots) << "Creating COT in " << location
+				 << " due to merchant republic "
+				 << euCountry->getKey() << ".\n"; 
+
+    map<string, double> posts;
+    double totalPosts = 0; 
+    Object* doge = euCountryToCharacterMap[euCountry]; 
+    for (objiter ckp = ck2provs.begin(); ckp != ck2provs.end(); ++ckp) {
+      Object* tradepost = (*ckp)->safeGetObject("tradepost");
+      if (!tradepost) continue;
+      string holder = tradepost->safeGetString("owner");
+      Object* ckRuler = getChar(holder);
+      if (ckRuler != doge) continue;
+
+      for (objiter eup = ckProvToEuProvsMap[*ckp].begin(); eup != ckProvToEuProvsMap[*ckp].end(); ++eup) {
+	string ownerTag = remQuotes((*eup)->safeGetString("owner"));
+	if (ownerTag == euCountry->getKey()) continue;
+	posts[ownerTag]++;
+	totalPosts++; 
+      }
+    }
+    for (map<string, double>::iterator p = posts.begin(); p != posts.end(); ++p) {
+      double merchants = (*p).second;
+      merchants /= totalPosts;
+      merchants *= configObject->safeGetFloat("numForeignMerchants", 10);
+      if (merchants < 0.5) continue;
+      if (merchants > 5) merchants = 5;
+
+      Logger::logStream(DebugCots) << "  Assigning " << (int) floor(0.5 + merchants) << " merchants from tag "
+				   << (*p).first << ".\n"; 
+      
+      owner = new Object((*p).first);
+      cot->setValue(owner);
+      owner->resetLeaf("level", (int) floor(merchants + 0.5)); 
+    }
+  }
+}
+
 void WorkerThread::eu3Characters () {
   int monarchId = 1;
   Object* dummyWorstChar = new Object("dummyWorst");
@@ -2705,6 +2773,7 @@ void WorkerThread::convertEU3 () {
   eu3Sliders(); 
   eu3Armies(); 
   eu3Hre();
+  eu3Cots(); 
   
   Logger::logStream(Logger::Game) << "Done with conversion, writing to file.\n";
   DWORD attribs = GetFileAttributesA("Output");

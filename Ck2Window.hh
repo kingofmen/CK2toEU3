@@ -109,7 +109,8 @@ private:
   // Eu3 conversions
   void eu3Armies ();   
   void eu3Characters ();
-  void eu3Cores (); 
+  void eu3Cores ();
+  void eu3Cots (); 
   void eu3Diplomacy ();
   void eu3Governments ();
   void eu3Hre (); 

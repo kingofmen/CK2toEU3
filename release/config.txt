@@ -20,6 +20,7 @@ debug = {
   47 = no # Religion 
   48 = no # Governments 
   49 = no # HRE 
+  50 = no # COTs 
   all = yes 
 }
 eu3dir = .\DW\ 
@@ -29,6 +30,7 @@ logfile = logfile.txt
 numElectors = 7
 
 forbidShips = { 4 283 98 }
+numForeignMerchants = 10 
 
 minimumMaxPrestige = 20 
 minimumGold = 10 
