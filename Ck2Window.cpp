@@ -1587,6 +1587,85 @@ void WorkerThread::eu3Diplomacy () {
       vassal->setLeaf("start_date", "1399.1.1");
     }
   }
+
+  objvec existingWars = euxGame->getValue("active_war");
+  for (objiter war = existingWars.begin(); war != existingWars.end(); ++war) {
+    objvec attackers = (*war)->getValue("attacker");
+    objvec defenders = (*war)->getValue("defender");
+    bool remove = false;
+    for (objiter attack = attackers.begin(); attack != attackers.end(); ++attack) {
+      string tag = remQuotes((*attack)->getLeaf());
+      Object* att = euxGame->safeGetObject(tag);
+      if (!att) {
+	Logger::logStream(Logger::Warning) << "Warning: War " << (*war)->safeGetString("name")
+					   << " contains nonexistent tag " << tag
+					   << ". Suggest fixing this in input save.\n";
+	continue; 
+      }
+      if (euCountryToCkCountryMap.find(att) != euCountryToCkCountryMap.end()) remove = true; 
+    }
+    for (objiter defend = defenders.begin(); defend != defenders.end(); ++defend) {
+      string tag = remQuotes((*defend)->getLeaf());
+      Object* att = euxGame->safeGetObject(tag);
+      if (!att) {
+	Logger::logStream(Logger::Warning) << "Warning: War " << (*war)->safeGetString("name")
+					   << " contains nonexistent tag " << tag
+					   << ". Suggest fixing this in input save.\n";
+	continue; 
+      }
+      if (euCountryToCkCountryMap.find(att) != euCountryToCkCountryMap.end()) remove = true;       
+    }
+    if (!remove) continue;
+    euxGame->removeObject(*war);
+  }
+
+
+  objvec ckwars = ck2Game->getValue("active_war");
+  for (objiter war = ckwars.begin(); war != ckwars.end(); ++war) {
+    objvec ckAttackers = (*war)->getValue("attacker");
+    objvec ckDefenders = (*war)->getValue("defender");
+    objvec euAttackers;
+    objvec euDefenders;
+
+    for (objiter cka = ckAttackers.begin(); cka != ckAttackers.end(); ++cka) {
+      Object* ckRuler = getChar((*cka)->getLeaf());
+      Object* euCountry = characterToEuCountryMap[ckRuler];
+      if (!euCountry) continue;
+      if (euCountryToCharacterMap[euCountry] != ckRuler) continue;       
+      if (find(euAttackers.begin(), euAttackers.end(), euCountry) != euAttackers.end()) continue;
+      euAttackers.push_back(euCountry); 
+    }
+    for (objiter cka = ckDefenders.begin(); cka != ckDefenders.end(); ++cka) {
+      Object* ckRuler = getChar((*cka)->getLeaf());
+      Object* euCountry = characterToEuCountryMap[ckRuler];
+      if (!euCountry) continue;
+      if (euCountryToCharacterMap[euCountry] != ckRuler) continue; // Check for sovereignty
+      if (find(euDefenders.begin(), euDefenders.end(), euCountry) != euDefenders.end()) continue;
+      euDefenders.push_back(euCountry); 
+    }
+
+    if (0 == euAttackers.size() * euDefenders.size()) {
+      Logger::logStream(DebugDiplomacy) << "Skipping CK war "
+					<< (*war)->safeGetString("name")
+					<< " because one side didn't convert.\n";
+      continue;
+    }
+
+    Object* euWar = new Object("active_war");
+    euxGame->setValue(euWar);
+    euWar->setLeaf("name", (*war)->safeGetString("name"));
+    for (objiter eua = euAttackers.begin(); eua != euAttackers.end(); ++eua) {
+      euWar->setLeaf("attacker", addQuotes((*eua)->getKey()));
+      euWar->setLeaf("original_attacker", addQuotes((*eua)->getKey()));
+    }
+    for (objiter eua = euDefenders.begin(); eua != euDefenders.end(); ++eua) {
+      euWar->setLeaf("defender", addQuotes((*eua)->getKey()));
+      euWar->setLeaf("original_defender", addQuotes((*eua)->getKey()));
+    }
+    euWar->setLeaf("action", euxGame->safeGetString("start_date"));
+    Logger::logStream(DebugDiplomacy) << "Converting war " << (*war)->safeGetString("name") << ".\n"; 
+  }
+
 }
 
 void WorkerThread::eu3Governments () {

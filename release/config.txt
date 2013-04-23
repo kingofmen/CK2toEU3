@@ -20,7 +20,8 @@ debug = {
   47 = no # Religion 
   48 = no # Governments 
   49 = no # HRE 
-  50 = no # COTs 
+  50 = no # COTs
+  51 = no # Diplomacy  
   all = yes 
 }
 eu3dir = .\DW\ 
