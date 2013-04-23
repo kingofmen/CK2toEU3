@@ -1415,6 +1415,8 @@ void WorkerThread::eu3Cores () {
 void WorkerThread::eu3Cots () {
   Object* trade = euxGame->getNeededObject("trade");
   trade->clear();
+  Object* diplomacy = euxGame->getNeededObject("diplomacy");
+  map<string, map<string, bool> > openMarkets; 
   for (map<Object*, Object*>::iterator i = euCountryToCkCountryMap.begin(); i != euCountryToCkCountryMap.end(); ++i) {
     Object* euCountry = (*i).first;
 
@@ -1470,12 +1472,21 @@ void WorkerThread::eu3Cots () {
       if (merchants < 0.5) continue;
       if (merchants > 5) merchants = 5;
 
+      string merchTag = (*p).first; 
       Logger::logStream(DebugCots) << "  Assigning " << (int) floor(0.5 + merchants) << " merchants from tag "
-				   << (*p).first << ".\n"; 
+				   << merchTag << ".\n"; 
       
-      owner = new Object((*p).first);
+      owner = new Object(merchTag);
       cot->setValue(owner);
-      owner->resetLeaf("level", (int) floor(merchants + 0.5)); 
+      owner->resetLeaf("level", (int) floor(merchants + 0.5));
+
+      if (openMarkets[euCountry->getKey()][merchTag]) continue;
+      openMarkets[euCountry->getKey()][merchTag] = true;
+      Object* marketOpen = new Object("open_market");
+      diplomacy->setValue(marketOpen);
+      marketOpen->setLeaf("first", addQuotes(euCountry->getKey()));
+      marketOpen->setLeaf("second", addQuotes(merchTag));
+      marketOpen->setLeaf("start_date", "\"1.1.1\""); 
     }
   }
 }
@@ -1558,8 +1569,7 @@ void WorkerThread::eu3Characters () {
 }
 
 void WorkerThread::eu3Diplomacy () {
-  Object* eu3Diplomacy = euxGame->safeGetObject("diplomacy");
-  assert(eu3Diplomacy);
+  Object* eu3Diplomacy = euxGame->getNeededObject("diplomacy");
   eu3Diplomacy->clear(); 
 
   for (map<Object*, Object*>::iterator i = euCountryToCkCountryMap.begin(); i != euCountryToCkCountryMap.end(); ++i) {
