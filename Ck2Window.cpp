@@ -1955,8 +1955,33 @@ void WorkerThread::eu3ProvinceReligion () {
 void WorkerThread::eu3Provinces () {
   for (map<Object*, objvec>::iterator link = euProvToCkProvsMap.begin(); link != euProvToCkProvsMap.end(); ++link) {
     Object* eup = (*link).first;
-    eup->unsetValue("hre");
-    eup->getNeededObject("history")->resetLeaf("hre", "no"); 
+    Object* history = eup->getNeededObject("history"); 
+    eup->unsetValue("hre"); history->unsetValue("hre");
+    eup->unsetValue("temple"); history->unsetValue("temple");
+    eup->unsetValue("workshop"); history->unsetValue("workshop");
+    eup->unsetValue("marketplace"); history->unsetValue("marketplace");
+    eup->unsetValue("dock"); history->unsetValue("dock");
+    eup->unsetValue("armory"); history->unsetValue("armory");
+    eup->unsetValue("courthouse"); history->unsetValue("courthouse");
+    eup->unsetValue("customs_house"); history->unsetValue("customs_house");
+    eup->unsetValue("shipyard"); history->unsetValue("shipyard");
+    eup->unsetValue("regimental_camp"); history->unsetValue("regimental_camp");
+    eup->unsetValue("constable"); history->unsetValue("constable");
+    eup->unsetValue("tax_assessor"); history->unsetValue("tax_assessor");
+    eup->unsetValue("war_college"); history->unsetValue("war_college");
+    eup->unsetValue("admiralty"); history->unsetValue("admiralty");
+    eup->unsetValue("refinery"); history->unsetValue("refinery");
+    eup->unsetValue("wharf"); history->unsetValue("wharf");
+    eup->unsetValue("university"); history->unsetValue("university");
+    eup->unsetValue("fine_arts_academy"); history->unsetValue("fine_arts_academy");
+    eup->unsetValue("textile");     history->unsetValue("textile");    
+    eup->unsetValue("fort1"); history->unsetValue("fort1");
+    eup->unsetValue("fort2"); history->unsetValue("fort2");
+    eup->unsetValue("fort3"); history->unsetValue("fort3");
+    eup->unsetValue("fort4"); history->unsetValue("fort4");
+    eup->unsetValue("fort5"); history->unsetValue("fort5");
+    eup->unsetValue("fort6"); history->unsetValue("fort6");
+
     objvec ckps = (*link).second;
     if (0 == ckps.size()) {
       Logger::logStream(Logger::Warning) << "Warning: No CK provinces for "
@@ -2029,7 +2054,6 @@ void WorkerThread::eu3Provinces () {
 
     }
 
-    Object* history = eup->getNeededObject("history");    
     eup->resetLeaf("owner", addQuotes(winner->getKey()));
     eup->resetLeaf("controller", conTag == "" ? addQuotes(winner->getKey()) : conTag);
     history->resetLeaf("owner", addQuotes(winner->getKey()));
@@ -2313,53 +2337,56 @@ void WorkerThread::eu3StateVariables () {
     euCountry->resetLeaf("army_tradition", "0");    
     euCountry->resetLeaf("cultural_tradition", "0");
     euCountry->resetLeaf("navy_tradition", "0");
-    euCountry->unsetValue("press_gangs");
-    euCountry->unsetValue("grand_navy");
-    euCountry->unsetValue("sea_hawks");
-    euCountry->unsetValue("superior_seamanship");
-    euCountry->unsetValue("naval_glory");
-    euCountry->unsetValue("excellent_shipwrights");
-    euCountry->unsetValue("naval_fighting_instruction");
-    euCountry->unsetValue("naval_provisioning");
-    euCountry->unsetValue("grand_army");
-    euCountry->unsetValue("military_drill");
-    euCountry->unsetValue("engineer_corps");
-    euCountry->unsetValue("battlefield_commisions");
-    euCountry->unsetValue("glorious_arms");
-    euCountry->unsetValue("national_conscripts");
-    euCountry->unsetValue("regimental_system");
-    euCountry->unsetValue("napoleonic_warfare");
-    euCountry->unsetValue("land_of_opportunity");
-    euCountry->unsetValue("merchant_adventures");
-    euCountry->unsetValue("colonial_ventures");
-    euCountry->unsetValue("shrewd_commerce_practise");
-    euCountry->unsetValue("vice_roys");
-    euCountry->unsetValue("quest_for_the_new_world");
-    euCountry->unsetValue("scientific_revolution");
-    euCountry->unsetValue("improved_foraging");
-    euCountry->unsetValue("vetting");
-    euCountry->unsetValue("bureaucracy");
-    euCountry->unsetValue("national_bank");
-    euCountry->unsetValue("national_trade_policy");
-    euCountry->unsetValue("espionage");
-    euCountry->unsetValue("bill_of_rights");
-    euCountry->unsetValue("smithian_economics");
-    euCountry->unsetValue("liberty_egalite_fraternity");
-    euCountry->unsetValue("ecumenism");
-    euCountry->unsetValue("church_attendance_duty");
-    euCountry->unsetValue("divine_supremacy");
-    euCountry->unsetValue("patron_of_art");
-    euCountry->unsetValue("deus_vult");
-    euCountry->unsetValue("humanist_tolerance");
-    euCountry->unsetValue("cabinet");
-    euCountry->unsetValue("revolution_and_counter");
+    euCountry->resetLeaf("inflation", "0.000");
+    euCountry->resetLeaf("legitimacy", "1.000");
+    Object* history = euCountry->getNeededObject("history");
+    euCountry->unsetValue("press_gangs"); history->unsetValue("press_gangs");
+    euCountry->unsetValue("grand_navy"); history->unsetValue("grand_navy");
+    euCountry->unsetValue("sea_hawks"); history->unsetValue("sea_hawks");
+    euCountry->unsetValue("superior_seamanship"); history->unsetValue("superior_seamanship");
+    euCountry->unsetValue("naval_glory"); history->unsetValue("naval_glory");
+    euCountry->unsetValue("excellent_shipwrights"); history->unsetValue("excellent_shipwrights");
+    euCountry->unsetValue("naval_fighting_instruction"); history->unsetValue("naval_fighting_instruction");
+    euCountry->unsetValue("naval_provisioning"); history->unsetValue("naval_provisioning");
+    euCountry->unsetValue("grand_army"); history->unsetValue("grand_army");
+    euCountry->unsetValue("military_drill"); history->unsetValue("military_drill");
+    euCountry->unsetValue("engineer_corps"); history->unsetValue("engineer_corps");
+    euCountry->unsetValue("battlefield_commisions"); history->unsetValue("battlefield_commisions");
+    euCountry->unsetValue("glorious_arms"); history->unsetValue("glorious_arms");
+    euCountry->unsetValue("national_conscripts"); history->unsetValue("national_conscripts");
+    euCountry->unsetValue("regimental_system"); history->unsetValue("regimental_system");
+    euCountry->unsetValue("napoleonic_warfare"); history->unsetValue("napoleonic_warfare");
+    euCountry->unsetValue("land_of_opportunity"); history->unsetValue("land_of_opportunity");
+    euCountry->unsetValue("merchant_adventures"); history->unsetValue("merchant_adventures");
+    euCountry->unsetValue("colonial_ventures"); history->unsetValue("colonial_ventures");
+    euCountry->unsetValue("shrewd_commerce_practise"); history->unsetValue("shrewd_commerce_practise");
+    euCountry->unsetValue("vice_roys"); history->unsetValue("vice_roys");
+    euCountry->unsetValue("quest_for_the_new_world"); history->unsetValue("quest_for_the_new_world");
+    euCountry->unsetValue("scientific_revolution"); history->unsetValue("scientific_revolution");
+    euCountry->unsetValue("improved_foraging"); history->unsetValue("improved_foraging");
+    euCountry->unsetValue("vetting"); history->unsetValue("vetting");
+    euCountry->unsetValue("bureaucracy"); history->unsetValue("bureaucracy");
+    euCountry->unsetValue("national_bank"); history->unsetValue("national_bank");
+    euCountry->unsetValue("national_trade_policy"); history->unsetValue("national_trade_policy");
+    euCountry->unsetValue("espionage"); history->unsetValue("espionage");
+    euCountry->unsetValue("bill_of_rights"); history->unsetValue("bill_of_rights");
+    euCountry->unsetValue("smithian_economics"); history->unsetValue("smithian_economics");
+    euCountry->unsetValue("liberty_egalite_fraternity"); history->unsetValue("liberty_egalite_fraternity");
+    euCountry->unsetValue("ecumenism"); history->unsetValue("ecumenism");
+    euCountry->unsetValue("church_attendance_duty"); history->unsetValue("church_attendance_duty");
+    euCountry->unsetValue("divine_supremacy"); history->unsetValue("divine_supremacy");
+    euCountry->unsetValue("patron_of_art"); history->unsetValue("patron_of_art");
+    euCountry->unsetValue("deus_vult"); history->unsetValue("deus_vult");
+    euCountry->unsetValue("humanist_tolerance"); history->unsetValue("humanist_tolerance");
+    euCountry->unsetValue("cabinet"); history->unsetValue("cabinet");
+    euCountry->unsetValue("revolution_and_counter"); history->unsetValue("revolution_and_counter");
 
 
 
     
   }
 
-  double minimumGold = configObject->safeGetFloat("minimumGold", 10); 
+  double minimumGold = configObject->safeGetFloat("minimumGold", 10);  
   for (map<Object*, Object*>::iterator i = euCountryToCharacterMap.begin(); i != euCountryToCharacterMap.end(); ++i) {
     Object* euCountry = (*i).first;
     Object* ckRuler   = (*i).second;
