@@ -36,6 +36,26 @@ numForeignMerchants = 10
 minimumMaxPrestige = 20 
 minimumGold = 10 
 
+keywords_to_remove = {
+  province = revolt
+  province = advisor 
+  province = add_core
+  province = culture 
+  province = religion 
+  state = union
+  state = monarch 
+  state = heir
+  state = land_tech
+  state = naval_tech
+  state = trade_tech
+  state = production_tech
+  state = government_tech
+  state = decision 
+  state = add_accepted_culture
+  state = primary_culture
+  state = religion 
+}
+
 e_weight = 1.0 
 k_weight = 1.0 
 d_weight = 1.5

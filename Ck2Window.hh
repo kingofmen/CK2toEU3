@@ -113,6 +113,7 @@ private:
   void eu3Cots (); 
   void eu3Diplomacy ();
   void eu3Governments ();
+  void eu3Histories (); 
   void eu3Hre (); 
   void eu3Manpower ();
   void eu3ProvinceCultures ();

@@ -1687,6 +1687,41 @@ void WorkerThread::eu3Governments () {
   }  
 }
 
+void WorkerThread::eu3Histories () {
+  Object* keywords = configObject->getNeededObject("keywords_to_remove");
+  objvec provWords = keywords->getValue("province"); 
+  
+  // Clear histories of provinces and states.
+  for (map<Object*, objvec>::iterator link = euProvToCkProvsMap.begin(); link != euProvToCkProvsMap.end(); ++link) {
+    Object* eup = (*link).first;
+    Object* euHistory = eup->getNeededObject("history");
+    objvec leaves = euHistory->getLeaves();
+    for (objiter leaf = leaves.begin(); leaf != leaves.end(); ++leaf) {
+      if ((*leaf)->isLeaf()) continue;
+      for (objiter word = provWords.begin(); word != provWords.end(); ++word) {
+	Object* w = (*leaf)->safeGetObject((*word)->getLeaf());
+	if (!w) continue;
+	euHistory->removeObject(*leaf); 
+      }
+    }
+  }
+
+  objvec stateWords = keywords->getValue("state"); 
+  for (map<Object*, Object*>::iterator i = euCountryToCkCountryMap.begin(); i != euCountryToCkCountryMap.end(); ++i) {
+    Object* euCountry = (*i).first;
+    Object* euHistory = euCountry->getNeededObject("history");
+    objvec leaves = euHistory->getLeaves();
+    for (objiter leaf = leaves.begin(); leaf != leaves.end(); ++leaf) {
+      if ((*leaf)->isLeaf()) continue;
+      for (objiter word = stateWords.begin(); word != stateWords.end(); ++word) {
+	Object* w = (*leaf)->safeGetObject((*word)->getLeaf());
+	if (!w) continue;
+	euHistory->removeObject(*leaf); 
+      }
+    }    
+  }
+}
+
 struct EmperorCandidate {
   Object* ckTitle;
   Object* euCountry;
@@ -2874,7 +2909,8 @@ void WorkerThread::convertEU3 () {
   createCountryMap(); 
   assignCKprovinces();
 
-  eu3Provinces(); 
+  eu3Provinces();
+  eu3Histories(); 
   eu3Diplomacy();
   eu3Governments(); 
   eu3Taxes();
