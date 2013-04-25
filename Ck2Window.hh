@@ -116,6 +116,7 @@ private:
   void eu3Histories (); 
   void eu3Hre (); 
   void eu3Manpower ();
+  void eu3Papacy (); 
   void eu3ProvinceCultures ();
   void eu3ProvinceReligion ();    
   void eu3Provinces ();

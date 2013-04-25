@@ -1869,6 +1869,121 @@ void WorkerThread::eu3Manpower () {
   }
 }
 
+void WorkerThread::eu3Papacy () {
+  Object* papacy = euxGame->safeGetObject("papacy");
+  if (!papacy) {
+    Logger::logStream(Logger::Warning) << "Warning: Could not find papacy, skipping.\n"; 
+    return;
+  }
+
+  Object* papalController = 0;
+  Object* papalNation = 0;
+  double maxPiety = 0.01; 
+  for (map<Object*, Object*>::iterator i = euCountryToCharacterMap.begin(); i != euCountryToCharacterMap.end(); ++i) {
+    Object* ckRuler = (*i).second;
+    Object* euNation = (*i).first; 
+    if (remQuotes(ckRuler->safeGetString("religion")) != "catholic") {
+      euNation->unsetValue("papal_influence"); 
+      continue;
+    }
+
+    double piety = ckRuler->safeGetFloat("piety");
+    if ((!papalController) || (piety > papalController->safeGetFloat("piety"))) papalController = ckRuler;
+    else continue;
+    papalNation = euNation;
+    maxPiety = piety; 
+  }
+
+  Logger::logStream(DebugReligion) << papalController->safeGetString("birth_name")
+				   << " with " << maxPiety
+				   << " is the most pious Catholic, setting "
+				   << papalNation->getKey()
+				   << " as controller.\n";
+  papacy->resetLeaf("controller", addQuotes(papalNation->getKey()));
+
+  double maxInfluence = configObject->safeGetFloat("maxPapalInfluence"); 
+  for (map<Object*, Object*>::iterator i = euCountryToCharacterMap.begin(); i != euCountryToCharacterMap.end(); ++i) {
+    Object* ckRuler = (*i).second;
+    Object* euNation = (*i).first; 
+    if (remQuotes(ckRuler->safeGetString("religion")) != "catholic") continue;
+
+    double piety = ckRuler->safeGetFloat("piety");
+    piety /= maxPiety;
+    piety *= maxInfluence; 
+    
+    Logger::logStream(DebugReligion) << euNation->getKey() << " has piety "
+				     << ckRuler->safeGetString("piety")
+				     << " giving papal influence "
+				     << piety << ".\n";
+    euNation->resetLeaf("papal_influence", piety); 
+
+  }
+  
+  objvec bishops;
+  objvec euProvs; 
+  for (map<Object*, Object*>::iterator i = titleToCkProvinceMap.begin(); i != titleToCkProvinceMap.end(); ++i) {
+    Object* ckProvince = (*i).second;
+    if (!ckProvince) continue;
+    objvec holdings = ckProvince->getLeaves();
+    for (objiter holding = holdings.begin(); holding != holdings.end(); ++holding) {
+      if ((*holding)->safeGetString("type") != "temple") continue;
+      if ((*holding)->getKey() == "settlement_construction") continue; 
+      Object* ckTitle = getTitle((*holding)->getKey());
+
+      if (!ckTitle) {
+	Logger::logStream(Logger::Warning) << "Warning: Could not find barony "
+					   << (*holding)->getKey()
+					   << " in province "
+					   << nameAndNumber(ckProvince)
+					   << ".\n";
+	continue;
+      }
+      
+      Object* bishop = getChar(ckTitle->safeGetString("holder"));
+      if (!bishop) continue;
+      if (bishop->safeGetString("religion") != "\"catholic\"") continue;
+      if (find(bishops.begin(), bishops.end(), bishop) != bishops.end()) continue; 
+      if (0 == ckProvToEuProvsMap[ckProvince].size()) continue;
+    
+      calculateAttributes(bishop);
+      bishops.push_back(bishop);
+      bishop->resetLeaf("bishopric", ckTitle->getKey()); 
+      Object* euProv = ckProvToEuProvsMap[ckProvince][0];
+      euProvs.push_back(euProv);
+    }
+  }
+
+  ObjectAscendingSorter sorter("learning");
+  sort(bishops.begin(), bishops.end(), sorter);
+  objvec cardinals = papacy->getValue("cardinal");
+  for (objiter c = cardinals.begin(); c != cardinals.end(); ++c) {
+    if (0 == bishops.size()) {
+      Logger::logStream(DebugReligion) << "Removed cardinal "
+				       << (*c)->safeGetString("name")
+				       << " due to lack of bishops.\n"; 
+      papacy->removeObject(*c);
+      continue;
+    }
+
+    Object* bishop = bishops.back();
+    Object* euProv = euProvs.back(); 
+    bishops.pop_back();
+    euProvs.pop_back();
+
+    Logger::logStream(DebugReligion) << "Cardinal " << (*c)->safeGetString("name");
+      
+    (*c)->resetLeaf("name", bishop->safeGetString("birth_name"));
+    (*c)->resetLeaf("location", euProv->getKey());
+    (*c)->resetLeaf("controller", euProv->safeGetString("owner"));
+    Logger::logStream(DebugReligion) << " assigned to " << euProv->safeGetString("owner")
+				     << " due to bishop " << bishop->safeGetString("birth_name")
+				     << " of " << bishop->safeGetString("bishopric")
+				     << ", learning " << bishop->safeGetString("learning")
+				     << ".\n"; 
+    
+  }
+}
+
 void WorkerThread::eu3ProvinceCultures () {
   for (map<Object*, objvec>::iterator link = euProvToCkProvsMap.begin(); link != euProvToCkProvsMap.end(); ++link) {
     Object* eup = (*link).first;
@@ -2926,6 +3041,7 @@ void WorkerThread::convertEU3 () {
   eu3Armies(); 
   eu3Hre();
   eu3Cots(); 
+  eu3Papacy(); 
   
   Logger::logStream(Logger::Game) << "Done with conversion, writing to file.\n";
   DWORD attribs = GetFileAttributesA("Output");

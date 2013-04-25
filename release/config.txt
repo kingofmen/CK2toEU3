@@ -35,6 +35,7 @@ numForeignMerchants = 10
 
 minimumMaxPrestige = 20 
 minimumGold = 10 
+maxPapalInfluence = 0.25
 
 keywords_to_remove = {
   province = revolt
