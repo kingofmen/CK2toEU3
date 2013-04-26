@@ -1566,6 +1566,70 @@ void WorkerThread::eu3Characters () {
   }
 
   euxGame->resetLeaf("monarch", monarchId);
+
+  // Generals and advisors
+  int leaderId = euxGame->safeGetInt("leader");
+  int advisorId = euxGame->safeGetInt("advisor");
+  Object* generalTraits = configObject->getNeededObject("general_traits"); 
+  for (objiter c = begin(); c != final(); ++c) {
+    string job = remQuotes((*c)->safeGetString("job_title", "\"BLAH\""));
+    if (job == "BLAH") continue;
+
+    Object* employer = getChar((*c)->safeGetInt("employer"));
+    if (!employer) continue;
+    Object* euNation = characterToEuCountryMap[employer];
+    if (!euNation) continue;
+   
+    if (job == "job_marshal") {
+      // Make a general
+      Object* event = new Object(remQuotes(euxGame->safeGetString("start_date")));
+      Object* history = euNation->getNeededObject("history");
+      history->setValue(event);
+      Object* leader = new Object("leader");
+      event->setValue(leader);
+      leader->setLeaf("name", (*c)->safeGetString("birth_name"));
+      leader->setLeaf("type", "general");
+      leader->setLeaf("activation", euxGame->safeGetString("start_date")); 
+      calculateAttributes(*c);
+      int fire = 0;
+      int shock = (int) floor(sqrt((*c)->safeGetFloat("martial")) + 0.5); 
+      int maneuver = 0;
+      int siege = 0;
+
+      Object* traits = (*c)->getNeededObject("traits");
+      for (int i = 0; i < traits->numTokens(); ++i) {
+	string trait = traits->getToken(i);
+	objvec adds = generalTraits->getValue(trait);
+	for (objiter a = adds.begin(); a != adds.end(); ++a) {
+	  string add = (*a)->getLeaf(); 
+	  if (add == "fire") fire++;
+	  else if (add == "maneuver") maneuver++;
+	  else if (add == "shock") shock++;
+	  else if (add == "siege") siege++;
+	}
+      }
+
+      Logger::logStream(DebugLeaders) << "Marshal " << (*c)->safeGetString("birth_name")
+				      << " becomes " << fire << "-" << shock << "-"
+				      << maneuver << "-" << siege << " general for "
+				      << euNation->getKey() << ".\n";
+      leader->setLeaf("fire", fire);
+      leader->setLeaf("shock", shock);
+      leader->setLeaf("manuever", maneuver); // Not my typo, Pdox spells it thus.
+      leader->setLeaf("siege", siege);
+      Object* id = leader->getNeededObject("id");
+      id->setLeaf("id", leaderId);
+      id->setLeaf("type", "38");
+
+      leader = new Object("leader");
+      leader->setLeaf("id", leaderId);
+      leader->setLeaf("type", "38");
+      euNation->setValue(leader); 
+      leaderId++;
+    }
+  }
+
+  euxGame->resetLeaf("leader", leaderId); 
 }
 
 void WorkerThread::eu3Diplomacy () {
@@ -2489,6 +2553,7 @@ void WorkerThread::eu3StateVariables () {
     euCountry->resetLeaf("navy_tradition", "0");
     euCountry->resetLeaf("inflation", "0.000");
     euCountry->resetLeaf("legitimacy", "1.000");
+    euCountry->unsetValue("leader"); 
     Object* history = euCountry->getNeededObject("history");
     euCountry->unsetValue("press_gangs"); history->unsetValue("press_gangs");
     euCountry->unsetValue("grand_navy"); history->unsetValue("grand_navy");
@@ -2771,6 +2836,13 @@ double WorkerThread::getTotalCkWeight (Object* euCountry, WeightType w) {
   return ret; 
 }
 
+void WorkerThread::printTraits () {
+  int counter = 0;
+  for (objiter trait = traits.begin(); trait != traits.end(); ++trait) {
+    Logger::logStream(Logger::Game) << (*trait)->getKey() << " : " << counter++ << "\n"; 
+  }
+}
+
 void WorkerThread::recursiveAddToHre (Object* ckRuler, Object* euCountry, objvec& electors, objvec& done) {
   if (find(done.begin(), done.end(), euCountry) != done.end()) return; 
   Logger::logStream(DebugHre) << "Adding " << euCountry->getKey() << " to HRE.\n"; 
@@ -3024,6 +3096,7 @@ void WorkerThread::convertEU3 () {
   createCountryMap(); 
   assignCKprovinces();
 
+  printTraits(); 
   eu3Provinces();
   eu3Histories(); 
   eu3Diplomacy();

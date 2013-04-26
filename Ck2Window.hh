@@ -132,6 +132,7 @@ private:
   double getCkWeight (Object* ckprov, WeightType w = BaseTax);
   double getManpower (Object* building);
   double getTotalCkWeight(Object* euCountry, WeightType w = BaseTax);
+  void printTraits ();   
   void recursiveAddToHre (Object* ckRuler, Object* euCountry, objvec& electors, objvec& done); 
   void recursiveCollectCultures (Object* ckRuler, map<string, double>& weights, int iteration);
   void recursiveCollectReligion (Object* ckRuler, map<string, double>& weights, int iteration);
@@ -155,7 +156,7 @@ private:
   
   // Helpers: 
   Object* loadTextFile (string fname);
-  TitleTier titleTier (Object* dat); 
+  TitleTier titleTier (Object* dat);
   
   // CK2 game objects
   objvec characters;

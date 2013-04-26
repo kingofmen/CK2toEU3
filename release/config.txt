@@ -55,6 +55,35 @@ keywords_to_remove = {
   state = add_accepted_culture
   state = primary_culture
   state = religion 
+  state = leader 
+}
+
+general_traits = {
+  15  = maneuver # tough_soldier
+  15  = maneuver # skilled_tactician
+  15  = maneuver
+  16  = maneuver # brilliant_strategist 
+  16  = maneuver
+  16  = maneuver
+  16  = fire 
+  55  = maneuver # Tricksy little dwarfses, precious! 
+  56  = fire     # genius
+  61  = shock    # strong
+  102 = fire     # light_foot_leader
+  102 = maneuver
+  103 = shock    # heavy_infantry_leader 
+  104 = maneuver # cavalry_leader
+  105 = maneuver # inspiring_leader
+  106 = maneuver # trickster
+  107 = maneuver # organizer
+  107 = maneuver 
+  108 = siege    # defensive_leader 
+  108 = fire 
+  109 = fire     # experimenter
+  110 = maneuver # flanker
+  110 = maneuver 
+  111 = shock    # aggressive_leader
+  
 }
 
 e_weight = 1.0 
