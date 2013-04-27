@@ -136,7 +136,7 @@ private:
   void recursiveAddToHre (Object* ckRuler, Object* euCountry, objvec& electors, objvec& done); 
   void recursiveCollectCultures (Object* ckRuler, map<string, double>& weights, int iteration);
   void recursiveCollectReligion (Object* ckRuler, map<string, double>& weights, int iteration);
-  void setCharacterAttributes (Object* euMonarch, Object* ckRuler, int monarchId, Object* dummyBestChar, Object* dummyWorstChar); 
+  void setCharacterAttributes (Object* euMonarch, Object* ckRuler, int monarchId, Object* dummyBestChar, Object* dummyWorstChar);
   
   enum TitleTier {Barony, County, Duchy, Kingdom, Empire, Other};
   enum IterType {Chars, Titles};

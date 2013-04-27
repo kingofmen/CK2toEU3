@@ -305,4 +305,26 @@ attribute for each trait he has that appears in the object
 \verb|general_traits| in \verb|config.txt|. Traits that appear more
 than once confer multiple stat increases. 
 
+\section{Advisors}
+
+Advisors are created from councilors who are not marshals. The type of
+advisor is decided by, firstly, the council position; for example,
+Chancellors can become the kind of advisors listed in the
+\verb|job_chancellor| object in \verb|config.txt|. Second, among these
+candidates the character gets points for attributes and traits, for
+example:
+\begin{verbatim}
+grand_captain = {
+  diplomacy = 1
+  inspiring_leader = 10
+} 
+\end{verbatim}
+indicates one point for each point of diplomacy, and 10 points for the
+Inspiring Leader trait. The character becomes the advisor type with
+the most points, of a level equal to the square root of the points. 
+He is placed in the capital of his nation. 
+
+Notice that not every EU3 advisor type is necessarily possible; the
+default \verb|config.txt| leaves out navy-related, colonial-related,
+and useless advisors. 
 \end{document}

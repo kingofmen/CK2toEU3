@@ -992,6 +992,7 @@ void WorkerThread::createProvinceMap () {
     for (objiter b = baronies.begin(); b != baronies.end(); ++b) {
       string htype = (*b)->safeGetString("type");
       if (!ckBuildings->safeGetObject(htype)) continue;
+      if ((*b)->getKey() == "settlement_construction") continue; 
       Object* btitle = getTitle((*b)->getKey());
       if (!btitle) {
 	Logger::logStream(Logger::Warning) << "Warning: " << (*b)->getKey()
@@ -1570,6 +1571,10 @@ void WorkerThread::eu3Characters () {
   // Generals and advisors
   int leaderId = euxGame->safeGetInt("leader");
   int advisorId = euxGame->safeGetInt("advisor");
+  Object* advisorList = euxGame->getNeededObject("active_advisors");
+  
+  advisorList = advisorList->getNeededObject("western");
+  advisorList->clear(); 
   Object* generalTraits = configObject->getNeededObject("general_traits"); 
   for (objiter c = begin(); c != final(); ++c) {
     string job = remQuotes((*c)->safeGetString("job_title", "\"BLAH\""));
@@ -1579,11 +1584,11 @@ void WorkerThread::eu3Characters () {
     if (!employer) continue;
     Object* euNation = characterToEuCountryMap[employer];
     if (!euNation) continue;
-   
+    
     if (job == "job_marshal") {
       // Make a general
-      Object* event = new Object(remQuotes(euxGame->safeGetString("start_date")));
       Object* history = euNation->getNeededObject("history");
+      Object* event = new Object(remQuotes(euxGame->safeGetString("start_date")));
       history->setValue(event);
       Object* leader = new Object("leader");
       event->setValue(leader);
@@ -1596,9 +1601,9 @@ void WorkerThread::eu3Characters () {
       int maneuver = 0;
       int siege = 0;
 
-      Object* traits = (*c)->getNeededObject("traits");
-      for (int i = 0; i < traits->numTokens(); ++i) {
-	string trait = traits->getToken(i);
+      Object* charTraits = (*c)->getNeededObject("traits");
+      for (int i = 0; i < charTraits->numTokens(); ++i) {
+	string trait = traits[charTraits->tokenAsInt(i)]->getKey();
 	objvec adds = generalTraits->getValue(trait);
 	for (objiter a = adds.begin(); a != adds.end(); ++a) {
 	  string add = (*a)->getLeaf(); 
@@ -1627,9 +1632,81 @@ void WorkerThread::eu3Characters () {
       euNation->setValue(leader); 
       leaderId++;
     }
+    else {
+      // Make an advisor
+      Object* jobOffers = configObject->safeGetObject(job);
+      if (!jobOffers) continue;
+      objvec jobs = jobOffers->getLeaves();
+      map<Object*, double> points;
+      calculateAttributes(*c);
+      Object* charTraits = (*c)->getNeededObject("traits");
+      double maxPoints = -1;
+      Object* bestJob = 0; 
+      for (objiter j = jobs.begin(); j != jobs.end(); ++j) {
+	objvec cvItems = (*j)->getLeaves();
+	for (objiter cv = cvItems.begin(); cv != cvItems.end(); ++cv) {
+	  string key = (*cv)->getKey();
+	  int attrib = (*c)->safeGetInt(key, -999);
+	  if (-999 == attrib) { // This is a trait
+	    for (int i = 0; i < charTraits->numTokens(); ++i) {
+	      int currTrait = charTraits->tokenAsInt(i);
+	      if (key != traits[currTrait]->getKey()) continue; 
+	      points[*j] += (*j)->safeGetFloat(key);
+	      break; 
+	    }
+	  }
+	  else {
+	    points[*j] += attrib * (*j)->safeGetFloat(key);
+	  }
+	}
+	if (points[*j] < maxPoints) continue;
+	maxPoints = points[*j];
+	bestJob = (*j); 
+      }
+
+      if (!bestJob) continue;
+      Object* province = euxGame->safeGetObject(euNation->safeGetString("capital"));
+      if ((!province) || (remQuotes(province->safeGetString("owner")) != euNation->getKey())) {
+	for (map<Object*, objvec>::iterator p = euProvToCkProvsMap.begin(); p != euProvToCkProvsMap.end(); ++p) {
+	  Object* prov = (*p).first;
+	  if (remQuotes(prov->safeGetString("owner")) != euNation->getKey()) continue;
+	  province = prov;
+	  break;
+	}
+      }
+      if (!province) break; 
+
+      if (maxPoints > 36) maxPoints = 36;
+      if (maxPoints < 1) maxPoints = 1;
+      int skill = (int) floor(sqrt(maxPoints + 0.5));
+      Logger::logStream(DebugLeaders) << "Making " << job << " " << (*c)->safeGetString("birth_name")
+				      << " a " << bestJob->getKey() << " of skill " << skill << " for tag " << euNation->getKey() << ".\n";
+
+      Object* history = province->getNeededObject("history"); 
+      Object* event = new Object(remQuotes(euxGame->safeGetString("start_date")));
+      history->setValue(event);
+      Object* advisor = new Object("advisor");
+      event->setValue(advisor);
+      advisor->setLeaf("name", (*c)->safeGetString("birth_name"));
+      advisor->setLeaf("type", bestJob->getKey());
+      advisor->setLeaf("date", euxGame->safeGetString("start_date"));
+      advisor->setLeaf("hire_date", "\"1.1.1\"");
+      advisor->setLeaf("home", addQuotes(euNation->getKey()));
+      advisor->setLeaf("location", province->getKey());
+      advisor->setLeaf("skill", skill); 
+      Object* id = advisor->getNeededObject("id");
+      id->setLeaf("id", advisorId);
+      id->setLeaf("type", "39");
+      id = new Object("advisor");
+      advisorList->setValue(id);
+      id->setLeaf("id", advisorId);
+      id->setLeaf("type", "39");
+      advisorId++; 
+    }
   }
 
-  euxGame->resetLeaf("leader", leaderId); 
+  euxGame->resetLeaf("leader", leaderId);
+  euxGame->resetLeaf("advisor", advisorId);   
 }
 
 void WorkerThread::eu3Diplomacy () {
@@ -2553,8 +2630,10 @@ void WorkerThread::eu3StateVariables () {
     euCountry->resetLeaf("navy_tradition", "0");
     euCountry->resetLeaf("inflation", "0.000");
     euCountry->resetLeaf("legitimacy", "1.000");
-    euCountry->unsetValue("leader"); 
+    euCountry->unsetValue("leader");
+
     Object* history = euCountry->getNeededObject("history");
+    //euCountry->unsetValue("advisor"); history->unsetValue("advisor"); 
     euCountry->unsetValue("press_gangs"); history->unsetValue("press_gangs");
     euCountry->unsetValue("grand_navy"); history->unsetValue("grand_navy");
     euCountry->unsetValue("sea_hawks"); history->unsetValue("sea_hawks");
@@ -3033,8 +3112,6 @@ void WorkerThread::setCharacterAttributes (Object* euMonarch, Object* ckRuler, i
 				       << ".\n"; 
   euMonarch->resetLeaf("dynasty", dynastyName); 
 }
-
-
 
 /******************************* End calculators ********************************/
 

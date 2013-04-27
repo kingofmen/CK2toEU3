@@ -39,7 +39,7 @@ maxPapalInfluence = 0.25
 
 keywords_to_remove = {
   province = revolt
-  province = advisor 
+  #province = advisor 
   province = add_core
   province = culture 
   province = religion 
@@ -59,31 +59,30 @@ keywords_to_remove = {
 }
 
 general_traits = {
-  15  = maneuver # tough_soldier
-  15  = maneuver # skilled_tactician
-  15  = maneuver
-  16  = maneuver # brilliant_strategist 
-  16  = maneuver
-  16  = maneuver
-  16  = fire 
-  55  = maneuver # Tricksy little dwarfses, precious! 
-  56  = fire     # genius
-  61  = shock    # strong
-  102 = fire     # light_foot_leader
-  102 = maneuver
-  103 = shock    # heavy_infantry_leader 
-  104 = maneuver # cavalry_leader
-  105 = maneuver # inspiring_leader
-  106 = maneuver # trickster
-  107 = maneuver # organizer
-  107 = maneuver 
-  108 = siege    # defensive_leader 
-  108 = fire 
-  109 = fire     # experimenter
-  110 = maneuver # flanker
-  110 = maneuver 
-  111 = shock    # aggressive_leader
-  
+ tough_soldier         = maneuver 
+ skilled_tactician     = maneuver 
+ skilled_tactician     = maneuver 
+ brilliant_strategist  = maneuver 
+ brilliant_strategist  = maneuver 
+ brilliant_strategist  = maneuver 
+ brilliant_strategist  = fire     
+ dwarf                 = maneuver 
+ genius                = fire     
+ strong                = shock    
+ light_foot_leader     = fire     
+ light_foot_leader     = maneuver 
+ heavy_infantry_leader = shock    
+ cavalry_leader        = maneuver 
+ inspiring_leader      = maneuver 
+ trickster             = maneuver 
+ organizer             = maneuver 
+ organizer             = maneuver 
+ defensive_leader      = siege    
+ defensive_leader      = fire     
+ experimenter          = fire     
+ flanker               = maneuver 
+ flanker               = maneuver 
+ aggressive_leader     = shock    
 }
 
 e_weight = 1.0 
@@ -350,8 +349,137 @@ skip = {
   d_lombard_band = yes
   d_turkic_company = yes
   d_breton_band = yes
-
-
-
-
 }
+
+job_chancellor = 
+  natural_scientist = {
+    learning = 1
+    genius = 10 
+  }  
+  artist = {
+    poet = 10
+    proud = 5
+    homosexual = 5
+
+  }  
+  statesman = {
+    diplomacy = 1
+    grey_eminence = 10
+    just = 5
+  }
+  diplomat = {
+    diplomacy = 0.8
+    intrigue = 0.8 
+    charismatic_negotiator = 10
+    deceitful = 5
+  }
+  ambassador = {
+    diplomacy = 1.5
+    intrigue = 0.1
+    ambitious = 4
+  }
+}
+
+job_treasurer = { 
+  treasurer = {
+    stewardship = 1
+    midas_touched = 10
+  }
+  trader = {
+    fortune_builder = 10
+    intrigue = 0.75 
+  }
+  sheriff = {
+    gardener = 10
+    martial = 0.3 
+    stewardship = 0.5 
+  }
+  high_judge = {
+    just = 10
+    diplomacy = 1
+  }
+  alderman = {
+    thrifty_clerk = 8
+    content = 4
+  }
+  collector = {
+    greedy = 10
+    intrigue = 0.25
+    martial = 0.1  
+  }
+  master_of_mint = {
+    diligent = 6
+    patient = 6
+    honest = 6
+  }
+  quartermaster = {
+    martial = 1
+    organizer = 10 
+  }  
+}
+
+job_spiritual = {  
+  theologian = {
+    learning = 1
+    scholarly_theologian = 5
+    mastermind_theologian = 10
+    mystic = 5 
+  }
+  philosopher = {
+    prestige = 0.05
+    learning = 1 
+    scholar = 10
+  }
+  army_reformer = {
+    martial = 1 
+    organizer = 4
+  }
+  recruitmaster = {
+    stewardship = 1
+    inspiring_leader = 5
+  }
+  grand_marshal = {
+    diplomacy = 1
+    proud = 4
+    ambitious = 4 
+  }
+}
+
+job_spymaster = {  
+  spymaster = {
+    intrigue = 1
+    trickster = 6 
+    deceitful = 6 
+  }
+  inquisitor = {
+    learning = 1
+    zealous = 6
+  }
+  grand_captain = {
+    diplomacy = 1
+    inspiring_leader = 10
+  } 
+  army_organiser = {
+    stewardship = 1
+    brilliant_strategist = 10
+  }
+  sergeant_major_general = {
+    martial = 1
+    brave = 4
+    tough_soldier = 4
+  }
+  commandant = {
+    martial = 1 
+    organizer = 10
+    diligent = 8 
+  }
+}
+ 
+  
+    
+  
+  
+  
+ 
+  
+  
