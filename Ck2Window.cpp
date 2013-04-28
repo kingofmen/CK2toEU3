@@ -2244,6 +2244,8 @@ void WorkerThread::eu3ProvinceReligion () {
 }
 
 void WorkerThread::eu3Provinces () {
+  double maxCkFortLevel = 0; 
+  
   for (map<Object*, objvec>::iterator link = euProvToCkProvsMap.begin(); link != euProvToCkProvsMap.end(); ++link) {
     Object* eup = (*link).first;
     Object* history = eup->getNeededObject("history"); 
@@ -2286,6 +2288,8 @@ void WorkerThread::eu3Provinces () {
     map<Object*, double> con_weights;
     double owner_con_weight = 0;    
     for (objiter ckp = ckps.begin(); ckp != ckps.end(); ++ckp) {
+      maxCkFortLevel = max(maxCkFortLevel, getCkWeight(*ckp, FortLevel)); 
+      
       objvec leaves = (*ckp)->getLeaves();
       for (objiter leaf = leaves.begin(); leaf != leaves.end(); ++leaf) {
 	if ((*leaf)->safeGetString("type", "BLAH") == "BLAH") continue; // Not a holding
@@ -2355,6 +2359,36 @@ void WorkerThread::eu3Provinces () {
       euCountryToCkProvincesMap[winner].push_back(*ckp);
     }
   }
+
+  // Rebuild forts
+  Object* fortLevels = configObject->getNeededObject("fortLevels");
+  objvec forts = fortLevels->getLeaves(); 
+  for (map<Object*, objvec>::iterator link = euProvToCkProvsMap.begin(); link != euProvToCkProvsMap.end(); ++link) {
+    Object* eup = (*link).first;
+    Object* history = eup->getNeededObject("history"); 
+
+    objvec ckps = (*link).second;
+    if (0 == ckps.size()) continue;
+
+    string keyword = "NONE";
+    double passed = 0;
+    for (objiter level = forts.begin(); level != forts.end(); ++level) {
+      string currKey = (*level)->getKey();
+      double current = fortLevels->safeGetFloat(currKey);
+      for (objiter ckp = ckps.begin(); ckp != ckps.end(); ++ckp) {
+	double currentFortWeight = getCkWeight(*ckp, FortLevel);
+	if (currentFortWeight < maxCkFortLevel * current) continue; // Not enough fort level for this.
+	if (current < passed) continue; // We already did better.
+	keyword = currKey;
+	passed = current; 
+      }
+    }
+    if (keyword == "NONE") continue;
+    eup->resetLeaf(keyword, "yes");
+    history->resetLeaf(keyword, "yes");
+  }
+  
+  
 }
 
 struct SliderInfo {
@@ -2845,14 +2879,18 @@ void WorkerThread::calculateAttributes (Object* ckChar) {
 }
 
 double WorkerThread::getCkWeight (Object* province, WeightType wtype) {
-  string cacheword = "totalTax";
-  string valueword = "tax_income";
-  string modword   = "NOTHING";
+  string cacheword = "totalTax";   // Keyword used to store the result in the province
+  string valueword = "tax_income"; // Keyword for determining raw value of a building
+  string modword   = "NOTHING";    // Keyword for getting percentage modifiers
 
   if (ManPower == wtype) {
     cacheword = "totalMp";
     valueword = "NOTHING";
     modword   = "levy_size";
+  }
+  else if (FortLevel == wtype) {
+    cacheword = "totalFortLevel";
+    valueword = "fort_level";
   }
   
   double ret = province->safeGetFloat(cacheword, -1);

@@ -37,6 +37,12 @@ minimumMaxPrestige = 20
 minimumGold = 10 
 maxPapalInfluence = 0.25
 
+fortLevels = {
+  fort3 = 0.95
+  fort2 = 0.85
+  fort1 = 0.10
+}
+
 keywords_to_remove = {
   province = revolt
   #province = advisor 

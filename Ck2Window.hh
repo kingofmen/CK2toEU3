@@ -127,7 +127,7 @@ private:
   void eu3Taxes ();  
 
   // Calculators, helper methods
-  enum WeightType {BaseTax, ManPower, NumWeights};
+  enum WeightType {BaseTax, ManPower, FortLevel, NumWeights};
   void calculateAttributes (Object* ckChar);  
   double getCkWeight (Object* ckprov, WeightType w = BaseTax);
   double getManpower (Object* building);

@@ -15,6 +15,7 @@ The converter sets:
 \item Province manpower 
 \item Province religion and culture
 \item Cores
+\item Buildings
 \end{itemize}
 
 \section{Province ownership}
@@ -76,6 +77,15 @@ EU3 nations get cores on all CK provinces that are part of their
 de-jure primary-tier titles; that is, Emperors get cores on all their
 Empire titles, Kings get cores on their Kingdom titles, and so
 on. Baronies do not give cores. 
+
+\section{Buildings}
+
+All buildings except forts are removed. Forts are converted from the
+CK fortifications: The total \verb|fort_level| of each CK province is
+counted - note that all baronies contribute. EU provinces having a CK
+province with more than 95\% of the maximum CK fort level then get a
+level-3 fort; more than 85\%, a level-2 fort; and so on. These numbers
+can be changed in the \verb|fortLevels| object of \verb|config.txt|. 
 
 \chapter{States}
 
