@@ -2285,6 +2285,15 @@ void WorkerThread::eu3Provinces () {
       continue; 
     }
 
+    map<string, int> discMap;
+    Object* disc = eup->getNeededObject("discovered_by");
+    disc->setObjList(); 
+    for (int i = 0; i < disc->numTokens(); ++i) discMap[disc->getToken(i)]++;
+    for (map<Object*, Object*>::iterator i = euCountryToCkCountryMap.begin(); i != euCountryToCkCountryMap.end(); ++i) {
+      string tag = (*i).first->getKey(); 
+      if (0 < discMap[tag]) continue;
+      disc->addToList(tag); 
+    }
     
     map<Object*, double> own_weights;
     map<Object*, double> con_weights;
