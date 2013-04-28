@@ -1264,6 +1264,8 @@ void WorkerThread::eu3Armies () {
       	string type = (*barony)->safeGetString("type", "BLAH");
 	if (type == "BLAH") continue;
 
+	// Do not use getCkWeight here because castles have a base galley weight,
+	// so we can't distinguish coastal provinces that way. 
 	Object* buildList = ckBuildings->safeGetObject(type);
 	if (buildList) { 
 	  objvec buildings = buildList->getLeaves();
@@ -2663,11 +2665,13 @@ void WorkerThread::eu3StateVariables () {
     euCountry->resetLeaf("cultural_tradition", "0");
     euCountry->resetLeaf("navy_tradition", "0");
     euCountry->resetLeaf("inflation", "0.000");
+    euCountry->resetLeaf("war_exhaustion", "0.000");    
     euCountry->resetLeaf("legitimacy", "1.000");
+    euCountry->resetLeaf("technology_group", "western"); 
     euCountry->unsetValue("leader");
 
     Object* history = euCountry->getNeededObject("history");
-    //euCountry->unsetValue("advisor"); history->unsetValue("advisor"); 
+    euCountry->unsetValue("advisor"); history->unsetValue("advisor"); 
     euCountry->unsetValue("press_gangs"); history->unsetValue("press_gangs");
     euCountry->unsetValue("grand_navy"); history->unsetValue("grand_navy");
     euCountry->unsetValue("sea_hawks"); history->unsetValue("sea_hawks");
@@ -2853,6 +2857,144 @@ void WorkerThread::eu3Taxes () {
   }
 }
 
+void WorkerThread::eu3Techs () {
+  map<Object*, objvec> ownerMap; 
+  
+  for (map<Object*, objvec>::iterator link = euProvToCkProvsMap.begin(); link != euProvToCkProvsMap.end(); ++link) {
+    Object* eup = (*link).first;
+    Object* euCountry = euxGame->safeGetObject(remQuotes(eup->safeGetString("owner")));
+    if (!euCountry) continue;
+    ownerMap[euCountry].push_back(eup); 
+      
+    for (objiter ckp = (*link).second.begin(); ckp != (*link).second.end(); ++ckp) {
+      eup->resetLeaf("navyWeight", eup->safeGetFloat("navyWeight") + getCkWeight(*ckp, Galleys));
+      eup->resetLeaf("armyWeight", eup->safeGetFloat("armyWeight") + getCkWeight(*ckp, ManPower));
+      eup->resetLeaf("govtWeight", eup->safeGetFloat("govtWeight") + getCkWeight(*ckp, BaseTax));      
+    }
+  }
+
+  double maxNavy = 1;
+  double maxArmy = 1;
+  double maxGovt = 1;
+  ObjectAscendingSorter nsorter("navyWeight");
+  ObjectAscendingSorter asorter("armyWeight");
+  ObjectAscendingSorter gsorter("govtWeight");  
+  for (map<Object*, objvec>::iterator eun = ownerMap.begin(); eun != ownerMap.end(); ++eun) {
+    unsigned int numProvs = (*eun).second.size();
+    if (0 == numProvs) continue;    
+    sort((*eun).second.begin(), (*eun).second.end(), nsorter);
+    double currNavy = (*eun).second[numProvs / 2]->safeGetFloat("navyWeight");
+    if (0 == numProvs%2) {
+      currNavy += (*eun).second[(numProvs / 2) - 1]->safeGetFloat("navyWeight");
+      currNavy *= 0.5; 
+    }
+    double currArmy = (*eun).second[numProvs / 2]->safeGetFloat("armyWeight");
+    if (0 == numProvs%2) {
+      currArmy += (*eun).second[(numProvs / 2) - 1]->safeGetFloat("armyWeight");
+      currArmy *= 0.5; 
+    }
+    double currGovt = (*eun).second[numProvs / 2]->safeGetFloat("govtWeight");
+    if (0 == numProvs%2) {
+      currGovt += (*eun).second[(numProvs / 2) - 1]->safeGetFloat("govtWeight");
+      currGovt *= 0.5; 
+    }
+    
+    maxNavy = max(maxNavy, currNavy);
+    maxArmy = max(maxArmy, currArmy);
+    maxGovt = max(maxGovt, currGovt);    
+
+    (*eun).first->resetLeaf("navyWeight", currNavy);
+    (*eun).first->resetLeaf("armyWeight", currArmy);
+    (*eun).first->resetLeaf("govtWeight", currGovt);
+  }
+
+
+  Object* tl = configObject->getNeededObject("techLevels");
+  objvec techLevels = tl->getLeaves(); 
+  for (map<Object*, objvec>::iterator eun = ownerMap.begin(); eun != ownerMap.end(); ++eun) {
+    double pNavy = -1;
+    double pArmy = -1;
+    double pGovt = -1;    
+
+    Object* euCountry = (*eun).first;
+    Object* techs = euCountry->getNeededObject("technology");
+    Object* history = euCountry->getNeededObject("history");
+    Object* firstDate = history->getNeededObject(remQuotes(euxGame->safeGetString("start_date"))); 
+    for (objiter level = techLevels.begin(); level != techLevels.end(); ++level) {
+      string levelToSet = (*level)->getKey();
+      double neededToPass = tl->safeGetFloat(levelToSet);
+
+      if ((neededToPass > pNavy) && (neededToPass < euCountry->safeGetFloat("navyWeight") / maxNavy)) {
+	Object* navyTech = techs->getNeededObject("naval_tech");
+	navyTech->clear();
+	navyTech->setObjList();
+	navyTech->addToList(levelToSet);
+	navyTech->addToList("0.000");
+	firstDate->resetLeaf("naval_tech", levelToSet);
+	pNavy = neededToPass;
+      }
+      if ((neededToPass > pArmy) && (neededToPass < euCountry->safeGetFloat("armyWeight") / maxArmy)) {
+	Object* armyTech = techs->getNeededObject("land_tech");
+	armyTech->clear();
+	armyTech->setObjList();
+	armyTech->addToList(levelToSet);
+	armyTech->addToList("0.000");
+	firstDate->resetLeaf("land_tech", levelToSet);
+	pArmy = neededToPass;
+      }
+      if ((neededToPass > pGovt) && (neededToPass < euCountry->safeGetFloat("govtWeight") / maxGovt)) {
+	Object* govtTech = techs->getNeededObject("trade_tech");
+	govtTech->clear();
+	govtTech->setObjList();
+	govtTech->addToList(levelToSet);
+	govtTech->addToList("0.000");
+	govtTech = techs->getNeededObject("production_tech");
+	govtTech->clear();
+	govtTech->setObjList();
+	govtTech->addToList(levelToSet);
+	govtTech->addToList("0.000");
+	govtTech = techs->getNeededObject("government_tech");
+	govtTech->clear();
+	govtTech->setObjList();
+	govtTech->addToList(levelToSet);
+	govtTech->addToList("0.000");
+
+	firstDate->resetLeaf("trade_tech", levelToSet);
+	firstDate->resetLeaf("production_tech", levelToSet);
+	firstDate->resetLeaf("government_tech", levelToSet);
+	pGovt = neededToPass;
+      }
+
+      
+    }
+    
+  }
+
+
+  for (map<Object*, objvec>::iterator eun = ownerMap.begin(); eun != ownerMap.end(); ++eun) {
+    Object* euCountry = (*eun).first;
+    Object* techs = euCountry->getNeededObject("technology");
+    Logger::logStream(DebugTechTeams) << "Tag " << euCountry->getKey() << " has weights "
+				      << euCountry->safeGetString("navyWeight") << " "
+				      << euCountry->safeGetString("armyWeight") << " "
+				      << euCountry->safeGetString("govtWeight") << " giving techs "
+				      << techs->safeGetObject("naval_tech")->getToken(0) << " "
+				      << techs->safeGetObject("land_tech")->getToken(0) << " "
+				      << techs->safeGetObject("trade_tech")->getToken(0) << ".\n"; 
+      
+
+    
+    euCountry->unsetValue("navyWeight");
+    euCountry->unsetValue("armyWeight");
+    euCountry->unsetValue("govtWeight");    
+    for (objiter eup = (*eun).second.begin(); eup != (*eun).second.end(); ++eup) {
+      (*eup)->unsetValue("navyWeight");
+      (*eup)->unsetValue("armyWeight");
+      (*eup)->unsetValue("govtWeight");      
+    }
+  }
+}
+
 /******************************* End EU3 conversions ********************************/
 
 /*******************************  Begin calculators ********************************/
@@ -2891,6 +3033,10 @@ double WorkerThread::getCkWeight (Object* province, WeightType wtype) {
   else if (FortLevel == wtype) {
     cacheword = "totalFortLevel";
     valueword = "fort_level";
+  }
+  else if (Galleys == wtype) {
+    cacheword = "totalGalleys";
+    valueword = "galleys"; 
   }
   
   double ret = province->safeGetFloat(cacheword, -1);
@@ -3230,6 +3376,7 @@ void WorkerThread::convertEU3 () {
   eu3Hre();
   eu3Cots(); 
   eu3Papacy(); 
+  eu3Techs(); 
   
   Logger::logStream(Logger::Game) << "Done with conversion, writing to file.\n";
   DWORD attribs = GetFileAttributesA("Output");

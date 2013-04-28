@@ -267,6 +267,14 @@ events containing any of the keywords listed in
 \verb|keywords_to_remove|
 within \verb|config.txt| with the key \verb|state|. 
 
+Tech group is set to western. Tech levels are found by calculating the
+median base tax, manpower, and number of galleys in the CK provinces
+of each EU3 nation. Those with at least 75\% of the maximum then get level-4 tech (where
+manpower governs army tech, galleys naval, and base tax the three
+others); those with less than 25\% get level-2; and everyone else gets the
+standard level-3 starting tech. The top and bottom levels are
+adjustable in the \verb|techLevels| object of \verb|config.txt|. 
+
 \chapter{Miscellany}
 
 \section{The HRE}

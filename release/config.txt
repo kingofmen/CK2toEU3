@@ -43,6 +43,12 @@ fortLevels = {
   fort1 = 0.10
 }
 
+techLevels = {
+  4 = 0.75
+  3 = 0.25
+  2 = 0.00 
+}
+
 keywords_to_remove = {
   province = revolt
   #province = advisor 
