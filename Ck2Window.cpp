@@ -810,7 +810,16 @@ void WorkerThread::createCountryMap () {
     if (demesne) {
       string primary = remQuotes(demesne->safeGetString("primary", "BAH"));
       if ((primary != "BAH") && (primary != cktag)) continue;
-    } 
+    }
+    // Sometimes primary title is not listed. Check that this is a highest-level title for the character.
+    TitleTier thisTier = titleTier(title);
+    TitleTier bestTier = thisTier; 
+    for (objiter t = beginRel(holder, Title); t != finalRel(holder, Title); ++t) {
+      TitleTier currTier = titleTier(*t);
+      if (currTier <= bestTier) continue;
+      bestTier = currTier;
+    }
+    if (bestTier > thisTier) continue; 
     
     string eutag = (*link)->safeGetString("EUX");
     Object* country = euxGame->safeGetObject(eutag);
