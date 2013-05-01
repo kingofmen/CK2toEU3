@@ -2683,6 +2683,7 @@ void WorkerThread::eu3StateVariables () {
     euCountry->resetLeaf("cultural_tradition", "0");
     euCountry->resetLeaf("navy_tradition", "0");
     euCountry->resetLeaf("inflation", "0.000");
+    euCountry->resetLeaf("unit_type", "western"); 
     euCountry->resetLeaf("war_exhaustion", "0.000");    
     euCountry->resetLeaf("legitimacy", "1.000");
     euCountry->resetLeaf("technology_group", "western"); 
