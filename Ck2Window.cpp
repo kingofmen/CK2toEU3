@@ -941,11 +941,9 @@ void WorkerThread::createCountryMap () {
 					  << ".\n"; 
 	break;
       }
+      dejureTag = remQuotes(liegeTitle->safeGetString("de_jure_liege"));
       liegeTitle = liegeMap[liegeTitle];
-      if (!liegeTitle) {
-	dejureTag = remQuotes(liegeTitle->safeGetString("de_jure_liege"));
-	liegeTitle = getTitle(dejureTag); 
-      }
+      if (!liegeTitle) liegeTitle = getTitle(dejureTag); 
     }
     if (characterToEuCountryMap[best]) continue;        
 
