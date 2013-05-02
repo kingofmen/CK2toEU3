@@ -2301,6 +2301,7 @@ void WorkerThread::eu3Provinces () {
       if (0 < discMap[tag]) continue;
       disc->addToList(tag); 
     }
+    eup->resetLeaf("doneDisc", "yes"); 
     
     map<Object*, double> own_weights;
     map<Object*, double> con_weights;
@@ -2406,6 +2407,38 @@ void WorkerThread::eu3Provinces () {
     history->resetLeaf(keyword, "yes");
   }
   
+
+  objvec eu3provs = euxGame->getLeaves();
+  for (objiter eup = eu3provs.begin(); eup != eu3provs.end(); ++eup) {
+    string done = (*eup)->safeGetString("doneDisc", "no");
+    if (done == "yes") {
+      (*eup)->unsetValue("doneDisc");
+      continue; 
+    }
+    
+    Object* disc = (*eup)->safeGetObject("discovered_by");
+    if (!disc) continue;
+    Object* history = (*eup)->safeGetObject("history");
+    if (!history) continue;
+    objvec checkDisc = history->getLeaves();
+    bool good = false;
+    for (objiter c = checkDisc.begin(); c != checkDisc.end(); ++c) {
+      if ((*c)->getKey() != "discovered_by") continue;
+      if ((*c)->getLeaf() != "\"western\"") continue;
+      good = true;
+      break;
+    }
+    if (!good) continue;
+    
+    map<string, int> discMap;    
+    disc->setObjList(); 
+    for (int i = 0; i < disc->numTokens(); ++i) discMap[disc->getToken(i)]++;
+    for (map<Object*, Object*>::iterator i = euCountryToCkCountryMap.begin(); i != euCountryToCkCountryMap.end(); ++i) {
+      string tag = (*i).first->getKey(); 
+      if (0 < discMap[tag]) continue;
+      disc->addToList(tag); 
+    }
+  }
   
 }
 
