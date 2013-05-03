@@ -2917,107 +2917,71 @@ void WorkerThread::eu3Techs () {
     ownerMap[euCountry].push_back(eup); 
       
     for (objiter ckp = (*link).second.begin(); ckp != (*link).second.end(); ++ckp) {
-      eup->resetLeaf("navyWeight", eup->safeGetFloat("navyWeight") + getCkWeight(*ckp, Galleys));
-      eup->resetLeaf("armyWeight", eup->safeGetFloat("armyWeight") + getCkWeight(*ckp, ManPower));
-      eup->resetLeaf("govtWeight", eup->safeGetFloat("govtWeight") + getCkWeight(*ckp, BaseTax));      
+      int holdings = (*ckp)->safeGetInt("max_settlements", 1);
+      eup->resetLeaf("navyWeight", eup->safeGetFloat("navyWeight") + getCkWeight(*ckp, Galleys) / holdings);
+      eup->resetLeaf("armyWeight", eup->safeGetFloat("armyWeight") + getCkWeight(*ckp, ManPower) / holdings);
+      eup->resetLeaf("prodWeight", eup->safeGetFloat("prodWeight") + getCkWeight(*ckp, BaseTax) / holdings);
+      eup->resetLeaf("tradWeight", eup->safeGetFloat("tradWeight") + getCkWeight(*ckp, EconTech));
+      eup->resetLeaf("govtWeight", eup->safeGetFloat("govtWeight") + getCkWeight(*ckp, GovtTech)); 
     }
   }
 
-  double maxNavy = 1;
-  double maxArmy = 1;
-  double maxGovt = 1;
-  ObjectAscendingSorter nsorter("navyWeight");
-  ObjectAscendingSorter asorter("armyWeight");
-  ObjectAscendingSorter gsorter("govtWeight");  
-  for (map<Object*, objvec>::iterator eun = ownerMap.begin(); eun != ownerMap.end(); ++eun) {
-    unsigned int numProvs = (*eun).second.size();
-    if (0 == numProvs) continue;    
-    sort((*eun).second.begin(), (*eun).second.end(), nsorter);
-    double currNavy = (*eun).second[numProvs / 2]->safeGetFloat("navyWeight");
-    if (0 == numProvs%2) {
-      currNavy += (*eun).second[(numProvs / 2) - 1]->safeGetFloat("navyWeight");
-      currNavy *= 0.5; 
-    }
-    double currArmy = (*eun).second[numProvs / 2]->safeGetFloat("armyWeight");
-    if (0 == numProvs%2) {
-      currArmy += (*eun).second[(numProvs / 2) - 1]->safeGetFloat("armyWeight");
-      currArmy *= 0.5; 
-    }
-    double currGovt = (*eun).second[numProvs / 2]->safeGetFloat("govtWeight");
-    if (0 == numProvs%2) {
-      currGovt += (*eun).second[(numProvs / 2) - 1]->safeGetFloat("govtWeight");
-      currGovt *= 0.5; 
-    }
-    
-    maxNavy = max(maxNavy, currNavy);
-    maxArmy = max(maxArmy, currArmy);
-    maxGovt = max(maxGovt, currGovt);    
+  vector<pair<string, double> > maxValues;
+  maxValues.push_back(pair<string, double>("navyWeight", 1));
+  maxValues.push_back(pair<string, double>("armyWeight", 1));
+  maxValues.push_back(pair<string, double>("govtWeight", 1));
+  maxValues.push_back(pair<string, double>("prodWeight", 1));
+  maxValues.push_back(pair<string, double>("tradWeight", 1));  
 
-    (*eun).first->resetLeaf("navyWeight", currNavy);
-    (*eun).first->resetLeaf("armyWeight", currArmy);
-    (*eun).first->resetLeaf("govtWeight", currGovt);
+  for (vector<pair<string, double> >::iterator m = maxValues.begin(); m != maxValues.end(); ++m) {
+    ObjectAscendingSorter sorter((*m).first); 
+    for (map<Object*, objvec>::iterator eun = ownerMap.begin(); eun != ownerMap.end(); ++eun) {
+      unsigned int numProvs = (*eun).second.size();
+      if (0 == numProvs) continue;    
+      sort((*eun).second.begin(), (*eun).second.end(), sorter);
+      double currVal = (*eun).second[numProvs / 2]->safeGetFloat((*m).first);
+      if (0 == numProvs%2) {
+	currVal += (*eun).second[(numProvs / 2) - 1]->safeGetFloat((*m).first);
+	currVal *= 0.5; 
+      }
+
+      (*m).second = max((*m).second, currVal);
+      (*eun).first->resetLeaf((*m).first, currVal);
+    }
   }
 
 
   Object* tl = configObject->getNeededObject("techLevels");
-  objvec techLevels = tl->getLeaves(); 
+  objvec techLevels = tl->getLeaves();
+  map<string, string> euTechNames;
+  euTechNames["navyWeight"] = "naval_tech";
+  euTechNames["armyWeight"] = "land_tech";
+  euTechNames["govtWeight"] = "government_tech";
+  euTechNames["prodWeight"] = "production_tech";
+  euTechNames["tradWeight"] = "trade_tech";
   for (map<Object*, objvec>::iterator eun = ownerMap.begin(); eun != ownerMap.end(); ++eun) {
-    double pNavy = -1;
-    double pArmy = -1;
-    double pGovt = -1;    
 
     Object* euCountry = (*eun).first;
     Object* techs = euCountry->getNeededObject("technology");
     Object* history = euCountry->getNeededObject("history");
-    Object* firstDate = history->getNeededObject(remQuotes(euxGame->safeGetString("start_date"))); 
-    for (objiter level = techLevels.begin(); level != techLevels.end(); ++level) {
-      string levelToSet = (*level)->getKey();
-      double neededToPass = tl->safeGetFloat(levelToSet);
-
-      if ((neededToPass > pNavy) && (neededToPass < euCountry->safeGetFloat("navyWeight") / maxNavy)) {
-	Object* navyTech = techs->getNeededObject("naval_tech");
-	navyTech->clear();
-	navyTech->setObjList();
-	navyTech->addToList(levelToSet);
-	navyTech->addToList("0.000");
-	firstDate->resetLeaf("naval_tech", levelToSet);
-	pNavy = neededToPass;
+    Object* firstDate = history->getNeededObject(remQuotes(euxGame->safeGetString("start_date")));
+    for (vector<pair<string, double> >::iterator m = maxValues.begin(); m != maxValues.end(); ++m) {
+      double passed = -1; 
+      for (objiter level = techLevels.begin(); level != techLevels.end(); ++level) {
+	string levelToSet = (*level)->getKey();
+	double neededToPass = tl->safeGetFloat(levelToSet);
+	
+	if ((neededToPass > passed) && (neededToPass < euCountry->safeGetFloat((*m).first) / (*m).second)) {
+	  Object* navyTech = techs->getNeededObject(euTechNames[(*m).first]);
+	  navyTech->clear();
+	  navyTech->setObjList();
+	  navyTech->addToList(levelToSet);
+	  navyTech->addToList("0.000");
+	  firstDate->resetLeaf(euTechNames[(*m).first], levelToSet);
+	  passed = neededToPass;
+	}
       }
-      if ((neededToPass > pArmy) && (neededToPass < euCountry->safeGetFloat("armyWeight") / maxArmy)) {
-	Object* armyTech = techs->getNeededObject("land_tech");
-	armyTech->clear();
-	armyTech->setObjList();
-	armyTech->addToList(levelToSet);
-	armyTech->addToList("0.000");
-	firstDate->resetLeaf("land_tech", levelToSet);
-	pArmy = neededToPass;
-      }
-      if ((neededToPass > pGovt) && (neededToPass < euCountry->safeGetFloat("govtWeight") / maxGovt)) {
-	Object* govtTech = techs->getNeededObject("trade_tech");
-	govtTech->clear();
-	govtTech->setObjList();
-	govtTech->addToList(levelToSet);
-	govtTech->addToList("0.000");
-	govtTech = techs->getNeededObject("production_tech");
-	govtTech->clear();
-	govtTech->setObjList();
-	govtTech->addToList(levelToSet);
-	govtTech->addToList("0.000");
-	govtTech = techs->getNeededObject("government_tech");
-	govtTech->clear();
-	govtTech->setObjList();
-	govtTech->addToList(levelToSet);
-	govtTech->addToList("0.000");
-
-	firstDate->resetLeaf("trade_tech", levelToSet);
-	firstDate->resetLeaf("production_tech", levelToSet);
-	firstDate->resetLeaf("government_tech", levelToSet);
-	pGovt = neededToPass;
-      }
-
-      
     }
-    
   }
 
 
@@ -3027,20 +2991,20 @@ void WorkerThread::eu3Techs () {
     Logger::logStream(DebugTechTeams) << "Tag " << euCountry->getKey() << " has weights "
 				      << euCountry->safeGetString("navyWeight") << " "
 				      << euCountry->safeGetString("armyWeight") << " "
+				      << euCountry->safeGetString("prodWeight") << " "
+				      << euCountry->safeGetString("tradWeight") << " "      
 				      << euCountry->safeGetString("govtWeight") << " giving techs "
 				      << techs->safeGetObject("naval_tech")->getToken(0) << " "
 				      << techs->safeGetObject("land_tech")->getToken(0) << " "
-				      << techs->safeGetObject("trade_tech")->getToken(0) << ".\n"; 
+				      << techs->safeGetObject("production_tech")->getToken(0) << " "
+				      << techs->safeGetObject("trade_tech")->getToken(0) << " "      
+				      << techs->safeGetObject("government_tech")->getToken(0) << ".\n"; 
       
-
-    
-    euCountry->unsetValue("navyWeight");
-    euCountry->unsetValue("armyWeight");
-    euCountry->unsetValue("govtWeight");    
-    for (objiter eup = (*eun).second.begin(); eup != (*eun).second.end(); ++eup) {
-      (*eup)->unsetValue("navyWeight");
-      (*eup)->unsetValue("armyWeight");
-      (*eup)->unsetValue("govtWeight");      
+    for (vector<pair<string, double> >::iterator m = maxValues.begin(); m != maxValues.end(); ++m) {    
+      euCountry->unsetValue((*m).first);
+      for (objiter eup = (*eun).second.begin(); eup != (*eun).second.end(); ++eup) {
+	(*eup)->unsetValue((*m).first);
+      }
     }
   }
 }
@@ -3075,18 +3039,23 @@ double WorkerThread::getCkWeight (Object* province, WeightType wtype) {
   string valueword = "tax_income"; // Keyword for determining raw value of a building
   string modword   = "NOTHING";    // Keyword for getting percentage modifiers
 
-  if (ManPower == wtype) {
+  switch (wtype) {
+  case ManPower:
     cacheword = "totalMp";
     valueword = "NOTHING";
     modword   = "levy_size";
-  }
-  else if (FortLevel == wtype) {
+    break;
+  case FortLevel:
     cacheword = "totalFortLevel";
     valueword = "fort_level";
-  }
-  else if (Galleys == wtype) {
+    break;
+  case Galleys:
     cacheword = "totalGalleys";
-    valueword = "galleys"; 
+    valueword = "galleys";
+    break;
+  case EconTech: return getTotalTechLevel(province, 8, 16);
+  case GovtTech: return getTotalTechLevel(province, 16, 24);
+  default: break;
   }
   
   double ret = province->safeGetFloat(cacheword, -1);
@@ -3146,6 +3115,17 @@ double WorkerThread::getTotalCkWeight (Object* euCountry, WeightType w) {
   for (objiter prov = euCountryToCkProvincesMap[euCountry].begin(); prov != euCountryToCkProvincesMap[euCountry].end(); ++prov) {
     ret += getCkWeight(*prov); 
   }
+  return ret; 
+}
+
+double WorkerThread::getTotalTechLevel (Object* province, int minTech, int maxTech) {
+  Object* provTechs = province->safeGetObject("technology");
+  if (!provTechs) return 0;
+  double ret = 0;
+  if (-1 == maxTech) maxTech = minTech + 1; 
+  for (int i = minTech; i < maxTech; ++i) {
+    ret += provTechs->tokenAsInt(i);
+  }	
   return ret; 
 }
 

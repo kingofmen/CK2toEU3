@@ -128,11 +128,12 @@ private:
   void eu3Techs (); 
 
   // Calculators, helper methods
-  enum WeightType {BaseTax, ManPower, FortLevel, Galleys, NumWeights};
+  enum WeightType {BaseTax, ManPower, FortLevel, Galleys, EconTech, GovtTech, NumWeights};
   void calculateAttributes (Object* ckChar);  
   double getCkWeight (Object* ckprov, WeightType w = BaseTax);
   double getManpower (Object* building);
-  double getTotalCkWeight(Object* euCountry, WeightType w = BaseTax);
+  double getTotalCkWeight (Object* euCountry, WeightType w = BaseTax);
+  double getTotalTechLevel (Object* ckprov, int minTech, int maxTech = -1); 
   void printTraits ();   
   void recursiveAddToHre (Object* ckRuler, Object* euCountry, objvec& electors, objvec& done); 
   void recursiveCollectCultures (Object* ckRuler, map<string, double>& weights, int iteration);
