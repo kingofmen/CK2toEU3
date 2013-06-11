@@ -30,6 +30,8 @@ eu4dir = .\Vanilla\
 logfile = logfile.txt
 numElectors = 7
 
+unitConversionRatio = 3
+maxArmySize = 50
 forbidShips = { 4 283 98 }
 numForeignMerchants = 10 
 

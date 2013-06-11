@@ -1224,6 +1224,9 @@ void WorkerThread::eu3Armies () {
     if (0 == retinue) continue; // Rhyming code!
     if (euLocation == "") euLocation = euNation->safeGetString("capital"); 
 
+    retinue /= configObject->safeGetInt("unitConversionRatio", 1);
+    if (retinue > configObject->safeGetInt("maxArmySize", 10000)) retinue = configObject->safeGetInt("maxArmySize", 10000); 
+    
     Logger::logStream(DebugUnits) << "Creating " << retinue
 				  << " regiments for tag " << euNation->getKey()
 				  << ", to be placed in " << euLocation << ".\n"; 
