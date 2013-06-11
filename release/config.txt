@@ -18,11 +18,11 @@ debug = {
   45 = no # Manpower 
   46 = no # Culture
   47 = no # Religion 
-  48 = no # Governments 
+  48 = yes # Governments 
   49 = no # HRE 
   50 = no # COTs
   51 = no # Diplomacy  
-  all = yes 
+  all = no 
 }
 eu3dir = .\DW\ 
 ck2dir = .\ckvanilla\

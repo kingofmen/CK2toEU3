@@ -1828,7 +1828,10 @@ void WorkerThread::eu3Governments () {
     
     string succession = ckCountry->safeGetString("succession", "primogeniture");
     if (succession == "patrician_elective") euCountry->resetLeaf("government", "merchant_republic");
-    else euCountry->resetLeaf("government", "feudal_monarchy");
+    else {
+      if (titleTier(ckCountry) == Empire) euCountry->resetLeaf("government", "imperial_government");
+      else euCountry->resetLeaf("government", "feudal_monarchy");
+    }
 
     Logger::logStream(DebugGovernments) << "Government of " << ckCountry->getKey()
 					<< " (" << euCountry->getKey() << ") is "
