@@ -21,7 +21,7 @@ link = { CK2 = e_golden_horde  EUX = GOL } # Golden Horde
 link = { CK2 = e_timurids  EUX = TIM } # Timurids
 
 link = { CK2 = e_il-khanate  EUX = JAI } # Ilkhanate => Jalayirids
-link = { CK2 = e_persia EUX = NAJ } # Persia => Najd #D
+link = { CK2 = e_persia EUX = PER } # Persia
 link = { CK2 = e_arabia EUX = HED } # Arabia => Hedjaz ???
 
 # Titular Empires
@@ -111,6 +111,8 @@ link = { CK2 = k_trinacria EUX = SIC } # Trinacria => Sicily
 
 ## Duchies, Holy Orders, and Mercenaries
 # European Duchies
+link = { CK2 = d_uppland EUX = GOT } # Uppland
+link = { CK2 = d_gotland EUX = GOT } # Gotland
 link = { CK2 = d_holland EUX = HOL } # Holland
 link = { CK2 = d_gelre EUX = GEL } # Gelre
 link = { CK2 = d_brabant EUX = BRB } # Brabant
@@ -123,6 +125,7 @@ link = { CK2 = d_mecklemburg EUX = MKL } # Mecklenburg
 link = { CK2 = d_pommerania EUX = POM } # Pommerania
 link = { CK2 = d_pomeralia EUX = POM } # Pomeralia => Pommerania
 link = { CK2 = d_saxony EUX = SAX } # Saxony
+link = { CK2 = d_swabia EUX = WUR } # Swabia
 link = { CK2 = d_brandenburg EUX = BRA } # Brandenburg
 link = { CK2 = d_meissen EUX = MEI } # Meissen
 link = { CK2 = d_bavaria EUX = BAV } # Bavaria
@@ -143,7 +146,8 @@ link = { CK2 = d_cyprus EUX = CYP } # Cyprus
 link = { CK2 = d_wallachia EUX = WAL } # Wallachia
 link = { CK2 = d_moldau EUX = MOL } # Moldavia
 link = { CK2 = d_bosnia EUX = BOS } # Bosnia
-link = { CK2 = d_croatia EUX = CRO } # Croatia
+link = { CK2 = d_croatia EUX = CRO } # Croati
+link = { CK2 = d_salerno EUX = SIC } # Lukania
 link = { CK2 = d_sicily EUX = SIC } # Sicily
 link = { CK2 = d_holstein EUX = SHL } # Holstein
 link = { CK2 = d_finland EUX = FIN } # Finland
@@ -212,7 +216,7 @@ link = { CK2 = d_khiva EUX = KHI } # Khiva
 link = { CK2 = d_medina EUX = HED } # Medina => Hedjaz
 link = { CK2 = d_oman EUX = OMA } # Oman
 link = { CK2 = d_sanaa EUX = OMA } 
-link = { CK2 = d_nefoud EUX = PER } # Nefoud => Persia #D
+link = { CK2 = d_nefoud EUX = NAJ } # Nefoud => Najd
 link = { CK2 = d_jerusalem EUX = KOJ } # Jerusalem ???
 link = { CK2 = d_syria EUX = SYR } # Syria
 link = { CK2 = d_marrakech EUX = MOR } # Morrocco
@@ -221,7 +225,6 @@ link = { CK2 = d_alger EUX = ALG } # Algiers
 link = { CK2 = d_tunis EUX = TUN } # Tunisia
 link = { CK2 = d_tripolitania EUX = TRP } # Tripoli
 link = { CK2 = d_mali EUX = MAL } # Mali
-link = { CK2 = d_songhay EUX = SON } # Songhai
 link = { CK2 = d_harer EUX = ADA } # Harer => Adal
 
 # Holy Orders
