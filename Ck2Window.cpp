@@ -1018,6 +1018,17 @@ void WorkerThread::createProvinceMap () {
     }
     titleToCkProvinceMap[ctitle] = (*ckp); 
   }
+
+  objvec leaves = ck2Game->getLeaves();
+  for (objiter prov = leaves.begin(); prov != leaves.end(); ++prov) {
+    int maxSettlements = (*prov)->safeGetInt("max_settlements", -1); 
+    if (-1 == maxSettlements) continue;
+
+    if (ckProvToEuProvsMap.find(*prov) == ckProvToEuProvsMap.end())
+      Logger::logStream(Logger::Warning) << "No conversion specified for province "
+					 << nameAndNumber(*prov)
+					 << ".\n"; 
+  }
 }
 
 void WorkerThread::createVassalsMap () {
@@ -1202,7 +1213,15 @@ void WorkerThread::eu3Armies () {
 
     int retinue = 0;
     string euLocation = ""; 
-    objvec ckArmies = demesne->getValue("army"); 
+    objvec ckArmies = demesne->getValue("army");
+    objvec ckNavies = demesne->getValue("navy");
+    for (objiter ckNavy = ckNavies.begin(); ckNavy != ckNavies.end(); ++ckNavy) {
+      objvec loadedArmies = (*ckNavy)->getValue("army");
+      for (objiter army = loadedArmies.begin(); army != loadedArmies.end(); ++army) {
+	ckArmies.push_back(*army); 
+      }
+    }
+    
     for (objiter ckArmy = ckArmies.begin(); ckArmy != ckArmies.end(); ++ckArmy) {
       objvec units = (*ckArmy)->getValue("sub_unit");
       for (objiter unit = units.begin(); unit != units.end(); ++unit) {
@@ -2290,6 +2309,15 @@ void WorkerThread::eu3Provinces () {
     eup->unsetValue("fort5"); history->unsetValue("fort5");
     eup->unsetValue("fort6"); history->unsetValue("fort6");
 
+    if (eup->safeGetInt("citysize") < 999) {
+      eup->resetLeaf("citysize", 999);
+      eup->resetLeaf("native_hostileness", "1");
+      eup->resetLeaf("native_ferocity", "1");
+      history->resetLeaf("citysize", 999);
+      history->resetLeaf("native_hostileness", "1");
+      history->resetLeaf("native_ferocity", "1");
+    }
+    
     objvec ckps = (*link).second;
     if (0 == ckps.size()) {
       Logger::logStream(Logger::Warning) << "Warning: No CK provinces for "
