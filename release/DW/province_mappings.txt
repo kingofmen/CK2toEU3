@@ -2,24 +2,8 @@
 ##
 seas = {
 link = { ck2 = 350 ck2 = 349 eux = 119 }	# Ancona, Spoleto -> Ancona
-link = { ck2 = 335 ck2 = 929 eux = 120 }	# Benevento, Aprutium -> Abruzzi
 link = { ck2 = 930 eux = 1311 eux = 1307 }	# Golfo di Taranto -> Gulf of Taranto, Straits of Messina
 link = { ck2 = 1008 ck2 = 943 eux = 1253 }	# Gulf of Bothnia, Näsijärvi -> Ålands Hav
-link = { ck2 = 925 eux = 1121 eux = 1124 }	# Mali -> Bure, Wasuju
-link = { ck2 = 926 eux = 1120 }	# Bambuk -> Bambuk
-# link = { ck2 = 924 ck2 = 923 eux = 1793 }	# Western Sahara, Adrar Plateau -> El Djouf
-link = { ck2 = 915 eux = 1134 }	# Djenné -> Jenne
-link = { ck2 = 919 eux = 1132 }	# Oualata -> Timbuktu
-link = { ck2 = 914 ck2 = 922 eux = 1142 }	# Gao, Tadmekka -> Dendi
-link = { ck2 = 911 eux = 1133 }	# Timbuktu -> Gao
-link = { ck2 = 927 eux = 1143 }	# Zarma -> Borgu
-link = { ck2 = 928 eux = 1136 }	# Gurma -> Gurma
-link = { ck2 = 913 eux = 1135 }	# Ghana -> Yatenga
-link = { ck2 = 912 eux = 1131 }	# Aoudaghost -> Massina
-link = { ck2 = 918 eux = 1127 }	# Sijilmasa -> Tuat
-link = { ck2 = 916 eux = 1128 }	# Taghaza -> Taodeni
-link = { ck2 = 917 eux = 1130 }	# Araouane -> Tadimekket
-link = { ck2 = 920 ck2 = 921 eux = 1129 }	# Ouadane, Idjil -> Azawadd
 link = { ck2 = 1011 ck2 = 1020 eux = 1294 }	# Mauretanian Coast, Western Mediterranean -> Gulf of Almeria
 link = { ck2 = 1021 eux = 1295 eux = 1299 }	# Golfo de Valencia -> Gulf of Valencia, Gulf of Mallorca
 link = { ck2 = 1022 eux = 1301 }	# Islas Baleares -> Barbary Coast
@@ -271,7 +255,7 @@ link = { ck2 = 348 ck2 = 347 ck2 = 346 ck2 = 345 eux = 122 }	# Foggia, Apulia, B
 link = { ck2 = 356 eux = 112 }	# Venezia -> Venezia
 link = { ck2 = 333 ck2 = 243 eux = 118 }	# Rome, Orvieto -> Roma
 link = { ck2 = 350 eux = 119 }	# Ancona -> Ancona
-link = { ck2 = 349 ck2 = 335 eux = 120 }	# Spoleto, Benevento -> Abruzzi
+link = { ck2 = 349 ck2 = 335 ck2 = 929 eux = 120 }	# Spoleto,Benevento -> Abruzzi
 link = { ck2 = 851 ck2 = 334 ck2 = 336 eux = 121 }	# Capua, Napoli, Salerno -> Napoli
 link = { ck2 = 353 ck2 = 355 eux = 113 }	# Ferrara, Padua -> Ferrara
 link = { ck2 = 322 ck2 = 323 eux = 106 }	# Modena, Lucca -> Modena
@@ -596,3 +580,19 @@ link = { ck2 = 759 eux = 323 }	# Ikonion -> Konya
 link = { ck2 = 749 eux = 322 }	# Dorylaion -> Anatolia
 link = { ck2 = 754 eux = 1848 }	# Sozopolis -> Hamid
 ##
+
+# Mali
+link = { ck2 = 925 eux = 1121 eux = 1124 }	# Mali -> Bure, Wasuju
+link = { ck2 = 926 eux = 1120 }	# Bambuk -> Bambuk
+# link = { ck2 = 924 ck2 = 923 eux = 1793 }	# Western Sahara, Adrar Plateau -> El Djouf
+link = { ck2 = 915 eux = 1134 }	# Djenné -> Jenne
+link = { ck2 = 919 eux = 1132 }	# Oualata -> Timbuktu
+link = { ck2 = 914 ck2 = 922 eux = 1142 }	# Gao, Tadmekka -> Dendi
+link = { ck2 = 911 eux = 1133 }	# Timbuktu -> Gao
+link = { ck2 = 927 eux = 1143 }	# Zarma -> Borgu
+link = { ck2 = 928 eux = 1136 }	# Gurma -> Gurma
+link = { ck2 = 913 eux = 1135 }	# Ghana -> Yatenga
+link = { ck2 = 912 eux = 1131 }	# Aoudaghost -> Massina
+link = { ck2 = 918 eux = 1127 }	# Sijilmasa -> Tuat
+link = { ck2 = 916 eux = 1128 }	# Taghaza -> Taodeni
+link = { ck2 = 920 ck2 = 917 ck2 = 921 eux = 1129 }	# Ouadane,Araouane, Idjil -> Azawadd
