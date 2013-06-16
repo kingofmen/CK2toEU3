@@ -21,7 +21,7 @@ link = { CK2 = e_golden_horde  EUX = GOL } # Golden Horde
 link = { CK2 = e_timurids  EUX = TIM } # Timurids
 
 link = { CK2 = e_il-khanate  EUX = JAI } # Ilkhanate => Jalayirids
-link = { CK2 = e_persia EUX = PER } # Persia
+link = { CK2 = e_persia EUX = NAJ } # Persia => Najd #D
 link = { CK2 = e_arabia EUX = HED } # Arabia => Hedjaz ???
 
 # Titular Empires
@@ -212,7 +212,7 @@ link = { CK2 = d_khiva EUX = KHI } # Khiva
 link = { CK2 = d_medina EUX = HED } # Medina => Hedjaz
 link = { CK2 = d_oman EUX = OMA } # Oman
 link = { CK2 = d_sanaa EUX = OMA } 
-link = { CK2 = d_nefoud EUX = NAJ } # Nefoud => Najd
+link = { CK2 = d_nefoud EUX = PER } # Nefoud => Persia #D
 link = { CK2 = d_jerusalem EUX = KOJ } # Jerusalem ???
 link = { CK2 = d_syria EUX = SYR } # Syria
 link = { CK2 = d_marrakech EUX = MOR } # Morrocco
