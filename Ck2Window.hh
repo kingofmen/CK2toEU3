@@ -132,6 +132,7 @@ private:
   void calculateAttributes (Object* ckChar);  
   double getCkWeight (Object* ckprov, WeightType w = BaseTax);
   double getManpower (Object* building);
+  Object* getSovereign (Object* title);   
   double getTotalCkWeight (Object* euCountry, WeightType w = BaseTax);
   double getTotalTechLevel (Object* ckprov, int minTech, int maxTech = -1); 
   void printTraits ();   
@@ -191,6 +192,9 @@ private:
   objvec sovereigns;
   map<Object*, Object*> liegeMap;
   map<Object*, objvec> vassalMap;
+  map<Object*, map<Object*, int> > tagBuildingsMap; // Buildings per tag, no vassals
+  map<Object*, map<Object*, int> > sovBuildingsMap; // Stores number of buildings for sovereign tags, including vassals
+
 
   // Input info
   objvec countryLinks;

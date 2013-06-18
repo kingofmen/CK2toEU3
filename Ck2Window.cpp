@@ -1240,10 +1240,10 @@ void WorkerThread::eu3Armies () {
       }
     }
 
+    retinue /= configObject->safeGetInt("unitConversionRatio", 1);        
     if (0 == retinue) continue; // Rhyming code!
     if (euLocation == "") euLocation = euNation->safeGetString("capital"); 
 
-    retinue /= configObject->safeGetInt("unitConversionRatio", 1);
     if (retinue > configObject->safeGetInt("maxArmySize", 10000)) retinue = configObject->safeGetInt("maxArmySize", 10000); 
     
     Logger::logStream(DebugUnits) << "Creating " << retinue
@@ -2003,7 +2003,8 @@ void WorkerThread::eu3Manpower () {
   
   double overflow = 0;
   double afterTotal = 0;
-  map<string, pair<double, double> > gains;   
+  map<string, pair<double, double> > gains;
+  map<string, int> popAdjusted; 
   for (map<Object*, objvec>::iterator link = euProvToCkProvsMap.begin(); link != euProvToCkProvsMap.end(); ++link) {
     Object* eup = (*link).first; 
     
@@ -2023,6 +2024,9 @@ void WorkerThread::eu3Manpower () {
 				    << ", final MP " << manpower << "\n";
     gains[eup->safeGetString("owner")].first  += inputValue;
     gains[eup->safeGetString("owner")].second += manpower;
+
+    double units = min(2.0, 0.99 + eup->safeGetFloat("citysize") / 101000.0) + 0.05 * eup->safeGetFloat("base_tax"); 
+    popAdjusted[eup->safeGetString("owner")] += (int) floor((125 * units) * manpower); 
     
     afterTotal += manpower; 
     eup->resetLeaf("manpower", manpower);
@@ -2042,6 +2046,20 @@ void WorkerThread::eu3Manpower () {
 				     << change 
 				     << "\n"; 
   }
+
+  
+  Logger::logStream(DebugManpower) << "Population-adjusted MP (tags with less than 25 base not shown):\nTAG\tMP\tAdj\tRatio\n";
+  for (map<string, int>::iterator i = popAdjusted.begin(); i != popAdjusted.end(); ++i) {
+    if (gains[(*i).first].second < 25) continue;
+    Logger::logStream(DebugManpower) << (*i).first << "\t"
+				     << gains[(*i).first].second << "\t"
+				     << (*i).second << "\t"
+				     << (*i).second / gains[(*i).first].second
+				     << "\n";
+  }
+  Logger::logStream(DebugManpower) << "\n";
+
+  
 }
 
 void WorkerThread::eu3Papacy () {
@@ -2939,6 +2957,52 @@ void WorkerThread::eu3Taxes () {
 				    << change 
 				    << "\n"; 
   }
+
+  set<Object*> buildingReference;
+  for (map<Object*, map<Object*, int> >::iterator i = tagBuildingsMap.begin(); i != tagBuildingsMap.end(); ++i) {
+    map<Object*, int> currMap = (*i).second;
+    for (map<Object*, int>::iterator j = currMap.begin(); j != currMap.end(); ++j) {
+      buildingReference.insert((*j).first); 
+    }
+  }
+  
+  Logger::logStream(DebugBasetax) << "Buildings (demesne only):\n\t\t\t";
+  for (map<Object*, map<Object*, int> >::iterator i = tagBuildingsMap.begin(); i != tagBuildingsMap.end(); ++i) {
+    Object* title = (*i).first;
+    if (titleTier(title) < Kingdom) continue;
+    Logger::logStream(DebugBasetax) << title->getKey() << "\t"; 
+  }
+  Logger::logStream(DebugBasetax) << "\n";   
+
+  for (set<Object*>::iterator b = buildingReference.begin(); b != buildingReference.end(); ++b) {
+    Logger::logStream(DebugBasetax) << (*b)->getKey() << "\t";    
+    for (map<Object*, map<Object*, int> >::iterator i = tagBuildingsMap.begin(); i != tagBuildingsMap.end(); ++i) {
+      Object* title = (*i).first;
+      if (titleTier(title) < Kingdom) continue;
+      Logger::logStream(DebugBasetax) << (*i).second[*b] << "\t\t";
+    }
+    Logger::logStream(DebugBasetax) << "\n";        
+  }
+  
+  
+  Logger::logStream(DebugBasetax) << "Buildings (including vassals):\n";
+  for (map<Object*, map<Object*, int> >::iterator i = sovBuildingsMap.begin(); i != sovBuildingsMap.end(); ++i) {
+    Object* title = (*i).first;
+    if (titleTier(title) < Kingdom) continue;
+    Logger::logStream(DebugBasetax) << title->getKey() << "\t"; 
+  }
+  Logger::logStream(DebugBasetax) << "\n";        
+
+  for (set<Object*>::iterator b = buildingReference.begin(); b != buildingReference.end(); ++b) {
+    Logger::logStream(DebugBasetax) << (*b)->getKey() << "\t";    
+    for (map<Object*, map<Object*, int> >::iterator i = sovBuildingsMap.begin(); i != sovBuildingsMap.end(); ++i) {
+      Object* title = (*i).first;
+      if (titleTier(title) < Kingdom) continue;
+      Logger::logStream(DebugBasetax) << (*i).second[*b] << "\t";
+    }
+    Logger::logStream(DebugBasetax) << "\n";        
+  }
+  
 }
 
 void WorkerThread::eu3Techs () {
@@ -3097,6 +3161,9 @@ double WorkerThread::getCkWeight (Object* province, WeightType wtype) {
   ret = 0;
   double modifier = 1; 
 
+  string countyTag = remQuotes(province->safeGetString("title", "\"NONE\""));
+  Object* countyTitle = titleMap[countyTag]; 
+  
   objvec leaves = province->getLeaves();
   for (objiter holding = leaves.begin(); holding != leaves.end(); ++holding) {
     string htype  = (*holding)->safeGetString("type", "NONE");
@@ -3119,7 +3186,13 @@ double WorkerThread::getCkWeight (Object* province, WeightType wtype) {
 
       if (ManPower == wtype) ret += getManpower(*building);
       else ret += (*building)->safeGetFloat(valueword);
-      modifier += (*building)->safeGetFloat(modword); 
+      modifier += (*building)->safeGetFloat(modword);
+
+      if (countyTitle) {
+	tagBuildingsMap[countyTitle][*building]++;
+	countyTitle = getSovereign(countyTitle);
+	if (countyTitle) sovBuildingsMap[countyTitle][*building]++;
+      }
     }
   }
 
@@ -3142,6 +3215,12 @@ double WorkerThread::getManpower (Object* building) {
   ret += 1.0 * building->safeGetFloat("horse_archers");
   ret += 1.0 * building->safeGetFloat("pikemen");
   return ret; 
+}
+
+Object* WorkerThread::getSovereign (Object* ckTitle) {
+  if (!ckTitle) return 0; 
+  while (liegeMap[ckTitle]) ckTitle = liegeMap[ckTitle];
+  return ckTitle; 
 }
 
 double WorkerThread::getTotalCkWeight (Object* euCountry, WeightType w) {
