@@ -2882,6 +2882,7 @@ void WorkerThread::eu3StateVariables () {
 
     prestige /= maxCkPrestige;
     prestige *= maxEuPrestige;
+    //euCountry->unsetValue("precise_prestige"); 
     euCountry->resetLeaf("precise_prestige", prestige);
 
     Object* history = euCountry->getNeededObject("history");
@@ -3112,7 +3113,7 @@ void WorkerThread::eu3Techs () {
 	string levelToSet = (*level)->getKey();
 	double neededToPass = tl->safeGetFloat(levelToSet);
 	
-	if ((neededToPass > passed) && (neededToPass < euCountry->safeGetFloat((*m).first) / (*m).second)) {
+	if ((neededToPass > passed) && (neededToPass <= euCountry->safeGetFloat((*m).first) / (*m).second)) {
 	  Object* navyTech = techs->getNeededObject(euTechNames[(*m).first]);
 	  navyTech->clear();
 	  navyTech->setObjList();
