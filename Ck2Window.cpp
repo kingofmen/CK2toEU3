@@ -1742,8 +1742,51 @@ void WorkerThread::eu3Characters () {
 
 void WorkerThread::eu3Diplomacy () {
   Object* eu3Diplomacy = euxGame->getNeededObject("diplomacy");
-  eu3Diplomacy->clear(); 
+  
+  objvec dipObjects = eu3Diplomacy->getLeaves();
+  objvec europeans; // Non-ROTW objects, to be removed. 
+  for (objiter dip = dipObjects.begin(); dip != dipObjects.end(); ++dip) {
+    string tag1 = remQuotes((*dip)->safeGetString("first"));
+    string tag2 = remQuotes((*dip)->safeGetString("second"));
+    
+    Object* euCountry1 = euxGame->safeGetObject(tag1);
+    if (!euCountry1) {
+      Logger::logStream(DebugDiplomacy) << "Removing object of type " << (*dip)->getKey()
+					<< " from diplomacy because of nonexistent tag "
+					<< tag1 << ".\n";
+      europeans.push_back(*dip);
+      continue; 
+    }
+    if (euCountryToCkCountryMap.find(euCountry1) != euCountryToCkCountryMap.end()) {
+      Logger::logStream(DebugDiplomacy) << "Removing object of type " << (*dip)->getKey()
+					<< " from diplomacy because first tag "
+					<< tag1 << " is converted from CK.\n";
+      europeans.push_back(*dip);
+      continue; 
+    }
 
+    Object* euCountry2 = euxGame->safeGetObject(tag2);
+    if (!euCountry2) {
+      Logger::logStream(DebugDiplomacy) << "Removing object of type " << (*dip)->getKey()
+					<< " from diplomacy because of nonexistent tag "
+					<< tag2 << ".\n";
+      europeans.push_back(*dip);
+      continue; 
+    }
+    if (euCountryToCkCountryMap.find(euCountry2) != euCountryToCkCountryMap.end()) {    
+      Logger::logStream(DebugDiplomacy) << "Removing object of type " << (*dip)->getKey()
+					<< " from diplomacy because second tag "
+					<< tag2 << " is converted from CK.\n";
+      europeans.push_back(*dip);
+      continue; 
+    }
+  }
+
+  for (objiter rem = europeans.begin(); rem != europeans.end(); ++rem) {
+    eu3Diplomacy->removeObject(*rem); 
+  }
+  
+  
   for (map<Object*, Object*>::iterator i = euCountryToCkCountryMap.begin(); i != euCountryToCkCountryMap.end(); ++i) {
     Object* euCountry = (*i).first;
     Object* ckCountry = (*i).second;
