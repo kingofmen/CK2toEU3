@@ -1437,7 +1437,7 @@ void WorkerThread::eu3Cores () {
 				    << (*title)->getKey()
 				    << ".\n";
       eup->setLeaf("core", addQuotes(euNation->getKey()));
-      history->setLeaf("add_core", addQuotes(euNation->getKey()));
+      history->getNeededObject("1399.1.1")->setLeaf("add_core", addQuotes(euNation->getKey()));
       gotCores[euNation]++; 
     }
     
