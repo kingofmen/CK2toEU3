@@ -2961,6 +2961,7 @@ void WorkerThread::eu3StateVariables () {
 
     Logger::logStream(DebugGovernments) << "Moving " << euCountry->getKey() << " capital to " << newCapital->getKey() << ".\n"; 
     euCountry->resetLeaf("capital", newCapital->getKey());
+    euCountry->resetLeaf("national_focus", newCapital->getKey());    
     history->resetLeaf("capital", newCapital->getKey());
   }  
 }
