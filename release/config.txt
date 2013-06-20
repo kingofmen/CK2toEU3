@@ -42,6 +42,11 @@ maxPapalInfluence = 0.25
 removeFromDiscoveries = "muslim"
 removeFromDiscoveries = "eastern" 
 
+#debugProvince = 180
+#debugProvince = 334
+#debugProvinceOwner = SPA
+#debugProvinceOwner = RUS 
+
 fortLevels = {
   fort3 = 0.95
   fort2 = 0.85

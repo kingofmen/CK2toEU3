@@ -2350,6 +2350,9 @@ void WorkerThread::eu3Provinces () {
   for (objiter leaf = eu3leaves.begin(); leaf != eu3leaves.end(); ++leaf) {
     if (groupsToRemove[(*leaf)->safeGetString("technology_group", "NONE")]) tagsToRemove.push_back((*leaf)->getKey()); 
   }
+  map<string, bool> debugOwners;
+  objvec toDebug = configObject->getValue("debugProvinceOwner");
+  for (objiter d = toDebug.begin(); d != toDebug.end(); ++d) debugOwners[(*d)->getLeaf()] = true;  
   
   for (map<Object*, objvec>::iterator link = euProvToCkProvsMap.begin(); link != euProvToCkProvsMap.end(); ++link) {
     Object* eup = (*link).first;
@@ -2475,17 +2478,17 @@ void WorkerThread::eu3Provinces () {
       if ((*curr).second <= best) continue;
       winner = (*curr).first;
       best = (*curr).second;
-
     }
 
     eup->resetLeaf("owner", addQuotes(winner->getKey()));
     eup->resetLeaf("controller", conTag == "" ? addQuotes(winner->getKey()) : conTag);
     history->resetLeaf("owner", addQuotes(winner->getKey()));
     history->resetLeaf("controller", conTag == "" ? addQuotes(winner->getKey()) : conTag);
-
+    
     for (objiter ckp = ckps.begin(); ckp != ckps.end(); ++ckp) {
       if (find(euCountryToCkProvincesMap[winner].begin(), euCountryToCkProvincesMap[winner].end(), (*ckp)) != euCountryToCkProvincesMap[winner].end()) continue; 
       euCountryToCkProvincesMap[winner].push_back(*ckp);
+      if (debugOwners[winner->getKey()]) (*ckp)->resetLeaf("debug", "yes");       
     }
   }
 
@@ -3222,10 +3225,11 @@ double WorkerThread::getCkWeight (Object* province, WeightType wtype) {
   double ret = province->safeGetFloat(cacheword, -1);
   if (ret > 0) return ret;
   ret = 0;
-  double modifier = 1; 
 
   string countyTag = remQuotes(province->safeGetString("title", "\"NONE\""));
   Object* countyTitle = titleMap[countyTag]; 
+
+  bool debug = (province->safeGetString("debug", "no") == "yes"); 
   
   objvec leaves = province->getLeaves();
   for (objiter holding = leaves.begin(); holding != leaves.end(); ++holding) {
@@ -3240,15 +3244,17 @@ double WorkerThread::getCkWeight (Object* province, WeightType wtype) {
     Object* buildList = ckBuildings->safeGetObject(htype);
     if (!buildList) continue;
 
-    if (ManPower == wtype) ret += getManpower(hinfo); 
-    else ret += hinfo->safeGetFloat(valueword);
+    double local = 0;
+    double modifier = 1; 
+    if (ManPower == wtype) local += getManpower(hinfo); 
+    else local += hinfo->safeGetFloat(valueword);
     
     objvec buildings = buildList->getLeaves();
     for (objiter building = buildings.begin(); building != buildings.end(); ++building) {
       if ((*holding)->safeGetString((*building)->getKey(), "no") != "yes") continue;
 
-      if (ManPower == wtype) ret += getManpower(*building);
-      else ret += (*building)->safeGetFloat(valueword);
+      if (ManPower == wtype) local += getManpower(*building);
+      else local += (*building)->safeGetFloat(valueword);
       modifier += (*building)->safeGetFloat(modword);
 
       if (countyTitle) {
@@ -3257,13 +3263,22 @@ double WorkerThread::getCkWeight (Object* province, WeightType wtype) {
 	if (countyTitle) sovBuildingsMap[countyTitle][*building]++;
       }
     }
+    local *= modifier;
+    ret += local; 
   }
-
+  
   unsigned int div = ckProvToEuProvsMap[province].size();
+  if (debug) Logger::logStream(DebugProvinces) << "Province " << nameAndNumber(province)
+					       << " has total " << wtype << " weight "
+					       << ret 
+					       << " (" << (ret/div) << ").\n"; 
+
+
+  
   if (0 == div) ret = 0.001; // Should be impossible!
   else ret /= div;
 
-  ret *= modifier; 
+  //ret *= modifier; 
   province->resetLeaf(cacheword, ret);
   return ret; 
 }
@@ -3549,6 +3564,13 @@ void WorkerThread::convertEU3 () {
   Logger::logStream(Logger::Game) << "Loading EU3 source file.\n";
   euxGame = loadTextFile(targetVersion + "input.eu3");
 
+  objvec debugProvs = configObject->getValue("debugProvince");
+  for (objiter dp = debugProvs.begin(); dp != debugProvs.end(); ++dp) {
+    Object* prov = ck2Game->safeGetObject((*dp)->getLeaf());
+    if (!prov) continue;
+    prov->resetLeaf("debug", "yes"); 
+  }
+  
   initialiseCharacters(); 
   initialiseRelationMaps();
   attribNames.push_back("diplomacy");
