@@ -16,6 +16,7 @@ The converter sets:
 \item Province religion and culture
 \item Cores
 \item Buildings
+\item Discoveries
 \end{itemize}
 
 \section{Province ownership}
@@ -86,6 +87,13 @@ counted - note that all baronies contribute. EU provinces having a CK
 province with more than 95\% of the maximum CK fort level then get a
 level-3 fort; more than 85\%, a level-2 fort; and so on. These numbers
 can be changed in the \verb|fortLevels| object of \verb|config.txt|. 
+
+\section{Discoveries}
+
+All provinces that have a CK equivalent are set to be discovered by
+the western tech group. In addition, any tech groups listed as
+\verb|removeFromDiscoveries| will be set to not have discovered the CK
+area. 
 
 \chapter{States}
 

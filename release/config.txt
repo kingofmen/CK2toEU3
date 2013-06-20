@@ -39,6 +39,9 @@ minimumMaxPrestige = 20
 minimumGold = 10 
 maxPapalInfluence = 0.25
 
+removeFromDiscoveries = "muslim"
+removeFromDiscoveries = "eastern" 
+
 fortLevels = {
   fort3 = 0.95
   fort2 = 0.85

@@ -2340,6 +2340,16 @@ void WorkerThread::eu3ProvinceReligion () {
 
 void WorkerThread::eu3Provinces () {
   double maxCkFortLevel = 0; 
+  objvec discsToRemove = configObject->getValue("removeFromDiscoveries");
+  map<string, bool> groupsToRemove; 
+  for (objiter rem = discsToRemove.begin(); rem != discsToRemove.end(); ++rem) {
+    groupsToRemove[remQuotes((*rem)->getLeaf())] = true;
+  }
+  vector<string> tagsToRemove;
+  objvec eu3leaves = euxGame->getLeaves();
+  for (objiter leaf = eu3leaves.begin(); leaf != eu3leaves.end(); ++leaf) {
+    if (groupsToRemove[(*leaf)->safeGetString("technology_group", "NONE")]) tagsToRemove.push_back((*leaf)->getKey()); 
+  }
   
   for (map<Object*, objvec>::iterator link = euProvToCkProvsMap.begin(); link != euProvToCkProvsMap.end(); ++link) {
     Object* eup = (*link).first;
@@ -2378,6 +2388,10 @@ void WorkerThread::eu3Provinces () {
       history->resetLeaf("native_hostileness", "1");
       history->resetLeaf("native_ferocity", "1");
     }
+
+    for (objiter rem = discsToRemove.begin(); rem != discsToRemove.end(); ++rem) {
+      history->unsetKeyValue("discovered_by", (*rem)->getLeaf()); 
+    }
     
     objvec ckps = (*link).second;
     if (0 == ckps.size()) {
@@ -2389,7 +2403,8 @@ void WorkerThread::eu3Provinces () {
 
     map<string, int> discMap;
     Object* disc = eup->getNeededObject("discovered_by");
-    disc->setObjList(); 
+    disc->setObjList();
+    for (vector<string>::iterator i = tagsToRemove.begin(); i != tagsToRemove.end(); ++i) disc->remToken(*i);
     for (int i = 0; i < disc->numTokens(); ++i) discMap[disc->getToken(i)]++;
     for (map<Object*, Object*>::iterator i = euCountryToCkCountryMap.begin(); i != euCountryToCkCountryMap.end(); ++i) {
       string tag = (*i).first->getKey(); 
@@ -2503,6 +2518,7 @@ void WorkerThread::eu3Provinces () {
   }
   
 
+  // Set all western-discovered provinces to also be individually discovered by converted tags, and not by tags to remove. 
   objvec eu3provs = euxGame->getLeaves();
   for (objiter eup = eu3provs.begin(); eup != eu3provs.end(); ++eup) {
     string done = (*eup)->safeGetString("doneDisc", "no");
@@ -2526,7 +2542,9 @@ void WorkerThread::eu3Provinces () {
     if (!good) continue;
     
     map<string, int> discMap;    
-    disc->setObjList(); 
+    disc->setObjList();
+    if ((*eup)->safeGetInt("patrol") != 0)
+      for (vector<string>::iterator i = tagsToRemove.begin(); i != tagsToRemove.end(); ++i) disc->remToken(*i);
     for (int i = 0; i < disc->numTokens(); ++i) discMap[disc->getToken(i)]++;
     for (map<Object*, Object*>::iterator i = euCountryToCkCountryMap.begin(); i != euCountryToCkCountryMap.end(); ++i) {
       string tag = (*i).first->getKey(); 
