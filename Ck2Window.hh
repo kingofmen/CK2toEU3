@@ -100,6 +100,7 @@ private:
   // Initialisers
   void assignCKprovinces ();
   void createCountryMap ();
+  void createDejureMap (); 
   void createProvinceMap ();  
   void createVassalsMap ();
   void initialiseCharacters ();
@@ -139,6 +140,7 @@ private:
   void recursiveAddToHre (Object* ckRuler, Object* euCountry, objvec& electors, objvec& done); 
   void recursiveCollectCultures (Object* ckRuler, map<string, double>& weights, int iteration);
   void recursiveCollectReligion (Object* ckRuler, map<string, double>& weights, int iteration);
+  void recurseDejure (Object* highTitle); 
   void setCharacterAttributes (Object* euMonarch, Object* ckRuler, int monarchId, Object* dummyBestChar, Object* dummyWorstChar);
   
   enum TitleTier {Barony, County, Duchy, Kingdom, Empire, Other};
@@ -192,6 +194,7 @@ private:
   objvec sovereigns;
   map<Object*, Object*> liegeMap;
   map<Object*, objvec> vassalMap;
+  map<Object*, Object*> canon_dejure;
   map<Object*, map<Object*, int> > tagBuildingsMap; // Buildings per tag, no vassals
   map<Object*, map<Object*, int> > sovBuildingsMap; // Stores number of buildings for sovereign tags, including vassals
 
@@ -207,7 +210,8 @@ private:
   map<string, string> cultureMap;
   map<string, map<string, string> > specialCultureMap;
   objvec traits;
-  map<string, Object*> dynasties; 
+  map<string, Object*> dynasties;
+  objvec canonTitles; 
 }; 
 
 #endif

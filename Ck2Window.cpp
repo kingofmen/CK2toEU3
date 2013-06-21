@@ -952,6 +952,27 @@ void WorkerThread::createCountryMap () {
   }
 }
 
+void WorkerThread::recurseDejure (Object* title) {
+  Object* highTitle = ck2Game->safeGetObject(title->getKey());
+  if (!highTitle) return; 
+  objvec leaves = title->getLeaves();
+  for (objiter leaf = leaves.begin(); leaf != leaves.end(); ++leaf) {
+    if (Other == titleTier(*leaf)) continue;
+    Object* lowTitle = ck2Game->safeGetObject((*leaf)->getKey());
+    if (!lowTitle) continue;
+    canon_dejure[lowTitle] = highTitle;
+    if (titleTier(lowTitle) != Barony)
+      Logger::logStream(DebugCores) << "Assign " << highTitle->getKey() << " as canonical de-jure overlord for " << lowTitle->getKey() << ".\n"; 
+    recurseDejure(*leaf); 
+  }
+}
+
+void WorkerThread::createDejureMap () {
+  for (objiter title = canonTitles.begin(); title != canonTitles.end(); ++title) {
+    recurseDejure(*title);
+  }
+}
+
 void WorkerThread::createProvinceMap () {
   map<string, int> counts;
   for (objiter link = provinceLinks.begin(); link != provinceLinks.end(); ++link) {
@@ -1170,6 +1191,9 @@ void WorkerThread::loadFiles () {
     dynasties[(*dyn)->getKey()] = (*dyn);
     Logger::logStream(DebugLeaders) << "Found dynasty " << (*dyn)->getKey() << ", " << (*dyn)->safeGetString("name") << ".\n"; 
   }
+
+  Object* dejureTitles = loadTextFile(sourceVersion + "dejures.txt");
+  canonTitles = dejureTitles->getLeaves(); 
 }
 
 
@@ -1400,9 +1424,19 @@ void WorkerThread::eu3Cores () {
       Object* title = getTitle(titleTag);
       while (title) {
 	dejures.insert(title);
-	titleTag = remQuotes(title->safeGetString("de_jure_liege"));
+	titleTag = remQuotes(title->safeGetString("de_jure_liege", "NONE"));
 	Object* liege = getTitle(titleTag);
 
+	if ((!liege) && (titleTier(title) != Empire)) {
+	  // De-jure not stored in save?
+	  liege = canon_dejure[title];
+	  Logger::logStream(DebugCores) << "No de-jure liege for "
+					<< title->getKey()
+					<< " stored in save, looking up canonical map.";
+	  if (liege) titleTag = liege->getKey();
+	  Logger::logStream(DebugCores) << " Found " << (liege ? liege->getKey() : "nothing") << ".\n"; 	  
+	}
+	
 	if (!liege) { // Either independent, or currently vassal to the de-jure liege.
 	  titleTag = remQuotes(title->safeGetString("liege"));
 	  liege = getTitle(titleTag);
@@ -1419,13 +1453,15 @@ void WorkerThread::eu3Cores () {
       if (!euNation) continue;
       if (gotCores[euNation] > 0) continue; 
       
-      // Check if this title is primary-level, ie empire for emperors, etc.
+      // Check if this title is primary-level, ie empire for emperors, etc, or alternatively demesne. 
       TitleTier level = titleTier(*title);
-      bool primary = true;      
-      for (objiter i = beginRel(holder, Title); i != finalRel(holder, Title); ++i) {
-	if (level >= titleTier(*i)) continue;
-	primary = false;
-	break;
+      bool primary = true;
+      if (County != level) {
+	for (objiter i = beginRel(holder, Title); i != finalRel(holder, Title); ++i) {
+	  if (level >= titleTier(*i)) continue;
+	  primary = false;
+	  break;
+	}
       }
       if (!primary) continue;
       
@@ -3278,7 +3314,6 @@ double WorkerThread::getCkWeight (Object* province, WeightType wtype) {
   if (0 == div) ret = 0.001; // Should be impossible!
   else ret /= div;
 
-  //ret *= modifier; 
   province->resetLeaf(cacheword, ret);
   return ret; 
 }
@@ -3580,6 +3615,7 @@ void WorkerThread::convertEU3 () {
   attribNames.push_back("learning"); 
   
   loadFiles();
+  createDejureMap(); 
   createProvinceMap(); 
   createVassalsMap();
   createCountryMap(); 
