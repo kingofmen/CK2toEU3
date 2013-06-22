@@ -1855,21 +1855,6 @@ void WorkerThread::eu3Diplomacy () {
     }
   }
 
-  for (map<string, objvec>::iterator i = dynastyToCountryMap.begin(); i != dynastyToCountryMap.end(); ++i) {
-    for (objiter first = (*i).second.begin(); first != (*i).second.end(); ++first) {
-      for (objiter second = first+1; second != (*i).second.end(); ++second) {
-	Object* alliance = new Object("alliance");
-	eu3Diplomacy->setValue(alliance);
-	Logger::logStream(DebugDiplomacy) << "Making "
-					  << (*first)->getKey() << " and "
-					  << (*second)->getKey() << " allies due to same-dynasty rulers.\n";
-	alliance->setLeaf("first", addQuotes((*first)->getKey()));
-	alliance->setLeaf("second", addQuotes((*second)->getKey()));
-	alliance->setLeaf("start_date", euxGame->safeGetString("start_date")); 
-      }
-    }
-  }
-
   objvec existingWars = euxGame->getValue("active_war");
   for (objiter war = existingWars.begin(); war != existingWars.end(); ++war) {
     objvec attackers = (*war)->getValue("attacker");
@@ -1901,7 +1886,7 @@ void WorkerThread::eu3Diplomacy () {
     euxGame->removeObject(*war);
   }
 
-
+  map<Object*, map<Object*, bool> > convertedWars; 
   objvec ckwars = ck2Game->getValue("active_war");
   for (objiter war = ckwars.begin(); war != ckwars.end(); ++war) {
     objvec ckAttackers = (*war)->getValue("attacker");
@@ -1939,6 +1924,11 @@ void WorkerThread::eu3Diplomacy () {
     for (objiter eua = euAttackers.begin(); eua != euAttackers.end(); ++eua) {
       euWar->setLeaf("attacker", addQuotes((*eua)->getKey()));
       euWar->setLeaf("original_attacker", addQuotes((*eua)->getKey()));
+
+      for (objiter eud = euDefenders.begin(); eud != euDefenders.end(); ++eud) {
+	convertedWars[*eua][*eud] = true;
+	convertedWars[*eud][*eua] = true;
+      }
     }
     for (objiter eua = euDefenders.begin(); eua != euDefenders.end(); ++eua) {
       euWar->setLeaf("defender", addQuotes((*eua)->getKey()));
@@ -1948,6 +1938,28 @@ void WorkerThread::eu3Diplomacy () {
     Logger::logStream(DebugDiplomacy) << "Converting war " << (*war)->safeGetString("name") << ".\n"; 
   }
 
+  for (map<string, objvec>::iterator i = dynastyToCountryMap.begin(); i != dynastyToCountryMap.end(); ++i) {
+    for (objiter first = (*i).second.begin(); first != (*i).second.end(); ++first) {
+      for (objiter second = first+1; second != (*i).second.end(); ++second) {
+	if ((convertedWars[*first][*second]) || (convertedWars[*second][*first])) {
+	  Logger::logStream(DebugDiplomacy) << "Skipping " << (*first)->getKey() << "-" << (*second)->getKey()
+					    << " alliance as they are at war.\n";
+	  continue; 
+	}
+	
+	Object* alliance = new Object("alliance");
+	eu3Diplomacy->setValue(alliance);
+	Logger::logStream(DebugDiplomacy) << "Making "
+					  << (*first)->getKey() << " and "
+					  << (*second)->getKey() << " allies due to same-dynasty rulers.\n";
+	alliance->setLeaf("first", addQuotes((*first)->getKey()));
+	alliance->setLeaf("second", addQuotes((*second)->getKey()));
+	alliance->setLeaf("start_date", euxGame->safeGetString("start_date")); 
+      }
+    }
+  }
+
+  
 }
 
 void WorkerThread::eu3Governments () {
