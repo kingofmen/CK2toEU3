@@ -3188,17 +3188,17 @@ void WorkerThread::eu3Techs () {
   for (map<Object*, objvec>::iterator eun = ownerMap.begin(); eun != ownerMap.end(); ++eun) {
     Object* euCountry = (*eun).first;
     Object* techs = euCountry->getNeededObject("technology");
-    Logger::logStream(DebugTechTeams) << "Tag " << euCountry->getKey() << " has weights "
-				      << euCountry->safeGetString("navyWeight") << " "
-				      << euCountry->safeGetString("armyWeight") << " "
-				      << euCountry->safeGetString("prodWeight") << " "
-				      << euCountry->safeGetString("tradWeight") << " "      
-				      << euCountry->safeGetString("govtWeight") << " giving techs "
-				      << techs->safeGetObject("naval_tech")->getToken(0) << " "
-				      << techs->safeGetObject("land_tech")->getToken(0) << " "
-				      << techs->safeGetObject("production_tech")->getToken(0) << " "
-				      << techs->safeGetObject("trade_tech")->getToken(0) << " "      
-				      << techs->safeGetObject("government_tech")->getToken(0) << ".\n"; 
+    Logger::logStream(DebugTech) << "Tag " << euCountry->getKey() << " has weights "
+				 << euCountry->safeGetString("navyWeight") << " "
+				 << euCountry->safeGetString("armyWeight") << " "
+				 << euCountry->safeGetString("prodWeight") << " "
+				 << euCountry->safeGetString("tradWeight") << " "      
+				 << euCountry->safeGetString("govtWeight") << " giving techs "
+				 << techs->safeGetObject("naval_tech")->getToken(0) << " "
+				 << techs->safeGetObject("land_tech")->getToken(0) << " "
+				 << techs->safeGetObject("production_tech")->getToken(0) << " "
+				 << techs->safeGetObject("trade_tech")->getToken(0) << " "      
+				 << techs->safeGetObject("government_tech")->getToken(0) << ".\n"; 
       
     for (vector<pair<string, double> >::iterator m = maxValues.begin(); m != maxValues.end(); ++m) {    
       euCountry->unsetValue((*m).first);
@@ -3347,6 +3347,8 @@ double WorkerThread::getTotalCkWeight (Object* euCountry, WeightType w) {
 double WorkerThread::getTotalTechLevel (Object* province, int minTech, int maxTech) {
   Object* provTechs = province->safeGetObject("technology");
   if (!provTechs) return 0;
+  provTechs = provTechs->safeGetObject("level");
+  if (!provTechs) return 0;  
   double ret = 0;
   if (-1 == maxTech) maxTech = minTech + 1; 
   for (int i = minTech; i < maxTech; ++i) {
