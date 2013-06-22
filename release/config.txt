@@ -42,8 +42,13 @@ maxPapalInfluence = 0.25
 removeFromDiscoveries = "muslim"
 removeFromDiscoveries = "eastern" 
 
+#debugProvince = 167
 #debugProvince = 180
-#debugProvince = 334
+#debugProvince = 184 
+#debugProvince = 185 
+#debugProvince = 925
+#debugProvince = 926
+#debugProvince = 927
 #debugProvinceOwner = SPA
 #debugProvinceOwner = RUS 
 

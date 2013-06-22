@@ -1780,54 +1780,70 @@ void WorkerThread::eu3Diplomacy () {
   Object* eu3Diplomacy = euxGame->getNeededObject("diplomacy");
   
   objvec dipObjects = eu3Diplomacy->getLeaves();
-  objvec europeans; // Non-ROTW objects, to be removed. 
+  objvec europeans; // Non-ROTW objects, to be removed.
+  int markets = 0; 
   for (objiter dip = dipObjects.begin(); dip != dipObjects.end(); ++dip) {
     string tag1 = remQuotes((*dip)->safeGetString("first"));
     string tag2 = remQuotes((*dip)->safeGetString("second"));
     
     Object* euCountry1 = euxGame->safeGetObject(tag1);
     if (!euCountry1) {
-      Logger::logStream(DebugDiplomacy) << "Removing object of type " << (*dip)->getKey()
-					<< " from diplomacy because of nonexistent tag "
-					<< tag1 << ".\n";
+      if ((*dip)->getKey() != "open_market") {      
+	Logger::logStream(DebugDiplomacy) << "Removing object of type " << (*dip)->getKey()
+					  << " from diplomacy because of nonexistent tag "
+					  << tag1 << ".\n";
+      }
+      else markets++;       
       europeans.push_back(*dip);
       continue; 
     }
     if (euCountryToCkCountryMap.find(euCountry1) != euCountryToCkCountryMap.end()) {
-      Logger::logStream(DebugDiplomacy) << "Removing object of type " << (*dip)->getKey()
-					<< " from diplomacy because first tag "
-					<< tag1 << " is converted from CK.\n";
+      if ((*dip)->getKey() != "open_market") {      
+	Logger::logStream(DebugDiplomacy) << "Removing object of type " << (*dip)->getKey()
+					  << " from diplomacy because first tag "
+					  << tag1 << " is converted from CK.\n";
+      }
+      else markets++;       
       europeans.push_back(*dip);
       continue; 
     }
 
     Object* euCountry2 = euxGame->safeGetObject(tag2);
     if (!euCountry2) {
-      Logger::logStream(DebugDiplomacy) << "Removing object of type " << (*dip)->getKey()
-					<< " from diplomacy because of nonexistent tag "
-					<< tag2 << ".\n";
+      if ((*dip)->getKey() != "open_market") {
+	Logger::logStream(DebugDiplomacy) << "Removing object of type " << (*dip)->getKey()
+					  << " from diplomacy because of nonexistent tag "
+					  << tag2 << ".\n";
+      }
+      else markets++; 	
       europeans.push_back(*dip);
       continue; 
     }
-    if (euCountryToCkCountryMap.find(euCountry2) != euCountryToCkCountryMap.end()) {    
-      Logger::logStream(DebugDiplomacy) << "Removing object of type " << (*dip)->getKey()
-					<< " from diplomacy because second tag "
-					<< tag2 << " is converted from CK.\n";
+    if (euCountryToCkCountryMap.find(euCountry2) != euCountryToCkCountryMap.end()) {
+      if ((*dip)->getKey() != "open_market") {
+	Logger::logStream(DebugDiplomacy) << "Removing object of type " << (*dip)->getKey()
+					  << " from diplomacy because second tag "
+					  << tag2 << " is converted from CK.\n";
+      }
+      else markets++; 
       europeans.push_back(*dip);
       continue; 
     }
   }
 
+  Logger::logStream(DebugDiplomacy) << "Removed " << markets << " open_market objects for having nonexistent or CK-converted tags.\n"; 
   for (objiter rem = europeans.begin(); rem != europeans.end(); ++rem) {
     eu3Diplomacy->removeObject(*rem); 
   }
-  
-  
+
+  map<string, objvec> dynastyToCountryMap;   
   for (map<Object*, Object*>::iterator i = euCountryToCkCountryMap.begin(); i != euCountryToCkCountryMap.end(); ++i) {
     Object* euCountry = (*i).first;
     Object* ckCountry = (*i).second;
 
     Object* liege = liegeMap[ckCountry];
+    dynastyToCountryMap[titleToCharMap[ckCountry]->safeGetString("dynasty")].push_back(euCountry);
+    
     if (liege) liege = titleToCharMap[liege];
     if (liege) liege = characterToEuCountryMap[liege];
     if ((liege) && (liege != euCountry)) {
@@ -1836,6 +1852,21 @@ void WorkerThread::eu3Diplomacy () {
       vassal->setLeaf("first",  addQuotes(liege->getKey()));
       vassal->setLeaf("second", addQuotes(euCountry->getKey()));
       vassal->setLeaf("start_date", "1399.1.1");
+    }
+  }
+
+  for (map<string, objvec>::iterator i = dynastyToCountryMap.begin(); i != dynastyToCountryMap.end(); ++i) {
+    for (objiter first = (*i).second.begin(); first != (*i).second.end(); ++first) {
+      for (objiter second = first+1; second != (*i).second.end(); ++second) {
+	Object* alliance = new Object("alliance");
+	eu3Diplomacy->setValue(alliance);
+	Logger::logStream(DebugDiplomacy) << "Making "
+					  << (*first)->getKey() << " and "
+					  << (*second)->getKey() << " allies due to same-dynasty rulers.\n";
+	alliance->setLeaf("first", addQuotes((*first)->getKey()));
+	alliance->setLeaf("second", addQuotes((*second)->getKey()));
+	alliance->setLeaf("start_date", euxGame->safeGetString("start_date")); 
+      }
     }
   }
 
