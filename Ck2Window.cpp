@@ -1836,13 +1836,28 @@ void WorkerThread::eu3Diplomacy () {
     eu3Diplomacy->removeObject(*rem); 
   }
 
-  map<string, objvec> dynastyToCountryMap;   
+  map<string, objvec> dynastyToCountryMap; // Use for alliances. 
+  map<Object*, objvec> countryToRoyalsMap; // Use for royal marriages. 
   for (map<Object*, Object*>::iterator i = euCountryToCkCountryMap.begin(); i != euCountryToCkCountryMap.end(); ++i) {
     Object* euCountry = (*i).first;
     Object* ckCountry = (*i).second;
 
     Object* liege = liegeMap[ckCountry];
-    dynastyToCountryMap[titleToCharMap[ckCountry]->safeGetString("dynasty")].push_back(euCountry);
+    Object* ruler = titleToCharMap[ckCountry];
+    if (ruler) {
+      dynastyToCountryMap[ruler->safeGetString("dynasty")].push_back(euCountry);
+      for (objiter child = beginRel(ruler, Child); child != finalRel(ruler, Child); ++child) {
+	if ((*child)->safeGetString("death_date", "dsa") != "dsa") continue; 
+	countryToRoyalsMap[euCountry].push_back(*child); 
+      }
+      Object* father = *(beginRel(ruler, Father));
+      if (father) {
+	for (objiter sibling = beginRel(father, Child); sibling != finalRel(father, Child); ++sibling) {
+	  if ((*sibling)->safeGetString("death_date", "dsa") != "dsa") continue; 
+	  countryToRoyalsMap[euCountry].push_back(*sibling); 
+	}
+      }
+    }
     
     if (liege) liege = titleToCharMap[liege];
     if (liege) liege = characterToEuCountryMap[liege];
@@ -1956,6 +1971,39 @@ void WorkerThread::eu3Diplomacy () {
 	alliance->setLeaf("second", addQuotes((*second)->getKey()));
 	alliance->setLeaf("start_date", euxGame->safeGetString("start_date")); 
       }
+    }
+  }
+
+  for (map<Object*, objvec>::iterator euc1 = countryToRoyalsMap.begin(); euc1 != countryToRoyalsMap.end(); ++euc1) {
+    Object* country1 = (*euc1).first;
+    map<Object*, objvec>::iterator euc2 = euc1;
+    for (++euc2; euc2 != countryToRoyalsMap.end(); ++euc2) {
+      Object* country2 = (*euc2).first;      
+      if ((convertedWars[country1][country2]) || (convertedWars[country2][country1])) continue; 
+      
+      // If any royals of either country are married to each other, create a royal marriage.
+      Object* char1 = 0;
+      Object* char2 = 0; 
+      for (objiter royal1 = (*euc1).second.begin(); royal1 != (*euc1).second.end(); ++royal1) {
+	for (objiter royal2 = (*euc2).second.begin(); royal2 != (*euc2).second.end(); ++royal2) {
+	  if ((*royal1)->safeGetString("spouse") != (*royal2)->getKey()) continue;
+	  char1 = (*royal1);
+	  char2 = (*royal2);	  
+	  break;
+	}
+	if (char1) break;
+      }
+      if (!char1) continue;
+      Object* alliance = new Object("royal_marriage");
+      eu3Diplomacy->setValue(alliance);
+      Logger::logStream(DebugDiplomacy) << "Royal marriage between "
+					<< country1->getKey() << " and "
+					<< country2->getKey() << " due to CK marriage of "
+					<< char1->getKey() << "(" << char1->safeGetString("birth_name") << ") and "
+					<< char2->getKey() << "(" << char2->safeGetString("birth_name") << ").\n"; 
+      alliance->setLeaf("first", addQuotes(country1->getKey()));
+      alliance->setLeaf("second", addQuotes(country2->getKey()));
+      alliance->setLeaf("start_date", euxGame->safeGetString("start_date"));       
     }
   }
 
