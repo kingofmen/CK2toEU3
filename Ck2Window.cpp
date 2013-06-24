@@ -3240,6 +3240,7 @@ void WorkerThread::eu3Techs () {
   maxValues.push_back(pair<string, double>("prodWeight", 1));
   maxValues.push_back(pair<string, double>("tradWeight", 1));  
 
+  // Calculate median per-holding weight for each tech in each nation.
   for (vector<pair<string, double> >::iterator m = maxValues.begin(); m != maxValues.end(); ++m) {
     ObjectAscendingSorter sorter((*m).first); 
     for (map<Object*, objvec>::iterator eun = ownerMap.begin(); eun != ownerMap.end(); ++eun) {
@@ -3257,7 +3258,21 @@ void WorkerThread::eu3Techs () {
     }
   }
 
-
+  // Sort and calculate percentiles.
+  
+  objvec nations;
+  for (map<Object*, objvec>::iterator eun = ownerMap.begin(); eun != ownerMap.end(); ++eun) nations.push_back((*eun).first);  
+  for (vector<pair<string, double> >::iterator m = maxValues.begin(); m != maxValues.end(); ++m) {
+    ObjectAscendingSorter sorter((*m).first);
+    sort(nations.begin(), nations.end(), sorter);
+    for (unsigned int i = 0; i < nations.size(); ++i) {
+      double percentile = i+1;
+      percentile /= nations.size();
+      nations[i]->resetLeaf((*m).first, percentile); 
+    }
+  }
+  
+  
   Object* tl = configObject->getNeededObject("techLevels");
   objvec techLevels = tl->getLeaves();
   map<string, string> euTechNames;
@@ -3278,7 +3293,7 @@ void WorkerThread::eu3Techs () {
 	string levelToSet = (*level)->getKey();
 	double neededToPass = tl->safeGetFloat(levelToSet);
 	
-	if ((neededToPass > passed) && (neededToPass <= euCountry->safeGetFloat((*m).first) / (*m).second)) {
+	if ((neededToPass > passed) && (neededToPass <= euCountry->safeGetFloat((*m).first))) {
 	  Object* navyTech = techs->getNeededObject(euTechNames[(*m).first]);
 	  navyTech->clear();
 	  navyTech->setObjList();
@@ -3292,27 +3307,43 @@ void WorkerThread::eu3Techs () {
   }
 
 
+  map<string, vector<int> > numTechLevels;
+  numTechLevels["naval_tech"].resize(100);
+  numTechLevels["land_tech"].resize(100);
+  numTechLevels["production_tech"].resize(100);
+  numTechLevels["trade_tech"].resize(100);
+  numTechLevels["government_tech"].resize(100);
   for (map<Object*, objvec>::iterator eun = ownerMap.begin(); eun != ownerMap.end(); ++eun) {
     Object* euCountry = (*eun).first;
     Object* techs = euCountry->getNeededObject("technology");
-    Logger::logStream(DebugTech) << "Tag " << euCountry->getKey() << " has weights "
+    Logger::logStream(DebugTech) << "Tag " << euCountry->getKey() << " has percentiles "
 				 << euCountry->safeGetString("navyWeight") << " "
 				 << euCountry->safeGetString("armyWeight") << " "
 				 << euCountry->safeGetString("prodWeight") << " "
 				 << euCountry->safeGetString("tradWeight") << " "      
-				 << euCountry->safeGetString("govtWeight") << " giving techs "
-				 << techs->safeGetObject("naval_tech")->getToken(0) << " "
-				 << techs->safeGetObject("land_tech")->getToken(0) << " "
-				 << techs->safeGetObject("production_tech")->getToken(0) << " "
-				 << techs->safeGetObject("trade_tech")->getToken(0) << " "      
-				 << techs->safeGetObject("government_tech")->getToken(0) << ".\n"; 
-      
+				 << euCountry->safeGetString("govtWeight") << " giving techs ";
+    for (map<string, vector<int> >::iterator t = numTechLevels.begin(); t != numTechLevels.end(); ++t) {
+      int currTechLevel = techs->safeGetObject((*t).first)->tokenAsInt(0); 
+      Logger::logStream(DebugTech) << currTechLevel << " ";
+      (*t).second[currTechLevel]++; 
+    }
+    Logger::logStream(DebugTech) << ".\n";
+    
     for (vector<pair<string, double> >::iterator m = maxValues.begin(); m != maxValues.end(); ++m) {    
       euCountry->unsetValue((*m).first);
       for (objiter eup = (*eun).second.begin(); eup != (*eun).second.end(); ++eup) {
 	(*eup)->unsetValue((*m).first);
       }
     }
+  }
+  
+  for (map<string, vector<int> >::iterator t = numTechLevels.begin(); t != numTechLevels.end(); ++t) {
+    while (0 == (*t).second.back()) (*t).second.pop_back();
+    Logger::logStream(DebugTech) << (*t).first << ": ";
+    for (vector<int>::iterator i = (*t).second.begin(); i != (*t).second.end(); ++i) {
+      Logger::logStream(DebugTech) << (*i) << " "; 
+    }
+    Logger::logStream(DebugTech) << "\n";
   }
 }
 

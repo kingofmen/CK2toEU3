@@ -289,9 +289,9 @@ within \verb|config.txt| with the key \verb|state|.
 
 Tech group is set to western. Production, army, and navy tech levels are found by calculating the
 median base tax, manpower, and number of galleys per holding in the CK provinces
-of each EU3 nation. Those with at least 75\% of the maximum then get level-4 tech (where
+of each EU3 nation. The top quartile gets level-4 tech (where
 manpower governs army tech, galleys naval, and base tax the three
-others); those with less than 25\% get level-2; and everyone else gets the
+others); the bottom quartile get level-2; and everyone else gets the
 standard level-3 starting tech. The top and bottom levels are
 adjustable in the \verb|techLevels| object of \verb|config.txt|. For
 trade and government techs, the median level of, respectively, economy
