@@ -2547,6 +2547,16 @@ void WorkerThread::eu3Provinces () {
       if (0 < discMap[tag]) continue;
       disc->addToList(tag); 
     }
+    disc = eup->safeGetObject("discovery_dates");
+    if (disc) {
+      if (groupsToRemove["nomad_group"]) disc->resetToken(1, "9999.1.1");
+      if (groupsToRemove["western"])     disc->resetToken(2, "9999.1.1");
+      if (groupsToRemove["eastern"])     disc->resetToken(3, "9999.1.1");            
+      if (groupsToRemove["ottoman"])     disc->resetToken(4, "9999.1.1");
+      if (groupsToRemove["muslim"])      disc->resetToken(5, "9999.1.1");
+      if (groupsToRemove["indian"])      disc->resetToken(6, "9999.1.1");
+      if (groupsToRemove["chinese"])     disc->resetToken(7, "9999.1.1");            
+    }
     eup->resetLeaf("doneDisc", "yes"); 
     
     map<Object*, double> own_weights;
