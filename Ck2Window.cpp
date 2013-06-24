@@ -2112,7 +2112,13 @@ void WorkerThread::eu3Hre () {
     candidates.push_back(curr); 
   }
 
-  if (0 == candidates.size()) {
+  if (configObject->safeGetString("removeHRE", "no") == "yes") {
+    Logger::logStream(DebugHre) << "No HRE will be created due to config option 'removeHRE'.\n";
+    euxGame->unsetValue("emperor");
+    euxGame->unsetValue("old_emperor");
+    return;     
+  }
+  else if (0 == candidates.size()) {
     Logger::logStream(DebugHre) << "No candidates for HRE - dissolving it.\n";
     euxGame->unsetValue("emperor");
     euxGame->unsetValue("old_emperor");
