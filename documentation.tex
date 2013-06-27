@@ -287,9 +287,11 @@ events containing any of the keywords listed in
 \verb|keywords_to_remove|
 within \verb|config.txt| with the key \verb|state|. 
 
-Tech group is set to western. Production, army, and navy tech levels are found by calculating the
-median base tax, manpower, and number of galleys per holding in the CK provinces
-of each EU3 nation. The top quartile gets level-4 tech (where
+Tech group is set to western. Production and army tech levels are found by calculating the
+median base tax and manpower per holding in the CK provinces
+of each EU3 nation; navy tech instead uses the average number of
+galleys, since if the median were used many nations with long
+coastlines but large interiors would get zero. The top quartile gets level-4 tech (where
 manpower governs army tech, galleys naval, and base tax the three
 others); the bottom quartile get level-2; and everyone else gets the
 standard level-3 starting tech. The top and bottom levels are

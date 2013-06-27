@@ -1017,18 +1017,27 @@ void WorkerThread::createProvinceMap () {
 
   for (objiter ckp = ck2provs.begin(); ckp != ck2provs.end(); ++ckp) {
     objvec baronies = (*ckp)->getLeaves();
+    bool coastal = false; 
     for (objiter b = baronies.begin(); b != baronies.end(); ++b) {
       string htype = (*b)->safeGetString("type");
       if (!ckBuildings->safeGetObject(htype)) continue;
-      if ((*b)->getKey() == "settlement_construction") continue; 
+      if ((*b)->getKey() == "settlement_construction") continue;
+      if ((*b)->safeGetString("ct_port_1", "no") == "yes") coastal = true;
+      Object* levy = (*b)->safeGetObject("levy");
+      if (levy) {
+	levy = levy->safeGetObject("galleys");
+	if (levy) coastal = true; 
+      }
+      
       Object* btitle = getTitle((*b)->getKey());
       if (!btitle) {
 	Logger::logStream(Logger::Warning) << "Warning: " << (*b)->getKey()
 					   << " should be a title, but isn't.\n"; 
 	continue;
       }
-      titleToCkProvinceMap[btitle] = (*ckp); 
+      titleToCkProvinceMap[btitle] = (*ckp);
     }
+    (*ckp)->resetLeaf("coastal", coastal ? "yes" : "no");     
 
     string tag = remQuotes((*ckp)->safeGetString("title"));
     Object* ctitle = getTitle(tag);
@@ -3233,45 +3242,57 @@ void WorkerThread::eu3Techs () {
     }
   }
 
-  vector<pair<string, double> > maxValues;
-  maxValues.push_back(pair<string, double>("navyWeight", 1));
-  maxValues.push_back(pair<string, double>("armyWeight", 1));
-  maxValues.push_back(pair<string, double>("govtWeight", 1));
-  maxValues.push_back(pair<string, double>("prodWeight", 1));
-  maxValues.push_back(pair<string, double>("tradWeight", 1));  
+  vector<string> weightTypes;
+  weightTypes.push_back("navyWeight");
+  weightTypes.push_back("armyWeight");
+  weightTypes.push_back("govtWeight");
+  weightTypes.push_back("prodWeight");
+  weightTypes.push_back("tradWeight");  
 
   // Calculate median per-holding weight for each tech in each nation.
-  for (vector<pair<string, double> >::iterator m = maxValues.begin(); m != maxValues.end(); ++m) {
-    ObjectAscendingSorter sorter((*m).first); 
+  for (vector<string>::iterator m = weightTypes.begin(); m != weightTypes.end(); ++m) {
+    ObjectAscendingSorter sorter(*m);
     for (map<Object*, objvec>::iterator eun = ownerMap.begin(); eun != ownerMap.end(); ++eun) {
+      double currVal = 0; 
       unsigned int numProvs = (*eun).second.size();
-      if (0 == numProvs) continue;    
-      sort((*eun).second.begin(), (*eun).second.end(), sorter);
-      double currVal = (*eun).second[numProvs / 2]->safeGetFloat((*m).first);
-      if (0 == numProvs%2) {
-	currVal += (*eun).second[(numProvs / 2) - 1]->safeGetFloat((*m).first);
-	currVal *= 0.5; 
+      if (0 == numProvs) continue;
+      if ((*m) == "navyWeight") {
+	// Average for this, otherwise large nations can easily get zero in spite of long coastlines.
+	for (objiter p = (*eun).second.begin(); p != (*eun).second.end(); ++p) {
+	  currVal += (*p)->safeGetFloat(*m);
+	}
+	currVal /= numProvs; 
       }
-
-      (*m).second = max((*m).second, currVal);
-      (*eun).first->resetLeaf((*m).first, currVal);
+      else {
+	// Median for everything else. 
+	sort((*eun).second.begin(), (*eun).second.end(), sorter);
+	currVal = (*eun).second[numProvs / 2]->safeGetFloat(*m);
+	if (0 == numProvs%2) {
+	  currVal += (*eun).second[(numProvs / 2) - 1]->safeGetFloat(*m);
+	  currVal *= 0.5; 
+	}
+      }
+      (*eun).first->resetLeaf((*m), currVal);
     }
   }
 
   // Sort and calculate percentiles.
-  
   objvec nations;
-  for (map<Object*, objvec>::iterator eun = ownerMap.begin(); eun != ownerMap.end(); ++eun) nations.push_back((*eun).first);  
-  for (vector<pair<string, double> >::iterator m = maxValues.begin(); m != maxValues.end(); ++m) {
-    ObjectAscendingSorter sorter((*m).first);
+  for (map<Object*, objvec>::iterator eun = ownerMap.begin(); eun != ownerMap.end(); ++eun) nations.push_back((*eun).first);
+  for (vector<string>::iterator m = weightTypes.begin(); m != weightTypes.end(); ++m) {
+    ObjectAscendingSorter sorter(*m);
     sort(nations.begin(), nations.end(), sorter);
     for (unsigned int i = 0; i < nations.size(); ++i) {
       double percentile = i+1;
       percentile /= nations.size();
-      nations[i]->resetLeaf((*m).first, percentile); 
+      string raw("raw_");
+      raw += (*m);
+      nations[i]->resetLeaf(raw , nations[i]->safeGetString(*m));
+      // Check for ties. 
+      if ((i > 0) && (nations[i]->safeGetFloat(raw) - nations[i-1]->safeGetFloat(raw) < 1e-6)) percentile = nations[i-1]->safeGetFloat(*m); 
+      nations[i]->resetLeaf((*m), percentile); 
     }
   }
-  
   
   Object* tl = configObject->getNeededObject("techLevels");
   objvec techLevels = tl->getLeaves();
@@ -3287,19 +3308,19 @@ void WorkerThread::eu3Techs () {
     Object* techs = euCountry->getNeededObject("technology");
     Object* history = euCountry->getNeededObject("history");
     Object* firstDate = history->getNeededObject(remQuotes(euxGame->safeGetString("start_date")));
-    for (vector<pair<string, double> >::iterator m = maxValues.begin(); m != maxValues.end(); ++m) {
+    for (vector<string>::iterator m = weightTypes.begin(); m != weightTypes.end(); ++m) {
       double passed = -1; 
       for (objiter level = techLevels.begin(); level != techLevels.end(); ++level) {
 	string levelToSet = (*level)->getKey();
 	double neededToPass = tl->safeGetFloat(levelToSet);
 	
-	if ((neededToPass > passed) && (neededToPass <= euCountry->safeGetFloat((*m).first))) {
-	  Object* navyTech = techs->getNeededObject(euTechNames[(*m).first]);
+	if ((neededToPass > passed) && (neededToPass <= euCountry->safeGetFloat(*m))) {
+	  Object* navyTech = techs->getNeededObject(euTechNames[(*m)]);
 	  navyTech->clear();
 	  navyTech->setObjList();
 	  navyTech->addToList(levelToSet);
 	  navyTech->addToList("0.000");
-	  firstDate->resetLeaf(euTechNames[(*m).first], levelToSet);
+	  firstDate->resetLeaf(euTechNames[(*m)], levelToSet);
 	  passed = neededToPass;
 	}
       }
@@ -3317,11 +3338,12 @@ void WorkerThread::eu3Techs () {
     Object* euCountry = (*eun).first;
     Object* techs = euCountry->getNeededObject("technology");
     Logger::logStream(DebugTech) << "Tag " << euCountry->getKey() << " has percentiles "
-				 << euCountry->safeGetString("navyWeight") << " "
-				 << euCountry->safeGetString("armyWeight") << " "
-				 << euCountry->safeGetString("prodWeight") << " "
-				 << euCountry->safeGetString("tradWeight") << " "      
-				 << euCountry->safeGetString("govtWeight") << " giving techs ";
+				 << euCountry->safeGetString("govtWeight") << " (" << euCountry->safeGetString("raw_govtWeight") << ") "
+				 << euCountry->safeGetString("armyWeight") << " (" << euCountry->safeGetString("raw_armyWeight") << ") "
+				 << euCountry->safeGetString("navyWeight") << " (" << euCountry->safeGetString("raw_navyWeight") << ") "
+				 << euCountry->safeGetString("prodWeight") << " (" << euCountry->safeGetString("raw_prodWeight") << ") "
+				 << euCountry->safeGetString("tradWeight") << " (" << euCountry->safeGetString("raw_tradWeight") << ") "
+				 << " giving techs ";
     for (map<string, vector<int> >::iterator t = numTechLevels.begin(); t != numTechLevels.end(); ++t) {
       int currTechLevel = techs->safeGetObject((*t).first)->tokenAsInt(0); 
       Logger::logStream(DebugTech) << currTechLevel << " ";
@@ -3329,10 +3351,10 @@ void WorkerThread::eu3Techs () {
     }
     Logger::logStream(DebugTech) << ".\n";
     
-    for (vector<pair<string, double> >::iterator m = maxValues.begin(); m != maxValues.end(); ++m) {    
-      euCountry->unsetValue((*m).first);
+    for (vector<string>::iterator m = weightTypes.begin(); m != weightTypes.end(); ++m) {    
+      euCountry->unsetValue(*m);
       for (objiter eup = (*eun).second.begin(); eup != (*eun).second.end(); ++eup) {
-	(*eup)->unsetValue((*m).first);
+	(*eup)->unsetValue(*m);
       }
     }
   }
@@ -3404,6 +3426,7 @@ double WorkerThread::getCkWeight (Object* province, WeightType wtype) {
   Object* countyTitle = titleMap[countyTag]; 
 
   bool debug = (province->safeGetString("debug", "no") == "yes"); 
+  bool coastal = (province->safeGetString("coastal", "no") == "yes"); // Calculated in createProvinceMap. 
   
   objvec leaves = province->getLeaves();
   for (objiter holding = leaves.begin(); holding != leaves.end(); ++holding) {
@@ -3419,8 +3442,9 @@ double WorkerThread::getCkWeight (Object* province, WeightType wtype) {
     if (!buildList) continue;
 
     double local = 0;
-    double modifier = 1; 
+    double modifier = 1;
     if (ManPower == wtype) local += getManpower(hinfo); 
+    else if (Galleys == wtype) local += (coastal ? hinfo->safeGetFloat(valueword) : 0);
     else local += hinfo->safeGetFloat(valueword);
     
     objvec buildings = buildList->getLeaves();
