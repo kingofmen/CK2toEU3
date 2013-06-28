@@ -1491,7 +1491,25 @@ void WorkerThread::eu3Cores () {
 
 void WorkerThread::eu3Cots () {
   Object* trade = euxGame->getNeededObject("trade");
-  trade->clear();
+  objvec cots = trade->getLeaves();
+  objvec cotsToRemove;
+  for (objiter cot = cots.begin(); cot != cots.end(); ++cot) {
+    string provid = (*cot)->safeGetString("location");
+    Object* province = euxGame->safeGetObject(provid);
+    if (!province) {
+      Logger::logStream(Logger::Error) << "Problem: Could not find province "
+				       << provid
+				       << ", alleged location of a COT. Removing the COT on general principles.\n";
+      cotsToRemove.push_back(*cot);
+    }
+    if (euProvToCkProvsMap.find(province) == euProvToCkProvsMap.end()) continue;
+    cotsToRemove.push_back(*cot);
+  }
+  for (objiter cot = cotsToRemove.begin(); cot != cotsToRemove.end(); ++cot) {
+    trade->removeObject(*cot); 
+  }
+
+    
   Object* diplomacy = euxGame->getNeededObject("diplomacy");
   map<string, map<string, bool> > openMarkets; 
   for (map<Object*, Object*>::iterator i = euCountryToCkCountryMap.begin(); i != euCountryToCkCountryMap.end(); ++i) {
