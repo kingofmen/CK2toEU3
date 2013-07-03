@@ -1630,15 +1630,13 @@ void WorkerThread::eu3Characters () {
     Object* ckHeir = 0; 
     for (objiter son = beginRel(ckRuler, Son); son != finalRel(ckRuler, Son); ++son) {
       if ((*son)->safeGetString("death_date", "ILIVE") != "ILIVE") continue;
-      ckHeir = (*son);
-      break;
+      if ((!ckHeir) || (days(remQuotes(ckHeir->safeGetString("birth_date"))) >days(remQuotes((*son)->safeGetString("birth_date"))))) ckHeir = (*son);
     }
 
     if (!ckHeir) {
       for (objiter son = beginRel(ckRuler, Daughter); son != finalRel(ckRuler, Daughter); ++son) {
 	if ((*son)->safeGetString("death_date", "ILIVE") != "ILIVE") continue;
-	ckHeir = (*son);
-	break;
+	if ((!ckHeir) || (days(remQuotes(ckHeir->safeGetString("birth_date"))) >days(remQuotes((*son)->safeGetString("birth_date"))))) ckHeir = (*son);
       }
     }
       
